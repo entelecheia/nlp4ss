@@ -1,7 +1,7 @@
 # Changes here will be overwritten by Copier; do NOT edit manually
 _commit: v0.31.0
 _src_path: gh:entelecheia/hyperfast-docker-template
-app_dirname: course_temp
+app_dirname: nlp4ss
 app_install_root: /workspace
 author: Young Joon Lee
 build_images_from_dockerfile: true
@@ -15,7 +15,7 @@ docker_container_uid: 9001
 docker_container_username: dev
 docker_image_variant_name: base
 docker_image_version_variable_name: IMAGE_VERSION
-docker_name_prefix: COURSE_TEMP
+docker_name_prefix: NLP4SS
 docker_project_name: nlp4ss
 docker_registry: ghcr.io
 docker_run_command: zsh
