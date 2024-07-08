@@ -5,34 +5,29 @@ author: Young Joon Lee
 build_and_release: true
 code_template_answers_file: .copier-hyfi-config.yaml
 code_template_source: ''
-codecov_graph_token: usYkLC6aBx
+codecov_graph_token: FZ6rvEttdM
 copyright_year: 2024
 documentaion_tool: jupyter-book
-documentation_url: https://entelecheia.github.io/course-template-i18n
+documentation_url: https://nlp4ss.entelecheia.ai
 email: entelecheia@hotmail.com
 favicon_path: https://assets.entelecheia.ai/favicon.png
-friendly_name: Course Template Internationalization
-github_repo_name: course-template-i18n
+friendly_name: NLP for Social Science
+github_repo_name: nlp4ss
 github_username: entelecheia
 google_analytics_id: G-BQJE5V9RK2
 logo_path: ''
 main_branch: main
 open_link: true
-package_name: coursetempi
+package_name: nlp4ss
 package_scripts:
-- coursetempi = 'coursetempi.__cli__:main'
+- nlp4ss = 'nlp4ss.__cli__:main'
 poe_task_files:
 - .tasks.toml
 - .tasks-extra.toml
-project_description: This project provides a comprehensive and flexible template for
-    creating and managing multilingual online courses. It leverages GitHub for version
-    control and Jupyter Book for interactive content delivery, enabling educators
-    to easily develop, maintain, and share their educational materials across different
-    languages and cultures.
+project_description: NLP for Social Science (nlp4ss) is a comprehensive, multilingual course and toolkit designed to bridge the gap between natural language processing (NLP) and social science research. This project provides researchers, students, and practitioners with the knowledge and tools to apply cutting-edge NLP techniques to social science questions. It covers a wide range of topics, including text preprocessing, sentiment analysis, topic modeling, and machine learning applications in social contexts. With interactive Jupyter notebooks, hands-on examples, and real-world case studies, nlp4ss offers a practical approach to integrating computational methods into social science research.
 project_license: CC-BY-4.0
-project_name: course-template-i18n
-project_short_description: Multilingual course creation template with interactive
-    documentation support for international audiences
+project_name: nlp4ss
+project_short_description: A course on applying natural language processing (NLP) techniques for social science research.
 upload_to_release: true
 upload_to_repository: true
 use_launch_buttons: true

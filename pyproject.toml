@@ -1,16 +1,16 @@
 [tool.poetry]
-name = "course-template-i18n"
+name = "nlp4ss"
 version = "0.2.0"
 description = "Multilingual course creation template with interactive documentation support for international audiences"
 authors = ["Young Joon Lee <entelecheia@hotmail.com>"]
 license = "CC-BY-4.0"
-homepage = "https://entelecheia.github.io/course-template-i18n"
-repository = "https://github.com/entelecheia/course-template-i18n"
+homepage = "https://nlp4ss.entelecheia.ai"
+repository = "https://github.com/entelecheia/nlp4ss"
 readme = "README.md"
-packages = [{ include = "coursetempi", from = "src" }]
+packages = [{ include = "nlp4ss", from = "src" }]
 
 [tool.poetry.scripts]
-coursetempi = 'coursetempi.__cli__:main'
+nlp4ss = 'nlp4ss.__cli__:main'
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.13"
@@ -99,7 +99,7 @@ tag_format = "v$version"
 [tool.semantic_release]
 branch = "main"
 version_toml = "pyproject.toml:tool.poetry.version"
-version_variable = "src/coursetempi/_version.py:__version__"
+version_variable = "src/nlp4ss/_version.py:__version__"
 version_source = "tag"
 commit_version_number = true # required for version_source = "tag"
 commit_subject = "chore(release): :rocket: {version} [skip ci]"
