@@ -213,7 +213,7 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture Notes</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../session01/index.html">세션 1 - 소개</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session01/index.html">Session 1 - Introduction to NLP for Social Science</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../session01/lecture1.html">1.1 Fundamentals of NLP and its evolution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../session01/lecture2.html">1.2 Overview of Generative LLMs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../session01/lecture3.html">1.3 Ethical Considerations and Challenges in Using LLMs for Research</a></li>
@@ -464,10 +464,135 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="using-llms-for-high-quality-text-generation">
 <h1>4.1 Using LLMs for High-Quality Text Generation<a class="headerlink" href="#using-llms-for-high-quality-text-generation" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>Introduction to Text Generation with LLMs</p>
 <ul class="simple">
-<li><p>Aspect-based emotion summarization</p></li>
-<li><p>Misinformation explanation</p></li>
+<li><p>Overview of text generation capabilities</p></li>
+<li><p>Importance in social science research</p></li>
+<li><p>Comparison with traditional text generation methods</p></li>
 </ul>
+</li>
+<li><p>Fundamentals of LLM-based Text Generation</p>
+<ul class="simple">
+<li><p>Autoregressive language modeling</p></li>
+<li><p>Transformer architecture recap</p></li>
+<li><p>Token-by-token generation process</p></li>
+</ul>
+</li>
+<li><p>Types of Text Generation Tasks</p>
+<ul class="simple">
+<li><p>Open-ended generation</p></li>
+<li><p>Constrained generation (e.g., summarization, paraphrasing)</p></li>
+<li><p>Dialogue generation</p></li>
+<li><p>Data augmentation</p></li>
+</ul>
+</li>
+<li><p>Prompt Engineering for Text Generation</p>
+<ul class="simple">
+<li><p>Crafting effective prompts</p></li>
+<li><p>Controlling style, tone, and content</p></li>
+<li><p>Few-shot prompting for specialized tasks</p></li>
+</ul>
+</li>
+<li><p>Controlling Generation Parameters</p>
+<ul class="simple">
+<li><p>Temperature and top-k/top-p sampling</p></li>
+<li><p>Repetition penalty</p></li>
+<li><p>Length control techniques</p></li>
+</ul>
+</li>
+<li><p>Aspect-based Emotion Summarization</p>
+<ul class="simple">
+<li><p>Techniques for extracting emotional content</p></li>
+<li><p>Generating emotion-focused summaries</p></li>
+<li><p>Applications in sentiment analysis research</p></li>
+</ul>
+</li>
+<li><p>Misinformation Explanation Generation</p>
+<ul class="simple">
+<li><p>Generating explanations for misinformation</p></li>
+<li><p>Fact-checking and correction strategies</p></li>
+<li><p>Ethical considerations in misinformation research</p></li>
+</ul>
+</li>
+<li><p>High-Quality Content Creation</p>
+<ul class="simple">
+<li><p>Generating research hypotheses</p></li>
+<li><p>Literature review synthesis</p></li>
+<li><p>Survey question generation</p></li>
+</ul>
+</li>
+<li><p>Data Augmentation for Social Science Research</p>
+<ul class="simple">
+<li><p>Generating synthetic datasets</p></li>
+<li><p>Balancing imbalanced datasets</p></li>
+<li><p>Enhancing diversity in training data</p></li>
+</ul>
+</li>
+<li><p>Cross-lingual Text Generation</p>
+<ul class="simple">
+<li><p>Techniques for multilingual generation</p></li>
+<li><p>Translation and localization applications</p></li>
+<li><p>Cultural adaptation in generated content</p></li>
+</ul>
+</li>
+<li><p>Stylistic Control in Generated Text</p>
+<ul class="simple">
+<li><p>Adapting to different writing styles</p></li>
+<li><p>Generating domain-specific content</p></li>
+<li><p>Maintaining consistency in long-form text</p></li>
+</ul>
+</li>
+<li><p>Evaluation of Generated Text</p>
+<ul class="simple">
+<li><p>Automated metrics (BLEU, ROUGE, METEOR)</p></li>
+<li><p>Human evaluation protocols</p></li>
+<li><p>Task-specific evaluation criteria</p></li>
+</ul>
+</li>
+<li><p>Ensuring Factual Accuracy</p>
+<ul class="simple">
+<li><p>Strategies for fact-checking generated content</p></li>
+<li><p>Combining LLMs with knowledge bases</p></li>
+<li><p>Handling hallucinations and false information</p></li>
+</ul>
+</li>
+<li><p>Challenges in LLM-based Text Generation</p>
+<ul class="simple">
+<li><p>Maintaining coherence in long-form text</p></li>
+<li><p>Handling domain-specific knowledge</p></li>
+<li><p>Balancing creativity and factual accuracy</p></li>
+</ul>
+</li>
+<li><p>Advanced Techniques</p>
+<ul class="simple">
+<li><p>Fine-tuning LLMs for specific generation tasks</p></li>
+<li><p>Combining retrieval and generation methods</p></li>
+<li><p>Multi-modal text generation (text + images)</p></li>
+</ul>
+</li>
+<li><p>Applications in Social Science Methodology</p>
+<ul class="simple">
+<li><p>Generating survey instruments</p></li>
+<li><p>Creating experimental stimuli</p></li>
+<li><p>Developing coding schemes for qualitative analysis</p></li>
+</ul>
+</li>
+<li><p>Future Directions in LLM-based Text Generation</p>
+<ul class="simple">
+<li><p>Advancements in controllable generation</p></li>
+<li><p>Integration with domain-specific knowledge</p></li>
+<li><p>Potential for automated theory development</p></li>
+</ul>
+</li>
+<li><p>Practical Implementation</p>
+<ul class="simple">
+<li><p>Tools and libraries for text generation (e.g., Hugging Face Transformers)</p></li>
+<li><p>Best practices for integrating LLMs in research workflows</p></li>
+<li><p>Reproducibility considerations in generative research</p></li>
+</ul>
+</li>
+</ol>
 </section>
 
     <script type="text/x-thebe-config">

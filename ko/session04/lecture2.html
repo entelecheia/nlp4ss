@@ -213,7 +213,7 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture Notes</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../session01/index.html">세션 1 - 소개</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session01/index.html">Session 1 - Introduction to NLP for Social Science</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../session01/lecture1.html">1.1 Fundamentals of NLP and its evolution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../session01/lecture2.html">1.2 Overview of Generative LLMs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../session01/lecture3.html">1.3 Ethical Considerations and Challenges in Using LLMs for Research</a></li>
@@ -464,10 +464,136 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="social-bias-inference-and-analysis">
 <h1>4.2 Social Bias Inference and Analysis<a class="headerlink" href="#social-bias-inference-and-analysis" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>Introduction to Social Bias in NLP</p>
 <ul class="simple">
-<li><p>Detecting and explaining social biases in text</p></li>
-<li><p>Positive reframing techniques</p></li>
+<li><p>Definition and types of social biases</p></li>
+<li><p>Importance of bias detection in social science research</p></li>
+<li><p>Overview of bias in language models</p></li>
 </ul>
+</li>
+<li><p>Sources of Bias in LLMs</p>
+<ul class="simple">
+<li><p>Training data biases</p></li>
+<li><p>Algorithmic biases</p></li>
+<li><p>Deployment and interpretation biases</p></li>
+</ul>
+</li>
+<li><p>Techniques for Detecting Bias in LLMs</p>
+<ul class="simple">
+<li><p>Word embedding association tests</p></li>
+<li><p>Sentiment analysis-based methods</p></li>
+<li><p>Cloze test probing</p></li>
+<li><p>Bias in language generation tasks</p></li>
+</ul>
+</li>
+<li><p>Quantifying Bias in LLMs</p>
+<ul class="simple">
+<li><p>Metrics for measuring bias (e.g., WEAT, SEAT)</p></li>
+<li><p>Statistical significance in bias detection</p></li>
+<li><p>Intersectional bias analysis</p></li>
+</ul>
+</li>
+<li><p>Social Bias Inference Using LLMs</p>
+<ul class="simple">
+<li><p>Prompt-based bias elicitation</p></li>
+<li><p>Few-shot learning for bias detection</p></li>
+<li><p>Comparative analysis across different LLMs</p></li>
+</ul>
+</li>
+<li><p>Analyzing Gender Bias</p>
+<ul class="simple">
+<li><p>Occupational stereotypes</p></li>
+<li><p>Gendered language in text generation</p></li>
+<li><p>Gender bias in sentiment analysis</p></li>
+</ul>
+</li>
+<li><p>Racial and Ethnic Bias Analysis</p>
+<ul class="simple">
+<li><p>Stereotypical associations in LLMs</p></li>
+<li><p>Cross-cultural bias analysis</p></li>
+<li><p>Bias in multilingual models</p></li>
+</ul>
+</li>
+<li><p>Age-related Bias Detection</p>
+<ul class="simple">
+<li><p>Ageism in language models</p></li>
+<li><p>Generational stereotypes in text generation</p></li>
+</ul>
+</li>
+<li><p>Socioeconomic Status Bias</p>
+<ul class="simple">
+<li><p>Class-based stereotypes in LLMs</p></li>
+<li><p>Economic bias in language understanding and generation</p></li>
+</ul>
+</li>
+<li><p>Intersectionality in Bias Analysis</p>
+<ul class="simple">
+<li><p>Techniques for analyzing compounded biases</p></li>
+<li><p>Challenges in intersectional bias detection</p></li>
+</ul>
+</li>
+<li><p>Contextual Bias Analysis</p>
+<ul class="simple">
+<li><p>Situational and contextual factors in bias manifestation</p></li>
+<li><p>Domain-specific bias analysis (e.g., healthcare, legal texts)</p></li>
+</ul>
+</li>
+<li><p>Bias in Downstream NLP Tasks</p>
+<ul class="simple">
+<li><p>Impact of LLM biases on classification tasks</p></li>
+<li><p>Bias propagation in text summarization and generation</p></li>
+</ul>
+</li>
+<li><p>Mitigating Bias in LLMs</p>
+<ul class="simple">
+<li><p>Data-level interventions</p></li>
+<li><p>Model-level debiasing techniques</p></li>
+<li><p>Post-processing methods for bias reduction</p></li>
+</ul>
+</li>
+<li><p>Ethical Considerations in Bias Analysis</p>
+<ul class="simple">
+<li><p>Responsible reporting of bias findings</p></li>
+<li><p>Avoiding reinforcement of stereotypes through analysis</p></li>
+<li><p>Privacy concerns in bias detection studies</p></li>
+</ul>
+</li>
+<li><p>Challenges in Social Bias Analysis</p>
+<ul class="simple">
+<li><p>Subjectivity in bias definition and measurement</p></li>
+<li><p>Cultural relativity of biases</p></li>
+<li><p>Evolving nature of social biases</p></li>
+</ul>
+</li>
+<li><p>Tools and Frameworks for Bias Analysis</p>
+<ul class="simple">
+<li><p>Overview of existing bias detection toolkits</p></li>
+<li><p>Developing custom bias analysis pipelines</p></li>
+</ul>
+</li>
+<li><p>Case Studies in Social Science Research</p>
+<ul class="simple">
+<li><p>Examples of bias analysis in social media studies</p></li>
+<li><p>Bias detection in historical text analysis</p></li>
+<li><p>Cross-cultural bias comparisons</p></li>
+</ul>
+</li>
+<li><p>Implications for Social Science Methodology</p>
+<ul class="simple">
+<li><p>Impact of LLM biases on research findings</p></li>
+<li><p>Strategies for bias-aware research design</p></li>
+<li><p>Reporting standards for bias in LLM-based studies</p></li>
+</ul>
+</li>
+<li><p>Future Directions in Social Bias Analysis</p>
+<ul class="simple">
+<li><p>Advancements in interpretable bias detection</p></li>
+<li><p>Real-time bias monitoring in deployed systems</p></li>
+<li><p>Collaborative approaches to bias mitigation</p></li>
+</ul>
+</li>
+</ol>
 </section>
 
     <script type="text/x-thebe-config">

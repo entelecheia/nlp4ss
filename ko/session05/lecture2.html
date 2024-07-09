@@ -213,7 +213,7 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture Notes</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../session01/index.html">세션 1 - 소개</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session01/index.html">Session 1 - Introduction to NLP for Social Science</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../session01/lecture1.html">1.1 Fundamentals of NLP and its evolution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../session01/lecture2.html">1.2 Overview of Generative LLMs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../session01/lecture3.html">1.3 Ethical Considerations and Challenges in Using LLMs for Research</a></li>
@@ -464,10 +464,176 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="misinformation-and-fake-news-detection">
 <h1>5.2 Misinformation and Fake News Detection<a class="headerlink" href="#misinformation-and-fake-news-detection" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>Introduction to Misinformation and Fake News</p>
 <ul class="simple">
-<li><p>Using LLMs to identify patterns in false information</p></li>
-<li><p>Studying the spread and impact of misinformation</p></li>
+<li><p>Definitions and types of misinformation</p></li>
+<li><p>Impact on society and importance in social science research</p></li>
+<li><p>Challenges in automated detection</p></li>
 </ul>
+</li>
+<li><p>Characteristics of Misinformation and Fake News</p>
+<ul class="simple">
+<li><p>Linguistic features of deceptive content</p></li>
+<li><p>Structural patterns in fake news articles</p></li>
+<li><p>Propagation dynamics of misinformation</p></li>
+</ul>
+</li>
+<li><p>Data Sources for Misinformation Research</p>
+<ul class="simple">
+<li><p>Social media platforms</p></li>
+<li><p>News websites and fact-checking databases</p></li>
+<li><p>User-generated content platforms</p></li>
+</ul>
+</li>
+<li><p>Data Collection and Preprocessing</p>
+<ul class="simple">
+<li><p>Web scraping and API usage for data gathering</p></li>
+<li><p>Handling multimodal data (text, images, videos)</p></li>
+<li><p>Ethical considerations in collecting sensitive data</p></li>
+</ul>
+</li>
+<li><p>Traditional Machine Learning Approaches</p>
+<ul class="simple">
+<li><p>Feature engineering for fake news detection</p></li>
+<li><p>Classification algorithms (SVM, Random Forest, etc.)</p></li>
+<li><p>Ensemble methods for improved accuracy</p></li>
+</ul>
+</li>
+<li><p>Deep Learning Techniques</p>
+<ul class="simple">
+<li><p>CNN and RNN models for text classification</p></li>
+<li><p>BERT and other transformer-based models</p></li>
+<li><p>Multimodal deep learning approaches</p></li>
+</ul>
+</li>
+<li><p>LLM-based Approaches to Misinformation Detection</p>
+<ul class="simple">
+<li><p>Zero-shot and few-shot learning for fake news classification</p></li>
+<li><p>Prompt engineering for misinformation identification</p></li>
+<li><p>Comparing LLM performance with traditional methods</p></li>
+</ul>
+</li>
+<li><p>Content-based Analysis</p>
+<ul class="simple">
+<li><p>Semantic analysis of article content</p></li>
+<li><p>Fact-checking using knowledge bases</p></li>
+<li><p>Detecting inconsistencies and logical fallacies</p></li>
+</ul>
+</li>
+<li><p>Source Credibility Assessment</p>
+<ul class="simple">
+<li><p>Analyzing author and website credibility</p></li>
+<li><p>Historical reliability of news sources</p></li>
+<li><p>Domain expertise and authority signals</p></li>
+</ul>
+</li>
+<li><p>Network Analysis in Misinformation Spread</p>
+<ul class="simple">
+<li><p>Social network analysis of information diffusion</p></li>
+<li><p>Identifying bot networks and coordinated inauthentic behavior</p></li>
+<li><p>Tracking the evolution of narratives across networks</p></li>
+</ul>
+</li>
+<li><p>Temporal Analysis of Misinformation</p>
+<ul class="simple">
+<li><p>Detecting emerging misinformation trends</p></li>
+<li><p>Tracking the lifecycle of fake news stories</p></li>
+<li><p>Time-series analysis of information spread</p></li>
+</ul>
+</li>
+<li><p>Cross-lingual Misinformation Detection</p>
+<ul class="simple">
+<li><p>Techniques for multilingual fake news detection</p></li>
+<li><p>Transfer learning for low-resource languages</p></li>
+<li><p>Cultural aspects in cross-lingual misinformation</p></li>
+</ul>
+</li>
+<li><p>Stance Detection and Claim Verification</p>
+<ul class="simple">
+<li><p>Identifying stance towards claims</p></li>
+<li><p>Automated fact-checking processes</p></li>
+<li><p>Linking claims to credible sources</p></li>
+</ul>
+</li>
+<li><p>Context and External Knowledge Integration</p>
+<ul class="simple">
+<li><p>Incorporating contextual information in detection models</p></li>
+<li><p>Leveraging external knowledge bases for fact verification</p></li>
+<li><p>Real-time fact-checking using LLMs and knowledge graphs</p></li>
+</ul>
+</li>
+<li><p>User Profiling and Behavior Analysis</p>
+<ul class="simple">
+<li><p>Identifying characteristics of misinformation spreaders</p></li>
+<li><p>Analyzing user engagement with fake news</p></li>
+<li><p>Ethical considerations in user behavior tracking</p></li>
+</ul>
+</li>
+<li><p>Explainable AI for Misinformation Detection</p>
+<ul class="simple">
+<li><p>Interpretable models for fake news classification</p></li>
+<li><p>Generating explanations for detection decisions</p></li>
+<li><p>Building trust in automated detection systems</p></li>
+</ul>
+</li>
+<li><p>Multimodal Misinformation Detection</p>
+<ul class="simple">
+<li><p>Analyzing text-image consistency</p></li>
+<li><p>Detecting manipulated images and deepfakes</p></li>
+<li><p>Integrating audio and video analysis in detection</p></li>
+</ul>
+</li>
+<li><p>Real-time Detection and Early Warning Systems</p>
+<ul class="simple">
+<li><p>Developing systems for rapid misinformation identification</p></li>
+<li><p>Balancing speed and accuracy in real-time detection</p></li>
+<li><p>Alerting and intervention strategies</p></li>
+</ul>
+</li>
+<li><p>Evaluation Metrics and Benchmarks</p>
+<ul class="simple">
+<li><p>Specialized metrics for misinformation detection</p></li>
+<li><p>Creating and using benchmark datasets</p></li>
+<li><p>Challenges in evaluating real-world performance</p></li>
+</ul>
+</li>
+<li><p>Ethical Considerations and Bias</p>
+<ul class="simple">
+<li><p>Avoiding bias in detection algorithms</p></li>
+<li><p>Balancing free speech and misinformation control</p></li>
+<li><p>Privacy concerns in misinformation research</p></li>
+</ul>
+</li>
+<li><p>Counter-strategies and Mitigation</p>
+<ul class="simple">
+<li><p>Developing effective counter-narratives</p></li>
+<li><p>Educational approaches to improving media literacy</p></li>
+<li><p>Platform policies and technological interventions</p></li>
+</ul>
+</li>
+<li><p>Case Studies in Social Science Research</p>
+<ul class="simple">
+<li><p>Analyzing misinformation campaigns in elections</p></li>
+<li><p>Studying health-related misinformation (e.g., during pandemics)</p></li>
+<li><p>Investigating the impact of fake news on public opinion</p></li>
+</ul>
+</li>
+<li><p>Challenges and Limitations</p>
+<ul class="simple">
+<li><p>Dealing with evolving tactics in misinformation</p></li>
+<li><p>Balancing automation and human judgment</p></li>
+<li><p>Addressing context-dependent and subjective misinformation</p></li>
+</ul>
+</li>
+<li><p>Future Directions</p>
+<ul class="simple">
+<li><p>Advancements in cross-platform misinformation tracking</p></li>
+<li><p>Potential for AI-generated misinformation and countermeasures</p></li>
+<li><p>Interdisciplinary approaches to misinformation researc</p></li>
+</ul>
+</li>
+</ol>
 </section>
 
     <script type="text/x-thebe-config">

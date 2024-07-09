@@ -213,7 +213,7 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture Notes</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../session01/index.html">세션 1 - 소개</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session01/index.html">Session 1 - Introduction to NLP for Social Science</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../session01/lecture1.html">1.1 Fundamentals of NLP and its evolution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../session01/lecture2.html">1.2 Overview of Generative LLMs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../session01/lecture3.html">1.3 Ethical Considerations and Challenges in Using LLMs for Research</a></li>
@@ -464,10 +464,159 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="analyzing-large-scale-textual-data">
 <h1>5.1 Analyzing Large-Scale Textual Data<a class="headerlink" href="#analyzing-large-scale-textual-data" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>Introduction to Large-Scale Text Analysis</p>
 <ul class="simple">
-<li><p>Processing social media posts, medical records, and financial documents</p></li>
-<li><p>Inferring public opinion and social attitudes at scale</p></li>
+<li><p>Definition and importance in social science research</p></li>
+<li><p>Challenges and opportunities of big data in textual analysis</p></li>
+<li><p>Overview of LLM capabilities in processing large datasets</p></li>
 </ul>
+</li>
+<li><p>Data Sources for Large-Scale Text Analysis</p>
+<ul class="simple">
+<li><p>Social media platforms (Twitter, Facebook, Reddit, etc.)</p></li>
+<li><p>News archives and digital libraries</p></li>
+<li><p>Government documents and public records</p></li>
+<li><p>Medical records and health-related text data</p></li>
+<li><p>Financial reports and business documents</p></li>
+</ul>
+</li>
+<li><p>Data Collection and Preprocessing for Large Datasets</p>
+<ul class="simple">
+<li><p>Web scraping and API usage for data collection</p></li>
+<li><p>Handling diverse data formats (JSON, CSV, XML, etc.)</p></li>
+<li><p>Cleaning and normalizing large text corpora</p></li>
+<li><p>Dealing with multilingual and code-mixed data</p></li>
+</ul>
+</li>
+<li><p>Scalable Text Processing Techniques</p>
+<ul class="simple">
+<li><p>Distributed computing frameworks (e.g., Hadoop, Spark)</p></li>
+<li><p>Cloud-based solutions for text processing</p></li>
+<li><p>Efficient tokenization and indexing strategies</p></li>
+<li><p>Handling out-of-vocabulary words in large datasets</p></li>
+</ul>
+</li>
+<li><p>Topic Modeling at Scale</p>
+<ul class="simple">
+<li><p>Scalable implementations of LDA and other topic models</p></li>
+<li><p>Dynamic topic modeling for temporal analysis</p></li>
+<li><p>Visualizing topics in large document collections</p></li>
+</ul>
+</li>
+<li><p>Large-Scale Sentiment Analysis</p>
+<ul class="simple">
+<li><p>Sentiment analysis on social media datasets</p></li>
+<li><p>Aspect-based sentiment analysis for product reviews</p></li>
+<li><p>Emotion detection in large-scale text data</p></li>
+</ul>
+</li>
+<li><p>Named Entity Recognition and Relation Extraction</p>
+<ul class="simple">
+<li><p>Identifying entities in large text corpora</p></li>
+<li><p>Extracting relationships between entities at scale</p></li>
+<li><p>Building knowledge graphs from large text datasets</p></li>
+</ul>
+</li>
+<li><p>Text Classification and Categorization</p>
+<ul class="simple">
+<li><p>Scalable methods for document classification</p></li>
+<li><p>Hierarchical classification for large taxonomies</p></li>
+<li><p>Handling class imbalance in large datasets</p></li>
+</ul>
+</li>
+<li><p>Trend Analysis and Event Detection</p>
+<ul class="simple">
+<li><p>Identifying emerging topics and trends</p></li>
+<li><p>Detecting and tracking events in real-time data streams</p></li>
+<li><p>Temporal analysis of language use and public opinion</p></li>
+</ul>
+</li>
+<li><p>Network Analysis of Textual Data</p>
+<ul class="simple">
+<li><p>Constructing and analyzing large-scale text networks</p></li>
+<li><p>Community detection in text-based networks</p></li>
+<li><p>Studying information flow and influence in social networks</p></li>
+</ul>
+</li>
+<li><p>Cross-lingual Analysis of Large Datasets</p>
+<ul class="simple">
+<li><p>Techniques for multilingual text analysis</p></li>
+<li><p>Cross-cultural comparisons using large-scale text data</p></li>
+<li><p>Machine translation for multilingual corpus analysis</p></li>
+</ul>
+</li>
+<li><p>Semantic Analysis and Word Embeddings</p>
+<ul class="simple">
+<li><p>Creating and using word embeddings for large vocabularies</p></li>
+<li><p>Semantic change detection in large diachronic corpora</p></li>
+<li><p>Analyzing semantic similarities and differences across domains</p></li>
+</ul>
+</li>
+<li><p>Summarization of Large Text Collections</p>
+<ul class="simple">
+<li><p>Extractive and abstractive summarization techniques</p></li>
+<li><p>Multi-document summarization for topic overviews</p></li>
+<li><p>Generating executive summaries from large reports</p></li>
+</ul>
+</li>
+<li><p>Information Retrieval and Question Answering</p>
+<ul class="simple">
+<li><p>Building scalable search systems for large text collections</p></li>
+<li><p>Implementing efficient question answering systems</p></li>
+<li><p>Fact verification in large-scale datasets</p></li>
+</ul>
+</li>
+<li><p>Visualization Techniques for Large-Scale Text Data</p>
+<ul class="simple">
+<li><p>Creating interactive visualizations of large text corpora</p></li>
+<li><p>Time-series visualization of textual trends</p></li>
+<li><p>Network visualizations of text-based relationships</p></li>
+</ul>
+</li>
+<li><p>Privacy and Ethical Considerations</p>
+<ul class="simple">
+<li><p>Anonymization techniques for large-scale text data</p></li>
+<li><p>Ethical issues in analyzing personal communication data</p></li>
+<li><p>Ensuring informed consent in large-scale text analysis</p></li>
+</ul>
+</li>
+<li><p>Bias Detection and Mitigation in Large Datasets</p>
+<ul class="simple">
+<li><p>Identifying and quantifying biases in large text corpora</p></li>
+<li><p>Techniques for reducing bias in large-scale analysis</p></li>
+<li><p>Ensuring representative sampling in big data research</p></li>
+</ul>
+</li>
+<li><p>Reproducibility and Transparency</p>
+<ul class="simple">
+<li><p>Documenting data collection and processing pipelines</p></li>
+<li><p>Sharing large datasets and analysis code</p></li>
+<li><p>Addressing challenges in reproducing large-scale studies</p></li>
+</ul>
+</li>
+<li><p>Case Studies in Social Science Research</p>
+<ul class="simple">
+<li><p>Analyzing public opinion trends using social media data</p></li>
+<li><p>Studying policy impacts through large-scale document analysis</p></li>
+<li><p>Investigating cultural phenomena using web-scale text corpora</p></li>
+</ul>
+</li>
+<li><p>Challenges and Limitations</p>
+<ul class="simple">
+<li><p>Dealing with noise and quality issues in large datasets</p></li>
+<li><p>Balancing depth and breadth in large-scale analysis</p></li>
+<li><p>Computational resource management for big data processing</p></li>
+</ul>
+</li>
+<li><p>Future Directions</p>
+<ul class="simple">
+<li><p>Integration of multimodal data in large-scale text analysis</p></li>
+<li><p>Advancements in real-time processing of streaming text data</p></li>
+<li><p>Potential for AI-assisted hypothesis generation from large datasets</p></li>
+</ul>
+</li>
+</ol>
 </section>
 
     <script type="text/x-thebe-config">

@@ -1,26 +1,29 @@
-# 세션 1 - 소개
+# Session 1 - Introduction to NLP for Social Science
 
-다음은 이 NLP for Social Science(사회과학을 위한 자연어 처리) 강좌의 도입 강의입니다.
+Welcome to our course on Natural Language Processing (NLP) for Social Science. This course is designed to bridge the gap between advanced NLP techniques, particularly those leveraging Large Language Models (LLMs), and social science research methodologies.
 
-사회과학을 위한 자연어 처리(NLP) 강좌에 오신 것을 환영합니다. 이 강좌는 NLP 기술과 사회과학 연구 방법론 간의 격차를 줄여, 텍스트 데이터를 연구에 활용할 수 있는 도구를 제공하는 것을 목표로 합니다.
+In this introductory session, we'll cover three key areas:
 
-우리가 다룰 주요 내용은 다음과 같습니다:
+1. Fundamentals of NLP and its evolution
+2. Overview of Generative Large Language Models (LLMs)
+3. Ethical Considerations and Challenges in Using LLMs for Research
 
-1. NLP의 기초와 사회과학 연구에서의 응용
-2. NLP 파이프라인: 원시 텍스트에서 의미 있는 통찰까지
-3. 분류, 감성 분석, 토픽 모델링과 같은 일반적인 NLP 작업
-4. GPT와 같은 대형 언어 모델을 포함한 현대 NLP 도구와 모델 사용 방법
-5. 사회과학 맥락에서 NLP의 실제 응용
+Key points we'll explore include:
 
-NLP는 최근 몇 년간 상당히 발전해왔다는 점을 이해하는 것이 중요합니다. 전통적으로 연구자들은 모델을 처음부터 구축해야 했지만, 이제는 특정 작업에 맞게 조정할 수 있는 강력한 사전 학습 모델을 사용할 수 있습니다. 이는 NLP를 더 접근 가능하게 만들었지만, 이러한 도구를 연구에 가장 잘 활용하는 방법에 대해 비판적으로 생각할 필요도 있습니다.
+1. The evolution of NLP from traditional rule-based systems to modern deep learning approaches
+2. The transformative impact of LLMs on NLP tasks and social science research
+3. Capabilities and limitations of LLMs in social science contexts
+4. Ethical challenges posed by LLMs, including bias, privacy concerns, and interpretability issues
 
-이 강좌 내내, 사회과학에서 NLP를 사용하는 기회와 도전을 모두 논의할 것입니다. NLP 기술로 답할 수 있는 연구 질문을 어떻게 구성할지, 텍스트 데이터를 준비하고 전처리하는 방법, 결과를 해석하고 검증하는 방법 등을 탐구할 것입니다.
+It's crucial to understand that NLP has undergone a revolutionary transformation in recent years. While traditionally, researchers had to build task-specific models from scratch, we now have access to powerful pre-trained LLMs that can be adapted for a wide range of tasks. This shift has made advanced NLP techniques more accessible to social scientists, but it also requires us to think critically about how to best utilize these tools in our research.
 
-목표는 단순히 트렌디해서 NLP를 사용하는 것이 아니라, 새로운 통찰을 얻고 여러분의 분야에서 중요한 질문에 답하기 위한 도구로 활용하는 것입니다. 복잡성의 많은 부분을 추상화하는 고급 도구를 사용하면서도 NLP의 기본 원리를 이해하는 것의 중요성을 강조할 것입니다.
+Throughout this course, we'll discuss both the opportunities and challenges of using LLMs in social science. We'll explore how to frame research questions that can leverage LLM capabilities, how to use LLMs for tasks such as data annotation, text generation, and large-scale textual analysis, and how to interpret and validate results.
 
-진행하면서, 여러분의 연구 관심사에 이러한 기술을 어떻게 적용할 수 있을지 생각해보시기 바랍니다. 질문하고 토론에 참여하는 것을 주저하지 마세요. 그것이 우리가 이 강좌를 통해 함께 배우고 성장하는 방법입니다.
+Remember, our goal isn't just to use LLMs because they're cutting-edge, but to harness their power as tools to gain new insights and answer important questions in your field. We'll emphasize the importance of understanding the underlying principles of these models, even as we use advanced tools that abstract away much of the complexity.
 
-NLP와 사회과학의 흥미로운 교차점을 탐구하는 여정을 시작해 봅시다!
+As we progress, I encourage you to think about how you might apply these techniques to your own research interests. Consider the ethical implications of using LLMs in your work, and how you can ensure responsible and transparent use of these powerful tools.
+
+Let's embark on this journey to explore the exciting intersection of NLP, LLMs, and social science! Don't hesitate to ask questions and engage in discussions – that's how we'll all learn and grow throughout this course.
 
 ```{tableofcontents}
 
