@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nlp4ss"
-version = "0.0.0"
+version = "0.1.0"
 description = "A course on applying natural language processing (NLP) techniques for social science research."
 authors = ["Young Joon Lee <entelecheia@hotmail.com>"]
 license = "CC-BY-4.0"
