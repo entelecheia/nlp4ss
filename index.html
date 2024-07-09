@@ -7,9 +7,9 @@
       var userLang = navigator.language || navigator.userLanguage;
       var langPrefix = userLang.split("-")[0];
       var supportedLangs = ["en", "ko"];
-      var siteURL = window.location.href.split('/index.html')[0];
-      if (!siteURL.endsWith('/')) {
-        siteURL += '/';
+      var siteURL = window.location.href.split("/index.html")[0];
+      if (!siteURL.endsWith("/")) {
+        siteURL += "/";
       }
       var targetLang = supportedLangs.includes(langPrefix) ? langPrefix : "en";
       window.location.replace(siteURL + targetLang + "/index.html");
@@ -17,8 +17,5 @@
   </head>
   <body>
     <p>Redirecting to the appropriate language...</p>
-  </body>
-</html>
-
   </body>
 </html>
