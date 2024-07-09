@@ -2,7 +2,7 @@
 FROM ghcr.io/entelecheia/devcon:latest-cuda-12.1.0-ubuntu22.04 AS builder
 
 # Sets labels for the image
-LABEL org.opencontainers.image.source="https://github.com/entelecheia/course-template-i18n"
+LABEL org.opencontainers.image.source="https://github.com/entelecheia/nlp4ss"
 LABEL org.opencontainers.image.description="A template for a course"
 LABEL org.opencontainers.image.licenses="MIT"
 
@@ -13,7 +13,7 @@ ENV PYTHONUNBUFFERED 1
 
 # Setting ARGs and ENVs for the app
 ARG ARG_APP_INSTALL_ROOT="/workspace"
-ARG ARG_APP_DIRNAME="course_temp"
+ARG ARG_APP_DIRNAME="nlp4ss"
 ENV APP_INSTALL_ROOT $ARG_APP_INSTALL_ROOT
 ENV APP_DIRNAME $ARG_APP_DIRNAME
 ENV APP_SRC_DIR=${APP_INSTALL_ROOT}/${APP_DIRNAME}

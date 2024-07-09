@@ -1,4 +1,4 @@
-from coursetempi import get_version
+from nlp4ss import get_version
 
 
 def test_get_version() -> None:

@@ -5,7 +5,7 @@
 
 #######################################################################################
 # Book settings
-title: "Course Template Internationalization" # The title of the book. Will be placed in the left navbar.
+title: "NLP for Social Science" # The title of the book. Will be placed in the left navbar.
 author: "Young Joon Lee" # The author of the book
 copyright: "2024" # Copyright year to be placed in the footer
 # logo: Path to the book logo
@@ -29,7 +29,7 @@ bibtex_bibfiles:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/entelecheia/course-template-i18n # Online location of your book
+  url: https://github.com/entelecheia/nlp4ss # Online location of your book
   path_to_book: book # Optional path to your book, relative to the repository root
   branch: main # Which branch of the repository should be used when creating links (optional)
 
