@@ -24,10 +24,19 @@ package_scripts:
 poe_task_files:
 - .tasks.toml
 - .tasks-extra.toml
-project_description: NLP for Social Science (nlp4ss) is a comprehensive, multilingual course and toolkit designed to bridge the gap between natural language processing (NLP) and social science research. This project provides researchers, students, and practitioners with the knowledge and tools to apply cutting-edge NLP techniques to social science questions. It covers a wide range of topics, including text preprocessing, sentiment analysis, topic modeling, and machine learning applications in social contexts. With interactive Jupyter notebooks, hands-on examples, and real-world case studies, nlp4ss offers a practical approach to integrating computational methods into social science research.
+project_description: NLP for Social Science (nlp4ss) is a comprehensive, multilingual
+    course and toolkit designed to bridge the gap between natural language processing
+    (NLP) and social science research. This project provides researchers, students,
+    and practitioners with the knowledge and tools to apply cutting-edge NLP techniques
+    to social science questions. It covers a wide range of topics, including text
+    preprocessing, sentiment analysis, topic modeling, and machine learning applications
+    in social contexts. With interactive Jupyter notebooks, hands-on examples, and
+    real-world case studies, nlp4ss offers a practical approach to integrating computational
+    methods into social science research.
 project_license: CC-BY-4.0
 project_name: nlp4ss
-project_short_description: A course on applying natural language processing (NLP) techniques for social science research.
+project_short_description: A course on applying natural language processing (NLP)
+    techniques for social science research.
 upload_to_release: true
 upload_to_repository: true
 use_launch_buttons: true
