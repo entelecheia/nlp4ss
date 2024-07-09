@@ -412,7 +412,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -428,6 +430,43 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-1-introduction-to-nlp-and-its-applications-in-social-science">Session 1: Introduction to NLP and Its Applications in Social Science</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals-of-natural-language-processing-and-its-evolution">1.1 Fundamentals of Natural Language Processing and its evolution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-generative-large-language-models-llms">1.2 Overview of Generative Large Language Models (LLMs)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ethical-considerations-and-challenges-in-using-llms-for-research">1.3 Ethical Considerations and Challenges in Using LLMs for Research</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-2-traditional-nlp-techniques-and-text-preprocessing">Session 2: Traditional NLP Techniques and Text Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-cleaning-normalization-and-representation">2.1 Text Cleaning, Normalization, and Representation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-nlp-tasks">2.2 Basic NLP Tasks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topic-modeling-and-latent-dirichlet-allocation-lda">2.3 Topic Modeling and Latent Dirichlet Allocation (LDA)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-3-llms-for-data-annotation-and-classification">Session 3: LLMs for Data Annotation and Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-learning-with-llms">3.1 Zero-shot Learning with LLMs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-learning-and-prompt-engineering">3.2 Few-shot Learning and Prompt Engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-llm-performance-with-traditional-supervised-learning">3.3 Comparing LLM Performance with Traditional Supervised Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-4-generative-explanations-and-summaries-in-social-science">Session 4: Generative Explanations and Summaries in Social Science</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-llms-for-high-quality-text-generation">4.1 Using LLMs for High-Quality Text Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#social-bias-inference-and-analysis">4.2 Social Bias Inference and Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figurative-language-explanation-and-cultural-context">4.3 Figurative Language Explanation and Cultural Context</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-5-advanced-applications-of-llms-in-social-science-research">Session 5: Advanced Applications of LLMs in Social Science Research</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-large-scale-textual-data">5.1 Analyzing Large-Scale Textual Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#misinformation-and-fake-news-detection">5.2 Misinformation and Fake News Detection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-directions-and-emerging-trends">5.3 Future Directions and Emerging Trends</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -439,6 +478,121 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="syllabus">
 <h1>Syllabus<a class="headerlink" href="#syllabus" title="Link to this heading">#</a></h1>
+<section id="session-1-introduction-to-nlp-and-its-applications-in-social-science">
+<h2>Session 1: Introduction to NLP and Its Applications in Social Science<a class="headerlink" href="#session-1-introduction-to-nlp-and-its-applications-in-social-science" title="Link to this heading">#</a></h2>
+<section id="fundamentals-of-natural-language-processing-and-its-evolution">
+<h3>1.1 Fundamentals of Natural Language Processing and its evolution<a class="headerlink" href="#fundamentals-of-natural-language-processing-and-its-evolution" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Traditional NLP vs. modern LLM-based approaches</p></li>
+<li><p>The intersection of NLP and Social Science Research</p></li>
+</ul>
+</section>
+<section id="overview-of-generative-large-language-models-llms">
+<h3>1.2 Overview of Generative Large Language Models (LLMs)<a class="headerlink" href="#overview-of-generative-large-language-models-llms" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Introduction to transformer architecture and GPT models</p></li>
+<li><p>Capabilities and limitations of LLMs in social science contexts</p></li>
+</ul>
+</section>
+<section id="ethical-considerations-and-challenges-in-using-llms-for-research">
+<h3>1.3 Ethical Considerations and Challenges in Using LLMs for Research<a class="headerlink" href="#ethical-considerations-and-challenges-in-using-llms-for-research" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Bias, privacy, and interpretability issues</p></li>
+<li><p>Developing responsible practices for LLM use in social science</p></li>
+</ul>
+</section>
+</section>
+<section id="session-2-traditional-nlp-techniques-and-text-preprocessing">
+<h2>Session 2: Traditional NLP Techniques and Text Preprocessing<a class="headerlink" href="#session-2-traditional-nlp-techniques-and-text-preprocessing" title="Link to this heading">#</a></h2>
+<section id="text-cleaning-normalization-and-representation">
+<h3>2.1 Text Cleaning, Normalization, and Representation<a class="headerlink" href="#text-cleaning-normalization-and-representation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Tokenization, stemming, and lemmatization</p></li>
+<li><p>Bag-of-Words, TF-IDF, and Word Embeddings</p></li>
+</ul>
+</section>
+<section id="basic-nlp-tasks">
+<h3>2.2 Basic NLP Tasks<a class="headerlink" href="#basic-nlp-tasks" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Text classification and sentiment analysis</p></li>
+<li><p>Named Entity Recognition</p></li>
+</ul>
+</section>
+<section id="topic-modeling-and-latent-dirichlet-allocation-lda">
+<h3>2.3 Topic Modeling and Latent Dirichlet Allocation (LDA)<a class="headerlink" href="#topic-modeling-and-latent-dirichlet-allocation-lda" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="session-3-llms-for-data-annotation-and-classification">
+<h2>Session 3: LLMs for Data Annotation and Classification<a class="headerlink" href="#session-3-llms-for-data-annotation-and-classification" title="Link to this heading">#</a></h2>
+<section id="zero-shot-learning-with-llms">
+<h3>3.1 Zero-shot Learning with LLMs<a class="headerlink" href="#zero-shot-learning-with-llms" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Principles and applications in social science contexts</p></li>
+</ul>
+</section>
+<section id="few-shot-learning-and-prompt-engineering">
+<h3>3.2 Few-shot Learning and Prompt Engineering<a class="headerlink" href="#few-shot-learning-and-prompt-engineering" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Designing effective prompts for social science tasks</p></li>
+</ul>
+</section>
+<section id="comparing-llm-performance-with-traditional-supervised-learning">
+<h3>3.3 Comparing LLM Performance with Traditional Supervised Learning<a class="headerlink" href="#comparing-llm-performance-with-traditional-supervised-learning" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Case studies in social science data annotation</p></li>
+</ul>
+</section>
+</section>
+<section id="session-4-generative-explanations-and-summaries-in-social-science">
+<h2>Session 4: Generative Explanations and Summaries in Social Science<a class="headerlink" href="#session-4-generative-explanations-and-summaries-in-social-science" title="Link to this heading">#</a></h2>
+<section id="using-llms-for-high-quality-text-generation">
+<h3>4.1 Using LLMs for High-Quality Text Generation<a class="headerlink" href="#using-llms-for-high-quality-text-generation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Aspect-based emotion summarization</p></li>
+<li><p>Misinformation explanation</p></li>
+</ul>
+</section>
+<section id="social-bias-inference-and-analysis">
+<h3>4.2 Social Bias Inference and Analysis<a class="headerlink" href="#social-bias-inference-and-analysis" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Detecting and explaining social biases in text</p></li>
+<li><p>Positive reframing techniques</p></li>
+</ul>
+</section>
+<section id="figurative-language-explanation-and-cultural-context">
+<h3>4.3 Figurative Language Explanation and Cultural Context<a class="headerlink" href="#figurative-language-explanation-and-cultural-context" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Analyzing metaphors and idioms in social contexts</p></li>
+<li><p>Cross-cultural communication analysis</p></li>
+</ul>
+</section>
+</section>
+<section id="session-5-advanced-applications-of-llms-in-social-science-research">
+<h2>Session 5: Advanced Applications of LLMs in Social Science Research<a class="headerlink" href="#session-5-advanced-applications-of-llms-in-social-science-research" title="Link to this heading">#</a></h2>
+<section id="analyzing-large-scale-textual-data">
+<h3>5.1 Analyzing Large-Scale Textual Data<a class="headerlink" href="#analyzing-large-scale-textual-data" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Processing social media posts, medical records, and financial documents</p></li>
+<li><p>Inferring public opinion and social attitudes at scale</p></li>
+</ul>
+</section>
+<section id="misinformation-and-fake-news-detection">
+<h3>5.2 Misinformation and Fake News Detection<a class="headerlink" href="#misinformation-and-fake-news-detection" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Using LLMs to identify patterns in false information</p></li>
+<li><p>Studying the spread and impact of misinformation</p></li>
+</ul>
+</section>
+<section id="future-directions-and-emerging-trends">
+<h3>5.3 Future Directions and Emerging Trends<a class="headerlink" href="#future-directions-and-emerging-trends" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>LLMs in social interaction studies</p></li>
+<li><p>Developing new methodologies for LLM result validation and interpretation</p></li>
+<li><p>Collaboration between NLP researchers and social scientists</p></li>
+</ul>
+<p>Each lecture will include theoretical concepts, practical examples, and hands-on exercises using Python and relevant NLP libraries, with a focus on integrating LLM capabilities. Students will be encouraged to apply these techniques to their own research interests and datasets throughout the course, while critically evaluating the benefits and limitations of LLM-based approaches in social science research.</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -495,6 +649,50 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-1-introduction-to-nlp-and-its-applications-in-social-science">Session 1: Introduction to NLP and Its Applications in Social Science</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals-of-natural-language-processing-and-its-evolution">1.1 Fundamentals of Natural Language Processing and its evolution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-generative-large-language-models-llms">1.2 Overview of Generative Large Language Models (LLMs)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ethical-considerations-and-challenges-in-using-llms-for-research">1.3 Ethical Considerations and Challenges in Using LLMs for Research</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-2-traditional-nlp-techniques-and-text-preprocessing">Session 2: Traditional NLP Techniques and Text Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-cleaning-normalization-and-representation">2.1 Text Cleaning, Normalization, and Representation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-nlp-tasks">2.2 Basic NLP Tasks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topic-modeling-and-latent-dirichlet-allocation-lda">2.3 Topic Modeling and Latent Dirichlet Allocation (LDA)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-3-llms-for-data-annotation-and-classification">Session 3: LLMs for Data Annotation and Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-learning-with-llms">3.1 Zero-shot Learning with LLMs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-learning-and-prompt-engineering">3.2 Few-shot Learning and Prompt Engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-llm-performance-with-traditional-supervised-learning">3.3 Comparing LLM Performance with Traditional Supervised Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-4-generative-explanations-and-summaries-in-social-science">Session 4: Generative Explanations and Summaries in Social Science</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-llms-for-high-quality-text-generation">4.1 Using LLMs for High-Quality Text Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#social-bias-inference-and-analysis">4.2 Social Bias Inference and Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figurative-language-explanation-and-cultural-context">4.3 Figurative Language Explanation and Cultural Context</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-5-advanced-applications-of-llms-in-social-science-research">Session 5: Advanced Applications of LLMs in Social Science Research</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-large-scale-textual-data">5.1 Analyzing Large-Scale Textual Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#misinformation-and-fake-news-detection">5.2 Misinformation and Fake News Detection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-directions-and-emerging-trends">5.3 Future Directions and Emerging Trends</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

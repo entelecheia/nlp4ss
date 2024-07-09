@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Syllabus &#8212; NLP for Social Science</title>
+    <title>강의 계획서 &#8212; NLP for Social Science</title>
   
   
   
@@ -220,7 +220,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">About</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Syllabus</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">강의 계획서</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../about/index.html">Who made this book?</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://halla.ai">CHU AI Department</a></li>
 </ul>
@@ -412,7 +412,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -423,11 +425,48 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Syllabus</h1>
+    <h1>강의 계획서</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nlp">세션 1: NLP 소개 및 사회과학에서의 응용</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.1 자연어 처리의 기초와 발전</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#llm">1.2 생성형 대규모 언어 모델(LLM) 개요</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.3 연구를 위한 LLM 사용의 윤리적 고려사항과 과제</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">세션 2: 전통적인 NLP 기술과 텍스트 전처리</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2.1 텍스트 정제, 정규화 및 표현</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.2 기본 NLP 작업</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lda">2.3 토픽 모델링과 잠재 디리클레 할당(LDA)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">세션 3: 데이터 주석 및 분류를 위한 LLM</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3.1 LLM을 사용한 제로샷 학습</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3.2 퓨샷 학습과 프롬프트 엔지니어링</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">3.3 LLM 성능과 전통적인 지도 학습 비교</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">세션 4: 사회과학에서의 생성적 설명 및 요약</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">4.1 LLM을 사용한 고품질 텍스트 생성</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">4.2 사회적 편향 추론 및 분석</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">4.3 비유적 언어 설명과 문화적 맥락</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">세션 5: 사회과학 연구에서 LLM의 고급 응용</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">5.1 대규모 텍스트 데이터 분석</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">5.2 잘못된 정보 및 가짜 뉴스 탐지</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">5.3 미래 방향과 새로운 트렌드</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -437,8 +476,123 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="syllabus">
-<h1>Syllabus<a class="headerlink" href="#syllabus" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>강의 계획서<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<section id="nlp">
+<h2>세션 1: NLP 소개 및 사회과학에서의 응용<a class="headerlink" href="#nlp" title="Link to this heading">#</a></h2>
+<section id="id2">
+<h3>1.1 자연어 처리의 기초와 발전<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>전통적인 NLP와 현대 LLM 기반 접근법</p></li>
+<li><p>NLP와 사회과학 연구의 교차점</p></li>
+</ul>
+</section>
+<section id="llm">
+<h3>1.2 생성형 대규모 언어 모델(LLM) 개요<a class="headerlink" href="#llm" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>트랜스포머 아키텍처와 GPT 모델 소개</p></li>
+<li><p>사회과학 맥락에서 LLM의 능력과 한계</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>1.3 연구를 위한 LLM 사용의 윤리적 고려사항과 과제<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>편향, 프라이버시 및 해석 가능성 문제</p></li>
+<li><p>사회과학에서 LLM 사용을 위한 책임감 있는 관행 개발</p></li>
+</ul>
+</section>
+</section>
+<section id="id4">
+<h2>세션 2: 전통적인 NLP 기술과 텍스트 전처리<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<section id="id5">
+<h3>2.1 텍스트 정제, 정규화 및 표현<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>토큰화, 어간 추출 및 표제어 추출</p></li>
+<li><p>Bag-of-Words, TF-IDF 및 단어 임베딩</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>2.2 기본 NLP 작업<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>텍스트 분류 및 감성 분석</p></li>
+<li><p>개체명 인식</p></li>
+</ul>
+</section>
+<section id="lda">
+<h3>2.3 토픽 모델링과 잠재 디리클레 할당(LDA)<a class="headerlink" href="#lda" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="id7">
+<h2>세션 3: 데이터 주석 및 분류를 위한 LLM<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<section id="id8">
+<h3>3.1 LLM을 사용한 제로샷 학습<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>사회과학 맥락에서의 원리와 응용</p></li>
+</ul>
+</section>
+<section id="id9">
+<h3>3.2 퓨샷 학습과 프롬프트 엔지니어링<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>사회과학 작업을 위한 효과적인 프롬프트 설계</p></li>
+</ul>
+</section>
+<section id="id10">
+<h3>3.3 LLM 성능과 전통적인 지도 학습 비교<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>사회과학 데이터 주석의 사례 연구</p></li>
+</ul>
+</section>
+</section>
+<section id="id11">
+<h2>세션 4: 사회과학에서의 생성적 설명 및 요약<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<section id="id12">
+<h3>4.1 LLM을 사용한 고품질 텍스트 생성<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>측면 기반 감정 요약</p></li>
+<li><p>잘못된 정보 설명</p></li>
+</ul>
+</section>
+<section id="id13">
+<h3>4.2 사회적 편향 추론 및 분석<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>텍스트에서 사회적 편향 탐지 및 설명</p></li>
+<li><p>긍정적인 재구성 기법</p></li>
+</ul>
+</section>
+<section id="id14">
+<h3>4.3 비유적 언어 설명과 문화적 맥락<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>사회적 맥락에서 은유와 관용구 분석</p></li>
+<li><p>문화 간 커뮤니케이션 분석</p></li>
+</ul>
+</section>
+</section>
+<section id="id15">
+<h2>세션 5: 사회과학 연구에서 LLM의 고급 응용<a class="headerlink" href="#id15" title="Link to this heading">#</a></h2>
+<section id="id16">
+<h3>5.1 대규모 텍스트 데이터 분석<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>소셜 미디어 게시물, 의료 기록 및 금융 문서 처리</p></li>
+<li><p>대규모로 여론과 사회적 태도 추론</p></li>
+</ul>
+</section>
+<section id="id17">
+<h3>5.2 잘못된 정보 및 가짜 뉴스 탐지<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>LLM을 사용하여 거짓 정보의 패턴 식별</p></li>
+<li><p>잘못된 정보의 확산과 영향 연구</p></li>
+</ul>
+</section>
+<section id="id18">
+<h3>5.3 미래 방향과 새로운 트렌드<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>사회적 상호작용 연구에서의 LLM</p></li>
+<li><p>LLM 결과 검증 및 해석을 위한 새로운 방법론 개발</p></li>
+<li><p>NLP 연구자와 사회과학자 간의 협력</p></li>
+</ul>
+<p>각 강의에는 이론적 개념, 실제 예제 및 Python과 관련 NLP 라이브러리를 사용한 실습 연습이 포함되며, LLM 기능 통합에 중점을 둡니다. 학생들은 LLM 기반 접근법의 이점과 한계를 비판적으로 평가하면서 강의 전반에 걸쳐 자신의 연구 관심사와 데이터 세트에 이러한 기술을 적용하도록 장려됩니다.</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -495,6 +649,50 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nlp">세션 1: NLP 소개 및 사회과학에서의 응용</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.1 자연어 처리의 기초와 발전</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#llm">1.2 생성형 대규모 언어 모델(LLM) 개요</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.3 연구를 위한 LLM 사용의 윤리적 고려사항과 과제</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">세션 2: 전통적인 NLP 기술과 텍스트 전처리</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2.1 텍스트 정제, 정규화 및 표현</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.2 기본 NLP 작업</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lda">2.3 토픽 모델링과 잠재 디리클레 할당(LDA)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">세션 3: 데이터 주석 및 분류를 위한 LLM</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3.1 LLM을 사용한 제로샷 학습</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3.2 퓨샷 학습과 프롬프트 엔지니어링</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">3.3 LLM 성능과 전통적인 지도 학습 비교</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">세션 4: 사회과학에서의 생성적 설명 및 요약</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">4.1 LLM을 사용한 고품질 텍스트 생성</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">4.2 사회적 편향 추론 및 분석</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">4.3 비유적 언어 설명과 문화적 맥락</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">세션 5: 사회과학 연구에서 LLM의 고급 응용</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">5.1 대규모 텍스트 데이터 분석</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">5.2 잘못된 정보 및 가짜 뉴스 탐지</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">5.3 미래 방향과 새로운 트렌드</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
