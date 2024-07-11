@@ -90,6 +90,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'session04/lecture2';</script>
     <script src="../_static/language_switcher.js?v=ff97be19"></script>
     <script src="../_static/chat.js?v=f0de43d7"></script>
@@ -437,7 +439,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -453,6 +457,26 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-social-bias-in-nlp">1. Introduction to Social Bias in NLP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-of-bias-in-llms">2. Sources of Bias in LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#techniques-for-detecting-bias-in-llms">3. Techniques for Detecting Bias in LLMs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word-embedding-association-test-weat">Word Embedding Association Test (WEAT)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-bias-in-llms">4. Quantifying Bias in LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#social-bias-inference-using-llms">5. Social Bias Inference Using LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-gender-bias">6. Analyzing Gender Bias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#racial-and-ethnic-bias-analysis">7. Racial and Ethnic Bias Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mitigating-bias-in-llms">8. Mitigating Bias in LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ethical-considerations-and-challenges">9. Ethical Considerations and Challenges</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -464,136 +488,247 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="social-bias-inference-and-analysis">
 <h1>4.2 Social Bias Inference and Analysis<a class="headerlink" href="#social-bias-inference-and-analysis" title="Link to this heading">#</a></h1>
+<section id="introduction-to-social-bias-in-nlp">
+<h2>1. Introduction to Social Bias in NLP<a class="headerlink" href="#introduction-to-social-bias-in-nlp" title="Link to this heading">#</a></h2>
+<p>Social bias in Natural Language Processing (NLP) refers to the unfair or prejudiced treatment of individuals or groups based on attributes such as gender, race, age, or socioeconomic status. In the context of Large Language Models (LLMs), these biases can manifest in various ways, potentially impacting social science research outcomes.</p>
+<div align="center" class="mermaid align-center">
+            graph TD
+    A[Social Bias in NLP] --&gt; B[Gender Bias]
+    A --&gt; C[Racial Bias]
+    A --&gt; D[Age Bias]
+    A --&gt; E[Socioeconomic Bias]
+    B --&gt; F[Occupational Stereotypes]
+    B --&gt; G[Gendered Language]
+    C --&gt; H[Ethnic Stereotypes]
+    C --&gt; I[Cultural Bias]
+    D --&gt; J[Ageism]
+    D --&gt; K[Generational Stereotypes]
+    E --&gt; L[Class-based Prejudice]
+    E --&gt; M[Economic Discrimination]
+        </div>
+        <p>Understanding and addressing these biases is crucial for ensuring the validity and fairness of social science research that utilizes LLMs.</p>
+</section>
+<section id="sources-of-bias-in-llms">
+<h2>2. Sources of Bias in LLMs<a class="headerlink" href="#sources-of-bias-in-llms" title="Link to this heading">#</a></h2>
+<p>Biases in LLMs can originate from various sources:</p>
 <ol class="arabic simple">
-<li><p>Introduction to Social Bias in NLP</p>
-<ul class="simple">
-<li><p>Definition and types of social biases</p></li>
-<li><p>Importance of bias detection in social science research</p></li>
-<li><p>Overview of bias in language models</p></li>
-</ul>
-</li>
-<li><p>Sources of Bias in LLMs</p>
-<ul class="simple">
-<li><p>Training data biases</p></li>
-<li><p>Algorithmic biases</p></li>
-<li><p>Deployment and interpretation biases</p></li>
-</ul>
-</li>
-<li><p>Techniques for Detecting Bias in LLMs</p>
-<ul class="simple">
-<li><p>Word embedding association tests</p></li>
-<li><p>Sentiment analysis-based methods</p></li>
-<li><p>Cloze test probing</p></li>
-<li><p>Bias in language generation tasks</p></li>
-</ul>
-</li>
-<li><p>Quantifying Bias in LLMs</p>
-<ul class="simple">
-<li><p>Metrics for measuring bias (e.g., WEAT, SEAT)</p></li>
-<li><p>Statistical significance in bias detection</p></li>
-<li><p>Intersectional bias analysis</p></li>
-</ul>
-</li>
-<li><p>Social Bias Inference Using LLMs</p>
-<ul class="simple">
-<li><p>Prompt-based bias elicitation</p></li>
-<li><p>Few-shot learning for bias detection</p></li>
-<li><p>Comparative analysis across different LLMs</p></li>
-</ul>
-</li>
-<li><p>Analyzing Gender Bias</p>
-<ul class="simple">
-<li><p>Occupational stereotypes</p></li>
-<li><p>Gendered language in text generation</p></li>
-<li><p>Gender bias in sentiment analysis</p></li>
-</ul>
-</li>
-<li><p>Racial and Ethnic Bias Analysis</p>
-<ul class="simple">
-<li><p>Stereotypical associations in LLMs</p></li>
-<li><p>Cross-cultural bias analysis</p></li>
-<li><p>Bias in multilingual models</p></li>
-</ul>
-</li>
-<li><p>Age-related Bias Detection</p>
-<ul class="simple">
-<li><p>Ageism in language models</p></li>
-<li><p>Generational stereotypes in text generation</p></li>
-</ul>
-</li>
-<li><p>Socioeconomic Status Bias</p>
-<ul class="simple">
-<li><p>Class-based stereotypes in LLMs</p></li>
-<li><p>Economic bias in language understanding and generation</p></li>
-</ul>
-</li>
-<li><p>Intersectionality in Bias Analysis</p>
-<ul class="simple">
-<li><p>Techniques for analyzing compounded biases</p></li>
-<li><p>Challenges in intersectional bias detection</p></li>
-</ul>
-</li>
-<li><p>Contextual Bias Analysis</p>
-<ul class="simple">
-<li><p>Situational and contextual factors in bias manifestation</p></li>
-<li><p>Domain-specific bias analysis (e.g., healthcare, legal texts)</p></li>
-</ul>
-</li>
-<li><p>Bias in Downstream NLP Tasks</p>
-<ul class="simple">
-<li><p>Impact of LLM biases on classification tasks</p></li>
-<li><p>Bias propagation in text summarization and generation</p></li>
-</ul>
-</li>
-<li><p>Mitigating Bias in LLMs</p>
-<ul class="simple">
-<li><p>Data-level interventions</p></li>
-<li><p>Model-level debiasing techniques</p></li>
-<li><p>Post-processing methods for bias reduction</p></li>
-</ul>
-</li>
-<li><p>Ethical Considerations in Bias Analysis</p>
-<ul class="simple">
-<li><p>Responsible reporting of bias findings</p></li>
-<li><p>Avoiding reinforcement of stereotypes through analysis</p></li>
-<li><p>Privacy concerns in bias detection studies</p></li>
-</ul>
-</li>
-<li><p>Challenges in Social Bias Analysis</p>
-<ul class="simple">
-<li><p>Subjectivity in bias definition and measurement</p></li>
-<li><p>Cultural relativity of biases</p></li>
-<li><p>Evolving nature of social biases</p></li>
-</ul>
-</li>
-<li><p>Tools and Frameworks for Bias Analysis</p>
-<ul class="simple">
-<li><p>Overview of existing bias detection toolkits</p></li>
-<li><p>Developing custom bias analysis pipelines</p></li>
-</ul>
-</li>
-<li><p>Case Studies in Social Science Research</p>
-<ul class="simple">
-<li><p>Examples of bias analysis in social media studies</p></li>
-<li><p>Bias detection in historical text analysis</p></li>
-<li><p>Cross-cultural bias comparisons</p></li>
-</ul>
-</li>
-<li><p>Implications for Social Science Methodology</p>
-<ul class="simple">
-<li><p>Impact of LLM biases on research findings</p></li>
-<li><p>Strategies for bias-aware research design</p></li>
-<li><p>Reporting standards for bias in LLM-based studies</p></li>
-</ul>
-</li>
-<li><p>Future Directions in Social Bias Analysis</p>
-<ul class="simple">
-<li><p>Advancements in interpretable bias detection</p></li>
-<li><p>Real-time bias monitoring in deployed systems</p></li>
-<li><p>Collaborative approaches to bias mitigation</p></li>
-</ul>
-</li>
+<li><p>Training data biases: Reflect societal biases present in the text used to train the models.</p></li>
+<li><p>Algorithmic biases: Arise from the model architecture and training process.</p></li>
+<li><p>Deployment and interpretation biases: Occur when models are applied in specific contexts or when their outputs are interpreted.</p></li>
 </ol>
+</section>
+<section id="techniques-for-detecting-bias-in-llms">
+<h2>3. Techniques for Detecting Bias in LLMs<a class="headerlink" href="#techniques-for-detecting-bias-in-llms" title="Link to this heading">#</a></h2>
+<section id="word-embedding-association-test-weat">
+<h3>Word Embedding Association Test (WEAT)<a class="headerlink" href="#word-embedding-association-test-weat" title="Link to this heading">#</a></h3>
+<p>WEAT is a common method for detecting bias in word embeddings. Here’s an example implementation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoModel</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
+
+<span class="k">def</span> <span class="nf">cosine_similarity</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">get_embedding</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">outputs</span><span class="o">.</span><span class="n">last_hidden_state</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">weat_test</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">target_set1</span><span class="p">,</span> <span class="n">target_set2</span><span class="p">,</span> <span class="n">attribute_set1</span><span class="p">,</span> <span class="n">attribute_set2</span><span class="p">):</span>
+    <span class="n">embeddings</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">target_set1</span> <span class="o">+</span> <span class="n">target_set2</span> <span class="o">+</span> <span class="n">attribute_set1</span> <span class="o">+</span> <span class="n">attribute_set2</span><span class="p">:</span>
+        <span class="n">embeddings</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_embedding</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+
+    <span class="n">association_1</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">cosine_similarity</span><span class="p">(</span><span class="n">embeddings</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">embeddings</span><span class="p">[</span><span class="n">a</span><span class="p">])</span>
+                        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">target_set1</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">attribute_set1</span><span class="p">)</span>
+    <span class="n">association_2</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">cosine_similarity</span><span class="p">(</span><span class="n">embeddings</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">embeddings</span><span class="p">[</span><span class="n">a</span><span class="p">])</span>
+                        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">target_set2</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">attribute_set2</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">association_1</span> <span class="o">-</span> <span class="n">association_2</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;bert-base-uncased&quot;</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+
+<span class="n">target_set1</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;man&quot;</span><span class="p">,</span> <span class="s2">&quot;boy&quot;</span><span class="p">,</span> <span class="s2">&quot;father&quot;</span><span class="p">,</span> <span class="s2">&quot;brother&quot;</span><span class="p">,</span> <span class="s2">&quot;son&quot;</span><span class="p">]</span>
+<span class="n">target_set2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;woman&quot;</span><span class="p">,</span> <span class="s2">&quot;girl&quot;</span><span class="p">,</span> <span class="s2">&quot;mother&quot;</span><span class="p">,</span> <span class="s2">&quot;sister&quot;</span><span class="p">,</span> <span class="s2">&quot;daughter&quot;</span><span class="p">]</span>
+<span class="n">attribute_set1</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;computer&quot;</span><span class="p">,</span> <span class="s2">&quot;engineer&quot;</span><span class="p">,</span> <span class="s2">&quot;scientist&quot;</span><span class="p">]</span>
+<span class="n">attribute_set2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;nurse&quot;</span><span class="p">,</span> <span class="s2">&quot;teacher&quot;</span><span class="p">,</span> <span class="s2">&quot;artist&quot;</span><span class="p">]</span>
+
+<span class="n">weat_score</span> <span class="o">=</span> <span class="n">weat_test</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">target_set1</span><span class="p">,</span> <span class="n">target_set2</span><span class="p">,</span> <span class="n">attribute_set1</span><span class="p">,</span> <span class="n">attribute_set2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WEAT score: </span><span class="si">{</span><span class="n">weat_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example calculates the WEAT score for gender bias in occupations. A positive score indicates bias towards associating male terms with technical professions and female terms with caregiving professions.</p>
+</section>
+</section>
+<section id="quantifying-bias-in-llms">
+<h2>4. Quantifying Bias in LLMs<a class="headerlink" href="#quantifying-bias-in-llms" title="Link to this heading">#</a></h2>
+<p>To quantify bias, we can use metrics like the WEAT score shown above. Additionally, we can analyze the statistical significance of these scores:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+
+<span class="k">def</span> <span class="nf">weat_significance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">target_set1</span><span class="p">,</span> <span class="n">target_set2</span><span class="p">,</span> <span class="n">attribute_set1</span><span class="p">,</span> <span class="n">attribute_set2</span><span class="p">,</span> <span class="n">num_permutations</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">observed_score</span> <span class="o">=</span> <span class="n">weat_test</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">target_set1</span><span class="p">,</span> <span class="n">target_set2</span><span class="p">,</span> <span class="n">attribute_set1</span><span class="p">,</span> <span class="n">attribute_set2</span><span class="p">)</span>
+
+    <span class="n">all_targets</span> <span class="o">=</span> <span class="n">target_set1</span> <span class="o">+</span> <span class="n">target_set2</span>
+    <span class="n">permutation_scores</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_permutations</span><span class="p">):</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">all_targets</span><span class="p">)</span>
+        <span class="n">perm_target1</span> <span class="o">=</span> <span class="n">all_targets</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">target_set1</span><span class="p">)]</span>
+        <span class="n">perm_target2</span> <span class="o">=</span> <span class="n">all_targets</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">target_set1</span><span class="p">):]</span>
+        <span class="n">perm_score</span> <span class="o">=</span> <span class="n">weat_test</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">perm_target1</span><span class="p">,</span> <span class="n">perm_target2</span><span class="p">,</span> <span class="n">attribute_set1</span><span class="p">,</span> <span class="n">attribute_set2</span><span class="p">)</span>
+        <span class="n">permutation_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">perm_score</span><span class="p">)</span>
+
+    <span class="n">p_value</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="n">observed_score</span> <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">permutation_scores</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_permutations</span>
+    <span class="k">return</span> <span class="n">observed_score</span><span class="p">,</span> <span class="n">p_value</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">observed_score</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">weat_significance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">target_set1</span><span class="p">,</span> <span class="n">target_set2</span><span class="p">,</span> <span class="n">attribute_set1</span><span class="p">,</span> <span class="n">attribute_set2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Observed WEAT score: </span><span class="si">{</span><span class="n">observed_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-value: </span><span class="si">{</span><span class="n">p_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This code calculates the statistical significance of the WEAT score using permutation testing.</p>
+</section>
+<section id="social-bias-inference-using-llms">
+<h2>5. Social Bias Inference Using LLMs<a class="headerlink" href="#social-bias-inference-using-llms" title="Link to this heading">#</a></h2>
+<p>We can use LLMs themselves to infer social biases through carefully crafted prompts:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">GPT2LMHeadModel</span><span class="p">,</span> <span class="n">GPT2Tokenizer</span>
+
+<span class="k">def</span> <span class="nf">generate_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="n">max_length</span><span class="p">,</span> <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">do_sample</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">analyze_occupation_bias</span><span class="p">(</span><span class="n">occupation</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
+    <span class="n">prompts</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">occupation</span><span class="si">}</span><span class="s2"> walked into the room. He&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">occupation</span><span class="si">}</span><span class="s2"> walked into the room. She&quot;</span>
+    <span class="p">]</span>
+
+    <span class="n">completions</span> <span class="o">=</span> <span class="p">[</span><span class="n">generate_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span> <span class="k">for</span> <span class="n">prompt</span> <span class="ow">in</span> <span class="n">prompts</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">completions</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;gpt2&quot;</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">GPT2LMHeadModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">GPT2Tokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+
+<span class="n">occupation</span> <span class="o">=</span> <span class="s2">&quot;engineer&quot;</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">analyze_occupation_bias</span><span class="p">(</span><span class="n">occupation</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Completions for &#39;</span><span class="si">{</span><span class="n">occupation</span><span class="si">}</span><span class="s2">&#39;:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Male prompt: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Female prompt: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example generates completions for prompts involving different genders in a specific occupation, allowing us to analyze potential gender biases in the model’s output.</p>
+</section>
+<section id="analyzing-gender-bias">
+<h2>6. Analyzing Gender Bias<a class="headerlink" href="#analyzing-gender-bias" title="Link to this heading">#</a></h2>
+<p>To analyze gender bias more systematically, we can create a function to compare word associations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gender_association_test</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">male_term</span><span class="p">,</span> <span class="n">female_term</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
+    <span class="n">male_associations</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">female_associations</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="n">male_prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2"> is a </span><span class="si">{</span><span class="n">male_term</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">female_prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2"> is a </span><span class="si">{</span><span class="n">female_term</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="n">male_prob</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">(</span><span class="n">male_prompt</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">input_ids</span><span class="p">)</span><span class="o">.</span><span class="n">logits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">male_term</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">female_prob</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">(</span><span class="n">female_prompt</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">input_ids</span><span class="p">)</span><span class="o">.</span><span class="n">logits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">female_term</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+        <span class="n">male_associations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">male_prob</span><span class="p">)</span>
+        <span class="n">female_associations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">female_prob</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">male_associations</span><span class="p">,</span> <span class="n">female_associations</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;doctor&quot;</span><span class="p">,</span> <span class="s2">&quot;nurse&quot;</span><span class="p">,</span> <span class="s2">&quot;engineer&quot;</span><span class="p">,</span> <span class="s2">&quot;teacher&quot;</span><span class="p">,</span> <span class="s2">&quot;scientist&quot;</span><span class="p">,</span> <span class="s2">&quot;artist&quot;</span><span class="p">]</span>
+<span class="n">male_term</span> <span class="o">=</span> <span class="s2">&quot;man&quot;</span>
+<span class="n">female_term</span> <span class="o">=</span> <span class="s2">&quot;woman&quot;</span>
+
+<span class="n">male_assoc</span><span class="p">,</span> <span class="n">female_assoc</span> <span class="o">=</span> <span class="n">gender_association_test</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">male_term</span><span class="p">,</span> <span class="n">female_term</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">male_prob</span><span class="p">,</span> <span class="n">female_prob</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">male_assoc</span><span class="p">,</span> <span class="n">female_assoc</span><span class="p">):</span>
+    <span class="n">bias</span> <span class="o">=</span> <span class="n">male_prob</span> <span class="o">-</span> <span class="n">female_prob</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">: Male association: </span><span class="si">{</span><span class="n">male_prob</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, Female association: </span><span class="si">{</span><span class="n">female_prob</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, Bias: </span><span class="si">{</span><span class="n">bias</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This function calculates the association probabilities between occupations and gender terms, helping to quantify gender bias in occupational stereotypes.</p>
+</section>
+<section id="racial-and-ethnic-bias-analysis">
+<h2>7. Racial and Ethnic Bias Analysis<a class="headerlink" href="#racial-and-ethnic-bias-analysis" title="Link to this heading">#</a></h2>
+<p>To analyze racial and ethnic biases, we can use a similar approach with culturally associated names:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">name_sentiment_analysis</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
+    <span class="n">sentiments</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+        <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> is a&quot;</span>
+        <span class="n">completion</span> <span class="o">=</span> <span class="n">generate_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+        <span class="n">sentiments</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">completion</span>
+    <span class="k">return</span> <span class="n">sentiments</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Emily&quot;</span><span class="p">,</span> <span class="s2">&quot;Lakisha&quot;</span><span class="p">,</span> <span class="s2">&quot;Brad&quot;</span><span class="p">,</span> <span class="s2">&quot;Jamal&quot;</span><span class="p">,</span> <span class="s2">&quot;Zhang Wei&quot;</span><span class="p">,</span> <span class="s2">&quot;Sven&quot;</span><span class="p">,</span> <span class="s2">&quot;Mohammed&quot;</span><span class="p">]</span>
+<span class="n">name_sentiments</span> <span class="o">=</span> <span class="n">name_sentiment_analysis</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">sentiment</span> <span class="ow">in</span> <span class="n">name_sentiments</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">sentiment</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This function generates completions for prompts starting with different names, allowing us to analyze potential racial or ethnic biases in the model’s associations.</p>
+</section>
+<section id="mitigating-bias-in-llms">
+<h2>8. Mitigating Bias in LLMs<a class="headerlink" href="#mitigating-bias-in-llms" title="Link to this heading">#</a></h2>
+<p>While completely eliminating bias is challenging, there are techniques to mitigate it. One approach is to use debiasing prompts:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">debiased_generation</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">debiasing_prefixes</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+    <span class="n">debiased_prompts</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">prompt</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">debiasing_prefixes</span><span class="p">]</span>
+    <span class="n">completions</span> <span class="o">=</span> <span class="p">[</span><span class="n">generate_completion</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">max_length</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">debiased_prompts</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">completions</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">debiasing_prefixes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Considering all genders equally,&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Without any racial stereotypes,&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Regardless of socioeconomic background,&quot;</span>
+<span class="p">]</span>
+
+<span class="n">biased_prompt</span> <span class="o">=</span> <span class="s2">&quot;The CEO of the company is&quot;</span>
+<span class="n">debiased_results</span> <span class="o">=</span> <span class="n">debiased_generation</span><span class="p">(</span><span class="n">biased_prompt</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">debiasing_prefixes</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Debiased completions:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">completion</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">debiasing_prefixes</span><span class="p">,</span> <span class="n">debiased_results</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">completion</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This approach uses explicit debiasing prefixes to guide the model towards more neutral completions.</p>
+</section>
+<section id="ethical-considerations-and-challenges">
+<h2>9. Ethical Considerations and Challenges<a class="headerlink" href="#ethical-considerations-and-challenges" title="Link to this heading">#</a></h2>
+<p>When conducting social bias analysis, researchers must consider several ethical issues:</p>
+<ol class="arabic simple">
+<li><p>Avoid reinforcing stereotypes through analysis</p></li>
+<li><p>Ensure privacy and consent when using real-world data</p></li>
+<li><p>Acknowledge the cultural relativity of biases</p></li>
+<li><p>Recognize the evolving nature of social biases</p></li>
+</ol>
+<div align="center" class="mermaid align-center">
+            graph TD
+    A[Ethical Considerations] --&gt; B[Avoid Reinforcing Stereotypes]
+    A --&gt; C[Ensure Privacy and Consent]
+    A --&gt; D[Acknowledge Cultural Relativity]
+    A --&gt; E[Recognize Evolving Nature of Biases]
+    B --&gt; F[Careful Reporting of Results]
+    C --&gt; G[Anonymization Techniques]
+    D --&gt; H[Cross-cultural Validation]
+    E --&gt; I[Longitudinal Bias Studies]
+        </div>
+        </section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Social bias inference and analysis in LLMs is a critical area for social science researchers using these models. By employing techniques such as WEAT, prompt-based analysis, and careful examination of model outputs, researchers can detect and quantify various types of social biases. However, it’s important to approach this analysis with caution, considering ethical implications and the complex nature of social biases.</p>
+<p>As the field progresses, we can expect more sophisticated techniques for bias detection and mitigation. Researchers should stay informed about the latest developments and best practices in this rapidly evolving area. By doing so, they can ensure more fair and accurate use of LLMs in social science research, ultimately contributing to a more equitable understanding of social phenomena.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -650,6 +785,33 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-social-bias-in-nlp">1. Introduction to Social Bias in NLP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-of-bias-in-llms">2. Sources of Bias in LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#techniques-for-detecting-bias-in-llms">3. Techniques for Detecting Bias in LLMs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word-embedding-association-test-weat">Word Embedding Association Test (WEAT)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-bias-in-llms">4. Quantifying Bias in LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#social-bias-inference-using-llms">5. Social Bias Inference Using LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-gender-bias">6. Analyzing Gender Bias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#racial-and-ethnic-bias-analysis">7. Racial and Ethnic Bias Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mitigating-bias-in-llms">8. Mitigating Bias in LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ethical-considerations-and-challenges">9. Ethical Considerations and Challenges</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
