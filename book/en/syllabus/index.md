@@ -1,83 +1,95 @@
-# Syllabus
+# Course Syllabus
 
-## Session 1: Introduction to NLP and Its Applications in Social Science
+## Course Description
 
-### 1.1 Fundamentals of Natural Language Processing and its evolution
+This course introduces social science researchers to Natural Language Processing (NLP) techniques, with a specific focus on leveraging Large Language Models (LLMs) for social science applications. Students will learn how to apply cutting-edge NLP methods to analyze textual data, extract insights, and address complex social science research questions.
 
-- Traditional NLP vs. modern LLM-based approaches
-- The intersection of NLP and Social Science Research
+## Course Objectives
 
-### 1.2 Overview of Generative Large Language Models (LLMs)
+By the end of this course, students will be able to:
 
-- Introduction to transformer architecture and GPT models
-- Capabilities and limitations of LLMs in social science contexts
+1. Understand fundamental NLP concepts and their relevance to social science research
+2. Apply traditional NLP techniques and modern LLM-based approaches to social science data
+3. Design and implement NLP-driven research projects in social science contexts
+4. Critically evaluate the potential and limitations of NLP methods in social science research
+5. Address ethical considerations in the use of AI and NLP in social science studies
 
-### 1.3 Ethical Considerations and Challenges in Using LLMs for Research
+## Prerequisites
 
-- Bias, privacy, and interpretability issues
-- Developing responsible practices for LLM use in social science
+- Basic programming skills in Python
+- Familiarity with basic statistical concepts
+- Understanding of fundamental social science research methods
 
-## Session 2: Traditional NLP Techniques and Text Preprocessing
+## Course Structure
 
-### 2.1 Text Cleaning, Normalization, and Representation
+The course consists of five sessions, each covering key aspects of NLP for social science:
 
-- Tokenization, stemming, and lemmatization
-- Bag-of-Words, TF-IDF, and Word Embeddings
+### Session 1: Introduction to NLP and Its Applications in Social Science
 
-### 2.2 Basic NLP Tasks
+1. Fundamentals of Natural Language Processing and its evolution
+2. Overview of Generative Large Language Models (LLMs)
+3. Ethical Considerations and Challenges in Using LLMs for Research
 
-- Text classification and sentiment analysis
-- Named Entity Recognition
+### Session 2: Traditional NLP Techniques and Text Preprocessing
 
-### 2.3 Topic Modeling and Latent Dirichlet Allocation (LDA)
+1. Text Cleaning, Normalization, and Representation
+2. Basic NLP Tasks
+3. Topic Modeling and Latent Dirichlet Allocation (LDA)
 
-## Session 3: LLMs for Data Annotation and Classification
+### Session 3: LLMs for Data Annotation and Classification
 
-### 3.1 Zero-shot Learning with LLMs
+1. Zero-shot Learning with LLMs
+2. Few-shot Learning and Prompt Engineering
+3. Comparing LLM Performance with Traditional Supervised Learning
 
-- Principles and applications in social science contexts
+### Session 4: Generative Explanations and Summaries in Social Science
 
-### 3.2 Few-shot Learning and Prompt Engineering
+1. Using LLMs for High-Quality Text Generation
+2. Social Bias Inference and Analysis
+3. Figurative Language Explanation and Cultural Context
 
-- Designing effective prompts for social science tasks
+### Session 5: Advanced Applications of LLMs in Social Science Research
 
-### 3.3 Comparing LLM Performance with Traditional Supervised Learning
+1. Analyzing Large-Scale Textual Data
+2. Misinformation and Fake News Detection
+3. Future Directions and Emerging Trends
 
-- Case studies in social science data annotation
+## Assessment
 
-## Session 4: Generative Explanations and Summaries in Social Science
+- Weekly coding assignments (40%)
+- Midterm project: Applying NLP techniques to a social science dataset (25%)
+- Final project: Designing and implementing an LLM-based social science study (35%)
 
-### 4.1 Using LLMs for High-Quality Text Generation
+## Required Materials
 
-- Aspect-based emotion summarization
-- Misinformation explanation
+- Python 3.7 or higher
+- Jupyter Notebook or Google Colab
+- Required libraries: NLTK, spaCy, Gensim, Transformers, TensorFlow or PyTorch
 
-### 4.2 Social Bias Inference and Analysis
+## Recommended Textbooks
 
-- Detecting and explaining social biases in text
-- Positive reframing techniques
+1. Jurafsky, D., & Martin, J. H. (2020). Speech and Language Processing (3rd ed. draft).
+2. Hovy, D. (2022). Text Analysis in Python for Social Scientists: Discovery and Exploration. Cambridge University Press.
 
-### 4.3 Figurative Language Explanation and Cultural Context
+## Course Policies
 
-- Analyzing metaphors and idioms in social contexts
-- Cross-cultural communication analysis
+- **Attendance**: Regular attendance and participation in class discussions are expected.
+- **Late Assignments**: Assignments submitted after the due date will incur a 10% penalty per day.
+- **Academic Integrity**: Plagiarism and cheating will not be tolerated. All work must be original and properly cited.
+- **Accommodations**: Students requiring special accommodations should contact the instructor within the first week of class.
 
-## Session 5: Advanced Applications of LLMs in Social Science Research
+## Additional Resources
 
-### 5.1 Analyzing Large-Scale Textual Data
+- Online tutorials and documentation for Python NLP libraries
+- Research papers demonstrating NLP applications in social science
+- Guest lectures from experts in NLP and social science research
 
-- Processing social media posts, medical records, and financial documents
-- Inferring public opinion and social attitudes at scale
+## Schedule
 
-### 5.2 Misinformation and Fake News Detection
-
-- Using LLMs to identify patterns in false information
-- Studying the spread and impact of misinformation
-
-### 5.3 Future Directions and Emerging Trends
-
-- LLMs in social interaction studies
-- Developing new methodologies for LLM result validation and interpretation
-- Collaboration between NLP researchers and social scientists
-
-Each lecture will include theoretical concepts, practical examples, and hands-on exercises using Python and relevant NLP libraries, with a focus on integrating LLM capabilities. Students will be encouraged to apply these techniques to their own research interests and datasets throughout the course, while critically evaluating the benefits and limitations of LLM-based approaches in social science research.
+| Week | Topic                                       | Assignments                               |
+| ---- | ------------------------------------------- | ----------------------------------------- |
+| 1    | Introduction to NLP and LLMs                | Python setup, basic NLP exercises         |
+| 2    | Traditional NLP and Text Preprocessing      | Text cleaning and representation tasks    |
+| 3    | LLMs for Data Annotation and Classification | Zero-shot and few-shot learning exercises |
+| 4    | Generative Explanations and Summaries       | Text generation and bias analysis project |
+| 5    | Advanced Applications and Future Trends     | Final project proposal and implementation |
