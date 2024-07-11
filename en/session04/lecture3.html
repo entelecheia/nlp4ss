@@ -90,6 +90,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'session04/lecture3';</script>
     <script src="../_static/language_switcher.js?v=ff97be19"></script>
     <script src="../_static/chat.js?v=f0de43d7"></script>
@@ -437,7 +439,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -453,6 +457,25 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-figurative-language">1. Introduction to Figurative Language</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cultural-context-in-figurative-language">2. Cultural Context in Figurative Language</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llms-and-figurative-language-understanding">3. LLMs and Figurative Language Understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metaphor-detection-and-interpretation">4. Metaphor Detection and Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#idiom-processing-with-llms">5. Idiom Processing with LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sarcasm-and-irony-detection">6. Sarcasm and Irony Detection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figurative-language-in-social-media-analysis">7. Figurative Language in Social Media Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proverbs-and-cultural-wisdom">8. Proverbs and Cultural Wisdom</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figurative-language-in-political-discourse">9. Figurative Language in Political Discourse</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-metrics-for-figurative-language-processing">10. Evaluation Metrics for Figurative Language Processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-and-limitations">11. Challenges and Limitations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -464,162 +487,322 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="figurative-language-explanation-and-cultural-context">
 <h1>4.3 Figurative Language Explanation and Cultural Context<a class="headerlink" href="#figurative-language-explanation-and-cultural-context" title="Link to this heading">#</a></h1>
+<section id="introduction-to-figurative-language">
+<h2>1. Introduction to Figurative Language<a class="headerlink" href="#introduction-to-figurative-language" title="Link to this heading">#</a></h2>
+<p>Figurative language is a form of expression that uses words or phrases in a non-literal sense to create vivid, often complex meanings. It’s an essential aspect of human communication and plays a crucial role in social science research, particularly in understanding cultural nuances and social interactions.</p>
+<p>Types of figurative language include:</p>
 <ol class="arabic simple">
-<li><p>Introduction to Figurative Language</p>
-<ul class="simple">
-<li><p>Definition and types (metaphor, simile, idiom, etc.)</p></li>
-<li><p>Importance in social science research</p></li>
-<li><p>Challenges in computational processing</p></li>
-</ul>
-</li>
-<li><p>Cultural Context in Figurative Language</p>
-<ul class="simple">
-<li><p>Role of culture in shaping figurative expressions</p></li>
-<li><p>Cross-cultural variations in figurative language use</p></li>
-<li><p>Importance of cultural context in interpretation</p></li>
-</ul>
-</li>
-<li><p>LLMs and Figurative Language Understanding</p>
-<ul class="simple">
-<li><p>Capabilities of LLMs in processing figurative language</p></li>
-<li><p>Limitations and challenges</p></li>
-<li><p>Comparison with traditional NLP approaches</p></li>
-</ul>
-</li>
-<li><p>Metaphor Detection and Interpretation</p>
-<ul class="simple">
-<li><p>Techniques for identifying metaphors in text</p></li>
-<li><p>LLM-based metaphor explanation generation</p></li>
-<li><p>Cultural variations in metaphor use and interpretation</p></li>
-</ul>
-</li>
-<li><p>Idiom Processing with LLMs</p>
-<ul class="simple">
-<li><p>Identifying and explaining idiomatic expressions</p></li>
-<li><p>Handling non-compositional meanings</p></li>
-<li><p>Cross-lingual idiom translation and explanation</p></li>
-</ul>
-</li>
-<li><p>Sarcasm and Irony Detection</p>
-<ul class="simple">
-<li><p>LLM-based approaches to detecting sarcasm and irony</p></li>
-<li><p>Cultural differences in sarcasm use and interpretation</p></li>
-<li><p>Challenges in context-dependent sarcasm detection</p></li>
-</ul>
-</li>
-<li><p>Humor Analysis and Generation</p>
-<ul class="simple">
-<li><p>Understanding cultural aspects of humor</p></li>
-<li><p>LLM capabilities in humor detection and explanation</p></li>
-<li><p>Generating culturally appropriate humor</p></li>
-</ul>
-</li>
-<li><p>Figurative Language in Social Media Analysis</p>
-<ul class="simple">
-<li><p>Detecting and interpreting memes and internet slang</p></li>
-<li><p>Cultural trends in online figurative language use</p></li>
-<li><p>Challenges of rapidly evolving online language</p></li>
-</ul>
-</li>
-<li><p>Proverbs and Cultural Wisdom</p>
-<ul class="simple">
-<li><p>LLM-based proverb interpretation and generation</p></li>
-<li><p>Cross-cultural analysis of proverbial wisdom</p></li>
-<li><p>Linking proverbs to cultural values and beliefs</p></li>
-</ul>
-</li>
-<li><p>Euphemisms and Taboo Language</p>
-<ul class="simple">
-<li><p>Detecting and explaining euphemisms</p></li>
-<li><p>Cultural variations in taboo topics and expressions</p></li>
-<li><p>Ethical considerations in processing sensitive language</p></li>
-</ul>
-</li>
-<li><p>Figurative Language in Political Discourse</p>
-<ul class="simple">
-<li><p>Analyzing metaphors and idioms in political speeches</p></li>
-<li><p>Cultural context in political figurative language</p></li>
-<li><p>LLM-based tools for political discourse analysis</p></li>
-</ul>
-</li>
-<li><p>Literary Analysis and Stylistics</p>
-<ul class="simple">
-<li><p>Using LLMs to analyze figurative devices in literature</p></li>
-<li><p>Cultural and historical context in literary figurative language</p></li>
-<li><p>Comparative analysis of figurative language across literary traditions</p></li>
-</ul>
-</li>
-<li><p>Figurative Language in Marketing and Advertising</p>
-<ul class="simple">
-<li><p>Cultural aspects of figurative language in branding</p></li>
-<li><p>LLM-based analysis of advertising metaphors</p></li>
-<li><p>Cross-cultural marketing language analysis</p></li>
-</ul>
-</li>
-<li><p>Emotional and Sensory Figurative Language</p>
-<ul class="simple">
-<li><p>Processing emotive and sensory metaphors</p></li>
-<li><p>Cultural variations in emotion-related figurative expressions</p></li>
-<li><p>Applications in sentiment analysis and emotion detection</p></li>
-</ul>
-</li>
-<li><p>Figurative Language Translation</p>
-<ul class="simple">
-<li><p>Challenges in translating culture-specific figurative expressions</p></li>
-<li><p>LLM-based approaches to figurative language translation</p></li>
-<li><p>Preserving cultural nuances in translation</p></li>
-</ul>
-</li>
-<li><p>Multimodal Figurative Language</p>
-<ul class="simple">
-<li><p>Analyzing visual metaphors and symbols</p></li>
-<li><p>Integrating text and image analysis for figurative content</p></li>
-<li><p>Cultural aspects of multimodal figurative expression</p></li>
-</ul>
-</li>
-<li><p>Temporality in Figurative Language</p>
-<ul class="simple">
-<li><p>Evolution of figurative expressions over time</p></li>
-<li><p>LLM-based diachronic analysis of figurative language</p></li>
-<li><p>Tracking cultural changes through figurative language shifts</p></li>
-</ul>
-</li>
-<li><p>Evaluation Metrics for Figurative Language Processing</p>
-<ul class="simple">
-<li><p>Developing culturally sensitive evaluation measures</p></li>
-<li><p>Human evaluation protocols for figurative language tasks</p></li>
-<li><p>Challenges in quantifying figurative language understanding</p></li>
-</ul>
-</li>
-<li><p>Ethical Considerations</p>
-<ul class="simple">
-<li><p>Avoiding cultural stereotyping in figurative language analysis</p></li>
-<li><p>Respecting cultural sensitivities in explanation generation</p></li>
-<li><p>Privacy concerns in culturally specific language analysis</p></li>
-</ul>
-</li>
-<li><p>Applications in Social Science Research</p>
-<ul class="simple">
-<li><p>Analyzing cultural values through figurative language</p></li>
-<li><p>Cross-cultural communication studies</p></li>
-<li><p>Sociolinguistic research using LLM-based figurative language analysis</p></li>
-</ul>
-</li>
-<li><p>Challenges and Limitations</p>
-<ul class="simple">
-<li><p>Handling culture-specific context in LLMs</p></li>
-<li><p>Ambiguity and multiple interpretations in figurative language</p></li>
-<li><p>Balancing literal and figurative meaning in analysis</p></li>
-</ul>
-</li>
-<li><p>Future Directions</p>
-<ul class="simple">
-<li><p>Integrating deeper cultural knowledge into LLMs</p></li>
-<li><p>Advancements in context-aware figurative language processing</p></li>
-<li><p>Potential for LLM-assisted cross-cultural understanding</p></li>
-</ul>
-</li>
+<li><p>Metaphor: A comparison between two unlike things</p></li>
+<li><p>Simile: A comparison using “like” or “as”</p></li>
+<li><p>Idiom: A phrase with a meaning not deducible from its individual words</p></li>
+<li><p>Personification: Attribution of human characteristics to non-human things</p></li>
+<li><p>Hyperbole: Exaggeration for emphasis</p></li>
 </ol>
+<div align="center" class="mermaid align-center">
+            graph TD
+    A[Figurative Language] --&gt; B[Metaphor]
+    A --&gt; C[Simile]
+    A --&gt; D[Idiom]
+    A --&gt; E[Personification]
+    A --&gt; F[Hyperbole]
+    B --&gt; G[Implicit Comparison]
+    C --&gt; H[Explicit Comparison]
+    D --&gt; I[Non-literal Phrase]
+    E --&gt; J[Human Traits to Non-human]
+    F --&gt; K[Exaggeration]
+        </div>
+        </section>
+<section id="cultural-context-in-figurative-language">
+<h2>2. Cultural Context in Figurative Language<a class="headerlink" href="#cultural-context-in-figurative-language" title="Link to this heading">#</a></h2>
+<p>Cultural context significantly influences the use and interpretation of figurative language. What may be a common metaphor in one culture might be meaningless or even offensive in another. Understanding these cultural nuances is crucial for accurate analysis in social science research.</p>
+</section>
+<section id="llms-and-figurative-language-understanding">
+<h2>3. LLMs and Figurative Language Understanding<a class="headerlink" href="#llms-and-figurative-language-understanding" title="Link to this heading">#</a></h2>
+<p>Large Language Models (LLMs) have shown remarkable capabilities in processing figurative language, often outperforming traditional NLP approaches. However, they also face challenges, particularly when dealing with culture-specific expressions.</p>
+<p>Let’s create a simple function to use an LLM for figurative language explanation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openai</span>
+
+<span class="n">openai</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="s1">&#39;your-api-key&#39;</span>
+
+<span class="k">def</span> <span class="nf">explain_figurative_language</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">cultural_context</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Explain the figurative language in this text: &#39;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+    <span class="k">if</span> <span class="n">cultural_context</span><span class="p">:</span>
+        <span class="n">prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; Consider the </span><span class="si">{</span><span class="n">cultural_context</span><span class="si">}</span><span class="s2"> cultural context.&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;It&#39;s raining cats and dogs.&quot;</span>
+<span class="n">explanation</span> <span class="o">=</span> <span class="n">explain_figurative_language</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;English-speaking&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">explanation</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This function uses OpenAI’s GPT-3 to generate explanations for figurative language, optionally considering cultural context.</p>
+</section>
+<section id="metaphor-detection-and-interpretation">
+<h2>4. Metaphor Detection and Interpretation<a class="headerlink" href="#metaphor-detection-and-interpretation" title="Link to this heading">#</a></h2>
+<p>Metaphor detection is a challenging task in NLP. LLMs can be used to identify and explain metaphors:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">detect_and_explain_metaphor</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Identify if there&#39;s a metaphor in this sentence and explain it:</span>
+<span class="s2">    &quot;</span><span class="si">{</span><span class="n">sentence</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="s2">    Format:</span>
+<span class="s2">    Metaphor: [Yes/No]</span>
+<span class="s2">    Explanation: [Your explanation here]</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">sentence</span> <span class="o">=</span> <span class="s2">&quot;Life is a roller coaster.&quot;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">detect_and_explain_metaphor</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="idiom-processing-with-llms">
+<h2>5. Idiom Processing with LLMs<a class="headerlink" href="#idiom-processing-with-llms" title="Link to this heading">#</a></h2>
+<p>Idioms are particularly challenging due to their non-compositional nature. LLMs can be effective in explaining idioms and even translating them across languages:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">explain_idiom</span><span class="p">(</span><span class="n">idiom</span><span class="p">,</span> <span class="n">source_language</span><span class="p">,</span> <span class="n">target_language</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Explain the meaning of the </span><span class="si">{</span><span class="n">source_language</span><span class="si">}</span><span class="s2"> idiom &quot;</span><span class="si">{</span><span class="n">idiom</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">    and provide an equivalent or similar idiom in </span><span class="si">{</span><span class="n">target_language</span><span class="si">}</span><span class="s2"> if possible.</span>
+
+<span class="s2">    Format:</span>
+<span class="s2">    Meaning: [Explanation]</span>
+<span class="s2">    </span><span class="si">{</span><span class="n">target_language</span><span class="si">}</span><span class="s2"> equivalent: [Equivalent idiom or &#39;No direct equivalent&#39;]</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">idiom</span> <span class="o">=</span> <span class="s2">&quot;Kick the bucket&quot;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">explain_idiom</span><span class="p">(</span><span class="n">idiom</span><span class="p">,</span> <span class="s2">&quot;English&quot;</span><span class="p">,</span> <span class="s2">&quot;Spanish&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="sarcasm-and-irony-detection">
+<h2>6. Sarcasm and Irony Detection<a class="headerlink" href="#sarcasm-and-irony-detection" title="Link to this heading">#</a></h2>
+<p>Detecting sarcasm and irony is crucial for accurate sentiment analysis in social media research. LLMs can be used to identify and explain sarcastic statements:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">detect_sarcasm</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Determine if the following text is sarcastic. If context is provided, consider it in your analysis.</span>
+
+<span class="s2">    Text: &quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">    Context: </span><span class="si">{</span><span class="n">context</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;No additional context provided&#39;</span><span class="si">}</span>
+
+<span class="s2">    Is this sarcastic? [Yes/No]</span>
+<span class="s2">    Explanation: [Your explanation here]</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Oh great, another meeting. Just what I wanted.&quot;</span>
+<span class="n">context</span> <span class="o">=</span> <span class="s2">&quot;Office environment with frequent unproductive meetings&quot;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">detect_sarcasm</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="figurative-language-in-social-media-analysis">
+<h2>7. Figurative Language in Social Media Analysis<a class="headerlink" href="#figurative-language-in-social-media-analysis" title="Link to this heading">#</a></h2>
+<p>Social media platforms are rich sources of figurative language, including internet slang and memes. LLMs can be used to interpret these expressions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">interpret_internet_slang</span><span class="p">(</span><span class="n">slang</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Explain the meaning of the internet slang or meme:</span>
+<span class="s2">    &quot;</span><span class="si">{</span><span class="n">slang</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="s2">    Consider its usage on the platform: </span><span class="si">{</span><span class="n">platform</span><span class="si">}</span>
+
+<span class="s2">    Explanation:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">slang</span> <span class="o">=</span> <span class="s2">&quot;TFW no GF&quot;</span>
+<span class="n">platform</span> <span class="o">=</span> <span class="s2">&quot;Twitter&quot;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">interpret_internet_slang</span><span class="p">(</span><span class="n">slang</span><span class="p">,</span> <span class="n">platform</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="proverbs-and-cultural-wisdom">
+<h2>8. Proverbs and Cultural Wisdom<a class="headerlink" href="#proverbs-and-cultural-wisdom" title="Link to this heading">#</a></h2>
+<p>Proverbs often encapsulate cultural wisdom. LLMs can be used to interpret proverbs and link them to cultural values:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">analyze_proverb</span><span class="p">(</span><span class="n">proverb</span><span class="p">,</span> <span class="n">culture</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Analyze the following proverb from </span><span class="si">{</span><span class="n">culture</span><span class="si">}</span><span class="s2"> culture:</span>
+<span class="s2">    &quot;</span><span class="si">{</span><span class="n">proverb</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="s2">    Provide:</span>
+<span class="s2">    1. Literal meaning</span>
+<span class="s2">    2. Figurative interpretation</span>
+<span class="s2">    3. Cultural values reflected</span>
+<span class="s2">    4. Possible equivalent in another culture (if any)</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">proverb</span> <span class="o">=</span> <span class="s2">&quot;The nail that sticks out gets hammered down&quot;</span>
+<span class="n">culture</span> <span class="o">=</span> <span class="s2">&quot;Japanese&quot;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">analyze_proverb</span><span class="p">(</span><span class="n">proverb</span><span class="p">,</span> <span class="n">culture</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="figurative-language-in-political-discourse">
+<h2>9. Figurative Language in Political Discourse<a class="headerlink" href="#figurative-language-in-political-discourse" title="Link to this heading">#</a></h2>
+<p>Political speeches often use figurative language to convey complex ideas. LLMs can be used to analyze these metaphors and their implications:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">analyze_political_metaphor</span><span class="p">(</span><span class="n">metaphor</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Analyze the following metaphor used in a political context:</span>
+<span class="s2">    Metaphor: &quot;</span><span class="si">{</span><span class="n">metaphor</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">    Context: </span><span class="si">{</span><span class="n">context</span><span class="si">}</span>
+
+<span class="s2">    Provide:</span>
+<span class="s2">    1. Literal meaning</span>
+<span class="s2">    2. Political implications</span>
+<span class="s2">    3. Potential emotional impact on audience</span>
+<span class="s2">    4. Cultural or historical references (if any)</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">metaphor</span> <span class="o">=</span> <span class="s2">&quot;Iron Curtain&quot;</span>
+<span class="n">context</span> <span class="o">=</span> <span class="s2">&quot;Cold War era speech&quot;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">analyze_political_metaphor</span><span class="p">(</span><span class="n">metaphor</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="evaluation-metrics-for-figurative-language-processing">
+<h2>10. Evaluation Metrics for Figurative Language Processing<a class="headerlink" href="#evaluation-metrics-for-figurative-language-processing" title="Link to this heading">#</a></h2>
+<p>Evaluating the performance of LLMs in figurative language tasks is challenging due to the subjective nature of interpretation. Here’s an example of how we might implement a simple human evaluation protocol:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">human_evaluation</span><span class="p">(</span><span class="n">model_output</span><span class="p">,</span> <span class="n">reference_explanation</span><span class="p">,</span> <span class="n">criteria</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model Output: </span><span class="si">{</span><span class="n">model_output</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reference Explanation: </span><span class="si">{</span><span class="n">reference_explanation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">criterion</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rate the model&#39;s output for </span><span class="si">{</span><span class="n">criterion</span><span class="si">}</span><span class="s2"> (0-5): &quot;</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">criterion</span><span class="si">}</span><span class="s2"> score: </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">overall_score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Overall score (0-5): &quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">overall_score</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">model_output</span> <span class="o">=</span> <span class="s2">&quot;The metaphor &#39;Life is a roller coaster&#39; compares life to an amusement park ride, suggesting that life has many ups and downs, excitement and fear, just like a roller coaster.&quot;</span>
+<span class="n">reference_explanation</span> <span class="o">=</span> <span class="s2">&quot;This metaphor compares the unpredictable and emotional nature of life to the thrilling and sometimes scary experience of riding a roller coaster, emphasizing life&#39;s highs and lows.&quot;</span>
+<span class="n">criteria</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Accuracy&quot;</span><span class="p">,</span> <span class="s2">&quot;Clarity&quot;</span><span class="p">,</span> <span class="s2">&quot;Cultural Sensitivity&quot;</span><span class="p">]</span>
+
+<span class="n">score</span> <span class="o">=</span> <span class="n">human_evaluation</span><span class="p">(</span><span class="n">model_output</span><span class="p">,</span> <span class="n">reference_explanation</span><span class="p">,</span> <span class="n">criteria</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Overall score: </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="challenges-and-limitations">
+<h2>11. Challenges and Limitations<a class="headerlink" href="#challenges-and-limitations" title="Link to this heading">#</a></h2>
+<p>While LLMs show impressive capabilities in processing figurative language, they face several challenges:</p>
+<ol class="arabic simple">
+<li><p>Cultural specificity: LLMs may struggle with highly culture-specific expressions.</p></li>
+<li><p>Contextual understanding: Figuring out the correct context for interpretation can be difficult.</p></li>
+<li><p>Evolving language: Keeping up with rapidly changing internet slang and memes.</p></li>
+<li><p>Bias: LLMs may perpetuate cultural biases present in their training data.</p></li>
+</ol>
+<div align="center" class="mermaid align-center">
+            graph TD
+    A[Challenges in LLM Figurative Language Processing] --&gt; B[Cultural Specificity]
+    A --&gt; C[Contextual Understanding]
+    A --&gt; D[Evolving Language]
+    A --&gt; E[Bias]
+    B --&gt; F[Culture-Specific Expressions]
+    C --&gt; G[Multiple Interpretations]
+    D --&gt; H[Rapid Changes in Internet Slang]
+    E --&gt; I[Perpetuation of Cultural Biases]
+        </div>
+        </section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Figurative language explanation and analysis within cultural contexts is a complex but crucial area for social science research. LLMs offer powerful tools for tackling these challenges, enabling researchers to process and analyze large volumes of text data containing figurative expressions.</p>
+<p>Key takeaways:</p>
+<ol class="arabic simple">
+<li><p>LLMs can effectively identify and explain various types of figurative language.</p></li>
+<li><p>Cultural context is crucial for accurate interpretation and should be explicitly considered.</p></li>
+<li><p>LLMs can assist in cross-cultural comparisons and translations of figurative expressions.</p></li>
+<li><p>Evaluation of LLM performance in figurative language tasks often requires human judgment.</p></li>
+<li><p>Researchers should be aware of the limitations and potential biases of LLMs in processing culturally specific figurative language.</p></li>
+</ol>
+<p>As LLM technology continues to advance, we can expect improvements in handling cultural nuances and context-dependent interpretations. However, human expertise will remain crucial in guiding these analyses and interpreting results in the context of social science research.</p>
+<p>By leveraging LLMs for figurative language analysis, social scientists can gain deeper insights into cultural expressions, communication patterns, and social phenomena across diverse contexts.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -676,6 +859,32 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-figurative-language">1. Introduction to Figurative Language</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cultural-context-in-figurative-language">2. Cultural Context in Figurative Language</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llms-and-figurative-language-understanding">3. LLMs and Figurative Language Understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metaphor-detection-and-interpretation">4. Metaphor Detection and Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#idiom-processing-with-llms">5. Idiom Processing with LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sarcasm-and-irony-detection">6. Sarcasm and Irony Detection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figurative-language-in-social-media-analysis">7. Figurative Language in Social Media Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proverbs-and-cultural-wisdom">8. Proverbs and Cultural Wisdom</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figurative-language-in-political-discourse">9. Figurative Language in Political Discourse</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-metrics-for-figurative-language-processing">10. Evaluation Metrics for Figurative Language Processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-and-limitations">11. Challenges and Limitations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
