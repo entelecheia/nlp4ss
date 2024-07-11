@@ -90,6 +90,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'session02/lecture1';</script>
     <script src="../_static/language_switcher.js?v=ff97be19"></script>
     <script src="../_static/chat.js?v=f0de43d7"></script>
@@ -483,6 +485,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word-embeddings">Word Embeddings</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
             </nav>
         </div>
@@ -515,7 +518,17 @@ document.write(`
 <li><p>Text representation</p></li>
 </ol>
 <p>Let’s explore each of these steps in detail.</p>
-</section>
+<div align="center" class="mermaid align-center">
+            graph TD
+    A[Raw Text] --&gt; B[Text Cleaning]
+    B --&gt; C[Lowercase Conversion]
+    C --&gt; D[Tokenization]
+    D --&gt; E[Stop Word Removal]
+    E --&gt; F[Stemming/Lemmatization]
+    F --&gt; G[Text Representation]
+    G --&gt; H[Processed Text]
+        </div>
+        </section>
 <section id="text-cleaning">
 <h2>2. Text Cleaning<a class="headerlink" href="#text-cleaning" title="Link to this heading">#</a></h2>
 <p>Text cleaning involves removing or replacing elements in the text that are not relevant to the analysis. This step is particularly important when dealing with web-scraped data or social media content.</p>
@@ -731,6 +744,43 @@ document.write(`
 </div>
 </section>
 </section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Text cleaning, normalization, and representation are fundamental steps in preparing textual data for analysis in social science research using NLP techniques. These processes transform raw, unstructured text into a format that can be effectively analyzed by machine learning algorithms.</p>
+<p>To recap the key points:</p>
+<ol class="arabic simple">
+<li><p>Text cleaning removes noise and irrelevant information, ensuring that the analysis focuses on the meaningful content.</p></li>
+<li><p>Normalization steps like lowercase conversion, stemming, and lemmatization help standardize the text and reduce variability.</p></li>
+<li><p>Tokenization breaks text into manageable units (words or sentences) for further processing.</p></li>
+<li><p>Stop word removal helps in focusing on the most informative words in the text.</p></li>
+<li><p>Text representation techniques like Bag-of-Words, TF-IDF, and word embeddings convert text into numerical formats suitable for machine learning algorithms.</p></li>
+</ol>
+<div align="center" class="mermaid align-center">
+            graph TD
+    A[Raw Text Data] --&gt; B[Preprocessing]
+    B --&gt; C[Cleaned Text]
+    C --&gt; D[Normalized Text]
+    D --&gt; E[Tokenized Text]
+    E --&gt; F[Filtered Text]
+    F --&gt; G[Numerical Representation]
+    G --&gt; H[Ready for Analysis]
+        </div>
+        <p>The choice of preprocessing techniques can significantly impact the results of your NLP analysis. It’s crucial to consider the specific requirements of your research question and the characteristics of your dataset when deciding which techniques to apply.</p>
+<p>For social science researchers, these preprocessing steps are particularly important because:</p>
+<ol class="arabic simple">
+<li><p>They help in handling the diverse and often messy nature of social data (e.g., social media posts, survey responses).</p></li>
+<li><p>They can reveal patterns and trends that might be obscured in raw text data.</p></li>
+<li><p>They enable the application of advanced NLP techniques to large-scale textual datasets, allowing for analysis at a scale that would be infeasible with manual methods.</p></li>
+</ol>
+<p>However, it’s also important to be aware of the potential drawbacks:</p>
+<ol class="arabic simple">
+<li><p>Some preprocessing steps (like stop word removal or stemming) might remove information that could be relevant for certain analyses.</p></li>
+<li><p>The choices made during preprocessing can introduce biases or assumptions into the analysis.</p></li>
+<li><p>Over-processing might lead to loss of nuance or context that could be important in social science research.</p></li>
+</ol>
+<p>Therefore, it’s crucial to document your preprocessing steps carefully and consider their potential impact on your research findings. In many cases, it may be beneficial to experiment with different preprocessing approaches and compare their effects on your results.</p>
+<p>As you move forward in your NLP projects, remember that preprocessing is not just a technical step, but an analytical one that requires careful consideration of your research goals and the nature of your data. By mastering these techniques, you’ll be well-equipped to tackle complex text analysis tasks in your social science research.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -820,6 +870,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word-embeddings">Word Embeddings</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
   </nav></div>
 
