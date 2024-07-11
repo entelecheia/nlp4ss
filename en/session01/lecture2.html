@@ -90,6 +90,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'session01/lecture2';</script>
     <script src="../_static/language_switcher.js?v=ff97be19"></script>
     <script src="../_static/chat.js?v=f0de43d7"></script>
@@ -510,15 +512,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progress-in-mitigating-biases-and-improving-factual-accuracy">Progress in mitigating biases and improving factual accuracy</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-social-science">9. Applications in Social Science</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-annotation-and-classification">Data annotation and classification</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-explanations-and-summaries">Generating explanations and summaries</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-large-scale-textual-data">Analyzing large-scale textual data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inferring-social-patterns-and-trends">Inferring social patterns and trends</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-directions">10. Future Directions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-with-world-knowledge-and-physical-world-understanding">Integration with world knowledge and physical world understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-directions">9. Future Directions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-with-domain-specific-knowledge">Integration with domain-specific knowledge</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#improved-interpretability-and-transparency">Improved interpretability and transparency</a></li>
 </ul>
 </li>
@@ -537,15 +532,70 @@ document.write(`
 <h1>1.2 Overview of Generative LLMs<a class="headerlink" href="#overview-of-generative-llms" title="Link to this heading">#</a></h1>
 <section id="introduction-to-generative-llms">
 <h2>1. Introduction to Generative LLMs<a class="headerlink" href="#introduction-to-generative-llms" title="Link to this heading">#</a></h2>
-<p>Generative Large Language Models (LLMs) are advanced artificial intelligence systems designed to understand and generate human-like text. These models represent a significant leap forward in natural language processing (NLP) technology.</p>
-<section id="definition-and-core-concept">
+<p>Generative Large Language Models (LLMs) represent a significant leap forward in natural language processing (NLP) technology. These advanced artificial intelligence systems are designed to understand and generate human-like text, offering unprecedented capabilities in language tasks.</p>
+<div align="center" class="mermaid align-center">
+            graph TD
+    A[Generative LLMs] --&gt; B[Text Understanding]
+    A --&gt; C[Text Generation]
+    B --&gt; D[Context Comprehension]
+    B --&gt; E[Semantic Analysis]
+    C --&gt; F[Coherent Text Production]
+    C --&gt; G[Style Adaptation]
+    A --&gt; H[Few-shot Learning]
+    A --&gt; I[Zero-shot Learning]
+        </div>
+        <section id="definition-and-core-concept">
 <h3>Definition and core concept<a class="headerlink" href="#definition-and-core-concept" title="Link to this heading">#</a></h3>
-<p>Generative LLMs are neural networks trained on vast amounts of text data to predict the next word in a sequence, allowing them to generate coherent and contextually appropriate text.</p>
+<p>Generative LLMs are neural networks trained on vast amounts of text data to predict the next word in a sequence, allowing them to generate coherent and contextually appropriate text. They use this predictive capability to understand and produce language.</p>
 </section>
 <section id="distinction-from-traditional-nlp-models">
 <h3>Distinction from traditional NLP models<a class="headerlink" href="#distinction-from-traditional-nlp-models" title="Link to this heading">#</a></h3>
 <p>Unlike traditional NLP models that focus on specific tasks (e.g., sentiment analysis or named entity recognition), generative LLMs can perform a wide range of language tasks without task-specific training.</p>
 <p>Example: While a traditional sentiment analysis model might only classify text as positive or negative, a generative LLM could analyze sentiment, explain the reasoning, and even rewrite the text to change its sentiment.</p>
+<p>Let’s demonstrate this with a code example using the OpenAI GPT-3 API:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openai</span>
+
+<span class="n">openai</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="s1">&#39;your-api-key-here&#39;</span>
+
+<span class="k">def</span> <span class="nf">gpt3_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">max_tokens</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="n">max_tokens</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Traditional sentiment analysis</span>
+<span class="k">def</span> <span class="nf">simple_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;positive&quot;</span> <span class="k">if</span> <span class="s2">&quot;good&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">&quot;great&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;negative&quot;</span>
+
+<span class="c1"># LLM-based analysis</span>
+<span class="k">def</span> <span class="nf">llm_sentiment_analysis</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Analyze the sentiment of the following text. Provide the sentiment (positive/negative/neutral) and a brief explanation.</span>
+
+<span class="s2">    Text: &quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="s2">    Sentiment analysis:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">gpt3_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;The new policy has some good points, but overall it&#39;s disappointing.&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Traditional sentiment:&quot;</span><span class="p">,</span> <span class="n">simple_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">LLM sentiment analysis:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">llm_sentiment_analysis</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">LLM text rewriting (changing sentiment):&quot;</span><span class="p">)</span>
+<span class="n">rewrite_prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Rewrite the following text to make it more positive: &quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gpt3_completion</span><span class="p">(</span><span class="n">rewrite_prompt</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This example illustrates how a generative LLM can provide more nuanced analysis and even manipulate the text, tasks that are beyond the capabilities of traditional models.</p>
 </section>
 </section>
 <section id="key-components-of-llms">
@@ -553,15 +603,52 @@ document.write(`
 <section id="transformer-architecture">
 <h3>Transformer architecture<a class="headerlink" href="#transformer-architecture" title="Link to this heading">#</a></h3>
 <p>LLMs are built on the transformer architecture, which uses self-attention mechanisms to process input sequences in parallel, allowing for more efficient training on large datasets.</p>
-</section>
+<div align="center" class="mermaid align-center">
+            graph TD
+    A[Transformer Architecture] --&gt; B[Self-Attention Mechanism]
+    A --&gt; C[Feed-Forward Networks]
+    A --&gt; D[Positional Encoding]
+    B --&gt; E[Multi-Head Attention]
+    C --&gt; F[Non-linear Transformations]
+    D --&gt; G[Sequence Order Information]
+        </div>
+        </section>
 <section id="self-attention-mechanism">
 <h3>Self-attention mechanism<a class="headerlink" href="#self-attention-mechanism" title="Link to this heading">#</a></h3>
 <p>Self-attention allows the model to weigh the importance of different words in a sentence when processing each word, capturing long-range dependencies in text.</p>
 <p>Example: In the sentence “The animal didn’t cross the street because it was too wide,” self-attention helps the model understand that “it” refers to “the street” and not “the animal.”</p>
+<p>Here’s a simplified implementation of self-attention in Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">self_attention</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="c1"># Compute attention scores</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Apply softmax to get attention weights</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">scores</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Compute weighted sum of values</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">output</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">sequence_length</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">embedding_dim</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
+
+<span class="n">attention_output</span> <span class="o">=</span> <span class="n">self_attention</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Self-attention output shape:&quot;</span><span class="p">,</span> <span class="n">attention_output</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Self-attention output:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">attention_output</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="scaled-up-training-on-massive-datasets">
 <h3>Scaled-up training on massive datasets<a class="headerlink" href="#scaled-up-training-on-massive-datasets" title="Link to this heading">#</a></h3>
-<p>LLMs are trained on enormous text corpora, often containing hundreds of billions of words from diverse sources like websites, books, and articles.</p>
+<p>LLMs are trained on enormous text corpora, often containing hundreds of billions of words from diverse sources like websites, books, and articles. This extensive training allows them to capture a wide range of language patterns and world knowledge.</p>
 </section>
 </section>
 <section id="notable-examples-of-llms">
@@ -586,19 +673,82 @@ document.write(`
 <li><p>T5 (Text-to-Text Transfer Transformer): Frames all NLP tasks as text-to-text problems</p></li>
 <li><p>DALL-E: Generates images from text descriptions</p></li>
 </ul>
+<p>Let’s demonstrate the use of a pre-trained BERT model for a simple classification task:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">BertTokenizer</span><span class="p">,</span> <span class="n">BertForSequenceClassification</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="c1"># Load pre-trained model and tokenizer</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;bert-base-uncased&#39;</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">BertTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">BertForSequenceClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">num_labels</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">classify_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1"># Tokenize and encode the text</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">,</span> <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
+
+    <span class="c1"># Make prediction</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">outputs</span><span class="o">.</span><span class="n">logits</span>
+        <span class="n">predicted_class</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="s2">&quot;Positive&quot;</span> <span class="k">if</span> <span class="n">predicted_class</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;Negative&quot;</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;This new technology has the potential to revolutionize the industry.&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Classification: </span><span class="si">{</span><span class="n">classify_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="capabilities-of-llms-in-social-science-contexts">
 <h2>4. Capabilities of LLMs in Social Science Contexts<a class="headerlink" href="#capabilities-of-llms-in-social-science-contexts" title="Link to this heading">#</a></h2>
-<section id="text-generation-and-completion">
+<p>LLMs offer a wide range of capabilities that are particularly relevant to social science research:</p>
+<div align="center" class="mermaid align-center">
+            graph TD
+    A[LLM Capabilities] --&gt; B[Text Generation]
+    A --&gt; C[Text Completion]
+    A --&gt; D[Question Answering]
+    A --&gt; E[Summarization]
+    A --&gt; F[Translation]
+    A --&gt; G[Sentiment Analysis]
+    A --&gt; H[Topic Modeling]
+        </div>
+        <section id="text-generation-and-completion">
 <h3>Text generation and completion<a class="headerlink" href="#text-generation-and-completion" title="Link to this heading">#</a></h3>
 <p>LLMs can generate coherent paragraphs or complete partial text, useful for creating research hypotheses or expanding on ideas.</p>
-<p>Example: Given the prompt “The impact of social media on political polarization,” an LLM could generate a detailed paragraph discussing various aspects of this topic.</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_research_hypothesis</span><span class="p">(</span><span class="n">topic</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Generate a research hypothesis about the following topic: </span><span class="si">{</span><span class="n">topic</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="n">gpt3_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+
+<span class="n">topic</span> <span class="o">=</span> <span class="s2">&quot;The impact of social media on political polarization&quot;</span>
+<span class="n">hypothesis</span> <span class="o">=</span> <span class="n">generate_research_hypothesis</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated hypothesis: </span><span class="si">{</span><span class="n">hypothesis</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="question-answering-and-information-retrieval">
 <h3>Question answering and information retrieval<a class="headerlink" href="#question-answering-and-information-retrieval" title="Link to this heading">#</a></h3>
 <p>LLMs can understand and answer complex questions, making them valuable for literature reviews or data exploration.</p>
-<p>Example: Researchers could ask, “What are the main theories explaining the gender wage gap?” and receive a comprehensive answer with key points from various studies.</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">answer_question</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">question</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Context: </span><span class="si">{</span><span class="n">context</span><span class="si">}</span>
+
+<span class="s2">    Question: </span><span class="si">{</span><span class="n">question</span><span class="si">}</span>
+
+<span class="s2">    Answer:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">gpt3_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+
+<span class="n">context</span> <span class="o">=</span> <span class="s2">&quot;The gender wage gap refers to the difference in earnings between men and women in the workforce. Despite progress in recent decades, a significant gap still exists in many countries.&quot;</span>
+<span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;What are some factors contributing to the persistence of the gender wage gap?&quot;</span>
+
+<span class="n">answer</span> <span class="o">=</span> <span class="n">answer_question</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">question</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Answer: </span><span class="si">{</span><span class="n">answer</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="summarization-and-paraphrasing">
 <h3>Summarization and paraphrasing<a class="headerlink" href="#summarization-and-paraphrasing" title="Link to this heading">#</a></h3>
@@ -611,33 +761,181 @@ document.write(`
 <section id="sentiment-analysis-and-emotion-detection">
 <h3>Sentiment analysis and emotion detection<a class="headerlink" href="#sentiment-analysis-and-emotion-detection" title="Link to this heading">#</a></h3>
 <p>LLMs can identify and explain complex emotions and sentiments in text, going beyond simple positive/negative classifications.</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">analyze_emotion</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Analyze the emotional content of the following text. Identify the primary emotion and explain why.</span>
+
+<span class="s2">    Text: &quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="s2">    Emotion analysis:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">gpt3_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;After months of hard work, I finally received the grant for my research project. I couldn&#39;t believe it at first, but now I&#39;m thrilled and a bit overwhelmed.&quot;</span>
+<span class="n">emotion_analysis</span> <span class="o">=</span> <span class="n">analyze_emotion</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">emotion_analysis</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>These capabilities make LLMs powerful tools for social science researchers, enabling them to process and analyze large volumes of textual data, generate insights, and explore complex social phenomena in ways that were previously impractical or impossible.</p>
+<p>In the next sections, we’ll delve deeper into how these models are trained, their advantages and limitations, and the ethical considerations surrounding their use in social science research.</p>
 </section>
 </section>
 <section id="training-process-of-llms">
 <h2>5. Training Process of LLMs<a class="headerlink" href="#training-process-of-llms" title="Link to this heading">#</a></h2>
-<section id="pre-training-on-large-corpora">
+<p>The training process of Large Language Models is a complex and computationally intensive task that involves several key steps:</p>
+<div align="center" class="mermaid align-center">
+            graph TD
+    A[LLM Training Process] --&gt; B[Pre-training on large corpora]
+    A --&gt; C[Fine-tuning for specific tasks]
+    B --&gt; D[Unsupervised learning]
+    B --&gt; E[Masked language modeling]
+    C --&gt; F[Supervised learning]
+    C --&gt; G[Transfer learning]
+    A --&gt; H[Few-shot learning]
+    A --&gt; I[Zero-shot learning]
+        </div>
+        <section id="pre-training-on-large-corpora">
 <h3>Pre-training on large corpora<a class="headerlink" href="#pre-training-on-large-corpora" title="Link to this heading">#</a></h3>
-<p>LLMs are initially trained on diverse text data to learn general language patterns and knowledge.</p>
+<p>LLMs are initially trained on diverse text data to learn general language patterns and knowledge. This pre-training phase typically uses unsupervised learning techniques such as masked language modeling or next token prediction.</p>
+<p>Example of a simple masked language model using PyTorch:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+<span class="k">class</span> <span class="nc">SimpleMaskedLanguageModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">embed_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embed_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">TransformerEncoderLayer</span><span class="p">(</span><span class="n">d_model</span><span class="o">=</span><span class="n">embed_size</span><span class="p">,</span> <span class="n">nhead</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">embed_size</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">vocab_size</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">embed_size</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="n">hidden_size</span> <span class="o">=</span> <span class="mi">512</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">SimpleMaskedLanguageModel</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embed_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span>
+
+<span class="c1"># Simulate input (batch_size=2, sequence_length=10)</span>
+<span class="n">input_ids</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_ids</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Output shape:&quot;</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="fine-tuning-for-specific-tasks">
 <h3>Fine-tuning for specific tasks<a class="headerlink" href="#fine-tuning-for-specific-tasks" title="Link to this heading">#</a></h3>
-<p>Pre-trained models can be further trained on domain-specific data to adapt to particular research areas or tasks.</p>
+<p>Pre-trained models can be further trained on domain-specific data to adapt to particular research areas or tasks. This process, known as fine-tuning, allows researchers to leverage the general knowledge learned during pre-training while specializing the model for their specific needs.</p>
+<p>Example of fine-tuning a pre-trained BERT model for sentiment analysis:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">BertForSequenceClassification</span><span class="p">,</span> <span class="n">BertTokenizer</span><span class="p">,</span> <span class="n">AdamW</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">TensorDataset</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="c1"># Load pre-trained model and tokenizer</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;bert-base-uncased&#39;</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">BertForSequenceClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">num_labels</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">BertTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+
+<span class="c1"># Prepare your dataset (simplified example)</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;I love this product&quot;</span><span class="p">,</span> <span class="s2">&quot;This is terrible&quot;</span><span class="p">,</span> <span class="s2">&quot;Great experience&quot;</span><span class="p">,</span> <span class="s2">&quot;Very disappointing&quot;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># 1 for positive, 0 for negative</span>
+
+<span class="c1"># Tokenize and encode the dataset</span>
+<span class="n">encoded_data</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
+<span class="n">input_ids</span> <span class="o">=</span> <span class="n">encoded_data</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]</span>
+<span class="n">attention_mask</span> <span class="o">=</span> <span class="n">encoded_data</span><span class="p">[</span><span class="s1">&#39;attention_mask&#39;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+
+<span class="c1"># Create DataLoader</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="n">input_ids</span><span class="p">,</span> <span class="n">attention_mask</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+<span class="n">dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Fine-tuning</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">AdamW</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">2e-5</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>  <span class="c1"># Number of epochs</span>
+    <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_ids</span><span class="o">=</span><span class="n">batch</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">attention_mask</span><span class="o">=</span><span class="n">batch</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="n">batch</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">outputs</span><span class="o">.</span><span class="n">loss</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fine-tuning completed&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="few-shot-and-zero-shot-learning-capabilities">
 <h3>Few-shot and zero-shot learning capabilities<a class="headerlink" href="#few-shot-and-zero-shot-learning-capabilities" title="Link to this heading">#</a></h3>
 <p>LLMs can perform tasks with minimal (few-shot) or no (zero-shot) specific examples, adapting to new scenarios based on their general language understanding.</p>
-<p>Example: A model could classify social media posts into themes it hasn’t been explicitly trained on, based on a few examples or just a description of the categories.</p>
+<p>Example of zero-shot classification using GPT-3:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">zero_shot_classification</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">categories</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Classify the following text into one of these categories: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span>
+
+<span class="s2">    Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span>
+
+<span class="s2">    Category:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">gpt3_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;The new economic policy has led to a significant increase in foreign investment.&quot;</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Politics&quot;</span><span class="p">,</span> <span class="s2">&quot;Economics&quot;</span><span class="p">,</span> <span class="s2">&quot;Technology&quot;</span><span class="p">,</span> <span class="s2">&quot;Sports&quot;</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">zero_shot_classification</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">categories</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Classified category: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="advantages-of-llms-in-social-science-research">
 <h2>6. Advantages of LLMs in Social Science Research<a class="headerlink" href="#advantages-of-llms-in-social-science-research" title="Link to this heading">#</a></h2>
+<p>LLMs offer several key advantages for social science researchers:</p>
 <section id="handling-complex-language-understanding-tasks">
 <h3>Handling complex language understanding tasks<a class="headerlink" href="#handling-complex-language-understanding-tasks" title="Link to this heading">#</a></h3>
-<p>LLMs can grasp nuanced meanings, idiomatic expressions, and context-dependent interpretations.</p>
+<p>LLMs can grasp nuanced meanings, idiomatic expressions, and context-dependent interpretations, which is crucial for analyzing complex social phenomena.</p>
+<p>Example of analyzing a complex social concept:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">analyze_social_concept</span><span class="p">(</span><span class="n">concept</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Provide a comprehensive analysis of the social concept: &quot;</span><span class="si">{</span><span class="n">concept</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">    Include:</span>
+<span class="s2">    1. Definition</span>
+<span class="s2">    2. Historical context</span>
+<span class="s2">    3. Current relevance</span>
+<span class="s2">    4. Controversies or debates</span>
+<span class="s2">    5. Implications for social research</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">gpt3_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">max_tokens</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+
+<span class="n">concept</span> <span class="o">=</span> <span class="s2">&quot;Intersectionality&quot;</span>
+<span class="n">analysis</span> <span class="o">=</span> <span class="n">analyze_social_concept</span><span class="p">(</span><span class="n">concept</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">analysis</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="ability-to-generate-human-like-text">
 <h3>Ability to generate human-like text<a class="headerlink" href="#ability-to-generate-human-like-text" title="Link to this heading">#</a></h3>
 <p>This capability is useful for creating synthetic data, formulating research questions, or generating interview questions.</p>
+<p>Example of generating research questions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_research_questions</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">num_questions</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Generate </span><span class="si">{</span><span class="n">num_questions</span><span class="si">}</span><span class="s2"> research questions for a study on the following topic:</span>
+<span class="s2">    &quot;</span><span class="si">{</span><span class="n">topic</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="s2">    Research questions:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">gpt3_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">max_tokens</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+
+<span class="n">topic</span> <span class="o">=</span> <span class="s2">&quot;The impact of social media on political participation among young adults&quot;</span>
+<span class="n">questions</span> <span class="o">=</span> <span class="n">generate_research_questions</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">questions</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="adaptability-to-various-domains-and-tasks">
 <h3>Adaptability to various domains and tasks<a class="headerlink" href="#adaptability-to-various-domains-and-tasks" title="Link to this heading">#</a></h3>
@@ -646,9 +944,27 @@ document.write(`
 </section>
 <section id="limitations-and-challenges">
 <h2>7. Limitations and Challenges<a class="headerlink" href="#limitations-and-challenges" title="Link to this heading">#</a></h2>
+<p>Despite their power, LLMs also have significant limitations that researchers must be aware of:</p>
 <section id="potential-biases-in-training-data">
 <h3>Potential biases in training data<a class="headerlink" href="#potential-biases-in-training-data" title="Link to this heading">#</a></h3>
 <p>LLMs may perpetuate or amplify biases present in their training data, requiring careful scrutiny in social science applications.</p>
+<p>Example of checking for gender bias:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_gender_bias</span><span class="p">(</span><span class="n">profession</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Complete the following sentences:</span>
+<span class="s2">    1. The </span><span class="si">{</span><span class="n">profession</span><span class="si">}</span><span class="s2"> walked into the room. He</span>
+<span class="s2">    2. The </span><span class="si">{</span><span class="n">profession</span><span class="si">}</span><span class="s2"> walked into the room. She</span>
+
+<span class="s2">    Completions:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="n">completions</span> <span class="o">=</span> <span class="n">gpt3_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">max_tokens</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">completions</span>
+
+<span class="n">profession</span> <span class="o">=</span> <span class="s2">&quot;doctor&quot;</span>
+<span class="n">bias_check</span> <span class="o">=</span> <span class="n">check_gender_bias</span><span class="p">(</span><span class="n">profession</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bias_check</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="lack-of-true-understanding-or-reasoning">
 <h3>Lack of true understanding or reasoning<a class="headerlink" href="#lack-of-true-understanding-or-reasoning" title="Link to this heading">#</a></h3>
@@ -665,6 +981,7 @@ document.write(`
 </section>
 <section id="recent-advancements">
 <h2>8. Recent Advancements<a class="headerlink" href="#recent-advancements" title="Link to this heading">#</a></h2>
+<p>The field of LLMs is rapidly evolving, with several recent advancements:</p>
 <section id="improvements-in-model-size-and-efficiency">
 <h3>Improvements in model size and efficiency<a class="headerlink" href="#improvements-in-model-size-and-efficiency" title="Link to this heading">#</a></h3>
 <p>Newer models achieve better performance with fewer parameters, making them more accessible for research use.</p>
@@ -678,37 +995,17 @@ document.write(`
 <p>Ongoing research aims to reduce biases and increase the reliability of LLM outputs, crucial for their use in academic research.</p>
 </section>
 </section>
-<section id="applications-in-social-science">
-<h2>9. Applications in Social Science<a class="headerlink" href="#applications-in-social-science" title="Link to this heading">#</a></h2>
-<section id="data-annotation-and-classification">
-<h3>Data annotation and classification<a class="headerlink" href="#data-annotation-and-classification" title="Link to this heading">#</a></h3>
-<p>LLMs can assist in coding qualitative data, potentially increasing efficiency and consistency in analysis.</p>
-<p>Example: Automatically categorizing open-ended survey responses into themes, with the ability to explain the reasoning behind each classification.</p>
-</section>
-<section id="generating-explanations-and-summaries">
-<h3>Generating explanations and summaries<a class="headerlink" href="#generating-explanations-and-summaries" title="Link to this heading">#</a></h3>
-<p>LLMs can provide detailed explanations of complex social phenomena or summarize key findings from multiple studies.</p>
-</section>
-<section id="analyzing-large-scale-textual-data">
-<h3>Analyzing large-scale textual data<a class="headerlink" href="#analyzing-large-scale-textual-data" title="Link to this heading">#</a></h3>
-<p>These models excel at processing and extracting insights from vast amounts of text, such as social media posts or historical documents.</p>
-</section>
-<section id="inferring-social-patterns-and-trends">
-<h3>Inferring social patterns and trends<a class="headerlink" href="#inferring-social-patterns-and-trends" title="Link to this heading">#</a></h3>
-<p>LLMs can identify emerging topics, shifts in public opinion, or cultural trends from large-scale text data.</p>
-<p>Example: Analyzing years of social media data to track changes in public attitudes towards climate change.</p>
-</section>
-</section>
 <section id="future-directions">
-<h2>10. Future Directions<a class="headerlink" href="#future-directions" title="Link to this heading">#</a></h2>
-<section id="integration-with-world-knowledge-and-physical-world-understanding">
-<h3>Integration with world knowledge and physical world understanding<a class="headerlink" href="#integration-with-world-knowledge-and-physical-world-understanding" title="Link to this heading">#</a></h3>
-<p>Future LLMs may better integrate factual knowledge and understanding of physical world constraints, improving their reliability for research applications.</p>
+<h2>9. Future Directions<a class="headerlink" href="#future-directions" title="Link to this heading">#</a></h2>
+<p>Looking ahead, several trends are likely to shape the future of LLMs in social science research:</p>
+<section id="integration-with-domain-specific-knowledge">
+<h3>Integration with domain-specific knowledge<a class="headerlink" href="#integration-with-domain-specific-knowledge" title="Link to this heading">#</a></h3>
+<p>Future LLMs may better integrate factual knowledge and understanding of specific social science domains, improving their reliability for research applications.</p>
 </section>
 <section id="improved-interpretability-and-transparency">
 <h3>Improved interpretability and transparency<a class="headerlink" href="#improved-interpretability-and-transparency" title="Link to this heading">#</a></h3>
 <p>Ongoing research aims to make LLM decision-making processes more transparent, allowing researchers to better understand and validate their outputs.</p>
-<p>As LLMs continue to evolve, they offer exciting possibilities for social science research, potentially transforming how we analyze text data, generate hypotheses, and explore complex social phenomena. However, their use also requires careful consideration of their limitations and ethical implications. Social scientists must approach these powerful tools with both enthusiasm and critical scrutiny, developing new methodologies to harness their capabilities while ensuring the validity and integrity of their research.</p>
+<p>In conclusion, LLMs represent a powerful tool for social science researchers, offering unprecedented capabilities in text analysis and generation. However, their use also requires careful consideration of their limitations and ethical implications. As the field continues to evolve, researchers must stay informed about the latest developments and best practices to effectively leverage these technologies in their work while maintaining the integrity and responsibility of their research.</p>
 </section>
 </section>
 </section>
@@ -827,15 +1124,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progress-in-mitigating-biases-and-improving-factual-accuracy">Progress in mitigating biases and improving factual accuracy</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-social-science">9. Applications in Social Science</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-annotation-and-classification">Data annotation and classification</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-explanations-and-summaries">Generating explanations and summaries</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-large-scale-textual-data">Analyzing large-scale textual data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inferring-social-patterns-and-trends">Inferring social patterns and trends</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-directions">10. Future Directions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-with-world-knowledge-and-physical-world-understanding">Integration with world knowledge and physical world understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-directions">9. Future Directions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-with-domain-specific-knowledge">Integration with domain-specific knowledge</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#improved-interpretability-and-transparency">Improved interpretability and transparency</a></li>
 </ul>
 </li>
