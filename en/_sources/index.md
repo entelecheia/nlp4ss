@@ -57,6 +57,12 @@ As social scientists, we're constantly seeking new ways to understand human beha
 
 We're excited to embark on this journey with you, exploring the fascinating intersection of NLP and social science. Let's dive in and discover how these powerful tools can transform our research and deepen our understanding of the social world.
 
+## Table of Contents
+
+```{tableofcontents}
+
+```
+
 ## Changelog
 
 See the [CHANGELOG] for more information.
@@ -68,9 +74,3 @@ Contributions are welcome! Please see the [contributing guidelines] for more inf
 ## License
 
 This project is released under the [CC-BY-4.0 License][license-url].
-
-## Table of Contents
-
-```{tableofcontents}
-
-```
