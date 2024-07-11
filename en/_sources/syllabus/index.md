@@ -71,13 +71,6 @@ The course consists of five sessions, each covering key aspects of NLP for socia
 1. Jurafsky, D., & Martin, J. H. (2020). Speech and Language Processing (3rd ed. draft).
 2. Hovy, D. (2022). Text Analysis in Python for Social Scientists: Discovery and Exploration. Cambridge University Press.
 
-## Course Policies
-
-- **Attendance**: Regular attendance and participation in class discussions are expected.
-- **Late Assignments**: Assignments submitted after the due date will incur a 10% penalty per day.
-- **Academic Integrity**: Plagiarism and cheating will not be tolerated. All work must be original and properly cited.
-- **Accommodations**: Students requiring special accommodations should contact the instructor within the first week of class.
-
 ## Additional Resources
 
 - Online tutorials and documentation for Python NLP libraries
