@@ -90,6 +90,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'session03/lecture2';</script>
     <script src="../_static/language_switcher.js?v=ff97be19"></script>
     <script src="../_static/chat.js?v=f0de43d7"></script>
@@ -437,7 +439,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -453,6 +457,26 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-few-shot-learning">1. Introduction to Few-shot Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-learning-capabilities-of-llms">2. Few-shot Learning Capabilities of LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-few-shot-learning">3. Types of Few-shot Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals-of-prompt-engineering">4. Fundamentals of Prompt Engineering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-design-strategies">5. Prompt Design Strategies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-context-learning">6. In-context Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-classification-techniques">7. Few-shot Classification Techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-named-entity-recognition-ner">8. Few-shot Named Entity Recognition (NER)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-sentiment-analysis-and-opinion-mining">9. Few-shot Sentiment Analysis and Opinion Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-text-generation-and-summarization">10. Few-shot Text Generation and Summarization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-question-answering-and-information-extraction">11. Few-shot Question Answering and Information Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-optimization-techniques">12. Prompt Optimization Techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -464,127 +488,378 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="few-shot-learning-and-prompt-engineering">
 <h1>3.2 Few-shot Learning and Prompt Engineering<a class="headerlink" href="#few-shot-learning-and-prompt-engineering" title="Link to this heading">#</a></h1>
+<section id="introduction-to-few-shot-learning">
+<h2>1. Introduction to Few-shot Learning<a class="headerlink" href="#introduction-to-few-shot-learning" title="Link to this heading">#</a></h2>
+<p>Few-shot learning is a machine learning paradigm where models can make accurate predictions based on only a small number of examples. This approach bridges the gap between zero-shot learning (no examples) and traditional supervised learning (large amounts of labeled data).</p>
+<div align="center" class="mermaid align-center">
+            graph LR
+    A[Zero-shot Learning] --&gt; B[Few-shot Learning]
+    B --&gt; C[Traditional Supervised Learning]
+    A --&gt; |No examples| D[LLM]
+    B --&gt; |Few examples| D
+    C --&gt; |Many examples| E[Traditional ML]
+        </div>
+        <p>In social science research, few-shot learning is particularly valuable when dealing with:</p>
+<ul class="simple">
+<li><p>Emerging social phenomena with limited data</p></li>
+<li><p>Low-resource languages or cultures</p></li>
+<li><p>Rapid exploration of new research questions</p></li>
+</ul>
+</section>
+<section id="few-shot-learning-capabilities-of-llms">
+<h2>2. Few-shot Learning Capabilities of LLMs<a class="headerlink" href="#few-shot-learning-capabilities-of-llms" title="Link to this heading">#</a></h2>
+<p>Large Language Models (LLMs) excel at few-shot learning due to their vast pre-trained knowledge and ability to understand and generate human-like text. This allows them to quickly adapt to new tasks with minimal examples.</p>
+<p>Advantages over traditional ML approaches:</p>
 <ol class="arabic simple">
-<li><p>Introduction to Few-shot Learning</p>
-<ul class="simple">
-<li><p>Definition and concept</p></li>
-<li><p>Comparison with zero-shot and traditional supervised learning</p></li>
-<li><p>Relevance to social science research</p></li>
-</ul>
-</li>
-<li><p>Few-shot Learning Capabilities of LLMs</p>
-<ul class="simple">
-<li><p>How LLMs facilitate few-shot learning</p></li>
-<li><p>Advantages over traditional machine learning approaches</p></li>
-<li><p>Limitations and challenges</p></li>
-</ul>
-</li>
-<li><p>Types of Few-shot Learning</p>
-<ul class="simple">
-<li><p>One-shot learning</p></li>
-<li><p>K-shot learning</p></li>
-<li><p>Importance of example selection</p></li>
-</ul>
-</li>
-<li><p>Fundamentals of Prompt Engineering</p>
-<ul class="simple">
-<li><p>Definition and importance</p></li>
-<li><p>Key components of effective prompts</p></li>
-<li><p>Role in optimizing LLM performance</p></li>
-</ul>
-</li>
-<li><p>Prompt Design Strategies</p>
-<ul class="simple">
-<li><p>Task description formulation</p></li>
-<li><p>Incorporating examples (demonstrations)</p></li>
-<li><p>Prompt templates and patterns</p></li>
-</ul>
-</li>
-<li><p>In-context Learning</p>
-<ul class="simple">
-<li><p>Concept and mechanics</p></li>
-<li><p>Relationship to few-shot learning</p></li>
-<li><p>Limitations and considerations</p></li>
-</ul>
-</li>
-<li><p>Few-shot Classification Techniques</p>
-<ul class="simple">
-<li><p>Designing prompts for classification tasks</p></li>
-<li><p>Handling multi-class and multi-label scenarios</p></li>
-<li><p>Strategies for improving classification accuracy</p></li>
-</ul>
-</li>
-<li><p>Few-shot Named Entity Recognition (NER)</p>
-<ul class="simple">
-<li><p>Prompt design for NER tasks</p></li>
-<li><p>Incorporating domain-specific knowledge</p></li>
-<li><p>Challenges in few-shot NER</p></li>
-</ul>
-</li>
-<li><p>Few-shot Sentiment Analysis and Opinion Mining</p>
-<ul class="simple">
-<li><p>Prompts for sentiment classification</p></li>
-<li><p>Extending to aspect-based sentiment analysis</p></li>
-<li><p>Cross-domain sentiment transfer</p></li>
-</ul>
-</li>
-<li><p>Few-shot Text Generation and Summarization</p>
-<ul class="simple">
-<li><p>Controlling output style and content</p></li>
-<li><p>Techniques for improving coherence and relevance</p></li>
-<li><p>Evaluation of few-shot generated text</p></li>
-</ul>
-</li>
-<li><p>Few-shot Question Answering and Information Extraction</p>
-<ul class="simple">
-<li><p>Designing effective QA prompts</p></li>
-<li><p>Strategies for extracting structured information</p></li>
-<li><p>Handling complex and multi-hop questions</p></li>
-</ul>
-</li>
-<li><p>Prompt Optimization Techniques</p>
-<ul class="simple">
-<li><p>Iterative refinement of prompts</p></li>
-<li><p>A/B testing of prompt variations</p></li>
-<li><p>Automated prompt optimization methods</p></li>
-</ul>
-</li>
-<li><p>Evaluation of Few-shot Learning Performance</p>
-<ul class="simple">
-<li><p>Metrics for assessing few-shot learning effectiveness</p></li>
-<li><p>Comparing few-shot results with fully supervised approaches</p></li>
-<li><p>Cross-validation in few-shot settings</p></li>
-</ul>
-</li>
-<li><p>Applications in Social Science Research</p>
-<ul class="simple">
-<li><p>Rapid prototyping of NLP models for new research questions</p></li>
-<li><p>Handling low-resource languages or domains</p></li>
-<li><p>Adapting to evolving social phenomena</p></li>
-</ul>
-</li>
-<li><p>Challenges and Limitations</p>
-<ul class="simple">
-<li><p>Sensitivity to prompt wording and example order</p></li>
-<li><p>Consistency and reliability of few-shot performance</p></li>
-<li><p>Scalability to large-scale social science studies</p></li>
-</ul>
-</li>
-<li><p>Combining Few-shot Learning with Other Techniques</p>
-<ul class="simple">
-<li><p>Integration with active learning</p></li>
-<li><p>Hybrid approaches using few-shot and fine-tuning</p></li>
-<li><p>Ensemble methods for improving robustness</p></li>
-</ul>
-</li>
-<li><p>Future Directions in Few-shot Learning and Prompt Engineering</p>
-<ul class="simple">
-<li><p>Advances in prompt optimization algorithms</p></li>
-<li><p>Cross-lingual and cross-modal few-shot learning</p></li>
-<li><p>Potential for meta-learning in social science contexts</p></li>
-</ul>
-</li>
+<li><p>Reduced need for large labeled datasets</p></li>
+<li><p>Faster adaptation to new tasks</p></li>
+<li><p>Ability to handle a wide range of tasks with the same model</p></li>
 </ol>
+<p>Limitations:</p>
+<ol class="arabic simple">
+<li><p>Sensitivity to prompt wording and example selection</p></li>
+<li><p>Potential for inconsistent performance</p></li>
+<li><p>Difficulty in formal analysis of few-shot learning processes</p></li>
+</ol>
+</section>
+<section id="types-of-few-shot-learning">
+<h2>3. Types of Few-shot Learning<a class="headerlink" href="#types-of-few-shot-learning" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>One-shot learning: Learning from a single example per class</p></li>
+<li><p>K-shot learning: Learning from K examples per class (where K is typically small, e.g., 5 or 10)</p></li>
+</ol>
+<p>Example selection is crucial in few-shot learning. Diverse and representative examples tend to yield better results.</p>
+</section>
+<section id="fundamentals-of-prompt-engineering">
+<h2>4. Fundamentals of Prompt Engineering<a class="headerlink" href="#fundamentals-of-prompt-engineering" title="Link to this heading">#</a></h2>
+<p>Prompt engineering is the process of designing and optimizing input prompts to elicit desired outputs from LLMs. It’s a critical skill for effectively using LLMs in few-shot learning scenarios.</p>
+<p>Key components of effective prompts:</p>
+<ol class="arabic simple">
+<li><p>Clear task description</p></li>
+<li><p>Relevant examples (demonstrations)</p></li>
+<li><p>Consistent formatting</p></li>
+<li><p>Appropriate level of detail</p></li>
+</ol>
+</section>
+<section id="prompt-design-strategies">
+<h2>5. Prompt Design Strategies<a class="headerlink" href="#prompt-design-strategies" title="Link to this heading">#</a></h2>
+<p>Let’s explore some prompt design strategies with a practical example using the OpenAI GPT-3 model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openai</span>
+
+<span class="n">openai</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="s1">&#39;your-api-key&#39;</span>
+
+<span class="k">def</span> <span class="nf">few_shot_classification</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">examples</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Classify the following text into one of these categories: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Add examples</span>
+    <span class="k">for</span> <span class="n">example</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+        <span class="n">prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Text: </span><span class="si">{</span><span class="n">example</span><span class="si">}</span><span class="se">\n</span><span class="s2">Category: </span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Add the text to classify</span>
+    <span class="n">prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="se">\n</span><span class="s2">Category:&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Technology&quot;</span><span class="p">,</span> <span class="s2">&quot;Politics&quot;</span><span class="p">,</span> <span class="s2">&quot;Sports&quot;</span><span class="p">]</span>
+<span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;Apple announced its new iPhone model yesterday.&quot;</span><span class="p">,</span> <span class="s2">&quot;Technology&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;The senator proposed a new bill on healthcare reform.&quot;</span><span class="p">,</span> <span class="s2">&quot;Politics&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;The local team won the championship after a thrilling match.&quot;</span><span class="p">,</span> <span class="s2">&quot;Sports&quot;</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">text_to_classify</span> <span class="o">=</span> <span class="s2">&quot;The new AI algorithm outperformed human experts in diagnostic accuracy.&quot;</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">few_shot_classification</span><span class="p">(</span><span class="n">text_to_classify</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">examples</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Classified category: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example demonstrates a few-shot learning approach to text classification, incorporating examples in the prompt design.</p>
+</section>
+<section id="in-context-learning">
+<h2>6. In-context Learning<a class="headerlink" href="#in-context-learning" title="Link to this heading">#</a></h2>
+<p>In-context learning refers to the ability of LLMs to adapt to new tasks based on information provided in the input prompt, without changing the model’s parameters. It’s closely related to few-shot learning.</p>
+<div align="center" class="mermaid align-center">
+            sequenceDiagram
+    participant User
+    participant LLM
+    User-&gt;&gt;LLM: Provide task description
+    User-&gt;&gt;LLM: Provide few-shot examples
+    User-&gt;&gt;LLM: Provide new instance
+    LLM-&gt;&gt;LLM: In-context learning
+    LLM-&gt;&gt;User: Generate response
+        </div>
+        </section>
+<section id="few-shot-classification-techniques">
+<h2>7. Few-shot Classification Techniques<a class="headerlink" href="#few-shot-classification-techniques" title="Link to this heading">#</a></h2>
+<p>Let’s extend our previous example to handle multi-label classification:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">few_shot_multi_label_classification</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">examples</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Classify the following text into one or more of these categories: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span><span class="si">}</span><span class="s2">. List all applicable categories, separated by commas.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Add examples</span>
+    <span class="k">for</span> <span class="n">example</span><span class="p">,</span> <span class="n">labels</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+        <span class="n">prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Text: </span><span class="si">{</span><span class="n">example</span><span class="si">}</span><span class="se">\n</span><span class="s2">Categories: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Add the text to classify</span>
+    <span class="n">prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="se">\n</span><span class="s2">Categories:&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Technology&quot;</span><span class="p">,</span> <span class="s2">&quot;Politics&quot;</span><span class="p">,</span> <span class="s2">&quot;Economics&quot;</span><span class="p">,</span> <span class="s2">&quot;Health&quot;</span><span class="p">]</span>
+<span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;The new healthcare bill aims to reduce drug prices and increase coverage.&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Politics&quot;</span><span class="p">,</span> <span class="s2">&quot;Health&quot;</span><span class="p">,</span> <span class="s2">&quot;Economics&quot;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s2">&quot;Researchers developed an AI system to predict stock market trends.&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Technology&quot;</span><span class="p">,</span> <span class="s2">&quot;Economics&quot;</span><span class="p">])</span>
+<span class="p">]</span>
+
+<span class="n">text_to_classify</span> <span class="o">=</span> <span class="s2">&quot;The government announced a major investment in renewable energy technologies.&quot;</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">few_shot_multi_label_classification</span><span class="p">(</span><span class="n">text_to_classify</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">examples</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Classified categories: </span><span class="si">{</span><span class="n">results</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example shows how to perform multi-label classification using few-shot learning.</p>
+</section>
+<section id="few-shot-named-entity-recognition-ner">
+<h2>8. Few-shot Named Entity Recognition (NER)<a class="headerlink" href="#few-shot-named-entity-recognition-ner" title="Link to this heading">#</a></h2>
+<p>Few-shot NER can be particularly useful in social science research when dealing with domain-specific entities. Here’s an example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">few_shot_ner</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">entity_types</span><span class="p">,</span> <span class="n">examples</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Identify and extract the following types of entities from the text: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">entity_types</span><span class="p">)</span><span class="si">}</span><span class="s2">. Format the output as: EntityType: Entity</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Add examples</span>
+    <span class="k">for</span> <span class="n">example</span><span class="p">,</span> <span class="n">entities</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+        <span class="n">prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Text: </span><span class="si">{</span><span class="n">example</span><span class="si">}</span><span class="se">\n</span><span class="s2">Entities:</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">entity_type</span><span class="p">,</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entities</span><span class="p">:</span>
+            <span class="n">prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">entity_type</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">entity</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">prompt</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Add the text for NER</span>
+    <span class="n">prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="se">\n</span><span class="s2">Entities:</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">entity_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Person&quot;</span><span class="p">,</span> <span class="s2">&quot;Organization&quot;</span><span class="p">,</span> <span class="s2">&quot;Policy&quot;</span><span class="p">]</span>
+<span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;President John Smith signed the Green Energy Act last week.&quot;</span><span class="p">,</span>
+     <span class="p">[(</span><span class="s2">&quot;Person&quot;</span><span class="p">,</span> <span class="s2">&quot;John Smith&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Policy&quot;</span><span class="p">,</span> <span class="s2">&quot;Green Energy Act&quot;</span><span class="p">)]),</span>
+    <span class="p">(</span><span class="s2">&quot;Apple Inc. announced its commitment to carbon neutrality by 2030.&quot;</span><span class="p">,</span>
+     <span class="p">[(</span><span class="s2">&quot;Organization&quot;</span><span class="p">,</span> <span class="s2">&quot;Apple Inc.&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Policy&quot;</span><span class="p">,</span> <span class="s2">&quot;carbon neutrality&quot;</span><span class="p">)])</span>
+<span class="p">]</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Senator Jane Doe proposed the Universal Healthcare Bill in Congress yesterday.&quot;</span>
+
+<span class="n">entities</span> <span class="o">=</span> <span class="n">few_shot_ner</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">entity_types</span><span class="p">,</span> <span class="n">examples</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extracted entities:</span><span class="se">\n</span><span class="si">{</span><span class="n">entities</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example demonstrates how to perform few-shot NER, which can be adapted for various domain-specific entity types relevant to social science research.</p>
+</section>
+<section id="few-shot-sentiment-analysis-and-opinion-mining">
+<h2>9. Few-shot Sentiment Analysis and Opinion Mining<a class="headerlink" href="#few-shot-sentiment-analysis-and-opinion-mining" title="Link to this heading">#</a></h2>
+<p>Few-shot learning can be applied to sentiment analysis tasks, including aspect-based sentiment analysis:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">few_shot_aspect_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">aspects</span><span class="p">,</span> <span class="n">examples</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Analyze the sentiment (Positive, Negative, or Neutral) for each aspect in the text. Aspects: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">aspects</span><span class="p">)</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Add examples</span>
+    <span class="k">for</span> <span class="n">example</span><span class="p">,</span> <span class="n">sentiments</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+        <span class="n">prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Text: </span><span class="si">{</span><span class="n">example</span><span class="si">}</span><span class="se">\n</span><span class="s2">Sentiments:</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">aspect</span><span class="p">,</span> <span class="n">sentiment</span> <span class="ow">in</span> <span class="n">sentiments</span><span class="p">:</span>
+            <span class="n">prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">aspect</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">sentiment</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">prompt</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Add the text for analysis</span>
+    <span class="n">prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="se">\n</span><span class="s2">Sentiments:</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">aspects</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span> <span class="s2">&quot;Quality&quot;</span><span class="p">,</span> <span class="s2">&quot;Service&quot;</span><span class="p">]</span>
+<span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;The food was delicious but a bit overpriced. The waiter was very attentive.&quot;</span><span class="p">,</span>
+     <span class="p">[(</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span> <span class="s2">&quot;Negative&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Quality&quot;</span><span class="p">,</span> <span class="s2">&quot;Positive&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Service&quot;</span><span class="p">,</span> <span class="s2">&quot;Positive&quot;</span><span class="p">)]),</span>
+    <span class="p">(</span><span class="s2">&quot;The product is cheap but breaks easily. Customer support was unhelpful.&quot;</span><span class="p">,</span>
+     <span class="p">[(</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span> <span class="s2">&quot;Positive&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Quality&quot;</span><span class="p">,</span> <span class="s2">&quot;Negative&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Service&quot;</span><span class="p">,</span> <span class="s2">&quot;Negative&quot;</span><span class="p">)])</span>
+<span class="p">]</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;The new policy is comprehensive but difficult to implement. Public response has been mixed.&quot;</span>
+
+<span class="n">sentiments</span> <span class="o">=</span> <span class="n">few_shot_aspect_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">aspects</span><span class="p">,</span> <span class="n">examples</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Aspect-based sentiments:</span><span class="se">\n</span><span class="si">{</span><span class="n">sentiments</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example shows how to perform aspect-based sentiment analysis using few-shot learning, which can be valuable for analyzing complex opinions in social science research.</p>
+</section>
+<section id="few-shot-text-generation-and-summarization">
+<h2>10. Few-shot Text Generation and Summarization<a class="headerlink" href="#few-shot-text-generation-and-summarization" title="Link to this heading">#</a></h2>
+<p>LLMs can perform text generation and summarization tasks with few-shot learning. Here’s an example of few-shot summarization:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">few_shot_summarization</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">max_words</span><span class="p">,</span> <span class="n">examples</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Summarize the following text in no more than </span><span class="si">{</span><span class="n">max_words</span><span class="si">}</span><span class="s2"> words:</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Add examples</span>
+    <span class="k">for</span> <span class="n">example</span><span class="p">,</span> <span class="n">summary</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+        <span class="n">prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Text: </span><span class="si">{</span><span class="n">example</span><span class="si">}</span><span class="se">\n</span><span class="s2">Summary: </span><span class="si">{</span><span class="n">summary</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Add the text to summarize</span>
+    <span class="n">prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="se">\n</span><span class="s2">Summary:&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="n">max_words</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>  <span class="c1"># Allowing some buffer</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;The Industrial Revolution was a period of major industrialization and innovation during the late 18th and early 19th centuries. The Industrial Revolution began in Great Britain and quickly spread throughout Western Europe and North America.&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;The Industrial Revolution was a time of rapid industrialization in the late 18th and early 19th centuries, starting in Britain and spreading to Western Europe and North America.&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Climate change is the long-term alteration of temperature and typical weather patterns in a place. Climate change could refer to a particular location or the planet as a whole. Climate change may cause weather patterns to be less predictable.&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;Climate change refers to long-term changes in temperature and weather patterns, affecting specific locations or the entire planet, leading to less predictable weather.&quot;</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">text_to_summarize</span> <span class="o">=</span> <span class="s2">&quot;Social media has revolutionized communication, allowing instant global connectivity but also raising concerns about privacy, misinformation, and mental health impacts. It has transformed businesses, politics, and social interactions.&quot;</span>
+
+<span class="n">summary</span> <span class="o">=</span> <span class="n">few_shot_summarization</span><span class="p">(</span><span class="n">text_to_summarize</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">examples</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Summary:</span><span class="se">\n</span><span class="si">{</span><span class="n">summary</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example demonstrates how to use few-shot learning for text summarization, which can be useful for processing large volumes of text data in social science research.</p>
+</section>
+<section id="few-shot-question-answering-and-information-extraction">
+<h2>11. Few-shot Question Answering and Information Extraction<a class="headerlink" href="#few-shot-question-answering-and-information-extraction" title="Link to this heading">#</a></h2>
+<p>Few-shot learning can be applied to question answering tasks, including handling complex or multi-hop questions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">few_shot_qa</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">question</span><span class="p">,</span> <span class="n">examples</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;Answer the question based on the given context.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Add examples</span>
+    <span class="k">for</span> <span class="n">ex_context</span><span class="p">,</span> <span class="n">ex_question</span><span class="p">,</span> <span class="n">ex_answer</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+        <span class="n">prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Context: </span><span class="si">{</span><span class="n">ex_context</span><span class="si">}</span><span class="se">\n</span><span class="s2">Question: </span><span class="si">{</span><span class="n">ex_question</span><span class="si">}</span><span class="se">\n</span><span class="s2">Answer: </span><span class="si">{</span><span class="n">ex_answer</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Add the actual context and question</span>
+    <span class="n">prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Context: </span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="se">\n</span><span class="s2">Question: </span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="se">\n</span><span class="s2">Answer:&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;The Treaty of Versailles was signed in 1919. It ended World War I and imposed heavy penalties on Germany.&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;When was the Treaty of Versailles signed?&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;The Treaty of Versailles was signed in 1919.&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;GDP stands for Gross Domestic Product. It is a measure of the market value of all final goods and services produced in a specific time period.&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;What does GDP measure?&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;GDP measures the market value of all final goods and services produced in a specific time period.&quot;</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">context</span> <span class="o">=</span> <span class="s2">&quot;The Civil Rights Act of 1964 prohibited discrimination based on race, color, religion, sex, or national origin. It was signed into law by President Lyndon B. Johnson.&quot;</span>
+<span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;What did the Civil Rights Act of 1964 prohibit, and who signed it into law?&quot;</span>
+
+<span class="n">answer</span> <span class="o">=</span> <span class="n">few_shot_qa</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">question</span><span class="p">,</span> <span class="n">examples</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Answer: </span><span class="si">{</span><span class="n">answer</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example shows how to perform few-shot question answering, which can be valuable for extracting specific information from large text corpora in social science research.</p>
+</section>
+<section id="prompt-optimization-techniques">
+<h2>12. Prompt Optimization Techniques<a class="headerlink" href="#prompt-optimization-techniques" title="Link to this heading">#</a></h2>
+<p>Prompt optimization is crucial for improving the performance of few-shot learning. Here’s an example of how you might implement A/B testing for prompt variations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">def</span> <span class="nf">ab_test_prompts</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">prompt_variations</span><span class="p">,</span> <span class="n">n_tests</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{</span><span class="n">variation</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">variation</span> <span class="ow">in</span> <span class="n">prompt_variations</span><span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_tests</span><span class="p">):</span>
+        <span class="n">variation</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">prompt_variations</span><span class="p">)</span>
+        <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">variation</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">Categories: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="se">\n</span><span class="s2">Category:&quot;</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+            <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+            <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">temperature</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">category</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">:</span>
+            <span class="n">results</span><span class="p">[</span><span class="n">variation</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">results</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Technology&quot;</span><span class="p">,</span> <span class="s2">&quot;Politics&quot;</span><span class="p">,</span> <span class="s2">&quot;Sports&quot;</span><span class="p">]</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;The new AI algorithm outperformed human experts in diagnostic accuracy.&quot;</span>
+
+<span class="n">prompt_variations</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Classify the following text into one of the given categories:&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Determine which category best describes the following text:&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Read the text and assign it to the most appropriate category:&quot;</span>
+<span class="p">]</span>
+
+<span class="n">test_results</span> <span class="o">=</span> <span class="n">ab_test_prompts</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">prompt_variations</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A/B Test Results:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">variation</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">test_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">variation</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> successes&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example demonstrates a simple A/B testing approach for prompt variations, which can help optimize prompt design for better few-shot learning performance.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Few-shot learning and prompt engineering are powerful techniques that can significantly enhance the application of LLMs in social science research. They allow researchers to quickly adapt models to new tasks, handle low-resource scenarios, and explore emerging social phenomena with minimal data requirements.</p>
+<p>However, it’s important to be aware of the limitations and challenges, such as sensitivity to prompt wording and example selection. Researchers should validate results, consider potential biases, and combine few-shot learning with other techniques when appropriate.</p>
+<p>As the field continues to evolve, we can expect more advanced prompt optimization techniques, improved few-shot learning capabilities, and novel applications in social science contexts. These developments will further empower researchers to leverage the power of LLMs in their studies of complex social phenomena.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -641,6 +916,33 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-few-shot-learning">1. Introduction to Few-shot Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-learning-capabilities-of-llms">2. Few-shot Learning Capabilities of LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-few-shot-learning">3. Types of Few-shot Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals-of-prompt-engineering">4. Fundamentals of Prompt Engineering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-design-strategies">5. Prompt Design Strategies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-context-learning">6. In-context Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-classification-techniques">7. Few-shot Classification Techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-named-entity-recognition-ner">8. Few-shot Named Entity Recognition (NER)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-sentiment-analysis-and-opinion-mining">9. Few-shot Sentiment Analysis and Opinion Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-text-generation-and-summarization">10. Few-shot Text Generation and Summarization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-question-answering-and-information-extraction">11. Few-shot Question Answering and Information Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-optimization-techniques">12. Prompt Optimization Techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
