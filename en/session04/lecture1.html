@@ -90,6 +90,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'session04/lecture1';</script>
     <script src="../_static/language_switcher.js?v=ff97be19"></script>
     <script src="../_static/chat.js?v=f0de43d7"></script>
@@ -437,7 +439,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -453,6 +457,24 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-text-generation-with-llms">1. Introduction to Text Generation with LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals-of-llm-based-text-generation">2. Fundamentals of LLM-based Text Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-text-generation-tasks">3. Types of Text Generation Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-engineering-for-text-generation">4. Prompt Engineering for Text Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-generation-parameters">5. Controlling Generation Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aspect-based-emotion-summarization">6. Aspect-based Emotion Summarization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misinformation-explanation-generation">7. Misinformation Explanation Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-quality-content-creation">8. High-Quality Content Creation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-augmentation-for-social-science-research">9. Data Augmentation for Social Science Research</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-of-generated-text">10. Evaluation of Generated Text</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -464,135 +486,227 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="using-llms-for-high-quality-text-generation">
 <h1>4.1 Using LLMs for High-Quality Text Generation<a class="headerlink" href="#using-llms-for-high-quality-text-generation" title="Link to this heading">#</a></h1>
+<section id="introduction-to-text-generation-with-llms">
+<h2>1. Introduction to Text Generation with LLMs<a class="headerlink" href="#introduction-to-text-generation-with-llms" title="Link to this heading">#</a></h2>
+<p>Text generation using Large Language Models (LLMs) has revolutionized natural language processing in recent years. For social science researchers, LLMs offer powerful tools to generate high-quality text for various applications, from creating research hypotheses to synthesizing literature reviews.</p>
+<div align="center" class="mermaid align-center">
+            graph TD
+    A[Traditional Methods] --&gt; B[Rule-based Systems]
+    A --&gt; C[Statistical Models]
+    D[LLM-based Generation] --&gt; E[Transformer Models]
+    D --&gt; F[Few-shot Learning]
+    D --&gt; G[Zero-shot Capabilities]
+        </div>
+        <p>LLMs provide several advantages over traditional text generation methods:</p>
 <ol class="arabic simple">
-<li><p>Introduction to Text Generation with LLMs</p>
-<ul class="simple">
-<li><p>Overview of text generation capabilities</p></li>
-<li><p>Importance in social science research</p></li>
-<li><p>Comparison with traditional text generation methods</p></li>
-</ul>
-</li>
-<li><p>Fundamentals of LLM-based Text Generation</p>
-<ul class="simple">
-<li><p>Autoregressive language modeling</p></li>
-<li><p>Transformer architecture recap</p></li>
-<li><p>Token-by-token generation process</p></li>
-</ul>
-</li>
-<li><p>Types of Text Generation Tasks</p>
-<ul class="simple">
-<li><p>Open-ended generation</p></li>
-<li><p>Constrained generation (e.g., summarization, paraphrasing)</p></li>
-<li><p>Dialogue generation</p></li>
-<li><p>Data augmentation</p></li>
-</ul>
-</li>
-<li><p>Prompt Engineering for Text Generation</p>
-<ul class="simple">
-<li><p>Crafting effective prompts</p></li>
-<li><p>Controlling style, tone, and content</p></li>
-<li><p>Few-shot prompting for specialized tasks</p></li>
-</ul>
-</li>
-<li><p>Controlling Generation Parameters</p>
-<ul class="simple">
-<li><p>Temperature and top-k/top-p sampling</p></li>
-<li><p>Repetition penalty</p></li>
-<li><p>Length control techniques</p></li>
-</ul>
-</li>
-<li><p>Aspect-based Emotion Summarization</p>
-<ul class="simple">
-<li><p>Techniques for extracting emotional content</p></li>
-<li><p>Generating emotion-focused summaries</p></li>
-<li><p>Applications in sentiment analysis research</p></li>
-</ul>
-</li>
-<li><p>Misinformation Explanation Generation</p>
-<ul class="simple">
-<li><p>Generating explanations for misinformation</p></li>
-<li><p>Fact-checking and correction strategies</p></li>
-<li><p>Ethical considerations in misinformation research</p></li>
-</ul>
-</li>
-<li><p>High-Quality Content Creation</p>
-<ul class="simple">
-<li><p>Generating research hypotheses</p></li>
-<li><p>Literature review synthesis</p></li>
-<li><p>Survey question generation</p></li>
-</ul>
-</li>
-<li><p>Data Augmentation for Social Science Research</p>
-<ul class="simple">
-<li><p>Generating synthetic datasets</p></li>
-<li><p>Balancing imbalanced datasets</p></li>
-<li><p>Enhancing diversity in training data</p></li>
-</ul>
-</li>
-<li><p>Cross-lingual Text Generation</p>
-<ul class="simple">
-<li><p>Techniques for multilingual generation</p></li>
-<li><p>Translation and localization applications</p></li>
-<li><p>Cultural adaptation in generated content</p></li>
-</ul>
-</li>
-<li><p>Stylistic Control in Generated Text</p>
-<ul class="simple">
-<li><p>Adapting to different writing styles</p></li>
-<li><p>Generating domain-specific content</p></li>
-<li><p>Maintaining consistency in long-form text</p></li>
-</ul>
-</li>
-<li><p>Evaluation of Generated Text</p>
-<ul class="simple">
-<li><p>Automated metrics (BLEU, ROUGE, METEOR)</p></li>
-<li><p>Human evaluation protocols</p></li>
-<li><p>Task-specific evaluation criteria</p></li>
-</ul>
-</li>
-<li><p>Ensuring Factual Accuracy</p>
-<ul class="simple">
-<li><p>Strategies for fact-checking generated content</p></li>
-<li><p>Combining LLMs with knowledge bases</p></li>
-<li><p>Handling hallucinations and false information</p></li>
-</ul>
-</li>
-<li><p>Challenges in LLM-based Text Generation</p>
-<ul class="simple">
-<li><p>Maintaining coherence in long-form text</p></li>
-<li><p>Handling domain-specific knowledge</p></li>
-<li><p>Balancing creativity and factual accuracy</p></li>
-</ul>
-</li>
-<li><p>Advanced Techniques</p>
-<ul class="simple">
-<li><p>Fine-tuning LLMs for specific generation tasks</p></li>
-<li><p>Combining retrieval and generation methods</p></li>
-<li><p>Multi-modal text generation (text + images)</p></li>
-</ul>
-</li>
-<li><p>Applications in Social Science Methodology</p>
-<ul class="simple">
-<li><p>Generating survey instruments</p></li>
-<li><p>Creating experimental stimuli</p></li>
-<li><p>Developing coding schemes for qualitative analysis</p></li>
-</ul>
-</li>
-<li><p>Future Directions in LLM-based Text Generation</p>
-<ul class="simple">
-<li><p>Advancements in controllable generation</p></li>
-<li><p>Integration with domain-specific knowledge</p></li>
-<li><p>Potential for automated theory development</p></li>
-</ul>
-</li>
-<li><p>Practical Implementation</p>
-<ul class="simple">
-<li><p>Tools and libraries for text generation (e.g., Hugging Face Transformers)</p></li>
-<li><p>Best practices for integrating LLMs in research workflows</p></li>
-<li><p>Reproducibility considerations in generative research</p></li>
-</ul>
-</li>
+<li><p>Flexibility in handling diverse tasks</p></li>
+<li><p>Ability to generate coherent and contextually relevant text</p></li>
+<li><p>Adaptation to specific domains with minimal fine-tuning</p></li>
 </ol>
+</section>
+<section id="fundamentals-of-llm-based-text-generation">
+<h2>2. Fundamentals of LLM-based Text Generation<a class="headerlink" href="#fundamentals-of-llm-based-text-generation" title="Link to this heading">#</a></h2>
+<p>LLMs are based on the Transformer architecture and use autoregressive language modeling to generate text token by token. Here’s a simplified illustration of the process:</p>
+<div align="center" class="mermaid align-center">
+            sequenceDiagram
+    participant User
+    participant LLM
+    participant Output
+    User-&gt;&gt;LLM: Provide prompt
+    loop Token Generation
+        LLM-&gt;&gt;LLM: Generate next token
+        LLM-&gt;&gt;Output: Add token to output
+    end
+    Output-&gt;&gt;User: Return generated text
+        </div>
+        <p>Let’s look at a basic example using the Hugging Face Transformers library:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">GPT2LMHeadModel</span><span class="p">,</span> <span class="n">GPT2Tokenizer</span>
+
+<span class="c1"># Load pre-trained model and tokenizer</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">GPT2LMHeadModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;gpt2&quot;</span><span class="p">)</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">GPT2Tokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;gpt2&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">generate_text</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="n">max_length</span><span class="p">,</span> <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;The impact of social media on political discourse&quot;</span>
+<span class="n">generated_text</span> <span class="o">=</span> <span class="n">generate_text</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">generated_text</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="types-of-text-generation-tasks">
+<h2>3. Types of Text Generation Tasks<a class="headerlink" href="#types-of-text-generation-tasks" title="Link to this heading">#</a></h2>
+<p>LLMs can be used for various text generation tasks in social science research:</p>
+<ol class="arabic simple">
+<li><p>Open-ended generation (e.g., creating research hypotheses)</p></li>
+<li><p>Constrained generation (e.g., summarization, paraphrasing)</p></li>
+<li><p>Dialogue generation (e.g., simulating interview responses)</p></li>
+<li><p>Data augmentation (e.g., generating synthetic survey responses)</p></li>
+</ol>
+</section>
+<section id="prompt-engineering-for-text-generation">
+<h2>4. Prompt Engineering for Text Generation<a class="headerlink" href="#prompt-engineering-for-text-generation" title="Link to this heading">#</a></h2>
+<p>Effective prompt engineering is crucial for generating high-quality text. Here’s an example of using a structured prompt for generating a research hypothesis:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_research_hypothesis</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Generate a research hypothesis for a study on </span><span class="si">{</span><span class="n">topic</span><span class="si">}</span><span class="s2">.</span>
+<span class="s2">    Include the following variables: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span>
+<span class="s2">    Format: &quot;If [independent variable], then [dependent variable].&quot;</span>
+<span class="s2">    Hypothesis:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">generate_text</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+
+<span class="n">topic</span> <span class="o">=</span> <span class="s2">&quot;the effect of remote work on employee productivity&quot;</span>
+<span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;remote work frequency&quot;</span><span class="p">,</span> <span class="s2">&quot;productivity metrics&quot;</span><span class="p">,</span> <span class="s2">&quot;job satisfaction&quot;</span><span class="p">]</span>
+<span class="n">hypothesis</span> <span class="o">=</span> <span class="n">generate_research_hypothesis</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">variables</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hypothesis</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="controlling-generation-parameters">
+<h2>5. Controlling Generation Parameters<a class="headerlink" href="#controlling-generation-parameters" title="Link to this heading">#</a></h2>
+<p>To control the quality and creativity of generated text, you can adjust parameters like temperature and top-k/top-p sampling:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="k">def</span> <span class="nf">generate_text_with_params</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">top_p</span><span class="o">=</span><span class="mf">0.95</span><span class="p">):</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+        <span class="n">inputs</span><span class="p">,</span>
+        <span class="n">max_length</span><span class="o">=</span><span class="n">max_length</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span>
+        <span class="n">top_k</span><span class="o">=</span><span class="n">top_k</span><span class="p">,</span>
+        <span class="n">top_p</span><span class="o">=</span><span class="n">top_p</span><span class="p">,</span>
+        <span class="n">no_repeat_ngram_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">1</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;The long-term effects of social media use on mental health include&quot;</span>
+<span class="n">generated_text</span> <span class="o">=</span> <span class="n">generate_text_with_params</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">generated_text</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="aspect-based-emotion-summarization">
+<h2>6. Aspect-based Emotion Summarization<a class="headerlink" href="#aspect-based-emotion-summarization" title="Link to this heading">#</a></h2>
+<p>LLMs can be used to generate emotion-focused summaries of text, which is particularly useful for sentiment analysis research:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">emotion_summary</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">aspect</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Summarize the following text, focusing on emotional content related to </span><span class="si">{</span><span class="n">aspect</span><span class="si">}</span><span class="s2">.</span>
+<span class="s2">    Highlight key emotions and their intensity.</span>
+
+<span class="s2">    Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span>
+
+<span class="s2">    Emotion-focused summary:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">generate_text</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+
+<span class="n">sample_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">The new policy has sparked heated debates among citizens. While some praise it as a</span>
+<span class="s2">step towards progress, others express deep concerns about its potential negative impacts</span>
+<span class="s2">on their daily lives. Social media is flooded with passionate arguments from both sides.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">aspect</span> <span class="o">=</span> <span class="s2">&quot;public reaction to policy change&quot;</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">emotion_summary</span><span class="p">(</span><span class="n">sample_text</span><span class="p">,</span> <span class="n">aspect</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="misinformation-explanation-generation">
+<h2>7. Misinformation Explanation Generation<a class="headerlink" href="#misinformation-explanation-generation" title="Link to this heading">#</a></h2>
+<p>LLMs can be used to generate explanations for misinformation, which is valuable for studying the spread and impact of false information:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">explain_misinformation</span><span class="p">(</span><span class="n">claim</span><span class="p">,</span> <span class="n">truth</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Claim: </span><span class="si">{</span><span class="n">claim</span><span class="si">}</span>
+<span class="s2">    Factual information: </span><span class="si">{</span><span class="n">truth</span><span class="si">}</span>
+
+<span class="s2">    Explain why the claim is misinformation and provide a detailed correction:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">generate_text</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+
+<span class="n">claim</span> <span class="o">=</span> <span class="s2">&quot;5G networks are responsible for the spread of COVID-19.&quot;</span>
+<span class="n">truth</span> <span class="o">=</span> <span class="s2">&quot;COVID-19 is caused by the SARS-CoV-2 virus and is not related to 5G technology.&quot;</span>
+<span class="n">explanation</span> <span class="o">=</span> <span class="n">explain_misinformation</span><span class="p">(</span><span class="n">claim</span><span class="p">,</span> <span class="n">truth</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">explanation</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="high-quality-content-creation">
+<h2>8. High-Quality Content Creation<a class="headerlink" href="#high-quality-content-creation" title="Link to this heading">#</a></h2>
+<p>LLMs can assist in creating high-quality content for research purposes, such as generating literature review syntheses:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">literature_review_synthesis</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">key_papers</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Generate a synthesis of the literature on </span><span class="si">{</span><span class="n">topic</span><span class="si">}</span><span class="s2">, incorporating the following key papers:</span>
+<span class="s2">    </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">key_papers</span><span class="p">)</span><span class="si">}</span>
+
+<span class="s2">    Include:</span>
+<span class="s2">    1. Main findings</span>
+<span class="s2">    2. Contradictions or debates in the field</span>
+<span class="s2">    3. Gaps in current research</span>
+
+<span class="s2">    Literature review synthesis:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">generate_text</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+
+<span class="n">topic</span> <span class="o">=</span> <span class="s2">&quot;the impact of social media on political polarization&quot;</span>
+<span class="n">key_papers</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Smith et al. (2020)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Johnson &amp; Lee (2019)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Garcia (2021)&quot;</span>
+<span class="p">]</span>
+<span class="n">synthesis</span> <span class="o">=</span> <span class="n">literature_review_synthesis</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">key_papers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">synthesis</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="data-augmentation-for-social-science-research">
+<h2>9. Data Augmentation for Social Science Research<a class="headerlink" href="#data-augmentation-for-social-science-research" title="Link to this heading">#</a></h2>
+<p>LLMs can be used to generate synthetic data, which is useful for balancing datasets or exploring potential research scenarios:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_survey_response</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">demographic</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Generate a realistic survey response for the following question:</span>
+<span class="s2">    &quot;</span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="s2">    Respondent demographic: </span><span class="si">{</span><span class="n">demographic</span><span class="si">}</span>
+
+<span class="s2">    Response:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">generate_text</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+
+<span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;How has the COVID-19 pandemic affected your work-life balance?&quot;</span>
+<span class="n">demographic</span> <span class="o">=</span> <span class="s2">&quot;35-year-old working parent with two children&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">generate_survey_response</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">demographic</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="evaluation-of-generated-text">
+<h2>10. Evaluation of Generated Text<a class="headerlink" href="#evaluation-of-generated-text" title="Link to this heading">#</a></h2>
+<p>When using LLMs for text generation in research, it’s crucial to evaluate the quality of the output. Here’s an example of how you might implement a simple evaluation using the ROUGE metric:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rouge</span> <span class="kn">import</span> <span class="n">Rouge</span>
+
+<span class="k">def</span> <span class="nf">evaluate_generated_text</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">generated</span><span class="p">):</span>
+    <span class="n">rouge</span> <span class="o">=</span> <span class="n">Rouge</span><span class="p">()</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">rouge</span><span class="o">.</span><span class="n">get_scores</span><span class="p">(</span><span class="n">generated</span><span class="p">,</span> <span class="n">reference</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">scores</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;rouge-l&#39;</span><span class="p">][</span><span class="s1">&#39;f&#39;</span><span class="p">]</span>
+
+<span class="n">reference</span> <span class="o">=</span> <span class="s2">&quot;The study found a strong correlation between social media use and political polarization.&quot;</span>
+<span class="n">generated</span> <span class="o">=</span> <span class="n">generate_text</span><span class="p">(</span><span class="s2">&quot;The relationship between social media and political polarization&quot;</span><span class="p">)</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">evaluate_generated_text</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">generated</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ROUGE-L F1 score: </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>LLMs offer powerful capabilities for generating high-quality text in social science research contexts. By leveraging techniques such as prompt engineering, parameter tuning, and task-specific adaptations, researchers can use LLMs to assist in various aspects of their work, from hypothesis generation to literature review synthesis and data augmentation.</p>
+<p>However, it’s important to note that while LLMs can be incredibly useful tools, they should be used judiciously and with careful evaluation. Researchers should always verify the accuracy of generated content and consider the ethical implications of using AI-generated text in their studies.</p>
+<p>As LLM technology continues to advance, we can expect even more sophisticated and tailored applications in social science research, potentially revolutionizing how we approach text-based tasks in the field.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -649,6 +763,31 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-text-generation-with-llms">1. Introduction to Text Generation with LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals-of-llm-based-text-generation">2. Fundamentals of LLM-based Text Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-text-generation-tasks">3. Types of Text Generation Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-engineering-for-text-generation">4. Prompt Engineering for Text Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-generation-parameters">5. Controlling Generation Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aspect-based-emotion-summarization">6. Aspect-based Emotion Summarization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misinformation-explanation-generation">7. Misinformation Explanation Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-quality-content-creation">8. High-Quality Content Creation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-augmentation-for-social-science-research">9. Data Augmentation for Social Science Research</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-of-generated-text">10. Evaluation of Generated Text</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
