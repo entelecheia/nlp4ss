@@ -1,7 +1,7 @@
 // book/_addons/language_switcher.js
 function switchLanguage(newLang) {
     var currentPath = window.location.pathname;
-    var supportedLangs = ['en','ko']; // This will be replaced by the actual languages during preprocessing
+    var supportedLangs = ['en']; // This will be replaced by the actual languages during preprocessing
     var langRegex = new RegExp('\\b(' + supportedLangs.join('|') + ')\\b');
 
     if (langRegex.test(currentPath)) {
