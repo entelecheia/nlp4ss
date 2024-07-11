@@ -244,5 +244,3 @@ embedding = get_word_embedding(word)
 print(f"Embedding for '{word}':")
 print(embedding[:10])  # Printing first 10 dimensions
 ```
-
-This comprehensive overview covers the main aspects of text cleaning, normalization, and representation, with code examples for each step. These techniques form the foundation for more advanced NLP tasks in social science research, such as sentiment analysis, topic modeling, and text classification.
