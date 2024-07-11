@@ -90,6 +90,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'session03/lecture1';</script>
     <script src="../_static/language_switcher.js?v=ff97be19"></script>
     <script src="../_static/chat.js?v=f0de43d7"></script>
@@ -437,7 +439,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -453,6 +457,23 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-zero-shot-learning">1. Introduction to Zero-shot Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-foundations-of-zero-shot-learning">2. Theoretical Foundations of Zero-shot Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-capabilities-of-llms">3. Zero-shot Capabilities of LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-engineering-for-zero-shot-tasks">4. Prompt Engineering for Zero-shot Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-classification-with-llms">5. Zero-shot Classification with LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-named-entity-recognition-ner">6. Zero-shot Named Entity Recognition (NER)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-sentiment-analysis-and-emotion-detection">7. Zero-shot Sentiment Analysis and Emotion Detection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-text-summarization-and-generation">8. Zero-shot Text Summarization and Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-question-answering-and-information-extraction">9. Zero-shot Question Answering and Information Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-social-science-research">10. Applications in Social Science Research</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -464,99 +485,317 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="zero-shot-learning-with-llms">
 <h1>3.1 Zero-shot Learning with LLMs<a class="headerlink" href="#zero-shot-learning-with-llms" title="Link to this heading">#</a></h1>
+<section id="introduction-to-zero-shot-learning">
+<h2>1. Introduction to Zero-shot Learning<a class="headerlink" href="#introduction-to-zero-shot-learning" title="Link to this heading">#</a></h2>
+<p>Zero-shot learning is a machine learning paradigm where a model can make predictions for classes it has never seen during training. In the context of Large Language Models (LLMs) and social science research, this capability is particularly powerful as it allows researchers to apply these models to novel tasks and domains without the need for task-specific training data.</p>
+<div align="center" class="mermaid align-center">
+            graph LR
+    A[Traditional ML] --&gt; B[Requires labeled data]
+    C[Zero-shot Learning] --&gt; D[No task-specific training]
+    B --&gt; E[Limited to seen classes]
+    D --&gt; F[Can handle unseen classes]
+        </div>
+        <p>Zero-shot learning with LLMs leverages the vast knowledge encoded in these models during pre-training, allowing them to generalize to new tasks based on natural language instructions or prompts.</p>
+</section>
+<section id="theoretical-foundations-of-zero-shot-learning">
+<h2>2. Theoretical Foundations of Zero-shot Learning<a class="headerlink" href="#theoretical-foundations-of-zero-shot-learning" title="Link to this heading">#</a></h2>
+<p>The core idea behind zero-shot learning is the ability to transfer knowledge from seen to unseen classes. This is achieved through semantic embeddings that capture relationships between concepts. In the context of LLMs, these embeddings are learned during pre-training on massive text corpora.</p>
+<div align="center" class="mermaid align-center">
+            graph TD
+    A[Pre-training] --&gt; B[Semantic Embeddings]
+    B --&gt; C[Zero-shot Capability]
+    C --&gt; D[Classification]
+    C --&gt; E[Generation]
+    C --&gt; F[Translation]
+        </div>
+        </section>
+<section id="zero-shot-capabilities-of-llms">
+<h2>3. Zero-shot Capabilities of LLMs<a class="headerlink" href="#zero-shot-capabilities-of-llms" title="Link to this heading">#</a></h2>
+<p>LLMs can perform a wide range of zero-shot tasks, including:</p>
 <ol class="arabic simple">
-<li><p>Introduction to Zero-shot Learning</p>
-<ul class="simple">
-<li><p>Definition and concept</p></li>
-<li><p>Comparison with traditional supervised learning</p></li>
-<li><p>Importance in the context of LLMs and social science research</p></li>
-</ul>
-</li>
-<li><p>Theoretical Foundations of Zero-shot Learning</p>
-<ul class="simple">
-<li><p>Transfer learning and generalization</p></li>
-<li><p>Semantic embeddings and their role in zero-shot learning</p></li>
-<li><p>Relationship to few-shot and one-shot learning</p></li>
-</ul>
-</li>
-<li><p>Zero-shot Capabilities of LLMs</p>
-<ul class="simple">
-<li><p>How LLMs enable zero-shot learning</p></li>
-<li><p>Examples of zero-shot tasks (classification, translation, summarization)</p></li>
-<li><p>Limitations and challenges of zero-shot learning with LLMs</p></li>
-</ul>
-</li>
-<li><p>Prompt Engineering for Zero-shot Tasks</p>
-<ul class="simple">
-<li><p>Principles of effective prompt design</p></li>
-<li><p>Task formulation strategies</p></li>
-<li><p>Examples of zero-shot prompts for various NLP tasks</p></li>
-</ul>
-</li>
-<li><p>Zero-shot Classification with LLMs</p>
-<ul class="simple">
-<li><p>Techniques for framing classification as a zero-shot task</p></li>
-<li><p>Handling multi-class and multi-label classification</p></li>
-<li><p>Evaluating zero-shot classification performance</p></li>
-</ul>
-</li>
-<li><p>Zero-shot Named Entity Recognition (NER)</p>
-<ul class="simple">
-<li><p>Approaches to zero-shot NER using LLMs</p></li>
-<li><p>Challenges in identifying novel entity types</p></li>
-<li><p>Comparison with traditional NER techniques</p></li>
-</ul>
-</li>
-<li><p>Zero-shot Sentiment Analysis and Emotion Detection</p>
-<ul class="simple">
-<li><p>Formulating sentiment analysis as a zero-shot task</p></li>
-<li><p>Extending to fine-grained emotion detection</p></li>
-<li><p>Cross-domain and cross-lingual sentiment analysis</p></li>
-</ul>
-</li>
-<li><p>Zero-shot Text Summarization and Generation</p>
-<ul class="simple">
-<li><p>Techniques for zero-shot abstractive summarization</p></li>
-<li><p>Controlling output length and style in zero-shot generation</p></li>
-<li><p>Evaluating the quality of zero-shot generated text</p></li>
-</ul>
-</li>
-<li><p>Zero-shot Question Answering and Information Extraction</p>
-<ul class="simple">
-<li><p>Framing QA tasks for zero-shot learning</p></li>
-<li><p>Extracting structured information without task-specific training</p></li>
-<li><p>Challenges in ensuring accuracy and relevance</p></li>
-</ul>
-</li>
-<li><p>Applications in Social Science Research</p>
-<ul class="simple">
-<li><p>Data annotation and labeling using zero-shot learning</p></li>
-<li><p>Exploratory analysis of novel datasets</p></li>
-<li><p>Cross-cultural and multilingual studies</p></li>
-</ul>
-</li>
-<li><p>Evaluating Zero-shot Performance</p>
-<ul class="simple">
-<li><p>Metrics for assessing zero-shot learning effectiveness</p></li>
-<li><p>Comparing zero-shot results with supervised baselines</p></li>
-<li><p>Assessing generalization to unseen categories or domains</p></li>
-</ul>
-</li>
-<li><p>Limitations and Challenges</p>
-<ul class="simple">
-<li><p>Domain-specific knowledge gaps in LLMs</p></li>
-<li><p>Handling ambiguity and context-dependence</p></li>
-<li><p>Scalability and computational considerations</p></li>
-</ul>
-</li>
-<li><p>Future Directions in Zero-shot Learning with LLMs</p>
-<ul class="simple">
-<li><p>Improving zero-shot performance through better prompting strategies</p></li>
-<li><p>Combining zero-shot learning with other techniques (e.g., active learning)</p></li>
-<li><p>Potential for discovering novel patterns and categories in social science data</p></li>
-</ul>
-</li>
+<li><p>Classification</p></li>
+<li><p>Translation</p></li>
+<li><p>Summarization</p></li>
+<li><p>Question answering</p></li>
 </ol>
+<p>Let’s look at an example using the OpenAI GPT-3 model for zero-shot classification:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openai</span>
+
+<span class="n">openai</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="s1">&#39;your-api-key&#39;</span>
+
+<span class="k">def</span> <span class="nf">zero_shot_classification</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">categories</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Classify the following text into one of these categories: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span><span class="se">\n\n</span><span class="s2">Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">Category:&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;The stock market saw significant gains today, with tech stocks leading the rally.&quot;</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Politics&quot;</span><span class="p">,</span> <span class="s2">&quot;Economics&quot;</span><span class="p">,</span> <span class="s2">&quot;Sports&quot;</span><span class="p">,</span> <span class="s2">&quot;Technology&quot;</span><span class="p">]</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">zero_shot_classification</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">categories</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Classified category: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example demonstrates how an LLM can classify text into categories it wasn’t explicitly trained on, based solely on its understanding of language and concepts.</p>
+</section>
+<section id="prompt-engineering-for-zero-shot-tasks">
+<h2>4. Prompt Engineering for Zero-shot Tasks<a class="headerlink" href="#prompt-engineering-for-zero-shot-tasks" title="Link to this heading">#</a></h2>
+<p>Effective prompt design is crucial for zero-shot learning. Here are some principles:</p>
+<ol class="arabic simple">
+<li><p>Be clear and specific in task description</p></li>
+<li><p>Provide examples if possible (few-shot learning)</p></li>
+<li><p>Use consistent formatting</p></li>
+</ol>
+<p>Example of a zero-shot sentiment analysis prompt:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">zero_shot_sentiment_analysis</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Analyze the sentiment of the following text. Classify it as positive, negative, or neutral.</span>
+
+<span class="s2">    Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span>
+
+<span class="s2">    Sentiment:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;I absolutely loved the new policy changes. They will make a real difference!&quot;</span>
+<span class="n">sentiment</span> <span class="o">=</span> <span class="n">zero_shot_sentiment_analysis</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sentiment: </span><span class="si">{</span><span class="n">sentiment</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="zero-shot-classification-with-llms">
+<h2>5. Zero-shot Classification with LLMs<a class="headerlink" href="#zero-shot-classification-with-llms" title="Link to this heading">#</a></h2>
+<p>Zero-shot classification can handle multi-class and even multi-label scenarios. Here’s an example of multi-label classification:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">zero_shot_multi_label_classification</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">categories</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Classify the following text into one or more of these categories: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span>
+<span class="s2">    List all applicable categories, separated by commas.</span>
+
+<span class="s2">    Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span>
+
+<span class="s2">    Categories:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;The new environmental policy aims to reduce carbon emissions while also creating jobs in the renewable energy sector.&quot;</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Environment&quot;</span><span class="p">,</span> <span class="s2">&quot;Economy&quot;</span><span class="p">,</span> <span class="s2">&quot;Politics&quot;</span><span class="p">,</span> <span class="s2">&quot;Technology&quot;</span><span class="p">]</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">zero_shot_multi_label_classification</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">categories</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Applicable categories: </span><span class="si">{</span><span class="n">results</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="zero-shot-named-entity-recognition-ner">
+<h2>6. Zero-shot Named Entity Recognition (NER)<a class="headerlink" href="#zero-shot-named-entity-recognition-ner" title="Link to this heading">#</a></h2>
+<p>LLMs can perform NER on entity types they haven’t been specifically trained on. Here’s an example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">zero_shot_ner</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">entity_types</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Identify and extract the following types of entities from the text: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">entity_types</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span>
+<span class="s2">    Format the output as: EntityType: Entity</span>
+
+<span class="s2">    Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span>
+
+<span class="s2">    Entities:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Dr. Jane Smith from Harvard University published a groundbreaking paper on climate change in Nature journal last month.&quot;</span>
+<span class="n">entity_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Person&quot;</span><span class="p">,</span> <span class="s2">&quot;Organization&quot;</span><span class="p">,</span> <span class="s2">&quot;Publication&quot;</span><span class="p">,</span> <span class="s2">&quot;Date&quot;</span><span class="p">]</span>
+
+<span class="n">entities</span> <span class="o">=</span> <span class="n">zero_shot_ner</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">entity_types</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extracted entities:</span><span class="se">\n</span><span class="si">{</span><span class="n">entities</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="zero-shot-sentiment-analysis-and-emotion-detection">
+<h2>7. Zero-shot Sentiment Analysis and Emotion Detection<a class="headerlink" href="#zero-shot-sentiment-analysis-and-emotion-detection" title="Link to this heading">#</a></h2>
+<p>LLMs can perform fine-grained emotion detection without task-specific training:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">zero_shot_emotion_detection</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">emotions</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Analyze the following text and identify the primary emotion expressed.</span>
+<span class="s2">    Choose from these emotions: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">emotions</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span>
+
+<span class="s2">    Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span>
+
+<span class="s2">    Primary emotion:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;I can&#39;t believe I won the lottery! This is the best day of my life!&quot;</span>
+<span class="n">emotions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Joy&quot;</span><span class="p">,</span> <span class="s2">&quot;Sadness&quot;</span><span class="p">,</span> <span class="s2">&quot;Anger&quot;</span><span class="p">,</span> <span class="s2">&quot;Fear&quot;</span><span class="p">,</span> <span class="s2">&quot;Surprise&quot;</span><span class="p">]</span>
+
+<span class="n">emotion</span> <span class="o">=</span> <span class="n">zero_shot_emotion_detection</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">emotions</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Detected emotion: </span><span class="si">{</span><span class="n">emotion</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="zero-shot-text-summarization-and-generation">
+<h2>8. Zero-shot Text Summarization and Generation<a class="headerlink" href="#zero-shot-text-summarization-and-generation" title="Link to this heading">#</a></h2>
+<p>LLMs can perform abstractive summarization without fine-tuning:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">zero_shot_summarization</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">max_words</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Summarize the following text in no more than </span><span class="si">{</span><span class="n">max_words</span><span class="si">}</span><span class="s2"> words:</span>
+
+<span class="s2">    </span><span class="si">{</span><span class="n">text</span><span class="si">}</span>
+
+<span class="s2">    Summary:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="n">max_words</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>  <span class="c1"># Allowing some buffer</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">long_text</span> <span class="o">=</span> <span class="s2">&quot;...&quot;</span>  <span class="c1"># Your long text here</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">zero_shot_summarization</span><span class="p">(</span><span class="n">long_text</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Summary:</span><span class="se">\n</span><span class="si">{</span><span class="n">summary</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="zero-shot-question-answering-and-information-extraction">
+<h2>9. Zero-shot Question Answering and Information Extraction<a class="headerlink" href="#zero-shot-question-answering-and-information-extraction" title="Link to this heading">#</a></h2>
+<p>LLMs can answer questions and extract information from text without specific training:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">zero_shot_qa</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">question</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Context: </span><span class="si">{</span><span class="n">context</span><span class="si">}</span>
+
+<span class="s2">    Question: </span><span class="si">{</span><span class="n">question</span><span class="si">}</span>
+
+<span class="s2">    Answer:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">context</span> <span class="o">=</span> <span class="s2">&quot;The Industrial Revolution began in the late 18th century in Great Britain and quickly spread to other parts of Europe and North America. It marked a major turning point in history, influencing almost every aspect of daily life.&quot;</span>
+<span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;What were the main effects of the Industrial Revolution?&quot;</span>
+
+<span class="n">answer</span> <span class="o">=</span> <span class="n">zero_shot_qa</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">question</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Answer: </span><span class="si">{</span><span class="n">answer</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="applications-in-social-science-research">
+<h2>10. Applications in Social Science Research<a class="headerlink" href="#applications-in-social-science-research" title="Link to this heading">#</a></h2>
+<p>Zero-shot learning with LLMs can be particularly useful in social science research for tasks such as:</p>
+<ol class="arabic simple">
+<li><p>Rapid data annotation</p></li>
+<li><p>Exploratory analysis of novel datasets</p></li>
+<li><p>Cross-cultural studies</p></li>
+</ol>
+<p>Example of using zero-shot learning for coding open-ended survey responses:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">code_survey_responses</span><span class="p">(</span><span class="n">responses</span><span class="p">,</span> <span class="n">themes</span><span class="p">):</span>
+    <span class="n">coded_responses</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="n">responses</span><span class="p">:</span>
+        <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        Code the following survey response into one or more of these themes: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">themes</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span>
+<span class="s2">        List all applicable themes, separated by commas.</span>
+
+<span class="s2">        Response: </span><span class="si">{</span><span class="n">response</span><span class="si">}</span>
+
+<span class="s2">        Themes:</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+            <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+            <span class="n">max_tokens</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+            <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">temperature</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">coded_themes</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+        <span class="n">coded_responses</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">response</span><span class="p">,</span> <span class="n">coded_themes</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">coded_responses</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">survey_responses</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;I think the government should focus more on environmental protection.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;The economy is the most pressing issue right now.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;We need better healthcare and education systems.&quot;</span>
+<span class="p">]</span>
+<span class="n">themes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Environment&quot;</span><span class="p">,</span> <span class="s2">&quot;Economy&quot;</span><span class="p">,</span> <span class="s2">&quot;Healthcare&quot;</span><span class="p">,</span> <span class="s2">&quot;Education&quot;</span><span class="p">,</span> <span class="s2">&quot;Politics&quot;</span><span class="p">]</span>
+
+<span class="n">coded_data</span> <span class="o">=</span> <span class="n">code_survey_responses</span><span class="p">(</span><span class="n">survey_responses</span><span class="p">,</span> <span class="n">themes</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">response</span><span class="p">,</span> <span class="n">themes</span> <span class="ow">in</span> <span class="n">coded_data</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Response: </span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Themes: </span><span class="si">{</span><span class="n">themes</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example demonstrates how zero-shot learning can be used to quickly code open-ended survey responses into predefined themes, a common task in social science research.</p>
+<p>In conclusion, zero-shot learning with LLMs offers powerful capabilities for social science researchers to analyze and interpret textual data without the need for task-specific training. However, it’s important to validate results and be aware of potential biases in the LLMs. As this field continues to evolve, we can expect even more sophisticated zero-shot capabilities that will further enhance social science research methodologies.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -613,6 +852,30 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-zero-shot-learning">1. Introduction to Zero-shot Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-foundations-of-zero-shot-learning">2. Theoretical Foundations of Zero-shot Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-capabilities-of-llms">3. Zero-shot Capabilities of LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-engineering-for-zero-shot-tasks">4. Prompt Engineering for Zero-shot Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-classification-with-llms">5. Zero-shot Classification with LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-named-entity-recognition-ner">6. Zero-shot Named Entity Recognition (NER)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-sentiment-analysis-and-emotion-detection">7. Zero-shot Sentiment Analysis and Emotion Detection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-text-summarization-and-generation">8. Zero-shot Text Summarization and Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-question-answering-and-information-extraction">9. Zero-shot Question Answering and Information Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-social-science-research">10. Applications in Social Science Research</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
