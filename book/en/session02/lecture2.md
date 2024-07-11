@@ -271,5 +271,3 @@ When applying these NLP tasks in social science research, it's crucial to:
 4. Combine computational methods with qualitative analysis for a more comprehensive understanding
 
 Remember that while these NLP tasks can process large amounts of text data quickly, they should be seen as tools to augment, not replace, careful human analysis in social science research.
-
-This overview covers the main aspects of basic NLP tasks, with code examples for each. These techniques form the foundation for more advanced text analysis in social science research, enabling researchers to extract insights from large-scale textual data efficiently.
