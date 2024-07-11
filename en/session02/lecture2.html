@@ -437,7 +437,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -453,6 +455,41 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-fundamental-nlp-tasks">1. Introduction to Fundamental NLP Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-classification">2. Text Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-classification">Types of classification:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-multi-class-classification">Example: Multi-class Classification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentiment-analysis">3. Sentiment Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-lexicon-based-sentiment-analysis">Example: Lexicon-based Sentiment Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#named-entity-recognition-ner">4. Named Entity Recognition (NER)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-ner-using-spacy">Example: NER using spaCy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-of-speech-pos-tagging">5. Part-of-Speech (POS) Tagging</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pos-tagging-with-nltk">Example: POS Tagging with NLTK</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-summarization">6. Text Summarization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extractive-summarization">Example: Extractive Summarization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-similarity-and-clustering">7. Text Similarity and Clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-document-similarity-and-clustering">Example: Document Similarity and Clustering</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-and-limitations">8. Challenges and Limitations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-and-interpretation">9. Evaluation and Interpretation</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -464,95 +501,272 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="basic-nlp-tasks">
 <h1>2.2 Basic NLP Tasks<a class="headerlink" href="#basic-nlp-tasks" title="Link to this heading">#</a></h1>
+<section id="introduction-to-fundamental-nlp-tasks">
+<h2>1. Introduction to Fundamental NLP Tasks<a class="headerlink" href="#introduction-to-fundamental-nlp-tasks" title="Link to this heading">#</a></h2>
+<p>Natural Language Processing (NLP) encompasses a wide range of tasks that are crucial for analyzing and understanding human language. In social science research, these tasks can provide valuable insights into textual data, such as social media posts, survey responses, or historical documents.</p>
+<p>Some common applications of NLP in social science research include:</p>
+<ul class="simple">
+<li><p>Analyzing public opinion on social issues</p></li>
+<li><p>Studying communication patterns in online communities</p></li>
+<li><p>Extracting themes from open-ended survey responses</p></li>
+<li><p>Tracking changes in language use over time</p></li>
+</ul>
+<p>The importance of these tasks lies in their ability to process and analyze large volumes of text data efficiently, revealing patterns and insights that might be difficult or time-consuming to identify manually.</p>
+</section>
+<section id="text-classification">
+<h2>2. Text Classification<a class="headerlink" href="#text-classification" title="Link to this heading">#</a></h2>
+<p>Text classification is the task of assigning predefined categories to text documents. It’s widely used in social science research for various purposes, such as categorizing survey responses or identifying topics in social media posts.</p>
+<section id="types-of-classification">
+<h3>Types of classification:<a class="headerlink" href="#types-of-classification" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Binary classification: Two classes (e.g., spam vs. not spam)</p></li>
+<li><p>Multi-class classification: More than two mutually exclusive classes</p></li>
+<li><p>Multi-label classification: Multiple non-exclusive labels per document</p></li>
+</ul>
+</section>
+<section id="example-multi-class-classification">
+<h3>Example: Multi-class Classification<a class="headerlink" href="#example-multi-class-classification" title="Link to this heading">#</a></h3>
+<p>Let’s implement a simple text classifier using scikit-learn to categorize news articles into different topics.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
+
+<span class="c1"># Sample data</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;The stock market saw significant gains today&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;A new study shows the impact of climate change on biodiversity&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;The local sports team won their championship game&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Scientists discover a new planet in a distant solar system&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Political tensions rise as new policies are announced&quot;</span>
+<span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;finance&#39;</span><span class="p">,</span> <span class="s1">&#39;science&#39;</span><span class="p">,</span> <span class="s1">&#39;sports&#39;</span><span class="p">,</span> <span class="s1">&#39;science&#39;</span><span class="p">,</span> <span class="s1">&#39;politics&#39;</span><span class="p">]</span>
+
+<span class="c1"># Split the data</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Feature extraction</span>
+<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">X_train_vectorized</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_vectorized</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Train the classifier</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">MultinomialNB</span><span class="p">()</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_vectorized</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Make predictions</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_vectorized</span><span class="p">)</span>
+
+<span class="c1"># Evaluate the model</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This example demonstrates a basic workflow for text classification, including feature extraction using TF-IDF, training a Naive Bayes classifier, and evaluating its performance.</p>
+</section>
+</section>
+<section id="sentiment-analysis">
+<h2>3. Sentiment Analysis<a class="headerlink" href="#sentiment-analysis" title="Link to this heading">#</a></h2>
+<p>Sentiment analysis is the process of determining the emotional tone behind a series of words. It’s particularly useful for understanding public opinion, customer feedback, or social media sentiment.</p>
+<section id="example-lexicon-based-sentiment-analysis">
+<h3>Example: Lexicon-based Sentiment Analysis<a class="headerlink" href="#example-lexicon-based-sentiment-analysis" title="Link to this heading">#</a></h3>
+<p>We’ll use the VADER (Valence Aware Dictionary and sEntiment Reasoner) sentiment analyzer, which is specifically attuned to sentiments expressed in social media.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vaderSentiment.vaderSentiment</span> <span class="kn">import</span> <span class="n">SentimentIntensityAnalyzer</span>
+
+<span class="k">def</span> <span class="nf">analyze_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">sia</span> <span class="o">=</span> <span class="n">SentimentIntensityAnalyzer</span><span class="p">()</span>
+    <span class="n">sentiment</span> <span class="o">=</span> <span class="n">sia</span><span class="o">.</span><span class="n">polarity_scores</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sentiment</span><span class="p">[</span><span class="s1">&#39;compound&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;Positive&#39;</span>
+    <span class="k">elif</span> <span class="n">sentiment</span><span class="p">[</span><span class="s1">&#39;compound&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;Negative&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;Neutral&#39;</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;I love this new policy! It&#39;s going to help so many people.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;This decision is terrible and will have negative consequences.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;The weather is cloudy today.&quot;</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sentiment: </span><span class="si">{</span><span class="n">analyze_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example demonstrates a simple sentiment analysis using a lexicon-based approach. For more complex scenarios or domain-specific applications, machine learning-based approaches might be more suitable.</p>
+</section>
+</section>
+<section id="named-entity-recognition-ner">
+<h2>4. Named Entity Recognition (NER)<a class="headerlink" href="#named-entity-recognition-ner" title="Link to this heading">#</a></h2>
+<p>Named Entity Recognition is the task of identifying and classifying named entities (e.g., person names, organizations, locations) in text. It’s crucial for extracting structured information from unstructured text data.</p>
+<section id="example-ner-using-spacy">
+<h3>Example: NER using spaCy<a class="headerlink" href="#example-ner-using-spacy" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+
+<span class="k">def</span> <span class="nf">perform_ner</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">entities</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ent</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">)</span> <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">entities</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Apple Inc. is planning to open a new store in New York City next month, according to CEO Tim Cook.&quot;</span>
+<span class="n">entities</span> <span class="o">=</span> <span class="n">perform_ner</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Named Entities:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">entity</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">entities</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">entity</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example uses spaCy, a popular NLP library, to perform named entity recognition. It identifies entities like organizations, locations, and person names in the given text.</p>
+</section>
+</section>
+<section id="part-of-speech-pos-tagging">
+<h2>5. Part-of-Speech (POS) Tagging<a class="headerlink" href="#part-of-speech-pos-tagging" title="Link to this heading">#</a></h2>
+<p>POS tagging is the process of marking up words in a text with their corresponding part of speech (e.g., noun, verb, adjective). It’s fundamental for understanding the grammatical structure of text.</p>
+<section id="example-pos-tagging-with-nltk">
+<h3>Example: POS Tagging with NLTK<a class="headerlink" href="#example-pos-tagging-with-nltk" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;averaged_perceptron_tagger&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">pos_tag_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">pos_tags</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pos_tags</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;The quick brown fox jumps over the lazy dog.&quot;</span>
+<span class="n">tagged_text</span> <span class="o">=</span> <span class="n">pos_tag_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;POS Tags:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">tagged_text</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example uses NLTK to perform part-of-speech tagging on a given text. Understanding the grammatical structure can be useful for various NLP tasks and linguistic analysis.</p>
+</section>
+</section>
+<section id="text-summarization">
+<h2>6. Text Summarization<a class="headerlink" href="#text-summarization" title="Link to this heading">#</a></h2>
+<p>Text summarization involves creating a concise and coherent summary of a longer text while preserving its key information. It’s particularly useful for processing large volumes of text data in social science research.</p>
+<section id="example-extractive-summarization">
+<h3>Example: Extractive Summarization<a class="headerlink" href="#example-extractive-summarization" title="Link to this heading">#</a></h3>
+<p>Here’s a simple example of extractive summarization using sentence scoring:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">sent_tokenize</span><span class="p">,</span> <span class="n">word_tokenize</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">summarize_text</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">num_sentences</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="c1"># Tokenize the text into sentences</span>
+    <span class="n">sentences</span> <span class="o">=</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="c1"># Calculate word frequencies</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+    <span class="n">stop_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
+    <span class="n">word_freq</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">word_freq</span><span class="p">:</span>
+                <span class="n">word_freq</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">word_freq</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Calculate sentence scores</span>
+    <span class="n">sentence_scores</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="o">.</span><span class="n">lower</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_freq</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">sentence</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sentence_scores</span><span class="p">:</span>
+                    <span class="n">sentence_scores</span><span class="p">[</span><span class="n">sentence</span><span class="p">]</span> <span class="o">=</span> <span class="n">word_freq</span><span class="p">[</span><span class="n">word</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">sentence_scores</span><span class="p">[</span><span class="n">sentence</span><span class="p">]</span> <span class="o">+=</span> <span class="n">word_freq</span><span class="p">[</span><span class="n">word</span><span class="p">]</span>
+
+    <span class="c1"># Get top sentences</span>
+    <span class="kn">import</span> <span class="nn">heapq</span>
+    <span class="n">summary_sentences</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">num_sentences</span><span class="p">,</span> <span class="n">sentence_scores</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">sentence_scores</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">summary_sentences</span><span class="p">)</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Natural language processing (NLP) is a subfield of linguistics, computer science, and artificial intelligence concerned with the interactions between computers and human language, in particular how to program computers to process and analyze large amounts of natural language data. The goal is a computer capable of understanding the contents of documents, including the contextual nuances of the language within them. The technology can then accurately extract information and insights contained in the documents as well as categorize and organize the documents themselves.&quot;&quot;&quot;</span>
+
+<span class="n">summary</span> <span class="o">=</span> <span class="n">summarize_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Summary:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example demonstrates a basic extractive summarization technique. It scores sentences based on the frequency of non-stop words and selects the top-scoring sentences as the summary.</p>
+</section>
+</section>
+<section id="text-similarity-and-clustering">
+<h2>7. Text Similarity and Clustering<a class="headerlink" href="#text-similarity-and-clustering" title="Link to this heading">#</a></h2>
+<p>Text similarity measures how alike two pieces of text are, while clustering groups similar texts together. These techniques are useful for organizing and analyzing large text datasets.</p>
+<section id="example-document-similarity-and-clustering">
+<h3>Example: Document Similarity and Clustering<a class="headerlink" href="#example-document-similarity-and-clustering" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">cosine_similarity</span>
+
+<span class="k">def</span> <span class="nf">cluster_documents</span><span class="p">(</span><span class="n">documents</span><span class="p">,</span> <span class="n">num_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="c1"># Create TF-IDF vectors</span>
+    <span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+    <span class="n">tfidf_matrix</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+
+    <span class="c1"># Perform clustering</span>
+    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">num_clusters</span><span class="p">)</span>
+    <span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="p">)</span>
+
+    <span class="c1"># Calculate document similarity</span>
+    <span class="n">similarity_matrix</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">similarity_matrix</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;The cat sat on the mat&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;The dog played in the yard&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;The mat was on the floor&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;The yard was full of flowers&quot;</span>
+<span class="p">]</span>
+
+<span class="n">clusters</span><span class="p">,</span> <span class="n">similarity</span> <span class="o">=</span> <span class="n">cluster_documents</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Clusters:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">doc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">documents</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Document </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: Cluster </span><span class="si">{</span><span class="n">clusters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Similarity Matrix:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">similarity</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example demonstrates document clustering using K-means and calculates document similarity using cosine similarity on TF-IDF vectors.</p>
+</section>
+</section>
+<section id="challenges-and-limitations">
+<h2>8. Challenges and Limitations<a class="headerlink" href="#challenges-and-limitations" title="Link to this heading">#</a></h2>
+<p>While these basic NLP tasks are powerful, they come with challenges:</p>
 <ol class="arabic simple">
-<li><p>Introduction to Fundamental NLP Tasks</p>
-<ul class="simple">
-<li><p>Overview of common applications in social science research</p></li>
-<li><p>Importance of these tasks in text analysis</p></li>
-</ul>
-</li>
-<li><p>Text Classification</p>
-<ul class="simple">
-<li><p>Definition and use cases</p></li>
-<li><p>Binary, multi-class, and multi-label classification</p></li>
-<li><p>Feature extraction for classification</p></li>
-<li><p>Common algorithms (e.g., Naive Bayes, SVM, Random Forest)</p></li>
-<li><p>Evaluation metrics (accuracy, precision, recall, F1-score)</p></li>
-</ul>
-</li>
-<li><p>Sentiment Analysis</p>
-<ul class="simple">
-<li><p>Understanding sentiment polarity</p></li>
-<li><p>Lexicon-based approaches</p></li>
-<li><p>Machine learning approaches</p></li>
-<li><p>Challenges in sentiment analysis (e.g., sarcasm, context)</p></li>
-<li><p>Applications in social media analysis and opinion mining</p></li>
-</ul>
-</li>
-<li><p>Named Entity Recognition (NER)</p>
-<ul class="simple">
-<li><p>Definition and importance in social science</p></li>
-<li><p>Types of named entities (e.g., person, organization, location)</p></li>
-<li><p>Rule-based NER systems</p></li>
-<li><p>Statistical and machine learning approaches to NER</p></li>
-<li><p>Evaluation of NER systems</p></li>
-</ul>
-</li>
-<li><p>Part-of-Speech (POS) Tagging</p>
-<ul class="simple">
-<li><p>Understanding grammatical structure</p></li>
-<li><p>Common POS tag sets</p></li>
-<li><p>Rule-based and statistical POS tagging approaches</p></li>
-<li><p>Applications in text analysis and information extraction</p></li>
-</ul>
-</li>
-<li><p>Text Summarization</p>
-<ul class="simple">
-<li><p>Extractive vs. abstractive summarization</p></li>
-<li><p>Basic techniques for extractive summarization</p></li>
-<li><p>Evaluation of summarization quality</p></li>
-</ul>
-</li>
-<li><p>Information Extraction</p>
-<ul class="simple">
-<li><p>Relation extraction</p></li>
-<li><p>Event extraction</p></li>
-<li><p>Applications in social science research</p></li>
-</ul>
-</li>
-<li><p>Text Similarity and Clustering</p>
-<ul class="simple">
-<li><p>Measuring document similarity</p></li>
-<li><p>Text clustering techniques</p></li>
-<li><p>Applications in content analysis and topic identification</p></li>
-</ul>
-</li>
-<li><p>Language Detection</p>
-<ul class="simple">
-<li><p>Importance in multilingual datasets</p></li>
-<li><p>Approaches to language identification</p></li>
-</ul>
-</li>
-<li><p>Practical Implementation</p>
-<ul class="simple">
-<li><p>Tools and libraries for basic NLP tasks (e.g., NLTK, spaCy)</p></li>
-<li><p>Hands-on examples using Python</p></li>
-</ul>
-</li>
-<li><p>Challenges and Limitations</p>
-<ul class="simple">
-<li><p>Dealing with domain-specific language</p></li>
-<li><p>Handling informal text (e.g., social media data)</p></li>
-<li><p>Considerations for low-resource languages</p></li>
-</ul>
-</li>
-<li><p>Evaluation and Interpretation</p>
-<ul class="simple">
-<li><p>Choosing appropriate evaluation metrics</p></li>
-<li><p>Interpreting results in the context of social science research</p></li>
-</ul>
-</li>
+<li><p>Domain-specific language: Models trained on general text may perform poorly on specialized domains (e.g., medical or legal texts).</p></li>
+<li><p>Informal text: Social media data often contains slang, abbreviations, and nonstandard language use, which can be challenging for NLP models.</p></li>
+<li><p>Low-resource languages: Many NLP tools and models perform best for English and other widely-spoken languages, with less support for low-resource languages.</p></li>
+<li><p>Context and nuance: Understanding sarcasm, irony, or cultural references remains challenging for many NLP systems.</p></li>
 </ol>
+</section>
+<section id="evaluation-and-interpretation">
+<h2>9. Evaluation and Interpretation<a class="headerlink" href="#evaluation-and-interpretation" title="Link to this heading">#</a></h2>
+<p>When applying these NLP tasks in social science research, it’s crucial to:</p>
+<ol class="arabic simple">
+<li><p>Choose appropriate evaluation metrics (e.g., accuracy, F1-score, inter-annotator agreement)</p></li>
+<li><p>Interpret results in the context of your research questions</p></li>
+<li><p>Be aware of potential biases in your data and models</p></li>
+<li><p>Combine computational methods with qualitative analysis for a more comprehensive understanding</p></li>
+</ol>
+<p>Remember that while these NLP tasks can process large amounts of text data quickly, they should be seen as tools to augment, not replace, careful human analysis in social science research.</p>
+<p>This overview covers the main aspects of basic NLP tasks, with code examples for each. These techniques form the foundation for more advanced text analysis in social science research, enabling researchers to extract insights from large-scale textual data efficiently.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -609,6 +823,48 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-fundamental-nlp-tasks">1. Introduction to Fundamental NLP Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-classification">2. Text Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-classification">Types of classification:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-multi-class-classification">Example: Multi-class Classification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentiment-analysis">3. Sentiment Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-lexicon-based-sentiment-analysis">Example: Lexicon-based Sentiment Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#named-entity-recognition-ner">4. Named Entity Recognition (NER)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-ner-using-spacy">Example: NER using spaCy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-of-speech-pos-tagging">5. Part-of-Speech (POS) Tagging</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pos-tagging-with-nltk">Example: POS Tagging with NLTK</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-summarization">6. Text Summarization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extractive-summarization">Example: Extractive Summarization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-similarity-and-clustering">7. Text Similarity and Clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-document-similarity-and-clustering">Example: Document Similarity and Clustering</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-and-limitations">8. Challenges and Limitations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-and-interpretation">9. Evaluation and Interpretation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

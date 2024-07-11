@@ -90,6 +90,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'session02/lecture3';</script>
     <script src="../_static/language_switcher.js?v=ff97be19"></script>
     <script src="../_static/chat.js?v=f0de43d7"></script>
@@ -437,7 +439,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -453,6 +457,26 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-topic-modeling">1. Introduction to Topic Modeling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals-of-latent-dirichlet-allocation-lda">2. Fundamentals of Latent Dirichlet Allocation (LDA)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-foundation-of-lda">3. Mathematical Foundation of LDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lda-algorithm">4. LDA Algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-data-for-lda">5. Preparing Data for LDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-lda">6. Implementing LDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-lda-results">7. Interpreting LDA Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-topic-models">8. Evaluating Topic Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-topic-modeling-techniques">9. Advanced Topic Modeling Techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-social-science-research">10. Applications in Social Science Research</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-and-limitations-of-lda">11. Challenges and Limitations of LDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-topic-modeling-with-other-nlp-techniques">12. Combining Topic Modeling with Other NLP Techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-directions-in-topic-modeling">13. Future Directions in Topic Modeling</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -464,100 +488,288 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="topic-modeling-and-latent-dirichlet-allocation-lda">
 <h1>2.3 Topic Modeling and Latent Dirichlet Allocation (LDA)<a class="headerlink" href="#topic-modeling-and-latent-dirichlet-allocation-lda" title="Link to this heading">#</a></h1>
+<section id="introduction-to-topic-modeling">
+<h2>1. Introduction to Topic Modeling<a class="headerlink" href="#introduction-to-topic-modeling" title="Link to this heading">#</a></h2>
+<p>Topic modeling is a statistical method for discovering abstract topics that occur in a collection of documents. It’s an unsupervised machine learning technique that can automatically identify themes or topics within a large corpus of text.</p>
+<p>Applications in social science research include:</p>
+<ul class="simple">
+<li><p>Analyzing trends in social media discussions</p></li>
+<li><p>Identifying themes in survey responses</p></li>
+<li><p>Exploring patterns in historical documents</p></li>
+<li><p>Understanding policy documents and political discourse</p></li>
+</ul>
+<p>The most popular topic modeling approach is Latent Dirichlet Allocation (LDA), which we’ll focus on in this section.</p>
+</section>
+<section id="fundamentals-of-latent-dirichlet-allocation-lda">
+<h2>2. Fundamentals of Latent Dirichlet Allocation (LDA)<a class="headerlink" href="#fundamentals-of-latent-dirichlet-allocation-lda" title="Link to this heading">#</a></h2>
+<p>LDA is a generative probabilistic model that assumes each document is a mixture of a small number of topics, and each word’s presence is attributable to one of the document’s topics.</p>
+<p>Key assumptions of LDA:</p>
 <ol class="arabic simple">
-<li><p>Introduction to Topic Modeling</p>
+<li><p>Documents are represented as random mixtures over latent topics</p></li>
+<li><p>Each topic is characterized by a distribution over words</p></li>
+</ol>
+<p>The intuition behind LDA is that documents exhibit multiple topics in different proportions. For example, a news article about a political debate on climate change might be 60% about politics, 30% about climate science, and 10% about economics.</p>
+</section>
+<section id="mathematical-foundation-of-lda">
+<h2>3. Mathematical Foundation of LDA<a class="headerlink" href="#mathematical-foundation-of-lda" title="Link to this heading">#</a></h2>
+<p>LDA uses two main probability distributions:</p>
+<ol class="arabic simple">
+<li><p>Dirichlet distribution: Used to generate topic distributions for documents and word distributions for topics</p></li>
+<li><p>Multinomial distribution: Used to generate words in documents based on the topic distributions</p></li>
+</ol>
+<p>The plate notation for LDA visualizes these relationships:</p>
+<div align="center" class="mermaid align-center">
+            graph LR
+    A[α] --&gt; B[θ]
+    B --&gt; C[z]
+    C --&gt; D[w]
+    E[φ] --&gt; D
+    F[β] --&gt; E
+    B -.-&gt; G[M]
+    C -.-&gt; H[N]
+    style G fill:#f9f,stroke:#333,stroke-width:2px
+    style H fill:#f9f,stroke:#333,stroke-width:2px
+        </div>
+        <p>This diagram represents the plate notation for LDA, where:</p>
 <ul class="simple">
-<li><p>Definition and purpose of topic modeling</p></li>
-<li><p>Applications in social science research</p></li>
-<li><p>Overview of different topic modeling approaches</p></li>
+<li><p>α is the parameter of the Dirichlet prior on the per-document topic distributions</p></li>
+<li><p>β is the parameter of the Dirichlet prior on the per-topic word distribution</p></li>
+<li><p>θ is the topic distribution for document d</p></li>
+<li><p>φ is the word distribution for topic k</p></li>
+<li><p>z is the topic for the n-th word in document d</p></li>
+<li><p>w is the specific word</p></li>
+<li><p>M represents the plate for documents</p></li>
+<li><p>N represents the plate for words within each document</p></li>
+</ul>
+<p>The dotted lines to M and N indicate that these are plates (repeated elements) in the model.</p>
+<p>Where:</p>
+<ul class="simple">
+<li><p>α is the parameter of the Dirichlet prior on the per-document topic distributions</p></li>
+<li><p>β is the parameter of the Dirichlet prior on the per-topic word distribution</p></li>
+<li><p>θ is the topic distribution for document d</p></li>
+<li><p>φ is the word distribution for topic k</p></li>
+<li><p>z is the topic for the n-th word in document d</p></li>
+<li><p>w is the specific word</p></li>
+</ul>
+</section>
+<section id="lda-algorithm">
+<h2>4. LDA Algorithm<a class="headerlink" href="#lda-algorithm" title="Link to this heading">#</a></h2>
+<p>The generative process for LDA:</p>
+<ol class="arabic simple">
+<li><p>For each topic k:</p>
+<ul class="simple">
+<li><p>Draw a word distribution φk ~ Dirichlet(β)</p></li>
 </ul>
 </li>
-<li><p>Fundamentals of Latent Dirichlet Allocation (LDA)</p>
+<li><p>For each document d:</p>
 <ul class="simple">
-<li><p>Conceptual overview of LDA</p></li>
-<li><p>Key assumptions and intuitions behind the model</p></li>
-<li><p>Probabilistic generative process in LDA</p></li>
+<li><p>Draw a topic distribution θd ~ Dirichlet(α)</p></li>
+<li><p>For each word position i in document d:</p>
+<ul>
+<li><p>Draw a topic zd,i ~ Multinomial(θd)</p></li>
+<li><p>Draw a word wd,i ~ Multinomial(φzd,i)</p></li>
 </ul>
 </li>
-<li><p>Mathematical Foundation of LDA</p>
-<ul class="simple">
-<li><p>Dirichlet distribution</p></li>
-<li><p>Multinomial distribution</p></li>
-<li><p>Plate notation for LDA</p></li>
-</ul>
-</li>
-<li><p>LDA Algorithm</p>
-<ul class="simple">
-<li><p>Generative process</p></li>
-<li><p>Inference problem</p></li>
-<li><p>Parameter estimation techniques (e.g., variational inference, Gibbs sampling)</p></li>
-</ul>
-</li>
-<li><p>Preparing Data for LDA</p>
-<ul class="simple">
-<li><p>Preprocessing steps specific to topic modeling</p></li>
-<li><p>Creating document-term matrix</p></li>
-<li><p>Considerations for vocabulary size and document length</p></li>
-</ul>
-</li>
-<li><p>Implementing LDA</p>
-<ul class="simple">
-<li><p>Tools and libraries for LDA (e.g., gensim, scikit-learn)</p></li>
-<li><p>Step-by-step implementation in Python</p></li>
-<li><p>Handling parameters (number of topics, alpha, beta)</p></li>
-</ul>
-</li>
-<li><p>Interpreting LDA Results</p>
-<ul class="simple">
-<li><p>Understanding topic-word distributions</p></li>
-<li><p>Analyzing document-topic distributions</p></li>
-<li><p>Visualizing topic models (e.g., pyLDAvis)</p></li>
-</ul>
-</li>
-<li><p>Evaluating Topic Models</p>
-<ul class="simple">
-<li><p>Perplexity and coherence scores</p></li>
-<li><p>Human evaluation of topic quality</p></li>
-<li><p>Stability and reproducibility of topics</p></li>
-</ul>
-</li>
-<li><p>Advanced Topic Modeling Techniques</p>
-<ul class="simple">
-<li><p>Dynamic Topic Models</p></li>
-<li><p>Hierarchical LDA</p></li>
-<li><p>Correlated Topic Models</p></li>
-</ul>
-</li>
-<li><p>Applications in Social Science Research</p>
-<ul class="simple">
-<li><p>Content analysis of large text corpora</p></li>
-<li><p>Trend analysis in social media data</p></li>
-<li><p>Policy document analysis</p></li>
-<li><p>Literary analysis and digital humanities applications</p></li>
-</ul>
-</li>
-<li><p>Challenges and Limitations of LDA</p>
-<ul class="simple">
-<li><p>Determining the optimal number of topics</p></li>
-<li><p>Handling short texts and social media data</p></li>
-<li><p>Dealing with multi-lingual corpora</p></li>
-</ul>
-</li>
-<li><p>Combining Topic Modeling with Other NLP Techniques</p>
-<ul class="simple">
-<li><p>Integration with sentiment analysis</p></li>
-<li><p>Using topic models for document classification</p></li>
-<li><p>Enhancing information retrieval with topic models</p></li>
-</ul>
-</li>
-<li><p>Future Directions in Topic Modeling</p>
-<ul class="simple">
-<li><p>Neural topic models</p></li>
-<li><p>Incorporating word embeddings into topic models</p></li>
-<li><p>Cross-lingual topic modeling</p></li>
 </ul>
 </li>
 </ol>
+<p>The inference problem in LDA is to reverse this process: given the observed words in documents, we want to infer the hidden topic structure.</p>
+<p>Common inference techniques include:</p>
+<ul class="simple">
+<li><p>Variational inference</p></li>
+<li><p>Gibbs sampling</p></li>
+</ul>
+</section>
+<section id="preparing-data-for-lda">
+<h2>5. Preparing Data for LDA<a class="headerlink" href="#preparing-data-for-lda" title="Link to this heading">#</a></h2>
+<p>Before applying LDA, we need to preprocess our text data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">WordNetLemmatizer</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;wordnet&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">preprocess_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1"># Convert to lowercase and remove special characters</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^a-zA-Z\s]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+    <span class="c1"># Tokenize</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="c1"># Remove stopwords and short words</span>
+    <span class="n">stop_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="n">t</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">]</span>
+
+    <span class="c1"># Lemmatize</span>
+    <span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">lemmatizer</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">tokens</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;The cat sat on the mat&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;The dog chased the cat&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;The mat was new and clean&quot;</span>
+<span class="p">]</span>
+
+<span class="n">processed_docs</span> <span class="o">=</span> <span class="p">[</span><span class="n">preprocess_text</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">documents</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">processed_docs</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="implementing-lda">
+<h2>6. Implementing LDA<a class="headerlink" href="#implementing-lda" title="Link to this heading">#</a></h2>
+<p>We’ll use the gensim library to implement LDA:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gensim</span> <span class="kn">import</span> <span class="n">corpora</span>
+<span class="kn">from</span> <span class="nn">gensim.models.ldamodel</span> <span class="kn">import</span> <span class="n">LdaModel</span>
+
+<span class="c1"># Create dictionary</span>
+<span class="n">dictionary</span> <span class="o">=</span> <span class="n">corpora</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">(</span><span class="n">processed_docs</span><span class="p">)</span>
+
+<span class="c1"># Create corpus</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">dictionary</span><span class="o">.</span><span class="n">doc2bow</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">processed_docs</span><span class="p">]</span>
+
+<span class="c1"># Train LDA model</span>
+<span class="n">lda_model</span> <span class="o">=</span> <span class="n">LdaModel</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span> <span class="n">id2word</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Print topics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topics:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">lda_model</span><span class="o">.</span><span class="n">print_topics</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Topic </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">topic</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get topic distribution for a document</span>
+<span class="n">doc_lda</span> <span class="o">=</span> <span class="n">lda_model</span><span class="p">[</span><span class="n">corpus</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Topic distribution for first document:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">topic</span><span class="p">,</span> <span class="n">prob</span> <span class="ow">in</span> <span class="n">doc_lda</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Topic </span><span class="si">{</span><span class="n">topic</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">prob</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="interpreting-lda-results">
+<h2>7. Interpreting LDA Results<a class="headerlink" href="#interpreting-lda-results" title="Link to this heading">#</a></h2>
+<p>To visualize LDA results, we can use pyLDAvis:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyLDAvis.gensim</span>
+
+<span class="c1"># Prepare visualization</span>
+<span class="n">vis_data</span> <span class="o">=</span> <span class="n">pyLDAvis</span><span class="o">.</span><span class="n">gensim</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">lda_model</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">)</span>
+
+<span class="c1"># Save visualization to HTML file</span>
+<span class="n">pyLDAvis</span><span class="o">.</span><span class="n">save_html</span><span class="p">(</span><span class="n">vis_data</span><span class="p">,</span> <span class="s1">&#39;lda_visualization.html&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Visualization saved to &#39;lda_visualization.html&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This visualization helps in understanding:</p>
+<ul class="simple">
+<li><p>The prevalence of each topic</p></li>
+<li><p>The most relevant terms for each topic</p></li>
+<li><p>The relationships between topics</p></li>
+</ul>
+</section>
+<section id="evaluating-topic-models">
+<h2>8. Evaluating Topic Models<a class="headerlink" href="#evaluating-topic-models" title="Link to this heading">#</a></h2>
+<p>We can evaluate topic models using coherence scores:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gensim.models.coherencemodel</span> <span class="kn">import</span> <span class="n">CoherenceModel</span>
+
+<span class="c1"># Calculate coherence score</span>
+<span class="n">coherence_model</span> <span class="o">=</span> <span class="n">CoherenceModel</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">lda_model</span><span class="p">,</span> <span class="n">texts</span><span class="o">=</span><span class="n">processed_docs</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">coherence</span><span class="o">=</span><span class="s1">&#39;c_v&#39;</span><span class="p">)</span>
+<span class="n">coherence_score</span> <span class="o">=</span> <span class="n">coherence_model</span><span class="o">.</span><span class="n">get_coherence</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Coherence Score: </span><span class="si">{</span><span class="n">coherence_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A higher coherence score generally indicates better topic quality.</p>
+</section>
+<section id="advanced-topic-modeling-techniques">
+<h2>9. Advanced Topic Modeling Techniques<a class="headerlink" href="#advanced-topic-modeling-techniques" title="Link to this heading">#</a></h2>
+<p>While LDA is the most common topic modeling technique, there are more advanced methods:</p>
+<ol class="arabic simple">
+<li><p>Dynamic Topic Models: For analyzing how topics evolve over time</p></li>
+<li><p>Hierarchical LDA: Organizes topics into a hierarchy</p></li>
+<li><p>Correlated Topic Models: Allows for correlation between topics</p></li>
+</ol>
+</section>
+<section id="applications-in-social-science-research">
+<h2>10. Applications in Social Science Research<a class="headerlink" href="#applications-in-social-science-research" title="Link to this heading">#</a></h2>
+<p>Example: Analyzing trends in social media data</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">gensim.models.ldamodel</span> <span class="kn">import</span> <span class="n">LdaModel</span>
+
+<span class="c1"># Assume we have a DataFrame &#39;df&#39; with columns &#39;date&#39; and &#39;text&#39;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;social_media_data.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Preprocess texts</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;processed_text&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">preprocess_text</span><span class="p">)</span>
+
+<span class="c1"># Create dictionary and corpus</span>
+<span class="n">dictionary</span> <span class="o">=</span> <span class="n">corpora</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;processed_text&#39;</span><span class="p">])</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">dictionary</span><span class="o">.</span><span class="n">doc2bow</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;processed_text&#39;</span><span class="p">]]</span>
+
+<span class="c1"># Train LDA model</span>
+<span class="n">lda_model</span> <span class="o">=</span> <span class="n">LdaModel</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span> <span class="n">id2word</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Function to get dominant topic</span>
+<span class="k">def</span> <span class="nf">get_dominant_topic</span><span class="p">(</span><span class="n">lda_result</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">lda_result</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Add dominant topic to DataFrame</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;dominant_topic&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_dominant_topic</span><span class="p">(</span><span class="n">lda_model</span><span class="p">[</span><span class="n">doc</span><span class="p">])</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">]</span>
+
+<span class="c1"># Analyze topic trends over time</span>
+<span class="n">topic_trends</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;dominant_topic&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+<span class="n">topic_trends</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example demonstrates how to use LDA to analyze trends in social media data over time.</p>
+</section>
+<section id="challenges-and-limitations-of-lda">
+<h2>11. Challenges and Limitations of LDA<a class="headerlink" href="#challenges-and-limitations-of-lda" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Determining the optimal number of topics: This often requires experimentation and domain expertise.</p></li>
+<li><p>Handling short texts: LDA typically performs poorly on very short documents (e.g., tweets).</p></li>
+<li><p>Interpretability: Topics may not always be easily interpretable or meaningful to humans.</p></li>
+</ol>
+</section>
+<section id="combining-topic-modeling-with-other-nlp-techniques">
+<h2>12. Combining Topic Modeling with Other NLP Techniques<a class="headerlink" href="#combining-topic-modeling-with-other-nlp-techniques" title="Link to this heading">#</a></h2>
+<p>Example: Combining topic modeling with sentiment analysis</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">textblob</span> <span class="kn">import</span> <span class="n">TextBlob</span>
+
+<span class="c1"># Function to get sentiment</span>
+<span class="k">def</span> <span class="nf">get_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">TextBlob</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">sentiment</span><span class="o">.</span><span class="n">polarity</span>
+
+<span class="c1"># Add sentiment to DataFrame</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">get_sentiment</span><span class="p">)</span>
+
+<span class="c1"># Analyze sentiment by topic</span>
+<span class="n">sentiment_by_topic</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;dominant_topic&#39;</span><span class="p">)[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average sentiment by topic:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sentiment_by_topic</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example shows how to combine topic modeling with sentiment analysis to understand the emotional tone associated with different topics.</p>
+</section>
+<section id="future-directions-in-topic-modeling">
+<h2>13. Future Directions in Topic Modeling<a class="headerlink" href="#future-directions-in-topic-modeling" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Neural topic models: Incorporating deep learning techniques for improved performance</p></li>
+<li><p>Incorporating word embeddings: Using pre-trained word vectors to enhance topic coherence</p></li>
+<li><p>Cross-lingual topic modeling: Developing models that can work across multiple languages</p></li>
+</ol>
+<p>In conclusion, topic modeling, particularly LDA, is a powerful tool for uncovering latent themes in large text corpora. It has wide-ranging applications in social science research, from analyzing social media trends to exploring historical documents. While LDA has some limitations, ongoing research is addressing these challenges and developing more sophisticated topic modeling techniques.</p>
+<p>When using topic modeling in your research, remember to:</p>
+<ul class="simple">
+<li><p>Carefully preprocess your data</p></li>
+<li><p>Experiment with different numbers of topics</p></li>
+<li><p>Use both quantitative metrics (like coherence scores) and qualitative assessment to evaluate your models</p></li>
+<li><p>Consider the specific needs of your research question when interpreting and applying the results</p></li>
+</ul>
+<p>By thoughtfully applying topic modeling techniques, social scientists can gain valuable insights from large-scale text data, uncovering patterns and themes that might be difficult to detect through manual analysis alone.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -614,6 +826,33 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-topic-modeling">1. Introduction to Topic Modeling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals-of-latent-dirichlet-allocation-lda">2. Fundamentals of Latent Dirichlet Allocation (LDA)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-foundation-of-lda">3. Mathematical Foundation of LDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lda-algorithm">4. LDA Algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-data-for-lda">5. Preparing Data for LDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-lda">6. Implementing LDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-lda-results">7. Interpreting LDA Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-topic-models">8. Evaluating Topic Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-topic-modeling-techniques">9. Advanced Topic Modeling Techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-social-science-research">10. Applications in Social Science Research</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-and-limitations-of-lda">11. Challenges and Limitations of LDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-topic-modeling-with-other-nlp-techniques">12. Combining Topic Modeling with Other NLP Techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-directions-in-topic-modeling">13. Future Directions in Topic Modeling</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
