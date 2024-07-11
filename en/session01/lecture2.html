@@ -437,7 +437,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -453,6 +455,75 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-generative-llms">1. Introduction to Generative LLMs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-and-core-concept">Definition and core concept</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distinction-from-traditional-nlp-models">Distinction from traditional NLP models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-components-of-llms">2. Key Components of LLMs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformer-architecture">Transformer architecture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#self-attention-mechanism">Self-attention mechanism</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaled-up-training-on-massive-datasets">Scaled-up training on massive datasets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notable-examples-of-llms">3. Notable Examples of LLMs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpt-generative-pre-trained-transformer-series">GPT (Generative Pre-trained Transformer) series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bert-and-its-variants">BERT and its variants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-prominent-models">Other prominent models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capabilities-of-llms-in-social-science-contexts">4. Capabilities of LLMs in Social Science Contexts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-generation-and-completion">Text generation and completion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-answering-and-information-retrieval">Question answering and information retrieval</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summarization-and-paraphrasing">Summarization and paraphrasing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#translation-and-cross-lingual-tasks">Translation and cross-lingual tasks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentiment-analysis-and-emotion-detection">Sentiment analysis and emotion detection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-process-of-llms">5. Training Process of LLMs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-training-on-large-corpora">Pre-training on large corpora</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning-for-specific-tasks">Fine-tuning for specific tasks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-and-zero-shot-learning-capabilities">Few-shot and zero-shot learning capabilities</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-llms-in-social-science-research">6. Advantages of LLMs in Social Science Research</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-complex-language-understanding-tasks">Handling complex language understanding tasks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ability-to-generate-human-like-text">Ability to generate human-like text</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptability-to-various-domains-and-tasks">Adaptability to various domains and tasks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-and-challenges">7. Limitations and Challenges</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-biases-in-training-data">Potential biases in training data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lack-of-true-understanding-or-reasoning">Lack of true understanding or reasoning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-resources-required">Computational resources required</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ethical-considerations-in-deployment">Ethical considerations in deployment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recent-advancements">8. Recent Advancements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#improvements-in-model-size-and-efficiency">Improvements in model size and efficiency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enhanced-multi-modal-capabilities">Enhanced multi-modal capabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progress-in-mitigating-biases-and-improving-factual-accuracy">Progress in mitigating biases and improving factual accuracy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-social-science">9. Applications in Social Science</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-annotation-and-classification">Data annotation and classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-explanations-and-summaries">Generating explanations and summaries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-large-scale-textual-data">Analyzing large-scale textual data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inferring-social-patterns-and-trends">Inferring social patterns and trends</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-directions">10. Future Directions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-with-world-knowledge-and-physical-world-understanding">Integration with world knowledge and physical world understanding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#improved-interpretability-and-transparency">Improved interpretability and transparency</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -464,81 +535,182 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="overview-of-generative-llms">
 <h1>1.2 Overview of Generative LLMs<a class="headerlink" href="#overview-of-generative-llms" title="Link to this heading">#</a></h1>
-<ol class="arabic simple">
-<li><p>Introduction to Generative LLMs</p>
+<section id="introduction-to-generative-llms">
+<h2>1. Introduction to Generative LLMs<a class="headerlink" href="#introduction-to-generative-llms" title="Link to this heading">#</a></h2>
+<p>Generative Large Language Models (LLMs) are advanced artificial intelligence systems designed to understand and generate human-like text. These models represent a significant leap forward in natural language processing (NLP) technology.</p>
+<section id="definition-and-core-concept">
+<h3>Definition and core concept<a class="headerlink" href="#definition-and-core-concept" title="Link to this heading">#</a></h3>
+<p>Generative LLMs are neural networks trained on vast amounts of text data to predict the next word in a sequence, allowing them to generate coherent and contextually appropriate text.</p>
+</section>
+<section id="distinction-from-traditional-nlp-models">
+<h3>Distinction from traditional NLP models<a class="headerlink" href="#distinction-from-traditional-nlp-models" title="Link to this heading">#</a></h3>
+<p>Unlike traditional NLP models that focus on specific tasks (e.g., sentiment analysis or named entity recognition), generative LLMs can perform a wide range of language tasks without task-specific training.</p>
+<p>Example: While a traditional sentiment analysis model might only classify text as positive or negative, a generative LLM could analyze sentiment, explain the reasoning, and even rewrite the text to change its sentiment.</p>
+</section>
+</section>
+<section id="key-components-of-llms">
+<h2>2. Key Components of LLMs<a class="headerlink" href="#key-components-of-llms" title="Link to this heading">#</a></h2>
+<section id="transformer-architecture">
+<h3>Transformer architecture<a class="headerlink" href="#transformer-architecture" title="Link to this heading">#</a></h3>
+<p>LLMs are built on the transformer architecture, which uses self-attention mechanisms to process input sequences in parallel, allowing for more efficient training on large datasets.</p>
+</section>
+<section id="self-attention-mechanism">
+<h3>Self-attention mechanism<a class="headerlink" href="#self-attention-mechanism" title="Link to this heading">#</a></h3>
+<p>Self-attention allows the model to weigh the importance of different words in a sentence when processing each word, capturing long-range dependencies in text.</p>
+<p>Example: In the sentence “The animal didn’t cross the street because it was too wide,” self-attention helps the model understand that “it” refers to “the street” and not “the animal.”</p>
+</section>
+<section id="scaled-up-training-on-massive-datasets">
+<h3>Scaled-up training on massive datasets<a class="headerlink" href="#scaled-up-training-on-massive-datasets" title="Link to this heading">#</a></h3>
+<p>LLMs are trained on enormous text corpora, often containing hundreds of billions of words from diverse sources like websites, books, and articles.</p>
+</section>
+</section>
+<section id="notable-examples-of-llms">
+<h2>3. Notable Examples of LLMs<a class="headerlink" href="#notable-examples-of-llms" title="Link to this heading">#</a></h2>
+<section id="gpt-generative-pre-trained-transformer-series">
+<h3>GPT (Generative Pre-trained Transformer) series<a class="headerlink" href="#gpt-generative-pre-trained-transformer-series" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Definition and core concept</p></li>
-<li><p>Distinction from traditional NLP models</p></li>
+<li><p>GPT-3: 175 billion parameters, capable of generating human-like text across various domains</p></li>
+<li><p>GPT-4: Latest iteration with multimodal capabilities (text and image input)</p></li>
 </ul>
-</li>
-<li><p>Key Components of LLMs</p>
+</section>
+<section id="bert-and-its-variants">
+<h3>BERT and its variants<a class="headerlink" href="#bert-and-its-variants" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Transformer architecture</p></li>
-<li><p>Self-attention mechanism</p></li>
-<li><p>Scaled-up training on massive datasets</p></li>
+<li><p>BERT (Bidirectional Encoder Representations from Transformers): Focuses on understanding context from both directions in a sentence</p></li>
+<li><p>RoBERTa, ALBERT: Improved versions of BERT with different training strategies</p></li>
 </ul>
-</li>
-<li><p>Notable Examples of LLMs</p>
+</section>
+<section id="other-prominent-models">
+<h3>Other prominent models<a class="headerlink" href="#other-prominent-models" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>GPT (Generative Pre-trained Transformer) series</p></li>
-<li><p>BERT and its variants</p></li>
-<li><p>Other prominent models (e.g., T5, DALL-E)</p></li>
+<li><p>T5 (Text-to-Text Transfer Transformer): Frames all NLP tasks as text-to-text problems</p></li>
+<li><p>DALL-E: Generates images from text descriptions</p></li>
 </ul>
-</li>
-<li><p>Capabilities of LLMs in Social Science Contexts</p>
-<ul class="simple">
-<li><p>Text generation and completion</p></li>
-<li><p>Question answering and information retrieval</p></li>
-<li><p>Summarization and paraphrasing</p></li>
-<li><p>Translation and cross-lingual tasks</p></li>
-<li><p>Sentiment analysis and emotion detection</p></li>
-</ul>
-</li>
-<li><p>Training Process of LLMs</p>
-<ul class="simple">
-<li><p>Pre-training on large corpora</p></li>
-<li><p>Fine-tuning for specific tasks</p></li>
-<li><p>Few-shot and zero-shot learning capabilities</p></li>
-</ul>
-</li>
-<li><p>Advantages of LLMs in Social Science Research</p>
-<ul class="simple">
-<li><p>Handling complex language understanding tasks</p></li>
-<li><p>Ability to generate human-like text</p></li>
-<li><p>Adaptability to various domains and tasks</p></li>
-</ul>
-</li>
-<li><p>Limitations and Challenges</p>
-<ul class="simple">
-<li><p>Potential biases in training data</p></li>
-<li><p>Lack of true understanding or reasoning</p></li>
-<li><p>Computational resources required</p></li>
-<li><p>Ethical considerations in deployment</p></li>
-</ul>
-</li>
-<li><p>Recent Advancements</p>
-<ul class="simple">
-<li><p>Improvements in model size and efficiency</p></li>
-<li><p>Enhanced multi-modal capabilities</p></li>
-<li><p>Progress in mitigating biases and improving factual accuracy</p></li>
-</ul>
-</li>
-<li><p>Applications in Social Science</p>
-<ul class="simple">
-<li><p>Data annotation and classification</p></li>
-<li><p>Generating explanations and summaries</p></li>
-<li><p>Analyzing large-scale textual data</p></li>
-<li><p>Inferring social patterns and trends</p></li>
-</ul>
-</li>
-<li><p>Future Directions</p>
-<ul class="simple">
-<li><p>Integration with domain-specific knowledge</p></li>
-<li><p>Improved interpretability and transparency</p></li>
-<li><p>Ethical and responsible use in research</p></li>
-</ul>
-</li>
-</ol>
+</section>
+</section>
+<section id="capabilities-of-llms-in-social-science-contexts">
+<h2>4. Capabilities of LLMs in Social Science Contexts<a class="headerlink" href="#capabilities-of-llms-in-social-science-contexts" title="Link to this heading">#</a></h2>
+<section id="text-generation-and-completion">
+<h3>Text generation and completion<a class="headerlink" href="#text-generation-and-completion" title="Link to this heading">#</a></h3>
+<p>LLMs can generate coherent paragraphs or complete partial text, useful for creating research hypotheses or expanding on ideas.</p>
+<p>Example: Given the prompt “The impact of social media on political polarization,” an LLM could generate a detailed paragraph discussing various aspects of this topic.</p>
+</section>
+<section id="question-answering-and-information-retrieval">
+<h3>Question answering and information retrieval<a class="headerlink" href="#question-answering-and-information-retrieval" title="Link to this heading">#</a></h3>
+<p>LLMs can understand and answer complex questions, making them valuable for literature reviews or data exploration.</p>
+<p>Example: Researchers could ask, “What are the main theories explaining the gender wage gap?” and receive a comprehensive answer with key points from various studies.</p>
+</section>
+<section id="summarization-and-paraphrasing">
+<h3>Summarization and paraphrasing<a class="headerlink" href="#summarization-and-paraphrasing" title="Link to this heading">#</a></h3>
+<p>LLMs can condense long texts or rephrase content, useful for processing large volumes of research papers or interview transcripts.</p>
+</section>
+<section id="translation-and-cross-lingual-tasks">
+<h3>Translation and cross-lingual tasks<a class="headerlink" href="#translation-and-cross-lingual-tasks" title="Link to this heading">#</a></h3>
+<p>These models can translate between languages and perform analysis across multiple languages, facilitating international research.</p>
+</section>
+<section id="sentiment-analysis-and-emotion-detection">
+<h3>Sentiment analysis and emotion detection<a class="headerlink" href="#sentiment-analysis-and-emotion-detection" title="Link to this heading">#</a></h3>
+<p>LLMs can identify and explain complex emotions and sentiments in text, going beyond simple positive/negative classifications.</p>
+</section>
+</section>
+<section id="training-process-of-llms">
+<h2>5. Training Process of LLMs<a class="headerlink" href="#training-process-of-llms" title="Link to this heading">#</a></h2>
+<section id="pre-training-on-large-corpora">
+<h3>Pre-training on large corpora<a class="headerlink" href="#pre-training-on-large-corpora" title="Link to this heading">#</a></h3>
+<p>LLMs are initially trained on diverse text data to learn general language patterns and knowledge.</p>
+</section>
+<section id="fine-tuning-for-specific-tasks">
+<h3>Fine-tuning for specific tasks<a class="headerlink" href="#fine-tuning-for-specific-tasks" title="Link to this heading">#</a></h3>
+<p>Pre-trained models can be further trained on domain-specific data to adapt to particular research areas or tasks.</p>
+</section>
+<section id="few-shot-and-zero-shot-learning-capabilities">
+<h3>Few-shot and zero-shot learning capabilities<a class="headerlink" href="#few-shot-and-zero-shot-learning-capabilities" title="Link to this heading">#</a></h3>
+<p>LLMs can perform tasks with minimal (few-shot) or no (zero-shot) specific examples, adapting to new scenarios based on their general language understanding.</p>
+<p>Example: A model could classify social media posts into themes it hasn’t been explicitly trained on, based on a few examples or just a description of the categories.</p>
+</section>
+</section>
+<section id="advantages-of-llms-in-social-science-research">
+<h2>6. Advantages of LLMs in Social Science Research<a class="headerlink" href="#advantages-of-llms-in-social-science-research" title="Link to this heading">#</a></h2>
+<section id="handling-complex-language-understanding-tasks">
+<h3>Handling complex language understanding tasks<a class="headerlink" href="#handling-complex-language-understanding-tasks" title="Link to this heading">#</a></h3>
+<p>LLMs can grasp nuanced meanings, idiomatic expressions, and context-dependent interpretations.</p>
+</section>
+<section id="ability-to-generate-human-like-text">
+<h3>Ability to generate human-like text<a class="headerlink" href="#ability-to-generate-human-like-text" title="Link to this heading">#</a></h3>
+<p>This capability is useful for creating synthetic data, formulating research questions, or generating interview questions.</p>
+</section>
+<section id="adaptability-to-various-domains-and-tasks">
+<h3>Adaptability to various domains and tasks<a class="headerlink" href="#adaptability-to-various-domains-and-tasks" title="Link to this heading">#</a></h3>
+<p>A single LLM can be applied to multiple research areas, from analyzing historical texts to coding contemporary social media posts.</p>
+</section>
+</section>
+<section id="limitations-and-challenges">
+<h2>7. Limitations and Challenges<a class="headerlink" href="#limitations-and-challenges" title="Link to this heading">#</a></h2>
+<section id="potential-biases-in-training-data">
+<h3>Potential biases in training data<a class="headerlink" href="#potential-biases-in-training-data" title="Link to this heading">#</a></h3>
+<p>LLMs may perpetuate or amplify biases present in their training data, requiring careful scrutiny in social science applications.</p>
+</section>
+<section id="lack-of-true-understanding-or-reasoning">
+<h3>Lack of true understanding or reasoning<a class="headerlink" href="#lack-of-true-understanding-or-reasoning" title="Link to this heading">#</a></h3>
+<p>Despite their sophisticated outputs, LLMs don’t truly “understand” text in a human sense and may produce plausible-sounding but incorrect information.</p>
+</section>
+<section id="computational-resources-required">
+<h3>Computational resources required<a class="headerlink" href="#computational-resources-required" title="Link to this heading">#</a></h3>
+<p>Training and running large LLMs require significant computational power, which may be a barrier for some researchers.</p>
+</section>
+<section id="ethical-considerations-in-deployment">
+<h3>Ethical considerations in deployment<a class="headerlink" href="#ethical-considerations-in-deployment" title="Link to this heading">#</a></h3>
+<p>Issues of privacy, consent, and the potential for misuse need to be carefully considered when applying LLMs to social science research.</p>
+</section>
+</section>
+<section id="recent-advancements">
+<h2>8. Recent Advancements<a class="headerlink" href="#recent-advancements" title="Link to this heading">#</a></h2>
+<section id="improvements-in-model-size-and-efficiency">
+<h3>Improvements in model size and efficiency<a class="headerlink" href="#improvements-in-model-size-and-efficiency" title="Link to this heading">#</a></h3>
+<p>Newer models achieve better performance with fewer parameters, making them more accessible for research use.</p>
+</section>
+<section id="enhanced-multi-modal-capabilities">
+<h3>Enhanced multi-modal capabilities<a class="headerlink" href="#enhanced-multi-modal-capabilities" title="Link to this heading">#</a></h3>
+<p>Some LLMs can now process and generate both text and images, opening new possibilities for analyzing visual social media content or historical artifacts.</p>
+</section>
+<section id="progress-in-mitigating-biases-and-improving-factual-accuracy">
+<h3>Progress in mitigating biases and improving factual accuracy<a class="headerlink" href="#progress-in-mitigating-biases-and-improving-factual-accuracy" title="Link to this heading">#</a></h3>
+<p>Ongoing research aims to reduce biases and increase the reliability of LLM outputs, crucial for their use in academic research.</p>
+</section>
+</section>
+<section id="applications-in-social-science">
+<h2>9. Applications in Social Science<a class="headerlink" href="#applications-in-social-science" title="Link to this heading">#</a></h2>
+<section id="data-annotation-and-classification">
+<h3>Data annotation and classification<a class="headerlink" href="#data-annotation-and-classification" title="Link to this heading">#</a></h3>
+<p>LLMs can assist in coding qualitative data, potentially increasing efficiency and consistency in analysis.</p>
+<p>Example: Automatically categorizing open-ended survey responses into themes, with the ability to explain the reasoning behind each classification.</p>
+</section>
+<section id="generating-explanations-and-summaries">
+<h3>Generating explanations and summaries<a class="headerlink" href="#generating-explanations-and-summaries" title="Link to this heading">#</a></h3>
+<p>LLMs can provide detailed explanations of complex social phenomena or summarize key findings from multiple studies.</p>
+</section>
+<section id="analyzing-large-scale-textual-data">
+<h3>Analyzing large-scale textual data<a class="headerlink" href="#analyzing-large-scale-textual-data" title="Link to this heading">#</a></h3>
+<p>These models excel at processing and extracting insights from vast amounts of text, such as social media posts or historical documents.</p>
+</section>
+<section id="inferring-social-patterns-and-trends">
+<h3>Inferring social patterns and trends<a class="headerlink" href="#inferring-social-patterns-and-trends" title="Link to this heading">#</a></h3>
+<p>LLMs can identify emerging topics, shifts in public opinion, or cultural trends from large-scale text data.</p>
+<p>Example: Analyzing years of social media data to track changes in public attitudes towards climate change.</p>
+</section>
+</section>
+<section id="future-directions">
+<h2>10. Future Directions<a class="headerlink" href="#future-directions" title="Link to this heading">#</a></h2>
+<section id="integration-with-world-knowledge-and-physical-world-understanding">
+<h3>Integration with world knowledge and physical world understanding<a class="headerlink" href="#integration-with-world-knowledge-and-physical-world-understanding" title="Link to this heading">#</a></h3>
+<p>Future LLMs may better integrate factual knowledge and understanding of physical world constraints, improving their reliability for research applications.</p>
+</section>
+<section id="improved-interpretability-and-transparency">
+<h3>Improved interpretability and transparency<a class="headerlink" href="#improved-interpretability-and-transparency" title="Link to this heading">#</a></h3>
+<p>Ongoing research aims to make LLM decision-making processes more transparent, allowing researchers to better understand and validate their outputs.</p>
+<p>As LLMs continue to evolve, they offer exciting possibilities for social science research, potentially transforming how we analyze text data, generate hypotheses, and explore complex social phenomena. However, their use also requires careful consideration of their limitations and ethical implications. Social scientists must approach these powerful tools with both enthusiasm and critical scrutiny, developing new methodologies to harness their capabilities while ensuring the validity and integrity of their research.</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -595,6 +767,82 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-generative-llms">1. Introduction to Generative LLMs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-and-core-concept">Definition and core concept</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distinction-from-traditional-nlp-models">Distinction from traditional NLP models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-components-of-llms">2. Key Components of LLMs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformer-architecture">Transformer architecture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#self-attention-mechanism">Self-attention mechanism</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaled-up-training-on-massive-datasets">Scaled-up training on massive datasets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notable-examples-of-llms">3. Notable Examples of LLMs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpt-generative-pre-trained-transformer-series">GPT (Generative Pre-trained Transformer) series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bert-and-its-variants">BERT and its variants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-prominent-models">Other prominent models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capabilities-of-llms-in-social-science-contexts">4. Capabilities of LLMs in Social Science Contexts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-generation-and-completion">Text generation and completion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-answering-and-information-retrieval">Question answering and information retrieval</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summarization-and-paraphrasing">Summarization and paraphrasing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#translation-and-cross-lingual-tasks">Translation and cross-lingual tasks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentiment-analysis-and-emotion-detection">Sentiment analysis and emotion detection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-process-of-llms">5. Training Process of LLMs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-training-on-large-corpora">Pre-training on large corpora</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning-for-specific-tasks">Fine-tuning for specific tasks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-and-zero-shot-learning-capabilities">Few-shot and zero-shot learning capabilities</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-llms-in-social-science-research">6. Advantages of LLMs in Social Science Research</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-complex-language-understanding-tasks">Handling complex language understanding tasks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ability-to-generate-human-like-text">Ability to generate human-like text</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptability-to-various-domains-and-tasks">Adaptability to various domains and tasks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-and-challenges">7. Limitations and Challenges</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-biases-in-training-data">Potential biases in training data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lack-of-true-understanding-or-reasoning">Lack of true understanding or reasoning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-resources-required">Computational resources required</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ethical-considerations-in-deployment">Ethical considerations in deployment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recent-advancements">8. Recent Advancements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#improvements-in-model-size-and-efficiency">Improvements in model size and efficiency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enhanced-multi-modal-capabilities">Enhanced multi-modal capabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progress-in-mitigating-biases-and-improving-factual-accuracy">Progress in mitigating biases and improving factual accuracy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-social-science">9. Applications in Social Science</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-annotation-and-classification">Data annotation and classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-explanations-and-summaries">Generating explanations and summaries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-large-scale-textual-data">Analyzing large-scale textual data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inferring-social-patterns-and-trends">Inferring social patterns and trends</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-directions">10. Future Directions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-with-world-knowledge-and-physical-world-understanding">Integration with world knowledge and physical world understanding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#improved-interpretability-and-transparency">Improved interpretability and transparency</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
