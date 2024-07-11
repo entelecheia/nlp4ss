@@ -90,6 +90,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'session05/lecture1';</script>
     <script src="../_static/language_switcher.js?v=ff97be19"></script>
     <script src="../_static/chat.js?v=f0de43d7"></script>
@@ -437,7 +439,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -453,6 +457,22 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-large-scale-text-analysis">1. Introduction to Large-Scale Text Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sources-for-large-scale-text-analysis">2. Data Sources for Large-Scale Text Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-collection-and-preprocessing-for-large-datasets">3. Data Collection and Preprocessing for Large Datasets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scalable-text-processing-techniques">4. Scalable Text Processing Techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topic-modeling-at-scale">5. Topic Modeling at Scale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#large-scale-sentiment-analysis">6. Large-Scale Sentiment Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#named-entity-recognition-and-relation-extraction">7. Named Entity Recognition and Relation Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-classification-and-categorization">8. Text Classification and Categorization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -464,159 +484,293 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="analyzing-large-scale-textual-data">
 <h1>5.1 Analyzing Large-Scale Textual Data<a class="headerlink" href="#analyzing-large-scale-textual-data" title="Link to this heading">#</a></h1>
+<section id="introduction-to-large-scale-text-analysis">
+<h2>1. Introduction to Large-Scale Text Analysis<a class="headerlink" href="#introduction-to-large-scale-text-analysis" title="Link to this heading">#</a></h2>
+<p>Large-scale text analysis refers to the process of examining vast amounts of textual data to extract meaningful patterns, trends, and insights. In social science research, this approach has become increasingly important due to the proliferation of digital text data from sources such as social media, online news, and digitized historical documents.</p>
+<p>The importance of large-scale text analysis in social science research lies in its ability to:</p>
 <ol class="arabic simple">
-<li><p>Introduction to Large-Scale Text Analysis</p>
-<ul class="simple">
-<li><p>Definition and importance in social science research</p></li>
-<li><p>Challenges and opportunities of big data in textual analysis</p></li>
-<li><p>Overview of LLM capabilities in processing large datasets</p></li>
-</ul>
-</li>
-<li><p>Data Sources for Large-Scale Text Analysis</p>
-<ul class="simple">
-<li><p>Social media platforms (Twitter, Facebook, Reddit, etc.)</p></li>
+<li><p>Analyze population-level trends and patterns</p></li>
+<li><p>Identify subtle effects that may not be visible in smaller datasets</p></li>
+<li><p>Study complex social phenomena across time and space</p></li>
+<li><p>Generate new hypotheses and research questions</p></li>
+</ol>
+<p>Large Language Models (LLMs) have significantly enhanced our ability to process and analyze large-scale textual data by offering:</p>
+<ol class="arabic simple">
+<li><p>Advanced natural language understanding</p></li>
+<li><p>Efficient processing of vast amounts of text</p></li>
+<li><p>Ability to handle diverse language patterns and structures</p></li>
+<li><p>Sophisticated text generation for summarization and explanation</p></li>
+</ol>
+<div align="center" class="mermaid align-center">
+            graph TD
+    A[Large-Scale Text Analysis] --&gt; B[Population-level Trends]
+    A --&gt; C[Subtle Effects Detection]
+    A --&gt; D[Complex Social Phenomena Study]
+    A --&gt; E[Hypothesis Generation]
+    F[LLM Capabilities] --&gt; G[Advanced NLU]
+    F --&gt; H[Efficient Processing]
+    F --&gt; I[Diverse Language Handling]
+    F --&gt; J[Sophisticated Text Generation]
+        </div>
+        </section>
+<section id="data-sources-for-large-scale-text-analysis">
+<h2>2. Data Sources for Large-Scale Text Analysis<a class="headerlink" href="#data-sources-for-large-scale-text-analysis" title="Link to this heading">#</a></h2>
+<p>Social scientists can leverage various data sources for large-scale text analysis:</p>
+<ol class="arabic simple">
+<li><p>Social media platforms (Twitter, Facebook, Reddit)</p></li>
 <li><p>News archives and digital libraries</p></li>
 <li><p>Government documents and public records</p></li>
 <li><p>Medical records and health-related text data</p></li>
 <li><p>Financial reports and business documents</p></li>
-</ul>
-</li>
-<li><p>Data Collection and Preprocessing for Large Datasets</p>
-<ul class="simple">
-<li><p>Web scraping and API usage for data collection</p></li>
-<li><p>Handling diverse data formats (JSON, CSV, XML, etc.)</p></li>
-<li><p>Cleaning and normalizing large text corpora</p></li>
-<li><p>Dealing with multilingual and code-mixed data</p></li>
-</ul>
-</li>
-<li><p>Scalable Text Processing Techniques</p>
-<ul class="simple">
-<li><p>Distributed computing frameworks (e.g., Hadoop, Spark)</p></li>
-<li><p>Cloud-based solutions for text processing</p></li>
-<li><p>Efficient tokenization and indexing strategies</p></li>
-<li><p>Handling out-of-vocabulary words in large datasets</p></li>
-</ul>
-</li>
-<li><p>Topic Modeling at Scale</p>
-<ul class="simple">
-<li><p>Scalable implementations of LDA and other topic models</p></li>
-<li><p>Dynamic topic modeling for temporal analysis</p></li>
-<li><p>Visualizing topics in large document collections</p></li>
-</ul>
-</li>
-<li><p>Large-Scale Sentiment Analysis</p>
-<ul class="simple">
-<li><p>Sentiment analysis on social media datasets</p></li>
-<li><p>Aspect-based sentiment analysis for product reviews</p></li>
-<li><p>Emotion detection in large-scale text data</p></li>
-</ul>
-</li>
-<li><p>Named Entity Recognition and Relation Extraction</p>
-<ul class="simple">
-<li><p>Identifying entities in large text corpora</p></li>
-<li><p>Extracting relationships between entities at scale</p></li>
-<li><p>Building knowledge graphs from large text datasets</p></li>
-</ul>
-</li>
-<li><p>Text Classification and Categorization</p>
-<ul class="simple">
-<li><p>Scalable methods for document classification</p></li>
-<li><p>Hierarchical classification for large taxonomies</p></li>
-<li><p>Handling class imbalance in large datasets</p></li>
-</ul>
-</li>
-<li><p>Trend Analysis and Event Detection</p>
-<ul class="simple">
-<li><p>Identifying emerging topics and trends</p></li>
-<li><p>Detecting and tracking events in real-time data streams</p></li>
-<li><p>Temporal analysis of language use and public opinion</p></li>
-</ul>
-</li>
-<li><p>Network Analysis of Textual Data</p>
-<ul class="simple">
-<li><p>Constructing and analyzing large-scale text networks</p></li>
-<li><p>Community detection in text-based networks</p></li>
-<li><p>Studying information flow and influence in social networks</p></li>
-</ul>
-</li>
-<li><p>Cross-lingual Analysis of Large Datasets</p>
-<ul class="simple">
-<li><p>Techniques for multilingual text analysis</p></li>
-<li><p>Cross-cultural comparisons using large-scale text data</p></li>
-<li><p>Machine translation for multilingual corpus analysis</p></li>
-</ul>
-</li>
-<li><p>Semantic Analysis and Word Embeddings</p>
-<ul class="simple">
-<li><p>Creating and using word embeddings for large vocabularies</p></li>
-<li><p>Semantic change detection in large diachronic corpora</p></li>
-<li><p>Analyzing semantic similarities and differences across domains</p></li>
-</ul>
-</li>
-<li><p>Summarization of Large Text Collections</p>
-<ul class="simple">
-<li><p>Extractive and abstractive summarization techniques</p></li>
-<li><p>Multi-document summarization for topic overviews</p></li>
-<li><p>Generating executive summaries from large reports</p></li>
-</ul>
-</li>
-<li><p>Information Retrieval and Question Answering</p>
-<ul class="simple">
-<li><p>Building scalable search systems for large text collections</p></li>
-<li><p>Implementing efficient question answering systems</p></li>
-<li><p>Fact verification in large-scale datasets</p></li>
-</ul>
-</li>
-<li><p>Visualization Techniques for Large-Scale Text Data</p>
-<ul class="simple">
-<li><p>Creating interactive visualizations of large text corpora</p></li>
-<li><p>Time-series visualization of textual trends</p></li>
-<li><p>Network visualizations of text-based relationships</p></li>
-</ul>
-</li>
-<li><p>Privacy and Ethical Considerations</p>
-<ul class="simple">
-<li><p>Anonymization techniques for large-scale text data</p></li>
-<li><p>Ethical issues in analyzing personal communication data</p></li>
-<li><p>Ensuring informed consent in large-scale text analysis</p></li>
-</ul>
-</li>
-<li><p>Bias Detection and Mitigation in Large Datasets</p>
-<ul class="simple">
-<li><p>Identifying and quantifying biases in large text corpora</p></li>
-<li><p>Techniques for reducing bias in large-scale analysis</p></li>
-<li><p>Ensuring representative sampling in big data research</p></li>
-</ul>
-</li>
-<li><p>Reproducibility and Transparency</p>
-<ul class="simple">
-<li><p>Documenting data collection and processing pipelines</p></li>
-<li><p>Sharing large datasets and analysis code</p></li>
-<li><p>Addressing challenges in reproducing large-scale studies</p></li>
-</ul>
-</li>
-<li><p>Case Studies in Social Science Research</p>
-<ul class="simple">
-<li><p>Analyzing public opinion trends using social media data</p></li>
-<li><p>Studying policy impacts through large-scale document analysis</p></li>
-<li><p>Investigating cultural phenomena using web-scale text corpora</p></li>
-</ul>
-</li>
-<li><p>Challenges and Limitations</p>
-<ul class="simple">
-<li><p>Dealing with noise and quality issues in large datasets</p></li>
-<li><p>Balancing depth and breadth in large-scale analysis</p></li>
-<li><p>Computational resource management for big data processing</p></li>
-</ul>
-</li>
-<li><p>Future Directions</p>
-<ul class="simple">
-<li><p>Integration of multimodal data in large-scale text analysis</p></li>
-<li><p>Advancements in real-time processing of streaming text data</p></li>
-<li><p>Potential for AI-assisted hypothesis generation from large datasets</p></li>
-</ul>
-</li>
 </ol>
+<p>Let’s look at an example of collecting data from Twitter using the <code class="docutils literal notranslate"><span class="pre">tweepy</span></code> library:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tweepy</span>
+
+<span class="c1"># Twitter API credentials</span>
+<span class="n">consumer_key</span> <span class="o">=</span> <span class="s2">&quot;YOUR_CONSUMER_KEY&quot;</span>
+<span class="n">consumer_secret</span> <span class="o">=</span> <span class="s2">&quot;YOUR_CONSUMER_SECRET&quot;</span>
+<span class="n">access_token</span> <span class="o">=</span> <span class="s2">&quot;YOUR_ACCESS_TOKEN&quot;</span>
+<span class="n">access_token_secret</span> <span class="o">=</span> <span class="s2">&quot;YOUR_ACCESS_TOKEN_SECRET&quot;</span>
+
+<span class="c1"># Authenticate with Twitter API</span>
+<span class="n">auth</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">OAuthHandler</span><span class="p">(</span><span class="n">consumer_key</span><span class="p">,</span> <span class="n">consumer_secret</span><span class="p">)</span>
+<span class="n">auth</span><span class="o">.</span><span class="n">set_access_token</span><span class="p">(</span><span class="n">access_token</span><span class="p">,</span> <span class="n">access_token_secret</span><span class="p">)</span>
+
+<span class="c1"># Create API object</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">API</span><span class="p">(</span><span class="n">auth</span><span class="p">)</span>
+
+<span class="c1"># Collect tweets</span>
+<span class="n">tweets</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">Cursor</span><span class="p">(</span><span class="n">api</span><span class="o">.</span><span class="n">search_tweets</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="s2">&quot;climate change&quot;</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">tweets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tweet</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Collected </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tweets</span><span class="p">)</span><span class="si">}</span><span class="s2"> tweets about climate change.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="data-collection-and-preprocessing-for-large-datasets">
+<h2>3. Data Collection and Preprocessing for Large Datasets<a class="headerlink" href="#data-collection-and-preprocessing-for-large-datasets" title="Link to this heading">#</a></h2>
+<p>When dealing with large-scale text data, efficient preprocessing is crucial. Here’s an example of preprocessing a large dataset using multiprocessing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">preprocess_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1"># Tokenize</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+    <span class="c1"># Remove stopwords and non-alphabetic tokens</span>
+    <span class="n">stop_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span> <span class="ow">and</span> <span class="n">token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">tokens</span>
+
+<span class="k">def</span> <span class="nf">preprocess_chunk</span><span class="p">(</span><span class="n">texts</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">preprocess_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">parallel_preprocess</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">num_processes</span><span class="o">=</span><span class="n">mp</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()):</span>
+    <span class="n">chunk_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span> <span class="o">//</span> <span class="n">num_processes</span>
+    <span class="n">chunks</span> <span class="o">=</span> <span class="p">[</span><span class="n">texts</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">chunk_size</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">texts</span><span class="p">),</span> <span class="n">chunk_size</span><span class="p">)]</span>
+
+    <span class="k">with</span> <span class="n">mp</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="n">num_processes</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+        <span class="n">processed_chunks</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">preprocess_chunk</span><span class="p">,</span> <span class="n">chunks</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">processed_chunks</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">large_dataset</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Your first document here.&quot;</span><span class="p">,</span> <span class="s2">&quot;Your second document here.&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>  <span class="c1"># Imagine this has millions of documents</span>
+<span class="n">preprocessed_data</span> <span class="o">=</span> <span class="n">parallel_preprocess</span><span class="p">(</span><span class="n">large_dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="scalable-text-processing-techniques">
+<h2>4. Scalable Text Processing Techniques<a class="headerlink" href="#scalable-text-processing-techniques" title="Link to this heading">#</a></h2>
+<p>For truly large-scale text processing, distributed computing frameworks like Apache Spark can be used. Here’s an example using PySpark:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+<span class="kn">from</span> <span class="nn">pyspark.ml.feature</span> <span class="kn">import</span> <span class="n">Tokenizer</span><span class="p">,</span> <span class="n">StopWordsRemover</span>
+
+<span class="c1"># Initialize Spark session</span>
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;LargeScaleTextProcessing&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+
+<span class="c1"># Create a DataFrame from your text data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;This is the first document.&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;This document is the second document.&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;And this is the third one.&quot;</span><span class="p">)]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">])</span>
+
+<span class="c1"># Tokenize the text</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">inputCol</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">outputCol</span><span class="o">=</span><span class="s2">&quot;words&quot;</span><span class="p">)</span>
+<span class="n">wordsDF</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Remove stop words</span>
+<span class="n">remover</span> <span class="o">=</span> <span class="n">StopWordsRemover</span><span class="p">(</span><span class="n">inputCol</span><span class="o">=</span><span class="s2">&quot;words&quot;</span><span class="p">,</span> <span class="n">outputCol</span><span class="o">=</span><span class="s2">&quot;filtered&quot;</span><span class="p">)</span>
+<span class="n">processedDF</span> <span class="o">=</span> <span class="n">remover</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">wordsDF</span><span class="p">)</span>
+
+<span class="c1"># Show the result</span>
+<span class="n">processedDF</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;filtered&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Stop the Spark session</span>
+<span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="topic-modeling-at-scale">
+<h2>5. Topic Modeling at Scale<a class="headerlink" href="#topic-modeling-at-scale" title="Link to this heading">#</a></h2>
+<p>For large-scale topic modeling, we can use the Gensim library, which provides efficient implementations of topic models. Here’s an example of using LDA (Latent Dirichlet Allocation) with Gensim:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gensim</span> <span class="kn">import</span> <span class="n">corpora</span>
+<span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">LdaMulticore</span>
+<span class="kn">from</span> <span class="nn">gensim.parsing.preprocessing</span> <span class="kn">import</span> <span class="n">STOPWORDS</span>
+<span class="kn">from</span> <span class="nn">gensim.utils</span> <span class="kn">import</span> <span class="n">simple_preprocess</span>
+
+<span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">token</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">simple_preprocess</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">if</span> <span class="n">token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STOPWORDS</span><span class="p">]</span>
+
+<span class="c1"># Assume &#39;documents&#39; is a large list of text documents</span>
+<span class="n">processed_docs</span> <span class="o">=</span> <span class="p">[</span><span class="n">preprocess</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">documents</span><span class="p">]</span>
+
+<span class="c1"># Create dictionary and corpus</span>
+<span class="n">dictionary</span> <span class="o">=</span> <span class="n">corpora</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">(</span><span class="n">processed_docs</span><span class="p">)</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">dictionary</span><span class="o">.</span><span class="n">doc2bow</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">processed_docs</span><span class="p">]</span>
+
+<span class="c1"># Train LDA model</span>
+<span class="n">lda_model</span> <span class="o">=</span> <span class="n">LdaMulticore</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span> <span class="n">id2word</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Print topics</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">lda_model</span><span class="o">.</span><span class="n">print_topics</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Topic: </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="large-scale-sentiment-analysis">
+<h2>6. Large-Scale Sentiment Analysis<a class="headerlink" href="#large-scale-sentiment-analysis" title="Link to this heading">#</a></h2>
+<p>For sentiment analysis on large datasets, we can use a pre-trained model from the Transformers library. Here’s an example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Load pre-trained sentiment analysis model</span>
+<span class="n">sentiment_analyzer</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;sentiment-analysis&quot;</span><span class="p">)</span>
+
+<span class="c1"># Assume &#39;texts&#39; is a large list of text documents</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Process in batches to handle large datasets</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">texts</span><span class="p">),</span> <span class="n">batch_size</span><span class="p">):</span>
+    <span class="n">batch</span> <span class="o">=</span> <span class="n">texts</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
+    <span class="n">batch_results</span> <span class="o">=</span> <span class="n">sentiment_analyzer</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">batch_results</span><span class="p">)</span>
+
+<span class="c1"># Create DataFrame with results</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">texts</span>
+
+<span class="c1"># Show summary of sentiment</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="named-entity-recognition-and-relation-extraction">
+<h2>7. Named Entity Recognition and Relation Extraction<a class="headerlink" href="#named-entity-recognition-and-relation-extraction" title="Link to this heading">#</a></h2>
+<p>For large-scale Named Entity Recognition (NER), we can use Spacy, which offers efficient processing. Here’s an example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="c1"># Load Spacy model</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">process_batch</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
+    <span class="n">docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">batch</span><span class="p">))</span>
+    <span class="n">entities</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">ent</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">)</span> <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">]</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">entities</span>
+
+<span class="c1"># Assume &#39;texts&#39; is a large list of text documents</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">all_entities</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">texts</span><span class="p">),</span> <span class="n">batch_size</span><span class="p">):</span>
+    <span class="n">batch</span> <span class="o">=</span> <span class="n">texts</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
+    <span class="n">batch_entities</span> <span class="o">=</span> <span class="n">process_batch</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+    <span class="n">all_entities</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">ent</span> <span class="k">for</span> <span class="n">doc_ents</span> <span class="ow">in</span> <span class="n">batch_entities</span> <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">doc_ents</span><span class="p">])</span>
+
+<span class="c1"># Count entity types</span>
+<span class="n">entity_counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">ent</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">all_entities</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Entity type counts:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">entity_counts</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="text-classification-and-categorization">
+<h2>8. Text Classification and Categorization<a class="headerlink" href="#text-classification-and-categorization" title="Link to this heading">#</a></h2>
+<p>For large-scale text classification, we can use a model from the Transformers library. Here’s an example using a BERT model for multi-class classification:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForSequenceClassification</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">DataLoader</span>
+
+<span class="c1"># Assume &#39;texts&#39; and &#39;labels&#39; are your large dataset</span>
+<span class="k">class</span> <span class="nc">TextDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">texts</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">max_length</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">texts</span> <span class="o">=</span> <span class="n">texts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">tokenizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_length</span> <span class="o">=</span> <span class="n">max_length</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">texts</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">texts</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">encoding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_length</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;max_length&#39;</span><span class="p">,</span> <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;input_ids&#39;</span><span class="p">:</span> <span class="n">encoding</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+            <span class="s1">&#39;attention_mask&#39;</span><span class="p">:</span> <span class="n">encoding</span><span class="p">[</span><span class="s1">&#39;attention_mask&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+            <span class="s1">&#39;labels&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+        <span class="p">}</span>
+
+<span class="c1"># Load pre-trained model and tokenizer</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;bert-base-uncased&#39;</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForSequenceClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">num_labels</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">labels</span><span class="p">)))</span>
+
+<span class="c1"># Create dataset and dataloader</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">TextDataset</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+<span class="n">dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Train the model (simplified, you would typically do this for multiple epochs with validation)</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">batch</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">outputs</span><span class="o">.</span><span class="n">loss</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training completed.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This code provides a foundation for large-scale text classification using a BERT model. In practice, you would need to add more components such as model evaluation, early stopping, and possibly distributed training for very large datasets.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Analyzing large-scale textual data presents both challenges and opportunities for social science research. By leveraging advanced NLP techniques and powerful computing resources, researchers can uncover insights from vast amounts of text data that were previously inaccessible.</p>
+<p>Key takeaways:</p>
+<ol class="arabic simple">
+<li><p>Large-scale text analysis allows for population-level studies and the detection of subtle patterns.</p></li>
+<li><p>Efficient data collection and preprocessing are crucial when dealing with big data.</p></li>
+<li><p>Distributed computing frameworks like Apache Spark can help process very large datasets.</p></li>
+<li><p>Pre-trained models and libraries like Transformers, Spacy, and Gensim provide powerful tools for various NLP tasks at scale.</p></li>
+<li><p>Careful consideration of ethical issues and bias is essential when working with large-scale text data.</p></li>
+</ol>
+<p>As technology continues to advance, the possibilities for large-scale text analysis in social science research will only grow, potentially leading to new discoveries and deeper understanding of complex social phenomena.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -673,6 +827,29 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-large-scale-text-analysis">1. Introduction to Large-Scale Text Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sources-for-large-scale-text-analysis">2. Data Sources for Large-Scale Text Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-collection-and-preprocessing-for-large-datasets">3. Data Collection and Preprocessing for Large Datasets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scalable-text-processing-techniques">4. Scalable Text Processing Techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topic-modeling-at-scale">5. Topic Modeling at Scale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#large-scale-sentiment-analysis">6. Large-Scale Sentiment Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#named-entity-recognition-and-relation-extraction">7. Named Entity Recognition and Relation Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-classification-and-categorization">8. Text Classification and Categorization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
