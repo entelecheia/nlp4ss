@@ -437,7 +437,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -453,6 +455,36 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-text-preprocessing">1. Introduction to Text Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-cleaning">2. Text Cleaning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-html-tags-and-special-characters">Removing HTML tags and special characters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-urls-and-email-addresses">Handling URLs and email addresses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-numbers-and-dates">Dealing with numbers and dates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-or-replacing-emojis-and-emoticons">Removing or replacing emojis and emoticons</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lowercase-conversion">3. Lowercase Conversion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenization">4. Tokenization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word-tokenization">Word tokenization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentence-tokenization">Sentence tokenization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stop-word-removal">5. Stop Word Removal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stemming">6. Stemming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lemmatization">7. Lemmatization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-representation-techniques">8. Text Representation Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bag-of-words-bow-model">Bag-of-Words (BoW) model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#term-frequency-inverse-document-frequency-tf-idf">Term Frequency-Inverse Document Frequency (TF-IDF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word-embeddings">Word Embeddings</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -464,102 +496,242 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="text-cleaning-normalization-and-representation">
 <h1>2.1 Text Cleaning, Normalization, and Representation<a class="headerlink" href="#text-cleaning-normalization-and-representation" title="Link to this heading">#</a></h1>
+<section id="introduction-to-text-preprocessing">
+<h2>1. Introduction to Text Preprocessing<a class="headerlink" href="#introduction-to-text-preprocessing" title="Link to this heading">#</a></h2>
+<p>Text preprocessing is a crucial step in the Natural Language Processing (NLP) pipeline, especially for social science applications. It involves transforming raw text data into a clean, standardized format that can be easily analyzed by machine learning algorithms.</p>
+<p>The importance of preprocessing in NLP cannot be overstated:</p>
+<ul class="simple">
+<li><p>It helps remove noise and irrelevant information from the text</p></li>
+<li><p>It standardizes the text, making it easier for algorithms to process</p></li>
+<li><p>It can significantly improve the performance of downstream NLP tasks</p></li>
+</ul>
+<p>Common preprocessing steps include:</p>
 <ol class="arabic simple">
-<li><p>Introduction to Text Preprocessing</p>
-<ul class="simple">
-<li><p>Importance in NLP pipeline</p></li>
-<li><p>Overview of common preprocessing steps</p></li>
-</ul>
-</li>
-<li><p>Text Cleaning</p>
-<ul class="simple">
-<li><p>Removing HTML tags and special characters</p></li>
-<li><p>Handling URLs and email addresses</p></li>
-<li><p>Dealing with numbers and dates</p></li>
-<li><p>Removing or replacing emojis and emoticons</p></li>
-</ul>
-</li>
-<li><p>Lowercase Conversion</p>
-<ul class="simple">
-<li><p>Benefits and potential drawbacks</p></li>
-<li><p>When to preserve case information</p></li>
-</ul>
-</li>
-<li><p>Tokenization</p>
-<ul class="simple">
-<li><p>Word tokenization</p></li>
-<li><p>Sentence tokenization</p></li>
-<li><p>Challenges in different languages</p></li>
-<li><p>Advanced tokenization techniques (e.g., subword tokenization)</p></li>
-</ul>
-</li>
-<li><p>Stop Word Removal</p>
-<ul class="simple">
-<li><p>Definition and purpose</p></li>
-<li><p>Common stop word lists</p></li>
-<li><p>Considerations for domain-specific stop words</p></li>
-</ul>
-</li>
-<li><p>Stemming</p>
-<ul class="simple">
-<li><p>Overview of stemming algorithms (e.g., Porter, Snowball)</p></li>
-<li><p>Pros and cons of stemming</p></li>
-</ul>
-</li>
-<li><p>Lemmatization</p>
-<ul class="simple">
-<li><p>Comparison with stemming</p></li>
-<li><p>Popular lemmatization tools</p></li>
-<li><p>Challenges in lemmatization</p></li>
-</ul>
-</li>
-<li><p>Handling Spelling Errors and Typos</p>
-<ul class="simple">
-<li><p>Spell checking algorithms</p></li>
-<li><p>Automated correction techniques</p></li>
-</ul>
-</li>
-<li><p>Text Normalization</p>
-<ul class="simple">
-<li><p>Standardizing text (e.g., expanding contractions)</p></li>
-<li><p>Handling social media text and slang</p></li>
-</ul>
-</li>
-<li><p>Text Representation Techniques</p>
-<ul class="simple">
-<li><p>Bag-of-Words (BoW) model</p></li>
-<li><p>Term Frequency-Inverse Document Frequency (TF-IDF)</p></li>
-<li><p>N-grams and their importance</p></li>
-</ul>
-</li>
-<li><p>Word Embeddings</p>
-<ul class="simple">
-<li><p>Introduction to word vectors</p></li>
-<li><p>Word2Vec, GloVe, and FastText</p></li>
-<li><p>Contextual embeddings (e.g., BERT embeddings)</p></li>
-</ul>
-</li>
-<li><p>Handling Special Cases in Social Science Research</p>
-<ul class="simple">
-<li><p>Preserving named entities</p></li>
-<li><p>Dealing with domain-specific terminology</p></li>
-<li><p>Considerations for multilingual text</p></li>
-</ul>
-</li>
-<li><p>Practical Considerations</p>
-<ul class="simple">
-<li><p>Balancing preprocessing and information preservation</p></li>
-<li><p>Impact of preprocessing on downstream tasks</p></li>
-<li><p>Tools and libraries for text preprocessing in Python</p></li>
-</ul>
-</li>
-<li><p>Evaluating Preprocessing Pipelines</p>
-<ul class="simple">
-<li><p>Metrics for assessing preprocessing quality</p></li>
-<li><p>Common pitfalls and how to avoid them</p></li>
-</ul>
-</li>
+<li><p>Text cleaning</p></li>
+<li><p>Lowercase conversion</p></li>
+<li><p>Tokenization</p></li>
+<li><p>Stop word removal</p></li>
+<li><p>Stemming or lemmatization</p></li>
+<li><p>Text representation</p></li>
 </ol>
+<p>Let’s explore each of these steps in detail.</p>
+</section>
+<section id="text-cleaning">
+<h2>2. Text Cleaning<a class="headerlink" href="#text-cleaning" title="Link to this heading">#</a></h2>
+<p>Text cleaning involves removing or replacing elements in the text that are not relevant to the analysis. This step is particularly important when dealing with web-scraped data or social media content.</p>
+<section id="removing-html-tags-and-special-characters">
+<h3>Removing HTML tags and special characters<a class="headerlink" href="#removing-html-tags-and-special-characters" title="Link to this heading">#</a></h3>
+<p>HTML tags and special characters can interfere with text analysis. We can use regular expressions to remove them.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="k">def</span> <span class="nf">clean_html</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">clean_text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;&lt;.*?&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>  <span class="c1"># Remove HTML tags</span>
+    <span class="n">clean_text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;[^a-zA-Z0-9\s]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">clean_text</span><span class="p">)</span>  <span class="c1"># Remove special characters</span>
+    <span class="k">return</span> <span class="n">clean_text</span>
+
+<span class="n">html_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;p&gt;This is a &lt;b&gt;sample&lt;/b&gt; text with HTML &amp;amp; special characters!&lt;/p&gt;&quot;</span>
+<span class="n">cleaned_text</span> <span class="o">=</span> <span class="n">clean_html</span><span class="p">(</span><span class="n">html_text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cleaned_text</span><span class="p">)</span>
+<span class="c1"># Output: This is a sample text with HTML  special characters</span>
+</pre></div>
+</div>
+</section>
+<section id="handling-urls-and-email-addresses">
+<h3>Handling URLs and email addresses<a class="headerlink" href="#handling-urls-and-email-addresses" title="Link to this heading">#</a></h3>
+<p>For many NLP tasks, URLs and email addresses can be considered noise. We can remove or replace them with placeholders.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">remove_urls_emails</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;http\S+|www\S+|https\S+&#39;</span><span class="p">,</span> <span class="s1">&#39;[URL]&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\S+@\S+&#39;</span><span class="p">,</span> <span class="s1">&#39;[EMAIL]&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span>
+
+<span class="n">sample_text</span> <span class="o">=</span> <span class="s2">&quot;Check out our website at https://example.com or email us at info@example.com&quot;</span>
+<span class="n">processed_text</span> <span class="o">=</span> <span class="n">remove_urls_emails</span><span class="p">(</span><span class="n">sample_text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">processed_text</span><span class="p">)</span>
+<span class="c1"># Output: Check out our website at [URL] or email us at [EMAIL]</span>
+</pre></div>
+</div>
+</section>
+<section id="dealing-with-numbers-and-dates">
+<h3>Dealing with numbers and dates<a class="headerlink" href="#dealing-with-numbers-and-dates" title="Link to this heading">#</a></h3>
+<p>Depending on the analysis, numbers and dates might need to be standardized or removed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">standardize_numbers</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\d+&#39;</span><span class="p">,</span> <span class="s1">&#39;[NUM]&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span>
+
+<span class="n">sample_text</span> <span class="o">=</span> <span class="s2">&quot;The event took place on 15/04/2023 and 1500 people attended.&quot;</span>
+<span class="n">processed_text</span> <span class="o">=</span> <span class="n">standardize_numbers</span><span class="p">(</span><span class="n">sample_text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">processed_text</span><span class="p">)</span>
+<span class="c1"># Output: The event took place on [NUM]/[NUM]/[NUM] and [NUM] people attended.</span>
+</pre></div>
+</div>
+</section>
+<section id="removing-or-replacing-emojis-and-emoticons">
+<h3>Removing or replacing emojis and emoticons<a class="headerlink" href="#removing-or-replacing-emojis-and-emoticons" title="Link to this heading">#</a></h3>
+<p>Emojis and emoticons can carry sentiment information but may need to be standardized for consistent analysis.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">emoji</span>
+
+<span class="k">def</span> <span class="nf">replace_emojis</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">emoji</span><span class="o">.</span><span class="n">demojize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="n">sample_text</span> <span class="o">=</span> <span class="s2">&quot;I love this movie! 😍👍&quot;</span>
+<span class="n">processed_text</span> <span class="o">=</span> <span class="n">replace_emojis</span><span class="p">(</span><span class="n">sample_text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">processed_text</span><span class="p">)</span>
+<span class="c1"># Output: I love this movie! :smiling_face_with_heart_eyes::thumbs_up:</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="lowercase-conversion">
+<h2>3. Lowercase Conversion<a class="headerlink" href="#lowercase-conversion" title="Link to this heading">#</a></h2>
+<p>Converting text to lowercase helps standardize the text and reduce the vocabulary size. However, it’s important to consider when case information might be relevant (e.g., for named entity recognition).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_lowercase</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="n">sample_text</span> <span class="o">=</span> <span class="s2">&quot;The Quick Brown Fox Jumps Over The Lazy Dog&quot;</span>
+<span class="n">lowercased_text</span> <span class="o">=</span> <span class="n">to_lowercase</span><span class="p">(</span><span class="n">sample_text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lowercased_text</span><span class="p">)</span>
+<span class="c1"># Output: the quick brown fox jumps over the lazy dog</span>
+</pre></div>
+</div>
+</section>
+<section id="tokenization">
+<h2>4. Tokenization<a class="headerlink" href="#tokenization" title="Link to this heading">#</a></h2>
+<p>Tokenization is the process of breaking text into smaller units, typically words or sentences. It’s a fundamental step in many NLP tasks.</p>
+<section id="word-tokenization">
+<h3>Word tokenization<a class="headerlink" href="#word-tokenization" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+
+<span class="k">def</span> <span class="nf">tokenize_words</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="n">sample_text</span> <span class="o">=</span> <span class="s2">&quot;This is a sample sentence for word tokenization.&quot;</span>
+<span class="n">tokens</span> <span class="o">=</span> <span class="n">tokenize_words</span><span class="p">(</span><span class="n">sample_text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+<span class="c1"># Output: [&#39;This&#39;, &#39;is&#39;, &#39;a&#39;, &#39;sample&#39;, &#39;sentence&#39;, &#39;for&#39;, &#39;word&#39;, &#39;tokenization&#39;, &#39;.&#39;]</span>
+</pre></div>
+</div>
+</section>
+<section id="sentence-tokenization">
+<h3>Sentence tokenization<a class="headerlink" href="#sentence-tokenization" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">sent_tokenize</span>
+
+<span class="k">def</span> <span class="nf">tokenize_sentences</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="n">sample_text</span> <span class="o">=</span> <span class="s2">&quot;This is the first sentence. And here&#39;s another one. What about a question?&quot;</span>
+<span class="n">sentences</span> <span class="o">=</span> <span class="n">tokenize_sentences</span><span class="p">(</span><span class="n">sample_text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
+<span class="c1"># Output: [&#39;This is the first sentence.&#39;, &quot;And here&#39;s another one.&quot;, &#39;What about a question?&#39;]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="stop-word-removal">
+<h2>5. Stop Word Removal<a class="headerlink" href="#stop-word-removal" title="Link to this heading">#</a></h2>
+<p>Stop words are common words that usually don’t contribute much to the meaning of a text. Removing them can help reduce noise in the data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+
+<span class="k">def</span> <span class="nf">remove_stopwords</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">stop_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
+    <span class="n">word_tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">filtered_text</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_tokens</span> <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filtered_text</span><span class="p">)</span>
+
+<span class="n">sample_text</span> <span class="o">=</span> <span class="s2">&quot;This is a sample sentence with stop words.&quot;</span>
+<span class="n">processed_text</span> <span class="o">=</span> <span class="n">remove_stopwords</span><span class="p">(</span><span class="n">sample_text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">processed_text</span><span class="p">)</span>
+<span class="c1"># Output: This sample sentence stop words .</span>
+</pre></div>
+</div>
+</section>
+<section id="stemming">
+<h2>6. Stemming<a class="headerlink" href="#stemming" title="Link to this heading">#</a></h2>
+<p>Stemming reduces words to their root form, which can help in reducing vocabulary size and grouping similar words.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">PorterStemmer</span>
+
+<span class="k">def</span> <span class="nf">stem_words</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">ps</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">ps</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">])</span>
+
+<span class="n">sample_text</span> <span class="o">=</span> <span class="s2">&quot;The runner runs quickly through the running track&quot;</span>
+<span class="n">stemmed_text</span> <span class="o">=</span> <span class="n">stem_words</span><span class="p">(</span><span class="n">sample_text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stemmed_text</span><span class="p">)</span>
+<span class="c1"># Output: The runner run quickli through the run track</span>
+</pre></div>
+</div>
+</section>
+<section id="lemmatization">
+<h2>7. Lemmatization<a class="headerlink" href="#lemmatization" title="Link to this heading">#</a></h2>
+<p>Lemmatization is similar to stemming but produces more linguistically correct root forms.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">WordNetLemmatizer</span>
+
+<span class="k">def</span> <span class="nf">lemmatize_words</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">lemmatizer</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">])</span>
+
+<span class="n">sample_text</span> <span class="o">=</span> <span class="s2">&quot;The children are playing with their toys&quot;</span>
+<span class="n">lemmatized_text</span> <span class="o">=</span> <span class="n">lemmatize_words</span><span class="p">(</span><span class="n">sample_text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lemmatized_text</span><span class="p">)</span>
+<span class="c1"># Output: The child are playing with their toy</span>
+</pre></div>
+</div>
+</section>
+<section id="text-representation-techniques">
+<h2>8. Text Representation Techniques<a class="headerlink" href="#text-representation-techniques" title="Link to this heading">#</a></h2>
+<p>After preprocessing, we need to represent the text in a format that machine learning algorithms can understand.</p>
+<section id="bag-of-words-bow-model">
+<h3>Bag-of-Words (BoW) model<a class="headerlink" href="#bag-of-words-bow-model" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+
+<span class="k">def</span> <span class="nf">bow_representation</span><span class="p">(</span><span class="n">texts</span><span class="p">):</span>
+    <span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+    <span class="n">bow_matrix</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">bow_matrix</span><span class="p">,</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+
+<span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;This is the first document.&quot;</span><span class="p">,</span> <span class="s2">&quot;This document is the second document.&quot;</span><span class="p">,</span> <span class="s2">&quot;And this is the third one.&quot;</span><span class="p">]</span>
+<span class="n">bow_matrix</span><span class="p">,</span> <span class="n">feature_names</span> <span class="o">=</span> <span class="n">bow_representation</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bow_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+<section id="term-frequency-inverse-document-frequency-tf-idf">
+<h3>Term Frequency-Inverse Document Frequency (TF-IDF)<a class="headerlink" href="#term-frequency-inverse-document-frequency-tf-idf" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="k">def</span> <span class="nf">tfidf_representation</span><span class="p">(</span><span class="n">texts</span><span class="p">):</span>
+    <span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+    <span class="n">tfidf_matrix</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tfidf_matrix</span><span class="p">,</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+
+<span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;This is the first document.&quot;</span><span class="p">,</span> <span class="s2">&quot;This document is the second document.&quot;</span><span class="p">,</span> <span class="s2">&quot;And this is the third one.&quot;</span><span class="p">]</span>
+<span class="n">tfidf_matrix</span><span class="p">,</span> <span class="n">feature_names</span> <span class="o">=</span> <span class="n">tfidf_representation</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+<section id="word-embeddings">
+<h3>Word Embeddings<a class="headerlink" href="#word-embeddings" title="Link to this heading">#</a></h3>
+<p>Word embeddings provide dense vector representations of words, capturing semantic relationships.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gensim.downloader</span> <span class="k">as</span> <span class="nn">api</span>
+
+<span class="k">def</span> <span class="nf">get_word_embedding</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;glove-wiki-gigaword-100&#39;</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span><span class="p">[</span><span class="n">word</span><span class="p">]</span>
+
+<span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;sociology&quot;</span>
+<span class="n">embedding</span> <span class="o">=</span> <span class="n">get_word_embedding</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Embedding for &#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39;:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">embedding</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>  <span class="c1"># Printing first 10 dimensions</span>
+</pre></div>
+</div>
+<p>This comprehensive overview covers the main aspects of text cleaning, normalization, and representation, with code examples for each step. These techniques form the foundation for more advanced NLP tasks in social science research, such as sentiment analysis, topic modeling, and text classification.</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -616,6 +788,43 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-text-preprocessing">1. Introduction to Text Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-cleaning">2. Text Cleaning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-html-tags-and-special-characters">Removing HTML tags and special characters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-urls-and-email-addresses">Handling URLs and email addresses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-numbers-and-dates">Dealing with numbers and dates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-or-replacing-emojis-and-emoticons">Removing or replacing emojis and emoticons</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lowercase-conversion">3. Lowercase Conversion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenization">4. Tokenization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word-tokenization">Word tokenization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentence-tokenization">Sentence tokenization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stop-word-removal">5. Stop Word Removal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stemming">6. Stemming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lemmatization">7. Lemmatization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-representation-techniques">8. Text Representation Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bag-of-words-bow-model">Bag-of-Words (BoW) model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#term-frequency-inverse-document-frequency-tf-idf">Term Frequency-Inverse Document Frequency (TF-IDF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word-embeddings">Word Embeddings</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
