@@ -6,8 +6,11 @@
     <script>
       var userLang = navigator.language || navigator.userLanguage;
       var langPrefix = userLang.split("-")[0];
-      var supportedLangs = ["en", "ko"];
-      var siteURL = window.location.href.split('/index.html')[0] + '/';
+      var supportedLangs = __SUPPORTED_LANGUAGES__; // This will be replaced by the actual languages during preprocessing
+      var siteURL = window.location.href.split("/index.html")[0];
+      if (!siteURL.endsWith("/")) {
+        siteURL += "/";
+      }
       var targetLang = supportedLangs.includes(langPrefix) ? langPrefix : "en";
       window.location.replace(siteURL + targetLang + "/index.html");
     </script>

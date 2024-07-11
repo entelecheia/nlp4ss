@@ -1,8 +1,13 @@
 #!/bin/bash
 
+# Load the configuration file
+source book/_config.env
+
+# Format the languages as a JavaScript array
+formatted_languages=$(printf "'%s'," "${LANGUAGES[@]}")
+formatted_languages="[${formatted_languages%,}]"
+
 # Define the languages and their respective build directories
-LANGUAGES=("en" "ko")
-LANGUAGE_NAMES=("English" "한국어")
 FINAL_BUILD_DIR="book/_build/html"
 LANGUAGE_SELECTOR_FILE="book/_addons/language_selector.html"
 REDIRECT_INDEX_FILE="book/_addons/language_redirect.html"
@@ -79,9 +84,8 @@ done
 echo "Copying and modifying redirect index file..."
 cp -f "$REDIRECT_INDEX_FILE" "$FINAL_INDEX_FILE"
 
-# Update the supported languages in the redirect file
-sed -i.bak 's/var supportedLangs = \["en", "ko"\];/var supportedLangs = ["en", "ko"];/' "$FINAL_INDEX_FILE"
-
+# Replace the supported languages placeholder in the redirect index file
+sed -i.bak "s/__SUPPORTED_LANGUAGES__/$formatted_languages/" "$FINAL_INDEX_FILE"
 # Remove backup file
 rm "${FINAL_INDEX_FILE}.bak"
 
