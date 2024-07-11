@@ -6,10 +6,6 @@ As we've progressed through the course, we've built a strong foundation in NLP t
 
 In this session, we'll cover three main topics:
 
-1. Analyzing Large-Scale Textual Data
-2. Misinformation and Fake News Detection
-3. Future Directions and Emerging Trends
-
 ```{tableofcontents}
 
 ```

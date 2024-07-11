@@ -4,9 +4,9 @@ Welcome to our course on Natural Language Processing (NLP) for Social Science. T
 
 In this introductory session, we'll cover three key areas:
 
-1. Fundamentals of NLP and its evolution
-2. Overview of Generative Large Language Models (LLMs)
-3. Ethical Considerations and Challenges in Using LLMs for Research
+```{tableofcontents}
+
+```
 
 Key points we'll explore include:
 
@@ -24,7 +24,3 @@ Remember, our goal isn't just to use LLMs because they're cutting-edge, but to h
 As we progress, I encourage you to think about how you might apply these techniques to your own research interests. Consider the ethical implications of using LLMs in your work, and how you can ensure responsible and transparent use of these powerful tools.
 
 Let's embark on this journey to explore the exciting intersection of NLP, LLMs, and social science! Don't hesitate to ask questions and engage in discussions – that's how we'll all learn and grow throughout this course.
-
-```{tableofcontents}
-
-```

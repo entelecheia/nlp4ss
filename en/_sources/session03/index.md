@@ -6,9 +6,9 @@ Data annotation and classification are fundamental processes in preparing and an
 
 In this session, we'll cover three main topics:
 
-1. Zero-shot Learning with LLMs
-2. Few-shot Learning and Prompt Engineering
-3. Comparing LLM Performance with Traditional Supervised Learning
+```{tableofcontents}
+
+```
 
 These topics will provide you with a comprehensive understanding of how LLMs can be leveraged for data annotation and classification tasks in social science research.
 
@@ -26,7 +26,3 @@ As we progress through the session, we encourage you to think about how these te
 Remember, while LLMs offer powerful capabilities, they also come with their own set of challenges and ethical considerations. We'll discuss these throughout the session to ensure you can use these tools responsibly in your research.
 
 Let's begin our exploration of LLMs for data annotation and classification!
-
-```{tableofcontents}
-
-```

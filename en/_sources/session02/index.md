@@ -11,11 +11,9 @@ Natural Language Processing (NLP) has come a long way in recent years, with adva
 
 In this session, we'll cover three main areas:
 
-1. **Text Cleaning, Normalization, and Representation**: We'll explore how to prepare raw text data for analysis, including techniques like tokenization, stemming, and lemmatization. We'll also discuss various ways to represent text data numerically, such as Bag-of-Words and TF-IDF.
+```{tableofcontents}
 
-2. **Basic NLP Tasks**: We'll introduce fundamental NLP tasks such as text classification, sentiment analysis, and named entity recognition. These tasks form the building blocks for more complex analyses in social science research.
-
-3. **Topic Modeling and Latent Dirichlet Allocation (LDA)**: We'll dive into the popular technique of topic modeling, with a focus on LDA. This method allows us to uncover latent themes in large collections of documents, a valuable tool for qualitative researchers working with large text corpora.
+```
 
 Throughout this session, we'll provide practical examples and code snippets to illustrate these concepts. We'll use popular Python libraries such as NLTK, scikit-learn, and gensim to implement these techniques.
 
@@ -24,7 +22,3 @@ By the end of this session, you'll have a solid understanding of the preprocessi
 Remember, while we're focusing on traditional techniques in this session, the preprocessing steps and basic tasks we'll cover remain relevant even when working with more advanced models like LLMs. A thorough understanding of these fundamentals will enhance your ability to leverage NLP effectively in your research, regardless of the specific tools or models you ultimately use.
 
 Let's begin our exploration of traditional NLP techniques and text preprocessing!
-
-```{tableofcontents}
-
-```

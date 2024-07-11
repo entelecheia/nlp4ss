@@ -4,9 +4,9 @@ Welcome to Session 4 of our course on Natural Language Processing for Social Sci
 
 The ability to generate high-quality explanations and summaries is a game-changer for social scientists. It allows researchers to process and synthesize vast amounts of textual data, extract meaningful insights, and communicate complex ideas more effectively. This session will delve into three key areas where LLMs excel:
 
-1. Using LLMs for High-Quality Text Generation
-2. Social Bias Inference and Analysis
-3. Figurative Language Explanation and Cultural Context
+```{tableofcontents}
+
+```
 
 ## Why Generative Explanations and Summaries Matter in Social Science
 
@@ -53,7 +53,3 @@ As we explore the powerful capabilities of LLMs in generating explanations and s
 By the end of this session, you'll have a solid understanding of how to leverage LLMs for generating high-quality explanations and summaries in your social science research. You'll be equipped with practical tools and techniques to enhance your data analysis, improve your research outputs, and tackle complex social science questions more effectively.
 
 Let's begin our exploration of generative explanations and summaries in social science!
-
-```{tableofcontents}
-
-```
