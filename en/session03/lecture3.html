@@ -90,6 +90,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'session03/lecture3';</script>
     <script src="../_static/language_switcher.js?v=ff97be19"></script>
     <script src="../_static/chat.js?v=f0de43d7"></script>
@@ -437,7 +439,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -453,6 +457,26 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-of-traditional-supervised-learning">2. Recap of Traditional Supervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-approaches-in-comparison">3. LLM Approaches in Comparison</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-metrics-and-methodologies">4. Evaluation Metrics and Methodologies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-comparison-in-classification-tasks">5. Performance Comparison in Classification Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-text-generation-capabilities">6. Comparing Text Generation Capabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#named-entity-recognition-ner-performance">7. Named Entity Recognition (NER) Performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentiment-analysis-and-opinion-mining">8. Sentiment Analysis and Opinion Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-extraction-and-relation-classification">9. Information Extraction and Relation Classification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-efficiency-and-resource-requirements">10. Computational Efficiency and Resource Requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scalability-and-adaptability">11. Scalability and Adaptability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretability-and-explainability">12. Interpretability and Explainability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -464,139 +488,420 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="comparing-llm-performance-with-traditional-supervised-learning">
 <h1>3.3 Comparing LLM Performance with Traditional Supervised Learning<a class="headerlink" href="#comparing-llm-performance-with-traditional-supervised-learning" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>In social science research, comparing the performance of Large Language Models (LLMs) with traditional supervised learning approaches is crucial for understanding the strengths and limitations of each method. This comparison helps researchers make informed decisions about which approach to use for specific tasks and datasets.</p>
+<div align="center" class="mermaid align-center">
+            graph TD
+    A[Social Science Research] --&gt; B[Traditional Supervised Learning]
+    A --&gt; C[LLM Approaches]
+    B --&gt; D[Comparison]
+    C --&gt; D
+    D --&gt; E[Informed Decision Making]
+        </div>
+        </section>
+<section id="recap-of-traditional-supervised-learning">
+<h2>2. Recap of Traditional Supervised Learning<a class="headerlink" href="#recap-of-traditional-supervised-learning" title="Link to this heading">#</a></h2>
+<p>Traditional supervised learning involves training models on labeled data to make predictions on unseen data. Key concepts include:</p>
+<ul class="simple">
+<li><p>Feature engineering: Selecting and creating relevant features from raw data</p></li>
+<li><p>Model selection: Choosing appropriate algorithms (e.g., logistic regression, random forests, SVMs)</p></li>
+<li><p>Training and validation: Splitting data, training models, and evaluating performance</p></li>
+</ul>
+<p>Here’s a simple example using scikit-learn for a text classification task:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
+
+<span class="c1"># Sample data</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;The economy is growing rapidly&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;New environmental policies announced&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Sports team wins championship&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Technology company releases new product&quot;</span>
+<span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Economy&quot;</span><span class="p">,</span> <span class="s2">&quot;Politics&quot;</span><span class="p">,</span> <span class="s2">&quot;Sports&quot;</span><span class="p">,</span> <span class="s2">&quot;Technology&quot;</span><span class="p">]</span>
+
+<span class="c1"># Split data</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Feature extraction</span>
+<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">X_train_vec</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_vec</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Train model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_vec</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Predict and evaluate</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_vec</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="llm-approaches-in-comparison">
+<h2>3. LLM Approaches in Comparison<a class="headerlink" href="#llm-approaches-in-comparison" title="Link to this heading">#</a></h2>
+<p>LLM approaches differ from traditional methods in several ways:</p>
 <ol class="arabic simple">
-<li><p>Introduction</p>
-<ul class="simple">
-<li><p>Overview of LLMs vs. traditional supervised learning</p></li>
-<li><p>Importance of comparative analysis in social science research</p></li>
-</ul>
-</li>
-<li><p>Recap of Traditional Supervised Learning</p>
-<ul class="simple">
-<li><p>Key concepts and algorithms</p></li>
-<li><p>Feature engineering and selection</p></li>
-<li><p>Model training and validation processes</p></li>
-</ul>
-</li>
-<li><p>LLM Approaches in Comparison</p>
-<ul class="simple">
-<li><p>Zero-shot, few-shot, and fine-tuning paradigms</p></li>
-<li><p>Prompt-based learning vs. traditional input-output mapping</p></li>
-</ul>
-</li>
-<li><p>Evaluation Metrics and Methodologies</p>
-<ul class="simple">
-<li><p>Common metrics for classification, regression, and generation tasks</p></li>
-<li><p>Cross-validation techniques</p></li>
-<li><p>Statistical significance testing</p></li>
-</ul>
-</li>
-<li><p>Performance Comparison in Classification Tasks</p>
-<ul class="simple">
-<li><p>Binary and multi-class classification scenarios</p></li>
-<li><p>Handling imbalanced datasets</p></li>
-<li><p>Analysis of precision, recall, and F1-scores</p></li>
-</ul>
-</li>
-<li><p>Comparing Text Generation Capabilities</p>
-<ul class="simple">
-<li><p>Evaluating coherence, relevance, and creativity</p></li>
-<li><p>Human evaluation vs. automated metrics</p></li>
-<li><p>Case studies in social science contexts</p></li>
-</ul>
-</li>
-<li><p>Named Entity Recognition (NER) Performance</p>
-<ul class="simple">
-<li><p>Accuracy and F1-score comparisons</p></li>
-<li><p>Handling domain-specific entities</p></li>
-<li><p>Analysis of generalization capabilities</p></li>
-</ul>
-</li>
-<li><p>Sentiment Analysis and Opinion Mining</p>
-<ul class="simple">
-<li><p>Comparing performance across different domains</p></li>
-<li><p>Handling nuanced and context-dependent sentiments</p></li>
-<li><p>Cross-lingual sentiment analysis comparisons</p></li>
-</ul>
-</li>
-<li><p>Information Extraction and Relation Classification</p>
-<ul class="simple">
-<li><p>Evaluating structured information extraction</p></li>
-<li><p>Performance on complex relational tasks</p></li>
-<li><p>Handling implicit and explicit relations</p></li>
-</ul>
-</li>
-<li><p>Computational Efficiency and Resource Requirements</p>
-<ul class="simple">
-<li><p>Training time and data requirements</p></li>
-<li><p>Inference speed comparisons</p></li>
-<li><p>Hardware and infrastructure considerations</p></li>
-</ul>
-</li>
-<li><p>Scalability and Adaptability</p>
-<ul class="simple">
-<li><p>Performance on varying dataset sizes</p></li>
-<li><p>Adaptability to new domains or languages</p></li>
-<li><p>Transfer learning capabilities</p></li>
-</ul>
-</li>
-<li><p>Interpretability and Explainability</p>
-<ul class="simple">
-<li><p>Comparing model transparency</p></li>
-<li><p>Methods for explaining predictions</p></li>
-<li><p>Implications for research accountability</p></li>
-</ul>
-</li>
-<li><p>Bias and Fairness Considerations</p>
-<ul class="simple">
-<li><p>Evaluating demographic and representation biases</p></li>
-<li><p>Fairness metrics across different approaches</p></li>
-<li><p>Strategies for mitigating biases</p></li>
-</ul>
-</li>
-<li><p>Robustness and Generalization</p>
-<ul class="simple">
-<li><p>Performance on out-of-distribution data</p></li>
-<li><p>Handling adversarial examples</p></li>
-<li><p>Consistency across different prompts or inputs</p></li>
-</ul>
-</li>
-<li><p>Case Studies in Social Science Research</p>
-<ul class="simple">
-<li><p>Comparative analysis in specific social science applications</p></li>
-<li><p>Strengths and weaknesses in real-world scenarios</p></li>
-<li><p>Lessons learned and best practices</p></li>
-</ul>
-</li>
-<li><p>Hybrid Approaches</p>
-<ul class="simple">
-<li><p>Combining LLMs with traditional supervised models</p></li>
-<li><p>Ensemble methods and their effectiveness</p></li>
-<li><p>Leveraging strengths of both paradigms</p></li>
-</ul>
-</li>
-<li><p>Ethical and Methodological Considerations</p>
-<ul class="simple">
-<li><p>Transparency in reporting comparative results</p></li>
-<li><p>Addressing potential confounds in comparisons</p></li>
-<li><p>Ethical implications of choosing one approach over another</p></li>
-</ul>
-</li>
-<li><p>Future Trends and Research Directions</p>
-<ul class="simple">
-<li><p>Emerging evaluation methodologies</p></li>
-<li><p>Potential for new hybrid models</p></li>
-<li><p>Implications for future social science research</p></li>
-</ul>
-</li>
-<li><p>Practical Guidelines for Researchers</p>
-<ul class="simple">
-<li><p>Decision-making framework for choosing between approaches</p></li>
-<li><p>Best practices for fair and robust comparisons</p></li>
-<li><p>Recommendations for reporting results in academic publications</p></li>
-</ul>
-</li>
+<li><p>Zero-shot learning: No task-specific training examples</p></li>
+<li><p>Few-shot learning: Learning from a small number of examples</p></li>
+<li><p>Fine-tuning: Adapting pre-trained models to specific tasks</p></li>
 </ol>
+<p>Here’s an example of few-shot learning using OpenAI’s GPT-3:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openai</span>
+
+<span class="n">openai</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="s1">&#39;your-api-key&#39;</span>
+
+<span class="k">def</span> <span class="nf">few_shot_classification</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">examples</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Classify the following text into one of these categories: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+    <span class="k">for</span> <span class="n">example</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+        <span class="n">prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Text: </span><span class="si">{</span><span class="n">example</span><span class="si">}</span><span class="se">\n</span><span class="s2">Category: </span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+    <span class="n">prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="se">\n</span><span class="s2">Category:&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Economy&quot;</span><span class="p">,</span> <span class="s2">&quot;Politics&quot;</span><span class="p">,</span> <span class="s2">&quot;Sports&quot;</span><span class="p">,</span> <span class="s2">&quot;Technology&quot;</span><span class="p">]</span>
+<span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;The stock market reached new highs today&quot;</span><span class="p">,</span> <span class="s2">&quot;Economy&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;The president signed a new bill into law&quot;</span><span class="p">,</span> <span class="s2">&quot;Politics&quot;</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;A new AI system beats human experts in medical diagnosis&quot;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">few_shot_classification</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">examples</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Classified category: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="evaluation-metrics-and-methodologies">
+<h2>4. Evaluation Metrics and Methodologies<a class="headerlink" href="#evaluation-metrics-and-methodologies" title="Link to this heading">#</a></h2>
+<p>To compare LLM performance with traditional supervised learning, we use various metrics:</p>
+<ol class="arabic simple">
+<li><p>Classification: Accuracy, Precision, Recall, F1-score</p></li>
+<li><p>Regression: Mean Squared Error (MSE), R-squared</p></li>
+<li><p>Generation: BLEU, ROUGE, Perplexity</p></li>
+</ol>
+<p>Here’s an example comparing traditional and LLM approaches:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_recall_fscore_support</span>
+
+<span class="k">def</span> <span class="nf">evaluate_performance</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="p">,</span> <span class="n">f1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">precision_recall_fscore_support</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;weighted&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;accuracy&#39;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">,</span>
+        <span class="s1">&#39;precision&#39;</span><span class="p">:</span> <span class="n">precision</span><span class="p">,</span>
+        <span class="s1">&#39;recall&#39;</span><span class="p">:</span> <span class="n">recall</span><span class="p">,</span>
+        <span class="s1">&#39;f1&#39;</span><span class="p">:</span> <span class="n">f1</span>
+    <span class="p">}</span>
+
+<span class="c1"># Traditional model performance</span>
+<span class="n">traditional_predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_vec</span><span class="p">)</span>
+<span class="n">traditional_performance</span> <span class="o">=</span> <span class="n">evaluate_performance</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">traditional_predictions</span><span class="p">)</span>
+
+<span class="c1"># LLM performance</span>
+<span class="n">llm_predictions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">X_test</span><span class="p">:</span>
+    <span class="n">llm_predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">few_shot_classification</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">examples</span><span class="p">))</span>
+<span class="n">llm_performance</span> <span class="o">=</span> <span class="n">evaluate_performance</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">llm_predictions</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Traditional model performance:&quot;</span><span class="p">,</span> <span class="n">traditional_performance</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LLM performance:&quot;</span><span class="p">,</span> <span class="n">llm_performance</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="performance-comparison-in-classification-tasks">
+<h2>5. Performance Comparison in Classification Tasks<a class="headerlink" href="#performance-comparison-in-classification-tasks" title="Link to this heading">#</a></h2>
+<p>When comparing classification performance, consider:</p>
+<ol class="arabic simple">
+<li><p>Overall accuracy</p></li>
+<li><p>Per-class precision and recall</p></li>
+<li><p>Performance on imbalanced datasets</p></li>
+</ol>
+<p>Here’s an example of handling imbalanced datasets:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">imblearn.over_sampling</span> <span class="kn">import</span> <span class="n">SMOTE</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+
+<span class="c1"># Assume we have imbalanced X_train and y_train</span>
+<span class="n">smote</span> <span class="o">=</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">X_train_balanced</span><span class="p">,</span> <span class="n">y_train_balanced</span> <span class="o">=</span> <span class="n">smote</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train_vec</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Train Random Forest on balanced data</span>
+<span class="n">rf_model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">rf_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_balanced</span><span class="p">,</span> <span class="n">y_train_balanced</span><span class="p">)</span>
+
+<span class="c1"># Evaluate</span>
+<span class="n">rf_predictions</span> <span class="o">=</span> <span class="n">rf_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_vec</span><span class="p">)</span>
+<span class="n">rf_performance</span> <span class="o">=</span> <span class="n">evaluate_performance</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">rf_predictions</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random Forest performance on balanced data:&quot;</span><span class="p">,</span> <span class="n">rf_performance</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="comparing-text-generation-capabilities">
+<h2>6. Comparing Text Generation Capabilities<a class="headerlink" href="#comparing-text-generation-capabilities" title="Link to this heading">#</a></h2>
+<p>For text generation tasks, we often use both automated metrics and human evaluation. Here’s an example using the BLEU score:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.translate.bleu_score</span> <span class="kn">import</span> <span class="n">sentence_bleu</span>
+
+<span class="k">def</span> <span class="nf">generate_text_traditional</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">vectorizer</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">generated_text</span> <span class="o">=</span> <span class="n">prompt</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_length</span><span class="p">):</span>
+        <span class="n">next_word_vec</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">generated_text</span><span class="p">])</span>
+        <span class="n">next_word</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">next_word_vec</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">generated_text</span> <span class="o">+=</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">next_word</span>
+    <span class="k">return</span> <span class="n">generated_text</span>
+
+<span class="k">def</span> <span class="nf">generate_text_llm</span><span class="p">(</span><span class="n">prompt</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;The impact of social media on&quot;</span>
+<span class="n">reference</span> <span class="o">=</span> <span class="s2">&quot;The impact of social media on society has been profound, changing how we communicate and share information.&quot;</span>
+
+<span class="n">traditional_generated</span> <span class="o">=</span> <span class="n">generate_text_traditional</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">vectorizer</span><span class="p">)</span>
+<span class="n">llm_generated</span> <span class="o">=</span> <span class="n">generate_text_llm</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+
+<span class="n">traditional_bleu</span> <span class="o">=</span> <span class="n">sentence_bleu</span><span class="p">([</span><span class="n">reference</span><span class="o">.</span><span class="n">split</span><span class="p">()],</span> <span class="n">traditional_generated</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="n">llm_bleu</span> <span class="o">=</span> <span class="n">sentence_bleu</span><span class="p">([</span><span class="n">reference</span><span class="o">.</span><span class="n">split</span><span class="p">()],</span> <span class="n">llm_generated</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Traditional model BLEU score:&quot;</span><span class="p">,</span> <span class="n">traditional_bleu</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LLM BLEU score:&quot;</span><span class="p">,</span> <span class="n">llm_bleu</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="named-entity-recognition-ner-performance">
+<h2>7. Named Entity Recognition (NER) Performance<a class="headerlink" href="#named-entity-recognition-ner-performance" title="Link to this heading">#</a></h2>
+<p>Comparing NER performance between traditional models and LLMs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="c1"># Load spaCy model</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load Hugging Face NER pipeline</span>
+<span class="n">ner_pipeline</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;ner&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;dbmdz/bert-large-cased-finetuned-conll03-english&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">traditional_ner</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">ent</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">)</span> <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">llm_ner</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">entities</span> <span class="o">=</span> <span class="n">ner_pipeline</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">ent</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">],</span> <span class="n">ent</span><span class="p">[</span><span class="s1">&#39;entity&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">entities</span><span class="p">]</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Apple Inc. is planning to open a new store in New York City next month, according to CEO Tim Cook.&quot;</span>
+
+<span class="n">traditional_entities</span> <span class="o">=</span> <span class="n">traditional_ner</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="n">llm_entities</span> <span class="o">=</span> <span class="n">llm_ner</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Traditional NER results:&quot;</span><span class="p">,</span> <span class="n">traditional_entities</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LLM NER results:&quot;</span><span class="p">,</span> <span class="n">llm_entities</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="sentiment-analysis-and-opinion-mining">
+<h2>8. Sentiment Analysis and Opinion Mining<a class="headerlink" href="#sentiment-analysis-and-opinion-mining" title="Link to this heading">#</a></h2>
+<p>Comparing sentiment analysis performance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">textblob</span> <span class="kn">import</span> <span class="n">TextBlob</span>
+
+<span class="k">def</span> <span class="nf">traditional_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">TextBlob</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">sentiment</span><span class="o">.</span><span class="n">polarity</span>
+
+<span class="k">def</span> <span class="nf">llm_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Analyze the sentiment of the following text as positive, negative, or neutral:</span><span class="se">\n\n</span><span class="s2">Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">Sentiment:&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;I love this product! It&#39;s amazing.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;This service is terrible and I&#39;m very disappointed.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;The weather is quite nice today.&quot;</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">:</span>
+    <span class="n">trad_sent</span> <span class="o">=</span> <span class="n">traditional_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">llm_sent</span> <span class="o">=</span> <span class="n">llm_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Traditional sentiment: </span><span class="si">{</span><span class="n">trad_sent</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LLM sentiment: </span><span class="si">{</span><span class="n">llm_sent</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="information-extraction-and-relation-classification">
+<h2>9. Information Extraction and Relation Classification<a class="headerlink" href="#information-extraction-and-relation-classification" title="Link to this heading">#</a></h2>
+<p>Comparing performance on relation extraction tasks:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="k">def</span> <span class="nf">traditional_relation_extraction</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(\w+) is the (CEO|founder) of (\w+)&quot;</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[{</span><span class="s1">&#39;person&#39;</span><span class="p">:</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;company&#39;</span><span class="p">:</span> <span class="n">m</span><span class="p">[</span><span class="mi">2</span><span class="p">]}</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">llm_relation_extraction</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Extract the relationship between person, role, and company in the following text.</span>
+<span class="s2">    Format the output as JSON: </span><span class="se">{{</span><span class="s2">&quot;person&quot;: &quot;&quot;, &quot;role&quot;: &quot;&quot;, &quot;company&quot;: &quot;&quot;</span><span class="se">}}</span>
+
+<span class="s2">    Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span>
+
+<span class="s2">    Relationship:&quot;&quot;&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Elon Musk is the CEO of Tesla and SpaceX. Jeff Bezos is the founder of Amazon.&quot;</span>
+
+<span class="n">trad_relations</span> <span class="o">=</span> <span class="n">traditional_relation_extraction</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="n">llm_relations</span> <span class="o">=</span> <span class="n">llm_relation_extraction</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Traditional relation extraction:&quot;</span><span class="p">,</span> <span class="n">trad_relations</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LLM relation extraction:&quot;</span><span class="p">,</span> <span class="n">llm_relations</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="computational-efficiency-and-resource-requirements">
+<h2>10. Computational Efficiency and Resource Requirements<a class="headerlink" href="#computational-efficiency-and-resource-requirements" title="Link to this heading">#</a></h2>
+<p>When comparing LLMs with traditional models, consider:</p>
+<ol class="arabic simple">
+<li><p>Training time and data requirements</p></li>
+<li><p>Inference speed</p></li>
+<li><p>Hardware requirements</p></li>
+</ol>
+<p>Here’s an example comparing inference speed:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">def</span> <span class="nf">measure_inference_time</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">input_data</span><span class="p">,</span> <span class="n">n_runs</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_runs</span><span class="p">):</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_data</span><span class="p">)</span>
+    <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_runs</span>
+
+<span class="c1"># Traditional model inference time</span>
+<span class="n">trad_time</span> <span class="o">=</span> <span class="n">measure_inference_time</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">x</span><span class="p">])),</span> <span class="s2">&quot;Sample text for inference&quot;</span><span class="p">)</span>
+
+<span class="c1"># LLM inference time</span>
+<span class="n">llm_time</span> <span class="o">=</span> <span class="n">measure_inference_time</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">few_shot_classification</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">examples</span><span class="p">),</span> <span class="s2">&quot;Sample text for inference&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Traditional model average inference time: </span><span class="si">{</span><span class="n">trad_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LLM average inference time: </span><span class="si">{</span><span class="n">llm_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="scalability-and-adaptability">
+<h2>11. Scalability and Adaptability<a class="headerlink" href="#scalability-and-adaptability" title="Link to this heading">#</a></h2>
+<p>To compare scalability, test models on datasets of varying sizes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">evaluate_scalability</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">vectorizer</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">):</span>
+    <span class="n">X_subset</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="n">n_samples</span><span class="p">]</span>
+    <span class="n">y_subset</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="n">n_samples</span><span class="p">]</span>
+
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_subset</span><span class="p">,</span> <span class="n">y_subset</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">X_train_vec</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">X_test_vec</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_vec</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_vec</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="c1"># Assume X and y are your full dataset</span>
+<span class="n">sample_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">]</span>
+<span class="n">accuracies</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">sample_sizes</span><span class="p">:</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="n">evaluate_scalability</span><span class="p">(</span><span class="n">LogisticRegression</span><span class="p">(),</span> <span class="n">TfidfVectorizer</span><span class="p">(),</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">accuracies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span>
+
+<span class="c1"># Plot results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sample_sizes</span><span class="p">,</span> <span class="n">accuracies</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Sample size&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Scalability of Traditional Model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="interpretability-and-explainability">
+<h2>12. Interpretability and Explainability<a class="headerlink" href="#interpretability-and-explainability" title="Link to this heading">#</a></h2>
+<p>Compare the interpretability of traditional models and LLMs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lime.lime_text</span> <span class="kn">import</span> <span class="n">LimeTextExplainer</span>
+
+<span class="k">def</span> <span class="nf">explain_traditional_prediction</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">vectorizer</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+    <span class="n">explainer</span> <span class="o">=</span> <span class="n">LimeTextExplainer</span><span class="p">(</span><span class="n">class_names</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+    <span class="n">exp</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">explain_instance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">num_features</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">exp</span><span class="o">.</span><span class="n">as_list</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">explain_llm_prediction</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">categories</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Classify the following text into one of these categories: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span>
+<span class="s2">    Explain your reasoning step by step.</span>
+
+<span class="s2">    Text: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span>
+
+<span class="s2">    Classification and explanation:&quot;&quot;&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;text-davinci-002&quot;</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;The new economic policy has significantly impacted the stock market.&quot;</span>
+
+<span class="n">trad_explanation</span> <span class="o">=</span> <span class="n">explain_traditional_prediction</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">vectorizer</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">categories</span><span class="p">)</span>
+<span class="n">llm_explanation</span> <span class="o">=</span> <span class="n">explain_llm_prediction</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">categories</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Traditional model explanation:&quot;</span><span class="p">,</span> <span class="n">trad_explanation</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LLM explanation:&quot;</span><span class="p">,</span> <span class="n">llm_explanation</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Comparing LLM performance with traditional supervised learning involves considering various factors such as accuracy, efficiency, scalability, and interpretability. While LLMs often show superior performance on many NLP tasks, traditional models may still be preferable in scenarios with limited computational resources or when interpretability is crucial.</p>
+<p>Researchers should carefully evaluate the trade-offs between these approaches based on their specific research questions, dataset characteristics, and available resources. As the field continues to evolve, hybrid approaches combining the strengths of both paradigms may offer promising directions for future research in social science applications of NLP.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -653,6 +958,33 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-of-traditional-supervised-learning">2. Recap of Traditional Supervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-approaches-in-comparison">3. LLM Approaches in Comparison</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-metrics-and-methodologies">4. Evaluation Metrics and Methodologies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-comparison-in-classification-tasks">5. Performance Comparison in Classification Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-text-generation-capabilities">6. Comparing Text Generation Capabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#named-entity-recognition-ner-performance">7. Named Entity Recognition (NER) Performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentiment-analysis-and-opinion-mining">8. Sentiment Analysis and Opinion Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-extraction-and-relation-classification">9. Information Extraction and Relation Classification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-efficiency-and-resource-requirements">10. Computational Efficiency and Resource Requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scalability-and-adaptability">11. Scalability and Adaptability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretability-and-explainability">12. Interpretability and Explainability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
