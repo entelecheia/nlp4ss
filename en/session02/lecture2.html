@@ -90,6 +90,8 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'session02/lecture2';</script>
     <script src="../_static/language_switcher.js?v=ff97be19"></script>
     <script src="../_static/chat.js?v=f0de43d7"></script>
@@ -486,8 +488,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-document-similarity-and-clustering">Example: Document Similarity and Clustering</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-and-limitations">8. Challenges and Limitations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-and-interpretation">9. Evaluation and Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topic-modeling">8. Topic Modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-latent-dirichlet-allocation-lda-with-gensim">Example: Latent Dirichlet Allocation (LDA) with Gensim</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-and-limitations">9. Challenges and Limitations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-and-interpretation">10. Evaluation and Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
             </nav>
         </div>
@@ -512,7 +519,16 @@ document.write(`
 <li><p>Tracking changes in language use over time</p></li>
 </ul>
 <p>The importance of these tasks lies in their ability to process and analyze large volumes of text data efficiently, revealing patterns and insights that might be difficult or time-consuming to identify manually.</p>
-</section>
+<div align="center" class="mermaid align-center">
+            graph TD
+    A[Basic NLP Tasks] --&gt; B[Text Classification]
+    A --&gt; C[Sentiment Analysis]
+    A --&gt; D[Named Entity Recognition]
+    A --&gt; E[Part-of-Speech Tagging]
+    A --&gt; F[Text Summarization]
+    A --&gt; G[Topic Modeling]
+        </div>
+        </section>
 <section id="text-classification">
 <h2>2. Text Classification<a class="headerlink" href="#text-classification" title="Link to this heading">#</a></h2>
 <p>Text classification is the task of assigning predefined categories to text documents. It’s widely used in social science research for various purposes, such as categorizing survey responses or identifying topics in social media posts.</p>
@@ -745,8 +761,58 @@ document.write(`
 <p>This example demonstrates document clustering using K-means and calculates document similarity using cosine similarity on TF-IDF vectors.</p>
 </section>
 </section>
+<section id="topic-modeling">
+<h2>8. Topic Modeling<a class="headerlink" href="#topic-modeling" title="Link to this heading">#</a></h2>
+<p>Topic modeling is a statistical method for discovering abstract topics that occur in a collection of documents. It’s particularly useful for analyzing large corpora of text in social science research.</p>
+<section id="example-latent-dirichlet-allocation-lda-with-gensim">
+<h3>Example: Latent Dirichlet Allocation (LDA) with Gensim<a class="headerlink" href="#example-latent-dirichlet-allocation-lda-with-gensim" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gensim</span> <span class="kn">import</span> <span class="n">corpora</span>
+<span class="kn">from</span> <span class="nn">gensim.models.ldamodel</span> <span class="kn">import</span> <span class="n">LdaModel</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+    <span class="n">stop_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">token</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span> <span class="ow">and</span> <span class="n">token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
+
+<span class="n">documents</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;The cat and the dog&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;The dog chased the cat&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;The cat climbed a tree&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Dogs are loyal pets&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Cats are independent animals&quot;</span>
+<span class="p">]</span>
+
+<span class="c1"># Preprocess the documents</span>
+<span class="n">processed_docs</span> <span class="o">=</span> <span class="p">[</span><span class="n">preprocess</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">documents</span><span class="p">]</span>
+
+<span class="c1"># Create a dictionary representation of the documents</span>
+<span class="n">dictionary</span> <span class="o">=</span> <span class="n">corpora</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">(</span><span class="n">processed_docs</span><span class="p">)</span>
+
+<span class="c1"># Create a corpus</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">dictionary</span><span class="o">.</span><span class="n">doc2bow</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">processed_docs</span><span class="p">]</span>
+
+<span class="c1"># Train the LDA model</span>
+<span class="n">lda_model</span> <span class="o">=</span> <span class="n">LdaModel</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span> <span class="n">id2word</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Print the topics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topics:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">lda_model</span><span class="o">.</span><span class="n">print_topics</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Topic: </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This example demonstrates how to perform topic modeling using Latent Dirichlet Allocation (LDA) with the Gensim library. It processes a small set of documents, creates a bag-of-words representation, and then trains an LDA model to discover latent topics in the text.</p>
+</section>
+</section>
 <section id="challenges-and-limitations">
-<h2>8. Challenges and Limitations<a class="headerlink" href="#challenges-and-limitations" title="Link to this heading">#</a></h2>
+<h2>9. Challenges and Limitations<a class="headerlink" href="#challenges-and-limitations" title="Link to this heading">#</a></h2>
 <p>While these basic NLP tasks are powerful, they come with challenges:</p>
 <ol class="arabic simple">
 <li><p>Domain-specific language: Models trained on general text may perform poorly on specialized domains (e.g., medical or legal texts).</p></li>
@@ -756,7 +822,7 @@ document.write(`
 </ol>
 </section>
 <section id="evaluation-and-interpretation">
-<h2>9. Evaluation and Interpretation<a class="headerlink" href="#evaluation-and-interpretation" title="Link to this heading">#</a></h2>
+<h2>10. Evaluation and Interpretation<a class="headerlink" href="#evaluation-and-interpretation" title="Link to this heading">#</a></h2>
 <p>When applying these NLP tasks in social science research, it’s crucial to:</p>
 <ol class="arabic simple">
 <li><p>Choose appropriate evaluation metrics (e.g., accuracy, F1-score, inter-annotator agreement)</p></li>
@@ -765,6 +831,38 @@ document.write(`
 <li><p>Combine computational methods with qualitative analysis for a more comprehensive understanding</p></li>
 </ol>
 <p>Remember that while these NLP tasks can process large amounts of text data quickly, they should be seen as tools to augment, not replace, careful human analysis in social science research.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>These basic NLP tasks form the foundation for more complex analyses in social science research. By mastering these techniques, researchers can:</p>
+<ol class="arabic simple">
+<li><p>Automatically categorize large volumes of text data</p></li>
+<li><p>Gauge public sentiment on various issues</p></li>
+<li><p>Extract structured information from unstructured text</p></li>
+<li><p>Understand the linguistic structure of text data</p></li>
+<li><p>Summarize long documents efficiently</p></li>
+<li><p>Discover latent themes in large text corpora</p></li>
+</ol>
+<div align="center" class="mermaid align-center">
+            graph TD
+    A[Raw Text Data] --&gt; B[Preprocessing]
+    B --&gt; C[Basic NLP Tasks]
+    C --&gt; D[Text Classification]
+    C --&gt; E[Sentiment Analysis]
+    C --&gt; F[Named Entity Recognition]
+    C --&gt; G[POS Tagging]
+    C --&gt; H[Summarization]
+    C --&gt; I[Topic Modeling]
+    D --&gt; J[Insights and Analysis]
+    E --&gt; J
+    F --&gt; J
+    G --&gt; J
+    H --&gt; J
+    I --&gt; J
+        </div>
+        <p>As you apply these techniques in your research, remember that the choice of method should be guided by your research questions and the nature of your data. Often, a combination of these techniques will be necessary to gain comprehensive insights from your text data.</p>
+<p>Moreover, while these methods can process large amounts of text data quickly, they should be seen as tools to augment, not replace, careful human analysis in social science research. Always interpret the results in the context of your research questions and domain knowledge.</p>
+<p>As you become more comfortable with these basic tasks, you’ll be well-prepared to explore more advanced NLP techniques and their applications in social science research.</p>
 </section>
 </section>
 
@@ -858,8 +956,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-document-similarity-and-clustering">Example: Document Similarity and Clustering</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-and-limitations">8. Challenges and Limitations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-and-interpretation">9. Evaluation and Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topic-modeling">8. Topic Modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-latent-dirichlet-allocation-lda-with-gensim">Example: Latent Dirichlet Allocation (LDA) with Gensim</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-and-limitations">9. Challenges and Limitations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-and-interpretation">10. Evaluation and Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
   </nav></div>
 
