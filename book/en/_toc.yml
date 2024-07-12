@@ -31,6 +31,9 @@ parts:
           - file: session05/lecture1
           - file: session05/lecture2
           - file: session05/lecture3
+  - caption: Labs
+    chapters:
+      - file: labs/nlp4ss-lab-1
   - caption: About
     chapters:
       - file: syllabus/index
