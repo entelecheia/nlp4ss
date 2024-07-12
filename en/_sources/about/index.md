@@ -6,7 +6,7 @@ This book is written by [Young Joon Lee](https://www.linkedin.com/in/entelecheia
 
 ### Young Joon Lee
 
-```{image} https://entelecheia.me/assets/img/profile-200x250.jpeg
+```{image} https://entelecheia.me/assets/img/profile-200x220.jpeg
 :width: 100
 :align: left
 ```
