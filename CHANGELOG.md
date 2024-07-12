@@ -1,5 +1,11 @@
 <!--next-version-placeholder-->
 
+## v0.3.1 (2024-07-12)
+
+### Fix
+
+* **config:** Update path to book location in repository config ([`e6ae656`](https://github.com/entelecheia/nlp4ss/commit/e6ae656b547f42cc7d6b481148c6685a06f10b6e))
+
 ## v0.3.0 (2024-07-12)
 
 ### Feature
