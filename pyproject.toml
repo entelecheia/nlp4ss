@@ -16,6 +16,7 @@ nlp4ss = 'nlp4ss.__cli__:main'
 python = ">=3.9,<3.13"
 click = "^8.1.3"
 pyyaml = "^6.0.1"
+hyfi = "^1.36.4"
 
 [tool.poetry.group.dev]
 optional = true
