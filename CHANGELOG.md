@@ -1,5 +1,24 @@
 <!--next-version-placeholder-->
 
+## v0.3.1 (2024-07-12)
+
+### Fix
+
+* **config:** Update path to book location in repository config ([`e6ae656`](https://github.com/entelecheia/nlp4ss/commit/e6ae656b547f42cc7d6b481148c6685a06f10b6e))
+
+## v0.3.0 (2024-07-12)
+
+### Feature
+
+* **dependencies:** Add nltk, scikit-learn, spacy, and textblob ([`2bb400d`](https://github.com/entelecheia/nlp4ss/commit/2bb400d3da99d68ea9db0496c9309a791cb2334f))
+* **book:** Add labs section to the table of contents ([`ff08f72`](https://github.com/entelecheia/nlp4ss/commit/ff08f7233cd0175bf5b7c3d76d60a30c04a67adb))
+* **dependencies:** Add hyfi version 1.36.4 ([`7a4efae`](https://github.com/entelecheia/nlp4ss/commit/7a4efaee7564b7dc25dcad97e2869381b91ef459))
+* **docs:** Add mermaid diagrams and conclusion on text preprocessing ([`b2dbac0`](https://github.com/entelecheia/nlp4ss/commit/b2dbac0d328d87a0a760e6de2dc866fd8a4d3714))
+
+### Fix
+
+* **docs:** Move and correct Table of Contents placement in index.md ([`d69ee74`](https://github.com/entelecheia/nlp4ss/commit/d69ee74da9825ac8b05f9add76d55a3213abe3c8))
+
 ## v0.2.0 (2024-07-11)
 
 ### Feature
