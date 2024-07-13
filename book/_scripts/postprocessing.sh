@@ -12,6 +12,7 @@ FINAL_BUILD_DIR="book/_build/html"
 LANGUAGE_SELECTOR_FILE="book/_addons/language_selector.html"
 REDIRECT_INDEX_FILE="book/_addons/language_redirect.html"
 FINAL_INDEX_FILE="$FINAL_BUILD_DIR/index.html"
+GISCUS_SCRIPT_FILE="book/_addons/giscus.html"
 
 # Function to copy and modify HTML files
 copy_and_modify_html() {
@@ -44,10 +45,16 @@ copy_and_modify_html() {
     # Replace language options
     selector_content="${selector_content/__LANGUAGE_OPTIONS__/$options}"
 
+    # Define the Giscus script
+    local giscus_script
+    giscus_script=$(cat "$GISCUS_SCRIPT_FILE")
+    giscus_script="${giscus_script//$'\n'/}"
+    giscus_script="${giscus_script/__CURRENT_LANGUAGE__/$lang}"
+
     # Modify HTML files
     find "$dest_dir" -name "*.html" -print0 | while IFS= read -r -d '' html_file; do
         # Add language selector and script
-        awk -v selector="$selector_content" '
+        awk -v selector="$selector_content" -v giscus="$giscus_script" '
         /<\/head>/ {
             print "    <script src=\"/_static/language_switcher.js\"></script>"
             print $0
@@ -56,6 +63,12 @@ copy_and_modify_html() {
         /<div class="sidebar-primary-items__start sidebar-primary__section">/ {
             print $0
             print selector
+            next
+        }
+        /<footer class="prev-next-footer d-print-none">/ {
+            print "    <div class=\"giscus\"></div>"
+            print giscus
+            print $0
             next
         }
         {print}
