@@ -1,5 +1,11 @@
 <!--next-version-placeholder-->
 
+## v0.4.0 (2024-07-13)
+
+### Feature
+
+* **comments:** Add Giscus integration for comments in the book ([`3b45187`](https://github.com/entelecheia/nlp4ss/commit/3b45187e5a3c75d2fbff57ac536cd94fd3f7c977))
+
 ## v0.3.1 (2024-07-12)
 
 ### Fix
