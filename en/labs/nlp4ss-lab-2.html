@@ -1,0 +1,1119 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lab Session 2: LLMs for Data Annotation and Classification &#8212; NLP for Social Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css?v=e236af4b" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../_static/language_selector.css?v=6a8ebae4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/tabs.js?v=3ee01567"></script>
+    <script src="../_static/js/hoverxref.js"></script>
+    <script src="../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../_static/js/micromodal.min.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-BQJE5V9RK2"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-BQJE5V9RK2');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-BQJE5V9RK2');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'labs/nlp4ss-lab-2';</script>
+    <script src="../_static/language_switcher.js?v=ff97be19"></script>
+    <script src="../_static/chat.js?v=f0de43d7"></script>
+    <link rel="icon" href="https://assets.entelecheia.ai/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Course Syllabus" href="../syllabus/index.html" />
+    <link rel="prev" title="Lab Session 1: Introduction to NLP for Social Science" href="nlp4ss-lab-1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <script src="/_static/language_switcher.js"></script>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-lang-select">  <nav class="menu">    <ul class="clearfix">      <li class="current-item">        <a href="#" class="clicker">          English <span class="arrow">&#9660;</span>        </a>        <ul class="sub-menu">                    <li><a href="#" onclick="switchLanguage('en'); return false;">English</a></li>        </ul>      </li>    </ul>  </nav></div>
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">NLP for Social Science</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture Notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session01/index.html">Session 1 - Introduction to NLP for Social Science</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../session01/lecture1.html">1.1 Fundamentals of NLP and its Evolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session01/lecture2.html">1.2 Overview of Generative LLMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session01/lecture3.html">1.3 Ethical Considerations and Challenges in Using LLMs for Research</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session02/index.html">Session 2: Traditional NLP Techniques and Text Preprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../session02/lecture1.html">2.1 Text Cleaning, Normalization, and Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session02/lecture2.html">2.2 Basic NLP Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session02/lecture3.html">2.3 Topic Modeling and Latent Dirichlet Allocation (LDA)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session03/index.html">Session 3: LLMs for Data Annotation and Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../session03/lecture1.html">3.1 Zero-shot Learning with LLMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session03/lecture2.html">3.2 Few-shot Learning and Prompt Engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session03/lecture3.html">3.3 Comparing LLM Performance with Traditional Supervised Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session04/index.html">Session 4: Generative Explanations and Summaries in Social Science</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../session04/lecture1.html">4.1 Using LLMs for High-Quality Text Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session04/lecture2.html">4.2 Social Bias Inference and Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session04/lecture3.html">4.3 Figurative Language Explanation and Cultural Context</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session05/index.html">Session 5: Advanced Applications of LLMs in Social Science Research</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../session05/lecture1.html">5.1 Analyzing Large-Scale Textual Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session05/lecture2.html">5.2 Misinformation and Fake News Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session05/lecture3.html">5.3 Future Directions and Emerging Trends</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Labs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="nlp4ss-lab-1.html">Lab Session 1: Introduction to NLP for Social Science</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab Session 2: LLMs for Data Annotation and Classification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/index.html">Course Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">Who made this book?</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/entelecheia/nlp4ss/blob/main/book/en/labs/nlp4ss-lab-2.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/entelecheia/nlp4ss" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/entelecheia/nlp4ss/edit/main/book/en/labs/nlp4ss-lab-2.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/entelecheia/nlp4ss/issues/new?title=Issue%20on%20page%20%2Flabs/nlp4ss-lab-2.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/labs/nlp4ss-lab-2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab Session 2: LLMs for Data Annotation and Classification</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">0. Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-data-loading">Setup and Data Loading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-llm-access">1. Setting up LLM Access</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-classification-for-environmental-topics">2. Zero-shot Classification for Environmental Topics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-learning-for-sentiment-analysis">3. Few-shot Learning for Sentiment Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-based-data-annotation-key-environmental-issues">4. LLM-based Data Annotation: Key Environmental Issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-summaries-with-llms">5. Generating Summaries with LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-and-interpretation">6. Analysis and Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">7. Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ethical-considerations">Ethical Considerations</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-session-2-llms-for-data-annotation-and-classification">
+<h1>Lab Session 2: LLMs for Data Annotation and Classification<a class="headerlink" href="#lab-session-2-llms-for-data-annotation-and-classification" title="Link to this heading">#</a></h1>
+<section id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this lab, you will be able to:</p>
+<ol class="arabic simple">
+<li><p>Use LLMs for zero-shot and few-shot classification of press releases</p></li>
+<li><p>Apply LLMs for data annotation tasks such as topic labeling and sentiment analysis</p></li>
+<li><p>Generate summaries of press releases using LLMs</p></li>
+<li><p>Analyze and interpret the results in the context of environmental communication</p></li>
+</ol>
+</section>
+<section id="installation">
+<h2>0. Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>Before we begin, let’s install the necessary packages for this lab. Run the following cell to install the required libraries:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">nlp4ss</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="setup-and-data-loading">
+<h2>Setup and Data Loading<a class="headerlink" href="#setup-and-data-loading" title="Link to this heading">#</a></h2>
+<p>We’ll use the Sierra Club press release dataset from Lab Session 1. Let’s start by loading the data and setting up our environment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hyfi</span> <span class="kn">import</span> <span class="n">HyFI</span>
+
+<span class="k">if</span> <span class="n">HyFI</span><span class="o">.</span><span class="n">is_colab</span><span class="p">():</span>
+    <span class="n">HyFI</span><span class="o">.</span><span class="n">mount_google_drive</span><span class="p">()</span>
+    <span class="n">project_root</span> <span class="o">=</span> <span class="s2">&quot;/content/drive/MyDrive/courses/nlp4ss&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">project_root</span> <span class="o">=</span> <span class="s2">&quot;$HOME/workspace/courses/nlp4ss&quot;</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">HyFI</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
+    <span class="n">project_name</span><span class="o">=</span><span class="s2">&quot;nlp4ss&quot;</span><span class="p">,</span>
+    <span class="n">project_root</span><span class="o">=</span><span class="n">project_root</span><span class="p">,</span>
+    <span class="n">logging_level</span><span class="o">=</span><span class="s2">&quot;WARNING&quot;</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">raw_data_file</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">workspace_dir</span> <span class="o">/</span> <span class="s2">&quot;data/raw/articles.jsonl&quot;</span>
+<span class="n">rdata</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">,</span> <span class="n">data_files</span><span class="o">=</span><span class="n">raw_data_file</span><span class="o">.</span><span class="n">as_posix</span><span class="p">())</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">rdata</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+
+<span class="c1"># Display basic information about the dataset</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sample of the data:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/yj.lee/.venvs/nlp4ss/lib/python3.12/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+INFO:hyfi.joblib.joblib:initialized batcher with &lt;hyfi.joblib.batcher.batcher.Batcher object at 0x16f794680&gt;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 6354 entries, 0 to 6353
+Data columns (total 7 columns):
+ #   Column     Non-Null Count  Dtype 
+---  ------     --------------  ----- 
+ 0   title      6354 non-null   object
+ 1   timestamp  6354 non-null   object
+ 2   url        6354 non-null   object
+ 3   page_url   6354 non-null   object
+ 4   page       6354 non-null   int64 
+ 5   content    6354 non-null   object
+ 6   uuid       6354 non-null   object
+dtypes: int64(1), object(6)
+memory usage: 347.6+ KB
+None
+
+Sample of the data:
+                                               title       timestamp  \
+0  Sierra Club Urges Commerce Department to Hold ...  April 15, 2024   
+1  Sierra Club Statement on BOEM Financial Assura...  April 15, 2024   
+2  We Energies Files Third Rate Increase in Three...  April 15, 2024   
+3  MEDIA ADVISORY: Oregon Regulators to Hear Conc...  April 12, 2024   
+4  Advisory: Special Meeting for County Commissio...  April 12, 2024   
+
+                                                 url  \
+0  https://www.sierraclub.org/press-releases/2024...   
+1  https://www.sierraclub.org/press-releases/2024...   
+2  https://www.sierraclub.org/press-releases/2024...   
+3  https://www.sierraclub.org/press-releases/2024...   
+4  https://www.sierraclub.org/press-releases/2024...   
+
+                                            page_url  page  \
+0  https://www.sierraclub.org/press-releases?_wra...     1   
+1  https://www.sierraclub.org/press-releases?_wra...     1   
+2  https://www.sierraclub.org/press-releases?_wra...     1   
+3  https://www.sierraclub.org/press-releases?_wra...     1   
+4  https://www.sierraclub.org/press-releases?_wra...     1   
+
+                                             content  \
+0  April 15, 2024\n\n\nContact\nAda Recinos, Depu...   
+1  April 15, 2024\n\n\nContact\nIan Brickey, ian....   
+2  April 15, 2024\n\n\nContact\nMegan Wittman, me...   
+3  April 12, 2024\n\n\nContact\nKim Petty, Sierra...   
+4  April 12, 2024\n\n\nContact\nLee Ziesche, lee....   
+
+                                   uuid  
+0  9ee69b6c-cd7a-4617-94d2-18951266c182  
+1  deed5268-32a0-4607-9c0e-e4f565b189f7  
+2  c0486029-319a-46c8-9622-56bdd61fd9e5  
+3  3ebc6ab6-15a5-4ccc-953b-593965ae0ad8  
+4  924abe2c-586d-4087-b4f2-208b731ebb2b  
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="setting-up-llm-access">
+<h2>1. Setting up LLM Access<a class="headerlink" href="#setting-up-llm-access" title="Link to this heading">#</a></h2>
+<p>We’ll use the OpenAI GPT-4.5 model for this lab. Make sure you have the OpenAI Python library installed and your API key set up.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openai</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># Set your OpenAI API key from the environment variable</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">)</span>
+<span class="c1"># or set it directly</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s2">&quot;YOUR_API_KEY&quot;</span>
+
+<span class="c1">## Set the API key</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+
+
+<span class="n">MODEL</span> <span class="o">=</span> <span class="s2">&quot;gpt-4o&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">MODEL</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">completion</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">MODEL</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;You are a helpful assistant that helps me with my research.&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">prompt</span><span class="p">},</span>
+        <span class="p">],</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">completion</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="zero-shot-classification-for-environmental-topics">
+<h2>2. Zero-shot Classification for Environmental Topics<a class="headerlink" href="#zero-shot-classification-for-environmental-topics" title="Link to this heading">#</a></h2>
+<p>Let’s use zero-shot learning to classify the press releases into different environmental topics.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+
+<span class="k">def</span> <span class="nf">zero_shot_classification</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">categories</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Classify the following press release into one of these categories: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span>
+<span class="s2">    Only respond with the category name.</span>
+
+<span class="s2">    Press Release: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span>
+
+<span class="s2">    Category:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+
+
+<span class="c1"># Define categories</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Climate Change&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Conservation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Renewable Energy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Environmental Justice&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Wildlife Protection&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># Apply zero-shot classification to a sample of press releases</span>
+<span class="n">sample_size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+<span class="n">df_sample</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">df_sample</span><span class="p">[</span><span class="s2">&quot;zero_shot_topic&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_sample</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">zero_shot_classification</span><span class="p">(</span><span class="n">x</span><span class="p">[:</span><span class="mi">1000</span><span class="p">],</span> <span class="n">categories</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Display results</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_sample</span><span class="p">[[</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;zero_shot_topic&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># Visualize distribution of classified topics</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">df_sample</span><span class="p">[</span><span class="s2">&quot;zero_shot_topic&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of Topics in Sierra Club Press Releases&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Topic&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Save the classified topics to a CSV file</span>
+<span class="n">output_file</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">workspace_dir</span> <span class="o">/</span> <span class="s2">&quot;data/processed/sierra_club_topics.csv&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_file</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving classified topics to </span><span class="si">{</span><span class="n">output_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">df_sample</span><span class="p">[[</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;zero_shot_topic&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                content        zero_shot_topic
+5775  April 5, 2017\n\n\nContact\n Emily Pomilio (20...       Renewable Energy
+1840  October 28, 2021\n\n\nContact\nShiloh Hernande...  Environmental Justice
+4272  December 6, 2018\n\n\nContact\nCourtney Bourgo...  Environmental Justice
+80    Black households face disproportionately high ...  Environmental Justice
+3133  February 24, 2020\n\n\nContact\nGabby Brown, g...           Conservation
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/7aba247483a733da1bce50ffb9bfb553458169051c7e282f2122970534989519.png"><img alt="../_images/7aba247483a733da1bce50ffb9bfb553458169051c7e282f2122970534989519.png" src="../_images/7aba247483a733da1bce50ffb9bfb553458169051c7e282f2122970534989519.png" style="width: 990px; height: 589px;" /></a>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving classified topics to /Users/yj.lee/workspace/courses/nlp4ss/workspace/data/processed/sierra_club_topics.csv
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="few-shot-learning-for-sentiment-analysis">
+<h2>3. Few-shot Learning for Sentiment Analysis<a class="headerlink" href="#few-shot-learning-for-sentiment-analysis" title="Link to this heading">#</a></h2>
+<p>Now, let’s use few-shot learning to perform sentiment analysis on the press releases.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">few_shot_sentiment_analysis</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Analyze the sentiment of the following press releases. Classify each as positive, negative, or neutral.</span>
+<span class="s2">    Just give the sentiment of the press release without any additional information.</span>
+<span class="s2">    Also, don&#39;t start the response with &quot;The sentiment is&quot; or &quot;Sentiment: &quot;.</span>
+
+<span class="s2">    Press Release: &quot;We are thrilled to announce a major victory in our fight against climate change. The new legislation will significantly reduce carbon emissions.&quot;</span>
+<span class="s2">    Sentiment: Positive</span>
+
+<span class="s2">    Press Release: &quot;The recent oil spill has caused devastating damage to local ecosystems. We demand immediate action to prevent such disasters in the future.&quot;</span>
+<span class="s2">    Sentiment: Negative</span>
+
+<span class="s2">    Press Release: &quot;The Sierra Club will be hosting its annual meeting next month to discuss ongoing projects and future initiatives.&quot;</span>
+<span class="s2">    Sentiment: Neutral</span>
+
+<span class="s2">    Press Release: </span><span class="si">{</span><span class="n">text</span><span class="p">[:</span><span class="mi">1000</span><span class="p">]</span><span class="si">}</span>
+<span class="s2">    Sentiment:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+
+
+<span class="c1"># Apply few-shot sentiment analysis to the sample</span>
+<span class="n">df_sample</span><span class="p">[</span><span class="s2">&quot;few_shot_sentiment&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_sample</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="n">few_shot_sentiment_analysis</span>
+<span class="p">)</span>
+
+<span class="c1"># Display results</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_sample</span><span class="p">[[</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;few_shot_sentiment&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># Visualize sentiment distribution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">df_sample</span><span class="p">[</span><span class="s2">&quot;few_shot_sentiment&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;pie&quot;</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%1.1f%%</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sentiment Distribution in Sierra Club Press Releases&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Save the sentiment analysis results to a CSV file</span>
+<span class="n">output_file</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">workspace_dir</span> <span class="o">/</span> <span class="s2">&quot;data/processed/sierra_club_sentiment.csv&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving sentiment analysis results to </span><span class="si">{</span><span class="n">output_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">df_sample</span><span class="p">[[</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;few_shot_sentiment&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                content few_shot_sentiment
+5775  April 5, 2017\n\n\nContact\n Emily Pomilio (20...           Positive
+1840  October 28, 2021\n\n\nContact\nShiloh Hernande...           Positive
+4272  December 6, 2018\n\n\nContact\nCourtney Bourgo...           Negative
+80    Black households face disproportionately high ...           Negative
+3133  February 24, 2020\n\n\nContact\nGabby Brown, g...            Neutral
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/2fcf4b63c3d8cb5d58253112fe81a51ea69d9913b81e6a3b3f71dccaaeb1c2fe.png"><img alt="../_images/2fcf4b63c3d8cb5d58253112fe81a51ea69d9913b81e6a3b3f71dccaaeb1c2fe.png" src="../_images/2fcf4b63c3d8cb5d58253112fe81a51ea69d9913b81e6a3b3f71dccaaeb1c2fe.png" style="width: 493px; height: 503px;" /></a>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving sentiment analysis results to /Users/yj.lee/workspace/courses/nlp4ss/workspace/data/processed/sierra_club_sentiment.csv
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="llm-based-data-annotation-key-environmental-issues">
+<h2>4. LLM-based Data Annotation: Key Environmental Issues<a class="headerlink" href="#llm-based-data-annotation-key-environmental-issues" title="Link to this heading">#</a></h2>
+<p>Let’s use the LLM to annotate our press releases with key environmental issues mentioned.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">extract_key_issues</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Extract the top 3 key environmental issues mentioned in the following press release. </span>
+<span class="s2">    Respond only with the issues, separated by semicolons.</span>
+<span class="s2">    Use only nouns or noun phrases as the key issues.</span>
+<span class="s2">    Key issues should be specific to environmental concerns.</span>
+
+<span class="s2">    Press Release: </span><span class="si">{</span><span class="n">text</span><span class="p">[:</span><span class="mi">1500</span><span class="p">]</span><span class="si">}</span>
+
+<span class="s2">    Key Issues:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+
+
+<span class="c1"># Apply key issue extraction to the sample</span>
+<span class="n">df_sample</span><span class="p">[</span><span class="s2">&quot;key_issues&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_sample</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">extract_key_issues</span><span class="p">)</span>
+
+<span class="c1"># Display results</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_sample</span><span class="p">[[</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;key_issues&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># Analyze most common issues</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">all_issues</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">issue</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">issues</span> <span class="ow">in</span> <span class="n">df_sample</span><span class="p">[</span><span class="s2">&quot;key_issues&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">issue</span> <span class="ow">in</span> <span class="n">issues</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">issue_counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">all_issues</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="o">*</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">issue_counts</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Top 10 Environmental Issues in Sierra Club Press Releases&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Issue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Save the extracted key issues to a CSV file</span>
+<span class="n">output_file</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">workspace_dir</span> <span class="o">/</span> <span class="s2">&quot;data/processed/sierra_club_key_issues.csv&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving extracted key issues to </span><span class="si">{</span><span class="n">output_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">df_sample</span><span class="p">[[</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;key_issues&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                content  \
+5775  April 5, 2017\n\n\nContact\n Emily Pomilio (20...   
+1840  October 28, 2021\n\n\nContact\nShiloh Hernande...   
+4272  December 6, 2018\n\n\nContact\nCourtney Bourgo...   
+80    Black households face disproportionately high ...   
+3133  February 24, 2020\n\n\nContact\nGabby Brown, g...   
+
+                                             key_issues  
+5775  energy efficiency; electricity usage reduction...  
+1840         water quality; contamination; strip mining  
+4272  habitat destruction; environmental damage; flo...  
+80    Energy burdens; Historic discrimination; Disin...  
+3133  oil and gas drilling in the Arctic; thermal co...  
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/b8f33cc5247931c9cfba19afb9b9ad8b5c87ea27cb0f951e2d8770cadddfb37c.png"><img alt="../_images/b8f33cc5247931c9cfba19afb9b9ad8b5c87ea27cb0f951e2d8770cadddfb37c.png" src="../_images/b8f33cc5247931c9cfba19afb9b9ad8b5c87ea27cb0f951e2d8770cadddfb37c.png" style="width: 1190px; height: 589px;" /></a>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving extracted key issues to /Users/yj.lee/workspace/courses/nlp4ss/workspace/data/processed/sierra_club_key_issues.csv
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="generating-summaries-with-llms">
+<h2>5. Generating Summaries with LLMs<a class="headerlink" href="#generating-summaries-with-llms" title="Link to this heading">#</a></h2>
+<p>Let’s use the LLM to generate concise summaries of the press releases.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_summary</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Summarize the following Sierra Club press release in 2-3 sentences:</span>
+
+<span class="s2">    </span><span class="si">{</span><span class="n">text</span><span class="p">[:</span><span class="n">max_length</span><span class="p">]</span><span class="si">}</span>
+
+<span class="s2">    Summary:</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+
+
+<span class="c1"># Generate summaries for the sample</span>
+<span class="n">df_sample</span><span class="p">[</span><span class="s2">&quot;summary&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_sample</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">generate_summary</span><span class="p">)</span>
+
+<span class="c1"># Display results</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_sample</span><span class="p">[[</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;summary&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># Save the generated summaries to a CSV file</span>
+<span class="n">output_file</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">workspace_dir</span> <span class="o">/</span> <span class="s2">&quot;data/processed/sierra_club_summaries.csv&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving generated summaries to </span><span class="si">{</span><span class="n">output_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">df_sample</span><span class="p">[[</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;summary&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                content  \
+5775  April 5, 2017\n\n\nContact\n Emily Pomilio (20...   
+1840  October 28, 2021\n\n\nContact\nShiloh Hernande...   
+4272  December 6, 2018\n\n\nContact\nCourtney Bourgo...   
+80    Black households face disproportionately high ...   
+3133  February 24, 2020\n\n\nContact\nGabby Brown, g...   
+
+                                                summary  
+5775  The Maryland General Assembly has enacted upda...  
+1840  A Montana district court judge ruled that the ...  
+4272  More than 500 diverse organizations and 2,845 ...  
+80    A new report by Dr. Marilyn A. Brown of Georgi...  
+3133  JPMorgan Chase has announced a new energy poli...  
+Saving generated summaries to /Users/yj.lee/workspace/courses/nlp4ss/workspace/data/processed/sierra_club_summaries.csv
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analysis-and-interpretation">
+<h2>6. Analysis and Interpretation<a class="headerlink" href="#analysis-and-interpretation" title="Link to this heading">#</a></h2>
+<p>Now that we’ve applied various LLM-based techniques to our Sierra Club press release dataset, let’s analyze and interpret the results in the context of environmental communication.</p>
+<ol class="arabic simple">
+<li><p>Examine the distribution of topics in the press releases. What does this tell us about the Sierra Club’s focus areas and communication strategies?</p></li>
+<li><p>Analyze the sentiment distribution across different topics. Are there any notable patterns in how the Sierra Club frames different environmental issues?</p></li>
+<li><p>Look at the key environmental issues extracted. How do these align with broader environmental discourse and policy debates?</p></li>
+<li><p>Compare the LLM-generated summaries with the original press releases. How effectively do they capture the main points?</p></li>
+<li><p>Discuss how these LLM-based analyses could be used to study environmental communication strategies and public engagement with environmental issues.</p></li>
+</ol>
+</section>
+<section id="exercise">
+<h2>7. Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h2>
+<p>For your exercise, please complete the following tasks:</p>
+<ol class="arabic simple">
+<li><p>Implement a few-shot learning approach to classify press releases by their primary call to action (e.g., public awareness, policy change, community action, donation request).</p></li>
+<li><p>Use the LLM to extract quotes from the press releases, along with the speaker’s name and affiliation.</p></li>
+<li><p>Create a visualization that shows how the topics and sentiments in Sierra Club press releases have changed over time (use the ‘timestamp’ column).</p></li>
+<li><p>Write a brief (300-350 words) analysis of your findings, discussing the potential of LLMs for analyzing environmental communication and the implications for social science research on environmental advocacy.</p></li>
+</ol>
+<p>Submit your code, visualizations, and written analysis.</p>
+</section>
+<section id="ethical-considerations">
+<h2>Ethical Considerations<a class="headerlink" href="#ethical-considerations" title="Link to this heading">#</a></h2>
+<p>As you work through this lab, consider the following ethical questions:</p>
+<ol class="arabic simple">
+<li><p>What are the potential biases in using LLMs to analyze environmental communication?</p></li>
+<li><p>How might the use of AI-generated summaries or classifications influence public understanding of environmental issues?</p></li>
+<li><p>What responsibilities do researchers have when using LLM-based analyses in studies of environmental advocacy?</p></li>
+<li><p>How can we ensure that the use of LLMs in analyzing press releases doesn’t oversimplify complex environmental issues?</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "entelecheia/nlp4ss",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./labs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+    <div class="giscus"></div>
+<script src="https://giscus.app/client.js"        data-repo="entelecheia/nlp4ss"        data-repo-id="R_kgDOMTcakg"        data-category="Q&A"        data-category-id="DIC_kwDOMTcaks4Cgwzd"        data-mapping="pathname"        data-strict="1"        data-reactions-enabled="1"        data-emit-metadata="1"        data-input-position="bottom"        data-theme="noborder_light"        data-lang="en"        data-loading="lazy"        crossorigin="anonymous"        async></script>
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="nlp4ss-lab-1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lab Session 1: Introduction to NLP for Social Science</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../syllabus/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Course Syllabus</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">0. Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-data-loading">Setup and Data Loading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-llm-access">1. Setting up LLM Access</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-classification-for-environmental-topics">2. Zero-shot Classification for Environmental Topics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-learning-for-sentiment-analysis">3. Few-shot Learning for Sentiment Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-based-data-annotation-key-environmental-issues">4. LLM-based Data Annotation: Key Environmental Issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-summaries-with-llms">5. Generating Summaries with LLMs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-and-interpretation">6. Analysis and Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">7. Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ethical-considerations">Ethical Considerations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Young Joon Lee
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
