@@ -1,5 +1,18 @@
 <!--next-version-placeholder-->
 
+## v0.5.0 (2024-07-17)
+
+### Feature
+
+* **lab:** AddlLab session 2 ([`3342458`](https://github.com/entelecheia/nlp4ss/commit/334245851ebd750daa02b6fe76a8a62c3ad05811))
+* **dependencies:** Openai and seaborn to project dependencies ([`6b0aae3`](https://github.com/entelecheia/nlp4ss/commit/6b0aae31c6075dea6ed6e4b09b3f2b7a39deb807))
+
+## v0.4.0 (2024-07-13)
+
+### Feature
+
+* **comments:** Add Giscus integration for comments in the book ([`3b45187`](https://github.com/entelecheia/nlp4ss/commit/3b45187e5a3c75d2fbff57ac536cd94fd3f7c977))
+
 ## v0.3.1 (2024-07-12)
 
 ### Fix
