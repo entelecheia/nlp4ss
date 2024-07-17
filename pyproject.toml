@@ -21,6 +21,8 @@ nltk = "^3.8.1"
 scikit-learn = "^1.5.1"
 spacy = "^3.7.5"
 textblob = "^0.18.0.post0"
+openai = "^1.35.14"
+seaborn = "^0.13.2"
 
 [tool.poetry.group.dev]
 optional = true
