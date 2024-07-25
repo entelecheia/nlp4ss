@@ -35,6 +35,7 @@ parts:
     chapters:
       - file: labs/nlp4ss-lab-1
       - file: labs/nlp4ss-lab-2
+      - file: labs/nlp4ss-lab-3
   - caption: About
     chapters:
       - file: syllabus/index
