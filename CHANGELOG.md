@@ -1,5 +1,14 @@
 <!--next-version-placeholder-->
 
+## v0.6.0 (2024-07-25)
+
+### Feature
+
+* **docs:** Add nlp4ss-lab-3 to table of contents ([`37ac31d`](https://github.com/entelecheia/nlp4ss/commit/37ac31d643561fe643daa7060acb420c064dba86))
+* Add lab session 3 ([`d197b99`](https://github.com/entelecheia/nlp4ss/commit/d197b9966cb895b5d9dff1f00ccc6ca9dd8c90cc))
+* **dependencies:** Add pyldavis to project dependencies ([`a6ebc5e`](https://github.com/entelecheia/nlp4ss/commit/a6ebc5ec70c5e8d167511bbb3e2d4533b99377bf))
+* **dependencies:** Add gensim version 4.3.3 to pyproject.toml ([`0210876`](https://github.com/entelecheia/nlp4ss/commit/021087625ed0f9e3fe69d34f13e3ded4877d3a53))
+
 ## v0.5.0 (2024-07-17)
 
 ### Feature
