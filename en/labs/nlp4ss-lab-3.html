@@ -1,0 +1,1107 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lab Session 3: Applying Traditional NLP Techniques &#8212; NLP for Social Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css?v=e236af4b" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../_static/language_selector.css?v=6a8ebae4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/tabs.js?v=3ee01567"></script>
+    <script src="../_static/js/hoverxref.js"></script>
+    <script src="../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../_static/js/micromodal.min.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-BQJE5V9RK2"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-BQJE5V9RK2');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-BQJE5V9RK2');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'labs/nlp4ss-lab-3';</script>
+    <script src="../_static/language_switcher.js?v=ff97be19"></script>
+    <script src="../_static/chat.js?v=f0de43d7"></script>
+    <link rel="icon" href="https://assets.entelecheia.ai/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Course Syllabus" href="../syllabus/index.html" />
+    <link rel="prev" title="Lab Session 2: LLMs for Data Annotation and Classification" href="nlp4ss-lab-2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <script src="/_static/language_switcher.js"></script>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-lang-select">  <nav class="menu">    <ul class="clearfix">      <li class="current-item">        <a href="#" class="clicker">          English <span class="arrow">&#9660;</span>        </a>        <ul class="sub-menu">                    <li><a href="#" onclick="switchLanguage('en'); return false;">English</a></li>        </ul>      </li>    </ul>  </nav></div>
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">NLP for Social Science</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture Notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session01/index.html">Session 1 - Introduction to NLP for Social Science</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../session01/lecture1.html">1.1 Fundamentals of NLP and its Evolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session01/lecture2.html">1.2 Overview of Generative LLMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session01/lecture3.html">1.3 Ethical Considerations and Challenges in Using LLMs for Research</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session02/index.html">Session 2: Traditional NLP Techniques and Text Preprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../session02/lecture1.html">2.1 Text Cleaning, Normalization, and Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session02/lecture2.html">2.2 Basic NLP Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session02/lecture3.html">2.3 Topic Modeling and Latent Dirichlet Allocation (LDA)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session03/index.html">Session 3: LLMs for Data Annotation and Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../session03/lecture1.html">3.1 Zero-shot Learning with LLMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session03/lecture2.html">3.2 Few-shot Learning and Prompt Engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session03/lecture3.html">3.3 Comparing LLM Performance with Traditional Supervised Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session04/index.html">Session 4: Generative Explanations and Summaries in Social Science</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../session04/lecture1.html">4.1 Using LLMs for High-Quality Text Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session04/lecture2.html">4.2 Social Bias Inference and Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session04/lecture3.html">4.3 Figurative Language Explanation and Cultural Context</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session05/index.html">Session 5: Advanced Applications of LLMs in Social Science Research</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../session05/lecture1.html">5.1 Analyzing Large-Scale Textual Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session05/lecture2.html">5.2 Misinformation and Fake News Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session05/lecture3.html">5.3 Future Directions and Emerging Trends</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Labs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="nlp4ss-lab-1.html">Lab Session 1: Introduction to NLP for Social Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nlp4ss-lab-2.html">Lab Session 2: LLMs for Data Annotation and Classification</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab Session 3: Applying Traditional NLP Techniques</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/index.html">Course Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">Who made this book?</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/entelecheia/nlp4ss/blob/main/book/en/labs/nlp4ss-lab-3.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/entelecheia/nlp4ss" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/entelecheia/nlp4ss/edit/main/book/en/labs/nlp4ss-lab-3.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/entelecheia/nlp4ss/issues/new?title=Issue%20on%20page%20%2Flabs/nlp4ss-lab-3.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/labs/nlp4ss-lab-3.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab Session 3: Applying Traditional NLP Techniques</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-data-loading">Setup and Data Loading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-classification-comparing-traditional-methods">1. Text Classification: Comparing Traditional Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topic-modeling-with-lda">2. Topic Modeling with LDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#word-co-occurrence-analysis">3. Word Co-occurrence Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentiment-analysis-comparison">4. Sentiment Analysis Comparison</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-issue-extraction-evaluation">5. Key Issue Extraction Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-and-interpretation">6. Analysis and Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">7. Exercise</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-session-3-applying-traditional-nlp-techniques">
+<h1>Lab Session 3: Applying Traditional NLP Techniques<a class="headerlink" href="#lab-session-3-applying-traditional-nlp-techniques" title="Link to this heading">#</a></h1>
+<section id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this lab, you will be able to:</p>
+<ol class="arabic simple">
+<li><p>Apply traditional NLP techniques to the annotated Sierra Club press release data</p></li>
+<li><p>Implement and compare different text classification methods</p></li>
+<li><p>Conduct topic modeling on environmental communication texts</p></li>
+<li><p>Analyze word co-occurrence patterns in press releases</p></li>
+<li><p>Visualize and interpret the results of these analyses</p></li>
+</ol>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>Before we begin, let’s install the necessary packages for this lab. Run the following cell to install the required libraries:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> install nlp4ss
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="setup-and-data-loading">
+<h2>Setup and Data Loading<a class="headerlink" href="#setup-and-data-loading" title="Link to this heading">#</a></h2>
+<p>First, let’s set up our environment and load the data from our previous lab sessions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hyfi</span> <span class="kn">import</span> <span class="n">HyFI</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span><span class="p">,</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
+<span class="kn">from</span> <span class="nn">gensim</span> <span class="kn">import</span> <span class="n">corpora</span>
+<span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">LdaModel</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">HyFI</span><span class="o">.</span><span class="n">is_colab</span><span class="p">():</span>
+    <span class="n">HyFI</span><span class="o">.</span><span class="n">mount_google_drive</span><span class="p">()</span>
+    <span class="n">project_root</span> <span class="o">=</span> <span class="s2">&quot;/content/drive/MyDrive/courses/nlp4ss&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">project_root</span> <span class="o">=</span> <span class="s2">&quot;$HOME/workspace/courses/nlp4ss&quot;</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">HyFI</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
+    <span class="n">project_name</span><span class="o">=</span><span class="s2">&quot;nlp4ss&quot;</span><span class="p">,</span>
+    <span class="n">project_root</span><span class="o">=</span><span class="n">project_root</span><span class="p">,</span>
+    <span class="n">logging_level</span><span class="o">=</span><span class="s2">&quot;WARNING&quot;</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Load the data from previous lab sessions</span>
+<span class="n">topics_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="n">h</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">workspace_dir</span> <span class="o">/</span> <span class="s2">&quot;data/processed/sierra_club_topics.csv&quot;</span>
+<span class="p">)</span>
+<span class="n">sentiment_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="n">h</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">workspace_dir</span> <span class="o">/</span> <span class="s2">&quot;data/processed/sierra_club_sentiment.csv&quot;</span>
+<span class="p">)</span>
+<span class="n">issues_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="n">h</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">workspace_dir</span> <span class="o">/</span> <span class="s2">&quot;data/processed/sierra_club_key_issues.csv&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Merge the dataframes</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">topics_df</span><span class="p">,</span> <span class="n">sentiment_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="n">issues_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of rows: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">merged_df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:hyfi.joblib.joblib:initialized batcher with &lt;hyfi.joblib.batcher.batcher.Batcher object at 0x177910e30&gt;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                             content        zero_shot_topic  \
+0  April 5, 2017\n\n\nContact\n Emily Pomilio (20...       Renewable Energy   
+1  October 28, 2021\n\n\nContact\nShiloh Hernande...  Environmental Justice   
+2  December 6, 2018\n\n\nContact\nCourtney Bourgo...  Environmental Justice   
+3  Black households face disproportionately high ...  Environmental Justice   
+4  February 24, 2020\n\n\nContact\nGabby Brown, g...           Conservation   
+
+  few_shot_sentiment                                         key_issues  
+0           Positive  energy efficiency; electricity usage reduction...  
+1           Positive         water quality; contamination; strip mining  
+2           Negative  habitat destruction; environmental damage; flo...  
+3           Negative  Energy burdens; Historic discrimination; Disin...  
+4            Neutral  oil and gas drilling in the Arctic; thermal co...  
+Number of rows: 100
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="text-classification-comparing-traditional-methods">
+<h2>1. Text Classification: Comparing Traditional Methods<a class="headerlink" href="#text-classification-comparing-traditional-methods" title="Link to this heading">#</a></h2>
+<p>Let’s compare the performance of traditional text classification methods (Naive Bayes and Logistic Regression) with the LLM-based zero-shot classification we performed in Lab 2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prepare the data</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">merged_df</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">merged_df</span><span class="p">[</span><span class="s2">&quot;zero_shot_topic&quot;</span><span class="p">]</span>
+
+<span class="c1"># Split the data</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="c1"># Create TF-IDF vectors</span>
+<span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">max_features</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+<span class="n">X_train_tfidf</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_tfidf</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Train and evaluate Naive Bayes classifier</span>
+<span class="n">nb_classifier</span> <span class="o">=</span> <span class="n">MultinomialNB</span><span class="p">()</span>
+<span class="n">nb_classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_tfidf</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">nb_predictions</span> <span class="o">=</span> <span class="n">nb_classifier</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_tfidf</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Naive Bayes Classification Report:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">nb_predictions</span><span class="p">))</span>
+
+<span class="c1"># Train and evaluate Logistic Regression classifier</span>
+<span class="n">lr_classifier</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">lr_classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_tfidf</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">lr_predictions</span> <span class="o">=</span> <span class="n">lr_classifier</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_tfidf</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Logistic Regression Classification Report:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">lr_predictions</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Naive Bayes Classification Report:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                       precision    recall  f1-score   support
+
+       Climate Change       0.00      0.00      0.00         4
+         Conservation       0.00      0.00      0.00         4
+Environmental Justice       0.30      1.00      0.46         6
+     Renewable Energy       0.00      0.00      0.00         3
+  Wildlife Protection       0.00      0.00      0.00         3
+
+             accuracy                           0.30        20
+            macro avg       0.06      0.20      0.09        20
+         weighted avg       0.09      0.30      0.14        20
+
+Logistic Regression Classification Report:
+                       precision    recall  f1-score   support
+
+       Climate Change       0.00      0.00      0.00         4
+         Conservation       0.00      0.00      0.00         4
+Environmental Justice       0.35      1.00      0.52         6
+     Renewable Energy       1.00      1.00      1.00         3
+  Wildlife Protection       0.00      0.00      0.00         3
+
+             accuracy                           0.45        20
+            macro avg       0.27      0.40      0.30        20
+         weighted avg       0.26      0.45      0.31        20
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="topic-modeling-with-lda">
+<h2>2. Topic Modeling with LDA<a class="headerlink" href="#topic-modeling-with-lda" title="Link to this heading">#</a></h2>
+<p>Now, let’s apply Latent Dirichlet Allocation (LDA) to discover latent topics in the press releases.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">preprocess_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+    <span class="n">stop_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">token</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span> <span class="ow">and</span> <span class="n">token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
+
+
+<span class="c1"># Preprocess the texts</span>
+<span class="n">processed_texts</span> <span class="o">=</span> <span class="n">merged_df</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">preprocess_text</span><span class="p">)</span>
+
+<span class="c1"># Create a dictionary and corpus</span>
+<span class="n">dictionary</span> <span class="o">=</span> <span class="n">corpora</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">(</span><span class="n">processed_texts</span><span class="p">)</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">dictionary</span><span class="o">.</span><span class="n">doc2bow</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">processed_texts</span><span class="p">]</span>
+
+<span class="c1"># Train the LDA model</span>
+<span class="n">lda_model</span> <span class="o">=</span> <span class="n">LdaModel</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span> <span class="n">id2word</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Print the topics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LDA Topics:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">lda_model</span><span class="o">.</span><span class="n">print_topics</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Topic </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">topic</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:gensim.models.ldamodel:too few updates, training might not converge; consider increasing the number of passes or iterations to improve accuracy
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LDA Topics:
+Topic 0: 0.012*&quot;de&quot; + 0.012*&quot;sierra&quot; + 0.012*&quot;club&quot; + 0.010*&quot;energy&quot; + 0.006*&quot;clean&quot; + 0.006*&quot;communities&quot; + 0.006*&quot;la&quot; + 0.005*&quot;health&quot; + 0.005*&quot;environmental&quot; + 0.005*&quot;gas&quot;
+Topic 1: 0.012*&quot;club&quot; + 0.012*&quot;energy&quot; + 0.012*&quot;sierra&quot; + 0.007*&quot;clean&quot; + 0.006*&quot;environmental&quot; + 0.005*&quot;communities&quot; + 0.005*&quot;public&quot; + 0.005*&quot;protect&quot; + 0.005*&quot;coal&quot; + 0.004*&quot;gas&quot;
+Topic 2: 0.015*&quot;de&quot; + 0.012*&quot;club&quot; + 0.011*&quot;sierra&quot; + 0.010*&quot;energy&quot; + 0.008*&quot;la&quot; + 0.008*&quot;clean&quot; + 0.006*&quot;communities&quot; + 0.006*&quot;climate&quot; + 0.006*&quot;new&quot; + 0.005*&quot;power&quot;
+Topic 3: 0.018*&quot;sierra&quot; + 0.013*&quot;energy&quot; + 0.012*&quot;club&quot; + 0.009*&quot;clean&quot; + 0.008*&quot;communities&quot; + 0.007*&quot;environmental&quot; + 0.007*&quot;grassroots&quot; + 0.006*&quot;public&quot; + 0.006*&quot;new&quot; + 0.005*&quot;climate&quot;
+Topic 4: 0.016*&quot;club&quot; + 0.015*&quot;sierra&quot; + 0.007*&quot;environmental&quot; + 0.007*&quot;clean&quot; + 0.006*&quot;energy&quot; + 0.006*&quot;public&quot; + 0.005*&quot;communities&quot; + 0.005*&quot;health&quot; + 0.005*&quot;wildlife&quot; + 0.005*&quot;climate&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualize the topics</span>
+<span class="kn">import</span> <span class="nn">pyLDAvis.gensim</span>
+
+<span class="n">vis</span> <span class="o">=</span> <span class="n">pyLDAvis</span><span class="o">.</span><span class="n">gensim</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">lda_model</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">)</span>
+<span class="n">pyLDAvis</span><span class="o">.</span><span class="n">save_html</span><span class="p">(</span><span class="n">vis</span><span class="p">,</span> <span class="s2">&quot;lda_visualization.html&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LDA visualization saved as &#39;lda_visualization.html&#39;&quot;</span><span class="p">)</span>
+<span class="n">pyLDAvis</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">vis</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LDA visualization saved as &#39;lda_visualization.html&#39;
+</pre></div>
+</div>
+<div class="output text_html">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bmabey/pyLDAvis@3.4.0/pyLDAvis/js/ldavis.v1.0.0.css">
+
+
+<div id="ldavis_el8144763022158881119366775" style="background-color:white;"></div>
+<script type="text/javascript">
+
+var ldavis_el8144763022158881119366775_data = {"mdsDat": {"x": [0.011423739842694848, 0.018871985426622512, -0.024914354996128322, -0.012577174111165813, 0.007195803837976769], "y": [0.011075831928530698, -0.013933463354531113, -0.0026195253683464538, -0.0016056440323501957, 0.007082800826697043], "topics": [1, 2, 3, 4, 5], "cluster": [1, 1, 1, 1, 1], "Freq": [29.091224041687454, 29.08332875604097, 21.999213370835967, 9.936823399847801, 9.889410431587804]}, "tinfo": {"Term": ["de", "energy", "la", "club", "sierra", "gas", "el", "en", "protect", "communities", "clean", "coal", "environmental", "para", "public", "que", "grassroots", "wildlife", "los", "new", "power", "del", "today", "las", "health", "information", "action", "national", "air", "state", "jersey", "pjm", "mopr", "nj", "prices", "weatherization", "capacity", "artificially", "heat", "lantry", "murphy", "beyer", "associations", "summit", "mandates", "administrator", "tilt", "njbpu", "opting", "consumer", "emp", "bailout", "colleague", "nafta", "impossible", "aligns", "bernhardt", "nomination", "identifying", "obama", "latino", "lauren", "senate", "usps", "market", "report", "arkansas", "commission", "vehicles", "continued", "grassroots", "sierra", "energy", "communities", "action", "electric", "new", "clean", "million", "fossil", "statement", "released", "resources", "america", "press", "water", "contact", "environmental", "related", "fuel", "public", "club", "works", "members", "people", "climate", "coal", "remaining", "health", "lobbying", "pollution", "largest", "power", "gas", "state", "protect", "said", "air", "cuts", "offset", "garett", "ads", "scheme", "refuge", "vet", "rockies", "lost", "wolf", "reppenhagen", "wolves", "craig", "tongass", "species", "roadless", "timber", "salmon", "mountains", "hunters", "gray", "rocky", "mast", "transformative", "arctic", "zeldin", "veteran", "angie", "regressive", "tax", "northern", "logging", "rio", "grande", "service", "wyoming", "trees", "lng", "wildlife", "club", "organization", "states", "pipeline", "sierra", "wild", "environmental", "permit", "legal", "public", "utah", "court", "health", "response", "said", "supporters", "addition", "climate", "pollution", "contact", "works", "would", "clean", "america", "education", "press", "protect", "grassroots", "largest", "air", "communities", "energy", "every", "action", "power", "new", "corte", "suprema", "incendios", "es", "los", "de", "m\u00e1s", "muro", "poder", "al", "reducci\u00f3n", "bosques", "comunidades", "la", "este", "justicia", "frontera", "ha", "salud", "civiles", "pa\u00eds", "fondos", "sobre", "proteger", "missoula", "un", "estados", "ya", "parajes", "medio", "en", "english", "el", "que", "las", "con", "city", "se", "offshore", "para", "wind", "york", "transition", "state", "power", "climate", "new", "clean", "energy", "club", "said", "renewable", "water", "health", "air", "sierra", "communities", "pollution", "coal", "public", "environmental", "protect", "contact", "grassroots", "press", "largest", "education", "places", "industria", "metano", "justin", "petr\u00f3leo", "reputaci\u00f3n", "energ\u00eda", "ejecutivos", "financiera", "activistas", "experiencia", "regulaciones", "da\u00f1inas", "supervisi\u00f3n", "defender", "expandir", "govern", "junta", "dci", "casa", "puerto", "altos", "peterson", "del", "reputations", "est\u00e1", "fomb", "canyons", "blanca", "infraestructura", "imported", "administraci\u00f3n", "p\u00fablica", "rico", "de", "girls", "por", "para", "el", "que", "gas", "la", "radium", "en", "las", "arkansas", "today", "como", "national", "energy", "club", "air", "sierra", "information", "health", "communities", "members", "epa", "grassroots", "wildlife", "clean", "plan", "pollution", "environmental", "public", "action", "protect", "press", "climate", "new", "power", "contact", "state", "coal", "chickasaw", "directions", "denton", "memphis", "king", "personally", "different", "gibbons", "wholesale", "sanitation", "parklands", "garland", "strategic", "rededicate", "galvanize", "customers", "kansas", "assassination", "dennis", "alive", "announcing", "captive", "jealous", "evergy", "renters", "adopting", "degrading", "agree", "terrible", "minorities", "deq", "demand", "llc", "owner", "srp", "monopoly", "border", "grid", "efficiency", "markets", "solar", "plants", "gas", "energy", "protect", "coal", "arizona", "xcel", "club", "fossil", "people", "legal", "sierra", "public", "clean", "environmental", "power", "largest", "communities", "get", "access", "new", "influential", "community", "action", "grassroots", "addition", "state", "contact", "wildlife", "water", "supporters", "climate", "said", "de", "pollution", "press"], "Freq": [215.0, 352.0, 125.0, 465.0, 505.0, 101.0, 73.0, 53.0, 130.0, 232.0, 277.0, 121.0, 215.0, 40.0, 198.0, 39.0, 170.0, 119.0, 35.0, 162.0, 146.0, 25.0, 90.0, 36.0, 171.0, 89.0, 132.0, 72.0, 122.0, 118.0, 6.69926189444835, 5.414000604611214, 3.4241523340551145, 1.628266071583191, 4.468642021209825, 2.2665703921144065, 5.017855530128523, 1.5590950171563112, 6.856362030112797, 2.738926217486862, 1.0137933819536993, 1.489625262263859, 0.9897176411922194, 1.5621230969013353, 0.989418336681216, 1.5560216340039708, 0.9688618401057482, 0.967933799806873, 0.9644634077950837, 0.9531309114662591, 0.9596900897888764, 0.9441950408901476, 2.1584646833717183, 1.5146957148386482, 1.430545541816694, 0.9307053473162766, 6.440372855134689, 2.948820225833333, 0.9192053793917393, 1.508010744055049, 2.9126146487742606, 2.9798101726194326, 11.886216318680411, 5.680330879587941, 6.345834912837813, 17.228751704318245, 5.82526916454696, 13.50260444091069, 8.991836593373693, 4.492381912711733, 67.97955306882453, 181.69645969153598, 130.42923935062186, 88.12602420985344, 51.85453612954486, 18.205944992040827, 60.53751523342583, 97.23714588278192, 30.322648133874708, 26.98727114870583, 25.014502262707992, 24.27489695622436, 16.22925826737827, 41.0992849439273, 46.96537308251171, 30.063935475826867, 49.3628293976924, 69.80117045856127, 26.042875111698557, 18.96450041178217, 63.15241823899805, 124.30076837395154, 34.2548220047575, 37.10521574583264, 32.31568636835131, 53.49153307378605, 40.142213617598344, 31.189673199730844, 49.671346809607535, 29.296271050987787, 41.11077630420445, 35.7659093032034, 40.17914495524263, 31.645092044255374, 33.77484025683148, 35.07889944047775, 34.27247704461139, 31.34663561303705, 2.976337436357919, 2.159274451573927, 2.1447527623062457, 2.822394154145393, 2.0836985315717373, 8.195965997880787, 2.032395175328294, 8.417159938842486, 2.6314794351974697, 5.243722225388879, 1.9665646948837183, 18.012812730570793, 5.225549619576059, 11.797949421641757, 16.272795839008293, 9.938415324102975, 3.042424415467267, 2.410069757571873, 2.3525911091660694, 4.150614290590157, 3.436606249332316, 4.0295508460473055, 1.1506814680843431, 1.1500334277555995, 8.576479578000201, 1.1487603700800884, 1.1515983111633088, 4.771383029103192, 1.1355457068219814, 9.509856328402734, 8.091176857672917, 3.9345862538728245, 19.777313393444725, 14.478006895898167, 22.611335285765968, 11.586965305106911, 6.838641490869718, 14.806350549829586, 51.87279716851272, 163.58852092152782, 41.56425985704702, 24.499247586373965, 14.753536282087001, 155.72734622029483, 38.42897477253197, 74.32229462928908, 14.419502856714768, 38.06216507516636, 65.03998869845873, 15.460926687987788, 25.428285448238793, 53.73090670960607, 25.981646216873347, 42.81067609266684, 31.75192472300213, 32.31137986367879, 51.86149250693641, 44.02305756725883, 43.72123276527518, 33.10531011102483, 30.545031323431804, 68.4966498522221, 35.82997268798812, 32.49793818152567, 40.019468190539904, 39.7264697204793, 46.25906648548207, 36.313831527662146, 37.303383146323945, 53.95915459030457, 67.05644562950371, 30.999626065884243, 37.248753610809004, 37.558597959039105, 31.571460777197352, 3.1383015094079285, 1.8428292792581873, 4.206940088580269, 8.409998392072806, 19.647308519400614, 120.35579451695965, 13.595379000740802, 3.99730679268389, 3.9569847386653794, 5.356937877525904, 1.6999633263740954, 1.7202608188216846, 8.932016721306685, 66.61832412399129, 5.365603147367544, 2.175971904834945, 2.093544952929082, 4.072188062327546, 4.861500503345, 1.2673223222454983, 4.550393106261961, 1.666609460290048, 4.905489195266455, 5.157194500308563, 7.936407821303403, 5.356323954348931, 5.198220464755432, 2.77060103857026, 3.484278966403264, 4.0373081814715714, 25.82622786450192, 5.280366948781339, 33.4475432695289, 18.14822871328681, 16.58437270339317, 6.600675888707813, 15.584085379893946, 6.182368551879073, 19.459449854399395, 17.169567564557358, 23.42272958956913, 16.664449480637188, 17.196485172423895, 37.40221711730715, 42.96297977352826, 46.502031284800864, 43.372777148461914, 64.97099283355253, 77.72546609343014, 93.19111180612855, 35.7200274150521, 20.991409266375157, 23.667652048439468, 41.528639628148035, 31.66666907088017, 84.5329532412878, 48.51898452512783, 31.908503642342524, 27.52361216538704, 34.74194181930106, 33.34212023540703, 25.04483521518264, 25.494795225095547, 25.720857817797107, 23.09410345611463, 21.667208956407507, 20.94031660626302, 19.70921609404995, 1.4811583755095277, 0.8984138119097643, 1.1084387961239215, 1.312376630403871, 0.6532348017871166, 1.0937737217785721, 0.6497374630883695, 0.6357365024232416, 0.6318219713792029, 0.6295410826160411, 0.6287942319771344, 0.6241485311142889, 0.6231125137731436, 0.6121412526125968, 0.6103467787624048, 0.6050239140631364, 0.996478050099908, 0.5963512857516539, 0.5889860973976526, 5.634092252121883, 0.5821459586087755, 0.9640507331128824, 7.0801345658136885, 0.5723392562488778, 1.4944585995264377, 0.569017037235129, 0.9436711346372805, 0.5672914248810998, 0.93540806458762, 0.37498370411412163, 2.208173911786031, 2.514484289578595, 4.894579824368724, 43.8173447646715, 2.666306402439798, 3.8373087821905307, 8.438646541707385, 13.653493086410819, 7.812401629374334, 17.458992087069053, 20.565443428895293, 2.7227872721538775, 9.532484431052419, 6.654854631228869, 2.5898950040520585, 13.213646907912596, 2.302362614655806, 10.976635142656374, 35.342194924383996, 40.93665926819426, 14.629396353090197, 42.46724596141461, 11.573127762115508, 18.70034522823888, 22.35411661360967, 12.681389530033563, 9.751454704153875, 16.967274580986402, 13.16382234000438, 22.907595092921905, 9.275025172362392, 14.103313091798952, 17.615295200600404, 16.728662017443913, 12.695693739190034, 12.434187178301567, 11.68933254273224, 13.186302858883508, 12.71639902417258, 11.858981684781321, 11.34891596856905, 9.979692341934424, 10.002302433905959, 1.3596483133654078, 0.7039678707189265, 1.9159882497241414, 3.1001158812088394, 2.6629369951638564, 0.44141991921315304, 0.6705441822613794, 0.8817938257428065, 1.6573190052420474, 0.4196314791226981, 0.4188008189719469, 0.6432098112602199, 1.4446809924523534, 0.40511384362598585, 0.4063032621021512, 3.9308725427494906, 1.5742023733380102, 0.6077517472316869, 0.39862405772908077, 0.3966513104573952, 0.39585450608622624, 0.5820048247097118, 0.3945514564226381, 3.6386206236849574, 0.3937062426501863, 0.3884113167952322, 0.3918419416777691, 0.5606036084939936, 0.5864913957000836, 0.3870039020067151, 2.9242828739862365, 3.896330715194019, 1.899377510814378, 2.185794839303929, 2.0553235458399706, 1.0947652114401687, 4.922356630233537, 2.9775233589763683, 3.9247291176484027, 1.213242677885963, 6.9010873655203, 9.810340634806224, 14.712070239895885, 42.15114230566836, 17.844848247029894, 16.57542663862948, 4.225235378654694, 3.2091385757663224, 43.80322631928239, 8.931253012666842, 11.305292762737569, 12.345085223188784, 40.942508531331896, 19.209361320207787, 24.234608308371396, 20.030279630807755, 14.358819395083335, 12.07142169284846, 19.382949322195074, 8.440924813526403, 9.088328223928508, 14.12097081335025, 9.153645083463065, 7.588884853473901, 11.804636301661356, 13.675144355232197, 9.494507228389297, 10.633269655299564, 11.504630664707356, 10.347093398441428, 8.345056334223138, 8.808372190118776, 11.718838620561773, 10.089725817563712, 11.590366743175402, 10.017450324770728, 9.490179438181713], "Total": [215.0, 352.0, 125.0, 465.0, 505.0, 101.0, 73.0, 53.0, 130.0, 232.0, 277.0, 121.0, 215.0, 40.0, 198.0, 39.0, 170.0, 119.0, 35.0, 162.0, 146.0, 25.0, 90.0, 36.0, 171.0, 89.0, 132.0, 72.0, 122.0, 118.0, 9.17293310012013, 7.973884801444566, 5.22105915631785, 2.655139043089874, 7.38079752324619, 3.7866937945587296, 8.42837481896757, 2.6407329545484455, 11.760934919657295, 4.806675508559408, 1.7803425919063862, 2.639265267594738, 1.7595648660180099, 2.7827841940236233, 1.7683243765092669, 2.8145211897876883, 1.752698715464348, 1.7563985336984245, 1.752931398322795, 1.7489899838113054, 1.7610600766249933, 1.7389126755793827, 3.976424138588249, 2.792355188183714, 2.6462716875255756, 1.7385135837395629, 12.059889919692337, 5.536211976154995, 1.7302386526210278, 2.8388611525547267, 5.498956784633467, 5.643376804649874, 23.498970863226795, 11.170937692759818, 12.688879334463149, 36.386678236198485, 11.738152017469098, 29.44032629685904, 19.02237311138164, 9.030752214728944, 170.60189630832232, 505.3665136458651, 352.70448830360806, 232.34122926109058, 132.0593801544997, 42.082605827636584, 162.31912299660792, 277.84699196984985, 75.22027836807416, 66.56489194465574, 61.29278061430675, 59.49059913607786, 37.75256019004472, 108.92986540039408, 131.2584567100802, 78.91947436418943, 141.43240402133952, 215.11116015466553, 67.27289748614997, 46.39780992876754, 198.87237209440957, 465.8202866890845, 95.19127578888768, 107.4464580190763, 90.6773444924043, 176.76019834496861, 121.94627057818644, 88.87829934527508, 171.9969923726517, 84.41756964908431, 141.1631009303755, 115.0541698430443, 146.91852376767466, 101.40083400100981, 118.20863906869002, 130.12923980147116, 132.04549982544737, 122.0334546211461, 4.00087616303746, 2.9909774186192877, 2.989087747276095, 3.961923844679956, 2.9558783651681746, 11.659178220448247, 2.953892825590422, 12.351698741320714, 3.8918266840940614, 7.770184537779389, 2.9229186552377633, 27.4929458182122, 8.013984233348925, 18.16295692493315, 25.359813282032086, 15.528751212986146, 4.7715611891400025, 3.809039121455508, 3.7575209469598017, 6.643149893103864, 5.564784901275221, 6.5290689165006315, 1.8862329608772743, 1.8865174002156557, 14.10379634301673, 1.8920481092864332, 1.8976552052115416, 7.890525361064486, 1.8790559020335964, 15.776334705818627, 13.697626874180513, 6.617937229632217, 34.51005726352947, 26.01703757672262, 41.8736964263021, 21.892051730488483, 12.235283689489137, 29.25647930025293, 119.8702598017026, 465.8202866890845, 98.65459030186969, 54.55909156980654, 30.092240755901706, 505.3665136458651, 96.06181450872518, 215.11116015466553, 30.73366215262413, 102.05440010723098, 198.87237209440957, 33.97138418177809, 64.10093331111169, 171.9969923726517, 67.36572290972069, 132.04549982544737, 89.00203690934337, 91.37287013109528, 176.76019834496861, 141.1631009303755, 141.43240402133952, 95.19127578888768, 85.1581058595425, 277.84699196984985, 108.92986540039408, 94.25820545404062, 131.2584567100802, 130.12923980147116, 170.60189630832232, 115.0541698430443, 122.0334546211461, 232.34122926109058, 352.70448830360806, 89.26568355267193, 132.0593801544997, 146.91852376767466, 162.31912299660792, 5.459563271185089, 3.2791171279080253, 7.502901682249098, 15.049001587218658, 35.21037493269986, 215.80400953105246, 24.504748533005497, 7.214679793796999, 7.336494976038235, 9.964799966561916, 3.166837947831424, 3.213289124184593, 16.760195184851558, 125.42392263439068, 10.109529766001062, 4.103745983110855, 3.9587237946594795, 7.715204617018314, 9.213515874600713, 2.43818395416358, 8.782062413175673, 3.2285018145843143, 9.510273715969419, 10.011848947937391, 15.410578544120652, 10.425834983581252, 10.209539180389879, 5.444325750985735, 6.871288507877934, 7.974021685776604, 53.36323936426073, 10.645336386341757, 73.46164518056379, 39.45963747494937, 36.208415805946, 13.508257627346623, 34.395053954731814, 12.941177378893535, 46.36815079964222, 40.51972688979528, 59.42155898956429, 41.92960346194056, 44.9623071949237, 118.20863906869002, 146.91852376767466, 176.76019834496861, 162.31912299660792, 277.84699196984985, 352.70448830360806, 465.8202866890845, 132.04549982544737, 64.84944837443213, 78.91947436418943, 171.9969923726517, 122.0334546211461, 505.3665136458651, 232.34122926109058, 141.1631009303755, 121.94627057818644, 198.87237209440957, 215.11116015466553, 130.12923980147116, 141.43240402133952, 170.60189630832232, 131.2584567100802, 115.0541698430443, 94.25820545404062, 91.02583464280572, 3.8385747644376784, 2.670820855415861, 3.306202241250749, 4.020629013769864, 2.0105331428125224, 3.3828194973274903, 2.024354100243774, 2.055739418575507, 2.0583669054751597, 2.0560121745494646, 2.0561520730730574, 2.042410621810377, 2.0484851837261004, 2.057703997236845, 2.064469190691814, 2.0616423328590723, 3.4272519242221597, 2.0615209575991984, 2.089335563319932, 20.095424877698154, 2.0962937380062687, 3.4796071030068334, 25.637342352853807, 2.107206039734503, 5.514281902682648, 2.1058400783026725, 3.4968545188018227, 2.1055167021301653, 3.512007342286107, 1.4168385006397934, 8.382697182532416, 9.746483727551, 20.08485503614519, 215.80400953105246, 10.87481080479553, 16.547797045292313, 40.51972688979528, 73.46164518056379, 39.45963747494937, 101.40083400100981, 125.42392263439068, 11.957769646760886, 53.36323936426073, 36.208415805946, 11.738152017469098, 90.15018171405593, 10.23267361540374, 72.55233846866959, 352.70448830360806, 465.8202866890845, 122.0334546211461, 505.3665136458651, 89.81793254777773, 171.9969923726517, 232.34122926109058, 107.4464580190763, 74.64884170306233, 170.60189630832232, 119.8702598017026, 277.84699196984985, 72.46404894041075, 141.1631009303755, 215.11116015466553, 198.87237209440957, 132.0593801544997, 130.12923980147116, 131.2584567100802, 176.76019834496861, 162.31912299660792, 146.91852376767466, 141.43240402133952, 118.20863906869002, 121.94627057818644, 3.8569286275571697, 2.3401512519504593, 6.4473707725914045, 10.51205048485308, 9.276096393302346, 1.5508216652888702, 2.3830438205158018, 3.2118832040868033, 6.089996029673719, 1.5821687546487564, 1.5802007898484534, 2.4325759743972712, 5.48571496028107, 1.5726055645231778, 1.5918756363780064, 15.435769429042868, 6.2646425419489455, 2.4199640688684623, 1.5893773394691098, 1.5922919469165113, 1.5901701694126489, 2.345359829354093, 1.5907471576449286, 14.72679544658561, 1.5949358323155023, 1.578701326231951, 1.5942661932150872, 2.297046928380896, 2.414715212456861, 1.5964549707365037, 12.348949754376726, 17.47961480145985, 8.616616969913169, 10.125154759459349, 9.502371298310937, 4.835189280406357, 25.529662365901732, 14.822206465945758, 20.783165425060645, 5.478866802030051, 39.948388249732496, 63.049807559834996, 101.40083400100981, 352.70448830360806, 130.12923980147116, 121.94627057818644, 24.011002893006147, 17.89457544513687, 465.8202866890845, 66.56489194465574, 90.6773444924043, 102.05440010723098, 505.3665136458651, 198.87237209440957, 277.84699196984985, 215.11116015466553, 146.91852376767466, 115.0541698430443, 232.34122926109058, 71.77564388751125, 81.00909143479005, 162.31912299660792, 83.47968013518685, 62.0086897163055, 132.0593801544997, 170.60189630832232, 91.37287013109528, 118.20863906869002, 141.43240402133952, 119.8702598017026, 78.91947436418943, 89.00203690934337, 176.76019834496861, 132.04549982544737, 215.80400953105246, 141.1631009303755, 131.2584567100802], "Category": ["Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Default", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic1", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic2", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic3", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic4", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5", "Topic5"], "logprob": [30.0, 29.0, 28.0, 27.0, 26.0, 25.0, 24.0, 23.0, 22.0, 21.0, 20.0, 19.0, 18.0, 17.0, 16.0, 15.0, 14.0, 13.0, 12.0, 11.0, 10.0, 9.0, 8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0, -7.3454, -7.5584, -8.0165, -8.7599, -7.7503, -8.4291, -7.6344, -8.8033, -7.3222, -8.2398, -9.2337, -8.8489, -9.2577, -8.8013, -9.258, -8.8053, -9.279, -9.28, -9.2836, -9.2954, -9.2885, -9.3048, -8.478, -8.8322, -8.8893, -9.3192, -7.3848, -8.166, -9.3316, -8.8366, -8.1783, -8.1555, -6.772, -7.5104, -7.3996, -6.4008, -7.4852, -6.6445, -7.0511, -7.745, -5.0282, -4.0451, -4.3766, -4.7686, -5.2989, -6.3456, -5.1441, -4.6702, -5.8355, -5.952, -6.0279, -6.0579, -6.4606, -5.5314, -5.398, -5.8441, -5.3482, -5.0017, -5.9876, -6.3048, -5.1018, -4.4247, -5.7136, -5.6336, -5.7718, -5.2679, -5.555, -5.8073, -5.342, -5.8699, -5.5311, -5.6704, -5.554, -5.7928, -5.7277, -5.6898, -5.713, -5.8023, -8.1564, -8.4773, -8.4841, -8.2095, -8.513, -7.1435, -8.5379, -7.1168, -8.2796, -7.5901, -8.5708, -6.356, -7.5936, -6.7792, -6.4576, -6.9507, -8.1345, -8.3675, -8.3916, -7.8239, -8.0126, -7.8535, -9.1068, -9.1073, -7.0981, -9.1084, -9.106, -7.6845, -9.12, -6.9948, -7.1563, -7.8773, -6.2626, -6.5745, -6.1287, -6.7972, -7.3245, -6.5521, -5.2983, -4.1498, -5.5199, -6.0485, -6.5556, -4.199, -5.5983, -4.9387, -6.5785, -5.6079, -5.0721, -6.5088, -6.0113, -5.2631, -5.9897, -5.4903, -5.7892, -5.7717, -5.2985, -5.4624, -5.4693, -5.7474, -5.8279, -5.0203, -5.6683, -5.7659, -5.5578, -5.5651, -5.4129, -5.6549, -5.628, -5.2589, -5.0416, -5.8131, -5.6295, -5.6212, -5.7949, -7.8243, -8.3567, -7.5312, -6.8385, -5.99, -4.1775, -6.3582, -7.5823, -7.5925, -7.2896, -8.4374, -8.4255, -6.7783, -4.769, -7.2879, -8.1905, -8.2291, -7.5638, -7.3866, -8.7311, -7.4527, -8.4572, -7.3776, -7.3276, -6.8965, -7.2897, -7.3196, -7.9489, -7.7197, -7.5724, -5.7166, -7.304, -5.458, -6.0694, -6.1595, -7.0808, -6.2217, -7.1463, -5.9996, -6.1248, -5.8143, -6.1547, -6.1233, -5.3462, -5.2076, -5.1285, -5.1981, -4.794, -4.6148, -4.4333, -5.3922, -5.9238, -5.8038, -5.2416, -5.5127, -4.5308, -5.086, -5.5051, -5.6529, -5.42, -5.4611, -5.7473, -5.7295, -5.7207, -5.8284, -5.8922, -5.9263, -5.9869, -7.7804, -8.2803, -8.0702, -7.9014, -8.599, -8.0836, -8.6044, -8.6262, -8.6323, -8.636, -8.6371, -8.6446, -8.6462, -8.664, -8.6669, -8.6757, -8.1767, -8.6901, -8.7026, -6.4444, -8.7142, -8.2098, -6.2159, -8.7312, -7.7714, -8.737, -8.2312, -8.7401, -8.24, -9.1541, -7.381, -7.2511, -6.5851, -4.3932, -7.1925, -6.8284, -6.0404, -5.5592, -6.1175, -5.3133, -5.1496, -7.1715, -5.9185, -6.2779, -7.2216, -5.5919, -7.3393, -5.7774, -4.6081, -4.4612, -5.4902, -4.4245, -5.7245, -5.2447, -5.0662, -5.6331, -5.8958, -5.3419, -5.5957, -5.0417, -5.9459, -5.5268, -5.3044, -5.3561, -5.6319, -5.6527, -5.7145, -5.594, -5.6303, -5.7001, -5.7441, -5.8726, -5.8704, -7.8612, -8.5194, -7.5182, -7.037, -7.189, -8.9862, -8.5681, -8.2942, -7.6632, -9.0368, -9.0388, -8.6097, -7.8005, -9.072, -9.0691, -6.7996, -7.7147, -8.6664, -9.0882, -9.0931, -9.0951, -8.7097, -9.0984, -6.8768, -9.1006, -9.1141, -9.1053, -8.7472, -8.702, -9.1177, -7.0954, -6.8084, -7.5269, -7.3864, -7.448, -8.0779, -6.5746, -7.0773, -6.8011, -7.9751, -6.2367, -5.885, -5.4797, -4.4272, -5.2867, -5.3605, -6.7273, -7.0024, -4.3887, -5.9789, -5.7431, -5.6552, -4.4562, -5.213, -4.9806, -5.1712, -5.5041, -5.6776, -5.204, -6.0353, -5.9614, -5.5208, -5.9543, -6.1417, -5.6999, -5.5528, -5.9177, -5.8044, -5.7257, -5.8317, -6.0467, -5.9927, -5.7072, -5.8569, -5.7182, -5.8641, -5.9182], "loglift": [30.0, 29.0, 28.0, 27.0, 26.0, 25.0, 24.0, 23.0, 22.0, 21.0, 20.0, 19.0, 18.0, 17.0, 16.0, 15.0, 14.0, 13.0, 12.0, 11.0, 10.0, 9.0, 8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0, 0.9205, 0.8476, 0.8129, 0.7458, 0.7329, 0.7215, 0.7161, 0.7078, 0.6951, 0.6723, 0.6716, 0.6628, 0.6593, 0.6573, 0.6541, 0.6421, 0.6419, 0.6389, 0.6373, 0.6277, 0.6277, 0.6241, 0.6237, 0.6231, 0.6196, 0.6099, 0.6074, 0.6048, 0.6022, 0.6021, 0.5992, 0.5961, 0.5532, 0.5584, 0.5418, 0.4871, 0.5341, 0.4553, 0.4854, 0.5365, 0.3146, 0.2118, 0.2399, 0.2653, 0.2999, 0.3968, 0.2484, 0.1848, 0.3262, 0.3319, 0.3385, 0.3384, 0.3905, 0.26, 0.207, 0.2696, 0.1821, 0.1092, 0.2857, 0.3401, 0.0876, -0.0864, 0.2127, 0.1715, 0.203, 0.0395, 0.1236, 0.1876, -0.0073, 0.1764, 0.0011, 0.0663, -0.0618, 0.0702, -0.018, -0.0762, -0.1141, -0.1245, 0.9392, 0.9092, 0.9031, 0.8959, 0.8854, 0.8826, 0.8611, 0.8515, 0.8437, 0.8417, 0.8387, 0.8122, 0.8074, 0.8035, 0.7913, 0.7887, 0.785, 0.7773, 0.7668, 0.7647, 0.753, 0.7524, 0.7408, 0.7401, 0.7376, 0.736, 0.7355, 0.732, 0.7313, 0.7288, 0.7086, 0.715, 0.6783, 0.6489, 0.6188, 0.5988, 0.6533, 0.554, 0.3974, 0.1886, 0.3706, 0.4344, 0.5222, 0.0578, 0.3188, 0.1723, 0.4782, 0.2487, 0.1173, 0.4478, 0.3104, 0.0715, 0.2823, 0.1086, 0.2043, 0.1955, 0.0088, 0.0698, 0.061, 0.1788, 0.2097, -0.1653, 0.1231, 0.1701, 0.0472, 0.0485, -0.0701, 0.0818, 0.0498, -0.225, -0.4251, 0.1774, -0.0306, -0.129, -0.4023, 0.9605, 0.9379, 0.9356, 0.9323, 0.9308, 0.9302, 0.925, 0.9237, 0.8968, 0.8935, 0.892, 0.8893, 0.8848, 0.8814, 0.8807, 0.8797, 0.8771, 0.8752, 0.8748, 0.8598, 0.8567, 0.8529, 0.8521, 0.8508, 0.8506, 0.8482, 0.8392, 0.8387, 0.8351, 0.8336, 0.7884, 0.813, 0.7274, 0.7375, 0.7333, 0.798, 0.7225, 0.7755, 0.6459, 0.6555, 0.5832, 0.5914, 0.553, 0.3634, 0.2846, 0.1789, 0.1944, 0.061, 0.0017, -0.095, 0.2067, 0.3862, 0.3098, 0.0931, 0.1651, -0.274, -0.0521, 0.0271, 0.0256, -0.2306, -0.3502, -0.1337, -0.1992, -0.3779, -0.2234, -0.1554, 0.0098, -0.0159, 1.3566, 1.2194, 1.2161, 1.1893, 1.1847, 1.1798, 1.1725, 1.1353, 1.1279, 1.1254, 1.1241, 1.1234, 1.1188, 1.0965, 1.0903, 1.0829, 1.0736, 1.0686, 1.0427, 1.0373, 1.0277, 1.0254, 1.0222, 1.0055, 1.0033, 1.0004, 0.9991, 0.9975, 0.986, 0.9796, 0.9749, 0.9541, 0.8971, 0.7146, 0.9032, 0.8474, 0.74, 0.6262, 0.6894, 0.5497, 0.5008, 0.8292, 0.5865, 0.615, 0.7977, 0.3887, 0.8173, 0.4204, 0.0084, -0.1229, 0.1877, -0.1676, 0.2598, 0.09, -0.0323, 0.1721, 0.2735, 0.0009, 0.1, -0.1867, 0.2532, 0.0054, -0.1935, -0.1666, -0.0331, -0.0392, -0.1096, -0.2867, -0.2377, -0.2079, -0.2138, -0.163, -0.1918, 1.2711, 1.1125, 1.1003, 1.0926, 1.0657, 1.0572, 1.0457, 1.0211, 1.0123, 0.9865, 0.9858, 0.9835, 0.9794, 0.9574, 0.9481, 0.9459, 0.9325, 0.932, 0.9306, 0.9238, 0.9232, 0.92, 0.9195, 0.9156, 0.9147, 0.9114, 0.9104, 0.9033, 0.8985, 0.8966, 0.8732, 0.8127, 0.8015, 0.7807, 0.7826, 0.8283, 0.6677, 0.7087, 0.6469, 0.8061, 0.5578, 0.4532, 0.3833, 0.1893, 0.3269, 0.318, 0.5763, 0.5952, -0.0504, 0.3051, 0.2317, 0.2015, -0.1994, -0.0236, -0.1256, -0.0602, -0.0118, 0.0591, -0.1701, 0.1733, 0.1261, -0.1282, 0.1033, 0.2131, -0.1011, -0.21, 0.0495, -0.0948, -0.1954, -0.136, 0.0669, 0.0007, -0.3999, -0.2579, -0.6105, -0.3319, -0.3132]}, "token.table": {"Topic": [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 2, 1, 2, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 1, 2, 3, 5, 1, 1, 1, 2, 3, 4, 5, 1, 3, 4, 1, 2, 3, 4, 5, 2, 3, 1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 5, 3, 4, 1, 2, 3, 5, 1, 2, 3, 4, 5, 3, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 1, 2, 3, 4, 5, 2, 3, 4, 3, 4, 1, 2, 3, 4, 5, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 5, 1, 2, 3, 4, 5, 1, 2, 5, 2, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 3, 4, 4, 3, 4, 3, 4, 1, 3, 1, 2, 3, 4, 5, 1, 3, 1, 2, 3, 4, 5, 2, 1, 2, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 5, 1, 2, 3, 4, 5, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 1, 1, 2, 3, 4, 1, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 2, 1, 3, 5, 1, 3, 4, 1, 3, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 5, 1, 2, 3, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 1, 2, 3, 4, 5, 2, 1, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 2, 1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 5, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 1, 2, 3, 5, 1, 4, 5, 2, 3, 1, 2, 3, 4, 5, 1, 1, 2, 3, 4, 5, 1, 2, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 1, 1, 2, 3, 1, 2, 3, 4, 5, 1, 2, 2, 1, 2, 3, 4, 5, 1, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 3, 1, 2, 3, 4, 5, 2, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 2, 3, 4, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 1, 2, 3, 4, 5, 1, 2, 1, 2, 3, 4, 5, 2, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 5, 1, 2, 3, 4, 1, 2, 3, 4, 5, 3, 1, 2, 3, 4, 5, 1, 2, 5, 1, 1, 2, 3, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 2, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 2, 2, 1, 2, 3, 4, 5, 1, 2, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 1, 2, 3, 4, 5, 2], "Freq": [0.3332959242202366, 0.2592301632824062, 0.20985298932385266, 0.07406576093783035, 0.11109864140674552, 0.3937622601224074, 0.2801769927794053, 0.13630232081160257, 0.09844056503060185, 0.09086821387440171, 0.48582203558561243, 0.273604188684582, 0.350213361516265, 0.1751066807581325, 0.09849750792644951, 0.09849750792644951, 0.11929334654766804, 0.2385866930953361, 0.35788003964300413, 0.2385866930953361, 0.11929334654766804, 0.7106004414736238, 0.3553002207368119, 0.7572078913198645, 0.43534156296269627, 0.43534156296269627, 0.43534156296269627, 0.2540287013609486, 0.30319554678564836, 0.2622231755983986, 0.12291711356174934, 0.05736131966214969, 0.1003532437535746, 0.1003532437535746, 0.501766218767873, 0.2007064875071492, 0.1003532437535746, 0.575204018739381, 0.4770323842836426, 0.4770323842836426, 0.3763889714661455, 0.33048787738490826, 0.13770328224371178, 0.07344175052997962, 0.08262196934622706, 0.1267342736054641, 0.6336713680273205, 0.1267342736054641, 0.14180579124643047, 0.6381260606089372, 0.07090289562321524, 0.07090289562321524, 0.07090289562321524, 0.3748281585781447, 0.12494271952604824, 0.20823786587674709, 0.12494271952604824, 0.16659029270139766, 0.5111537140659455, 0.08519228567765758, 0.17038457135531515, 0.2555768570329727, 0.7573654869399665, 0.41322927594854103, 0.41322927594854103, 0.41322927594854103, 0.5683223274758002, 0.5750720056525054, 0.497516979006809, 0.2487584895034045, 0.08291949650113484, 0.08291949650113484, 0.08291949650113484, 0.3788933277295532, 0.47494280097056146, 0.47494280097056146, 0.27419085688142253, 0.23502073446979072, 0.23502073446979072, 0.07834024482326357, 0.19585061205815893, 0.3112076011067821, 0.6224152022135642, 0.28597129066228477, 0.28597129066228477, 0.28597129066228477, 0.28597129066228477, 0.5932341770975573, 0.11864683541951147, 0.11864683541951147, 0.11864683541951147, 0.11864683541951147, 0.42637380732976815, 0.42637380732976815, 0.42637380732976815, 0.4786210590370704, 0.4786210590370704, 0.25927365957854437, 0.25927365957854437, 0.25927365957854437, 0.25927365957854437, 0.17444368623165266, 0.23259158164220353, 0.46518316328440706, 0.08722184311582633, 0.05814789541055088, 0.4101413260030457, 0.34911301112997406, 0.24473901811173437, 0.23394170848915785, 0.08277937377308663, 0.08637847698061213, 0.29984125666437744, 0.2941838744631628, 0.2658969634570894, 0.0735459686157907, 0.06788858641457603, 0.26619707973939055, 0.3520671054617746, 0.19964780980454291, 0.08801677636544365, 0.09445702829462245, 0.32801331119309474, 0.2296093178351663, 0.2296093178351663, 0.08200332779827368, 0.13940565725706525, 0.5029644550719533, 0.25148222753597665, 0.47553820765545135, 0.20380208899519345, 0.10190104449759672, 0.10190104449759672, 0.1698350741626612, 0.378753268543273, 0.23241677842428116, 0.21089670634795885, 0.09468831713581825, 0.08177627389002486, 0.2257748077576074, 0.32253543965372483, 0.24190157974029364, 0.09676063189611746, 0.12901417586148994, 0.09772616987359506, 0.19545233974719012, 0.39090467949438024, 0.19545233974719012, 0.09772616987359506, 0.1193303525371631, 0.1193303525371631, 0.536986586417234, 0.17899552880574465, 0.05966517626858155, 0.14805758486210133, 0.14805758486210133, 0.5182015470173545, 0.14805758486210133, 0.07402879243105066, 0.5717585630884252, 0.34645525782483916, 0.31110268049577394, 0.17676288664532608, 0.07777567012394349, 0.08484618558975653, 0.4429309879055362, 0.2214654939527681, 0.11073274697638405, 0.11073274697638405, 0.11073274697638405, 0.18316483394887617, 0.18316483394887617, 0.5494945018466285, 0.18316483394887617, 0.18720476255405533, 0.3900099219876153, 0.2496063500720738, 0.07800198439752305, 0.09360238127702766, 0.12478187763817385, 0.6239093881908693, 0.12478187763817385, 0.2591383616079338, 0.19435377120595032, 0.1295691808039669, 0.1295691808039669, 0.2591383616079338, 0.7498357554067367, 0.48961750850747526, 0.48961750850747526, 0.4850787455319289, 0.4850787455319289, 0.11584585501597319, 0.06950751300958391, 0.5560601040766713, 0.20388870482811283, 0.055606010407667134, 0.4859785476156114, 0.4859785476156114, 0.1560224123447313, 0.11701680925854846, 0.3900560308618282, 0.27303922160327976, 0.07801120617236565, 0.34325699211054106, 0.17162849605527053, 0.17162849605527053, 0.11441899737018035, 0.2288379947403607, 0.3102039684924365, 0.3102039684924365, 0.15510198424621824, 0.3102039684924365, 0.4048927317262665, 0.1619570926905066, 0.1619570926905066, 0.0809785463452533, 0.2429356390357599, 0.41963139384635967, 0.41963139384635967, 0.41963139384635967, 0.4273228062359321, 0.4273228062359321, 0.2758380543609792, 0.3394929899827436, 0.2227922746761755, 0.0848732474956859, 0.07426409155872517, 0.38492692698069386, 0.19246346349034693, 0.1443475976177602, 0.09623173174517347, 0.19246346349034693, 0.49398472326535137, 0.176963093707565, 0.12251291102831421, 0.4492140071038188, 0.19057563937737768, 0.06806272834906346, 0.42773016656157253, 0.21386508328078627, 0.11881393515599238, 0.0950511481247939, 0.14257672218719086, 0.5678397990353987, 0.13117644437245596, 0.13117644437245596, 0.4872267933834079, 0.18739492053207996, 0.09369746026603998, 0.3685805094946679, 0.189960724124175, 0.22114830569680075, 0.09923321409471829, 0.11907985691366195, 0.29561139776746126, 0.29561139776746126, 0.29561139776746126, 0.0939378488107737, 0.0939378488107737, 0.46968924405386847, 0.1878756976215474, 0.0939378488107737, 0.325413148948989, 0.34400818603178834, 0.1534090559330948, 0.08367766687259717, 0.09297518541399685, 0.29471321320043325, 0.29471321320043325, 0.20094082718211356, 0.13396055145474237, 0.06698027572737118, 0.13289918194298217, 0.06644959097149108, 0.5315967277719287, 0.19934877291447325, 0.06644959097149108, 0.09794761372979151, 0.19589522745958302, 0.4897380686489575, 0.09794761372979151, 0.09794761372979151, 0.09891656913292429, 0.09891656913292429, 0.49458284566462146, 0.09891656913292429, 0.09891656913292429, 0.18134727561053943, 0.18134727561053943, 0.36269455122107885, 0.18134727561053943, 0.18134727561053943, 0.3395171758944505, 0.13580687035778022, 0.13580687035778022, 0.06790343517889011, 0.27161374071556044, 0.3024678569124319, 0.34727790978834777, 0.17924021150366334, 0.07841759253285271, 0.08962010575183167, 0.48438601288348365, 0.48438601288348365, 0.48637844288015014, 0.48644297568265465, 0.48644297568265465, 0.47486986799396924, 0.47486986799396924, 0.309741191868822, 0.619482383737644, 0.40561922676068785, 0.18027521189363904, 0.18027521189363904, 0.09013760594681952, 0.13520640892022928, 0.2526066611035231, 0.5052133222070462, 0.4095020870418203, 0.2586328970790444, 0.1724219313860296, 0.0646582242697611, 0.0862109656930148, 0.6691004644552727, 0.4110868521784911, 0.4110868521784911, 0.4110868521784911, 0.3155792584475323, 0.18737518470322231, 0.17751333287673693, 0.16765148105025154, 0.14792777739728077, 0.3483075685002657, 0.27864605480021254, 0.16718763288012753, 0.08359381644006376, 0.11145842192008501, 0.31134382431079655, 0.31134382431079655, 0.31134382431079655, 0.2758668682932003, 0.1839112455288002, 0.1839112455288002, 0.2758668682932003, 0.0919556227644001, 0.48505018744604766, 0.48505018744604766, 0.1153090543515259, 0.5381089203071209, 0.1153090543515259, 0.1153090543515259, 0.07687270290101726, 0.3985887699460631, 0.2696335796693956, 0.15240158850878885, 0.09964719248651578, 0.08206239381242476, 0.17970146514932517, 0.5391043954479755, 0.17970146514932517, 0.17970146514932517, 0.2698653543377675, 0.2698653543377675, 0.13493267716888374, 0.06746633858444187, 0.20239901575332558, 0.12961419037340696, 0.12961419037340696, 0.5184567614936278, 0.12961419037340696, 0.12961419037340696, 0.29070275770676923, 0.31395897832331077, 0.24419031647368614, 0.1104670479285723, 0.046512441233083075, 0.5951907775886217, 0.17005450788246335, 0.08502725394123167, 0.08502725394123167, 0.08502725394123167, 0.1505310005180046, 0.6021240020720184, 0.1505310005180046, 0.5779549534887364, 0.3778901481333009, 0.13328176782135792, 0.5331270712854317, 0.13328176782135792, 0.26051335752646004, 0.26051335752646004, 0.26051335752646004, 0.3234320011322066, 0.3234320011322066, 0.15572651906365503, 0.08385274103427579, 0.10781066704406887, 0.3117417558582267, 0.2894744875826391, 0.16700451206690717, 0.13360360965352575, 0.1002027072401443, 0.2847374457221549, 0.2847374457221549, 0.2847374457221549, 0.2847374457221549, 0.6286354152475628, 0.7631146900993235, 0.10901638429990336, 0.10901638429990336, 0.291778959385064, 0.291778959385064, 0.291778959385064, 0.2436797998988104, 0.4873595997976208, 0.30246183597700793, 0.30246183597700793, 0.3192520541447837, 0.15962602707239185, 0.15962602707239185, 0.15962602707239185, 0.3192520541447837, 0.21560793626983732, 0.323411904404756, 0.21560793626983732, 0.10780396813491866, 0.323411904404756, 0.11959440978197462, 0.12756737043410626, 0.53418836369282, 0.16743217369476446, 0.05581072456492149, 0.62413200031036, 0.2080440001034533, 0.3128960910248696, 0.3128960910248696, 0.19121427784853143, 0.0782240227562174, 0.10429869700828988, 0.16570733257583461, 0.13808944381319552, 0.4695041089648647, 0.1933252213384737, 0.0552357775252782, 0.5455580244571725, 0.1818526748190575, 0.1818526748190575, 0.1818526748190575, 0.5315966138444173, 0.1771988712814724, 0.1771988712814724, 0.2841621720330433, 0.37235043231916015, 0.1469804338101948, 0.06859086911142424, 0.11758434704815585, 0.34816448386590304, 0.23210965591060204, 0.11605482795530102, 0.11605482795530102, 0.23210965591060204, 0.17090231359303626, 0.5127069407791087, 0.10254138815582174, 0.136721850874429, 0.0683609254372145, 0.3435303826034106, 0.3079927568168509, 0.17768812893279862, 0.08292112683530602, 0.08292112683530602, 0.15110448547659822, 0.6044179419063929, 0.15110448547659822, 0.08520216003760589, 0.14200360006267648, 0.5680144002507059, 0.14200360006267648, 0.05680144002507059, 0.7708462486937132, 0.5655071056442904, 0.4728549970290858, 0.15761833234302858, 0.15761833234302858, 0.07880916617151429, 0.07880916617151429, 0.3650389893141684, 0.1825194946570842, 0.1825194946570842, 0.1825194946570842, 0.1825194946570842, 0.5301572079065497, 0.12540723356492958, 0.12540723356492958, 0.5016289342597183, 0.12540723356492958, 0.3443575589381544, 0.28851579262385907, 0.17683225999526847, 0.12099049368097317, 0.0744556884190604, 0.1902578381717078, 0.3805156763434156, 0.0951289190858539, 0.2853867572575617, 0.3744167258437462, 0.3744167258437462, 0.398828622425478, 0.2791800356978346, 0.1595314489701912, 0.0930600118992782, 0.066471437070913, 0.06489049045997781, 0.25956196183991126, 0.5191239236798225, 0.06489049045997781, 0.4136342724171321, 0.20681713620856604, 0.20681713620856604, 0.20681713620856604, 0.5745960561220205, 0.19153201870734016, 0.19153201870734016, 0.5322658285160575, 0.26613291425802876, 0.1386062900337968, 0.1386062900337968, 0.5544251601351872, 0.1386062900337968, 0.1386062900337968, 0.5616896458839434, 0.12242525141440622, 0.12242525141440622, 0.5713178399338957, 0.16323366855254162, 0.040808417138135405, 0.7162412605900966, 0.3581206302950483, 0.19296414554639954, 0.3445788313328563, 0.26187991181297077, 0.15161468578645676, 0.06891576626657125, 0.3758029175729021, 0.19714251413660439, 0.2649102533710621, 0.08008914636799552, 0.08624984993476441, 0.7532562203117368, 0.569346865653727, 0.5418867653408671, 0.18062892178028905, 0.18062892178028905, 0.07300534677908044, 0.5840427742326435, 0.14601069355816088, 0.07300534677908044, 0.07300534677908044, 0.7045078616121028, 0.3522539308060514, 0.6686777330880859, 0.2803648576837424, 0.17253222011307226, 0.4097640227685466, 0.0646995825424021, 0.043133055028268065, 0.5704729808347321, 0.24327301878770413, 0.42572778287848223, 0.1621820125251361, 0.09122738204538905, 0.08109100626256804, 0.29629176751074077, 0.09876392250358026, 0.19752784500716053, 0.09876392250358026, 0.19752784500716053, 0.12339668560942914, 0.17275535985320079, 0.4195487310720591, 0.19743469697508662, 0.07403801136565748, 0.145533111999809, 0.145533111999809, 0.4365993359994271, 0.145533111999809, 0.11386846881203057, 0.11386846881203057, 0.5693423440601528, 0.11386846881203057, 0.11386846881203057, 0.3528996154345975, 0.3308433894699352, 0.12130924280564291, 0.07719679087631821, 0.12130924280564291, 0.2277632898168082, 0.4555265796336164, 0.162688064154863, 0.06507522566194521, 0.06507522566194521, 0.2873887684433883, 0.2873887684433883, 0.2873887684433883, 0.24871730183889054, 0.24871730183889054, 0.24871730183889054, 0.24871730183889054, 0.23261810434063993, 0.4984673664442284, 0.09969347328884567, 0.09969347328884567, 0.09969347328884567, 0.6270469318912394, 0.1254093863782479, 0.1254093863782479, 0.1254093863782479, 0.27464730313215413, 0.32957676375858497, 0.21971784250572332, 0.09887302912757549, 0.07690124487700316, 0.3449986629998858, 0.23459909083992234, 0.20699919779993148, 0.12419951867995889, 0.08279967911997259, 0.2696281028909851, 0.28548857953163126, 0.20618619632840038, 0.07930238320323091, 0.15860476640646182, 0.27260974164532387, 0.13630487082266193, 0.5452194832906477, 0.13630487082266193, 0.13630487082266193, 0.29044417223607205, 0.3116961848387115, 0.22668813442815378, 0.09917605881231728, 0.07084004200879805, 0.18129301391531574, 0.12086200927687717, 0.4230170324690701, 0.24172401855375433, 0.06043100463843858, 0.2722597462471978, 0.2586467589348379, 0.29267922721573764, 0.08167792387415934, 0.09529091118651922, 0.3580721667618888, 0.3047422695845862, 0.17522680501113708, 0.09142268087537586, 0.0685670106565319, 0.5419468543069771, 0.13548671357674427, 0.13548671357674427, 0.13548671357674427, 0.26896337866414183, 0.3073867184733049, 0.19211669904581558, 0.09221601554199148, 0.1383240233129872, 0.09988165075203384, 0.09988165075203384, 0.49940825376016923, 0.19976330150406768, 0.09988165075203384, 0.3167860841429113, 0.32684278522681326, 0.17599226896828407, 0.08548195921316655, 0.09553866029706849, 0.19905028255656285, 0.24881285319570356, 0.19905028255656285, 0.29857542383484426, 0.04976257063914071, 0.10260110496806524, 0.10260110496806524, 0.41040441987226095, 0.3078033149041957, 0.10260110496806524, 0.15205410855102386, 0.12671175712585322, 0.4561623256530716, 0.20273881140136513, 0.05068470285034128, 0.3345105415275764, 0.1672552707637882, 0.1672552707637882, 0.2508829061456823, 0.0836276353818941, 0.6315447878757272, 0.08576933820654421, 0.6861547056523537, 0.08576933820654421, 0.08576933820654421, 0.08576933820654421, 0.532182144723718, 0.4863453501790035, 0.3864855086010356, 0.2824317178238337, 0.1783779270466318, 0.0891889635233159, 0.07432413626942992, 0.40342508477856776, 0.25214067798660483, 0.1512844067919629, 0.10085627119464194, 0.10085627119464194, 0.34879155236275355, 0.28128350996996254, 0.18002144638077602, 0.09001072319038801, 0.09001072319038801, 0.2621456377214537, 0.21588464282943245, 0.3238269642441487, 0.10794232141471623, 0.07710165815336874, 0.46720395551490396, 0.19237809932966632, 0.1374129280926188, 0.08244775685557128, 0.10993034247409504, 0.6842475743948855, 0.4973805100278557, 0.4973805100278557, 0.47456204146320446, 0.47456204146320446, 0.42381231681922255, 0.18541788860840985, 0.15892961880720843, 0.07946480940360422, 0.15892961880720843, 0.2671982014372869, 0.3859529576316366, 0.16328778976723088, 0.103910411670056, 0.08906606714576229, 0.1991550346169541, 0.29873255192543113, 0.1991550346169541, 0.24894379327119262, 0.04978875865423853, 0.1448853000103261, 0.5795412000413044, 0.11590824000826087, 0.08693118000619565, 0.08693118000619565, 0.12879335708124878, 0.643966785406244, 0.12879335708124878, 0.06439667854062439, 0.06439667854062439, 0.08096052380670955, 0.6476841904536764, 0.1619210476134191, 0.08096052380670955, 0.08096052380670955, 0.15316119538465026, 0.612644781538601, 0.15316119538465026, 0.2574870029266051, 0.32564532723070644, 0.2726332972164054, 0.06815832430410135, 0.0757314714490015, 0.262533402287, 0.525066804574, 0.10853619981887068, 0.10853619981887068, 0.5426809990943534, 0.10853619981887068, 0.10853619981887068, 0.6766178282461938, 0.1545454436983383, 0.1545454436983383, 0.4636363310950149, 0.1545454436983383, 0.07727272184916915, 0.5106606612623461, 0.25533033063117305, 0.08511011021039103, 0.04255505510519551, 0.08511011021039103, 0.1432880426632511, 0.5492708302091293, 0.1432880426632511, 0.07164402133162555, 0.09552536177550074, 0.3601346648138548, 0.3086868555547327, 0.16819476103943767, 0.08310799957242802, 0.08112923767784641, 0.21029888936231655, 0.10514944468115828, 0.5257472234057914, 0.10514944468115828, 0.10514944468115828, 0.40051678430623894, 0.20025839215311947, 0.17522609313397955, 0.05006459803827987, 0.17522609313397955, 0.11829740095624275, 0.630919471766628, 0.157729867941657, 0.03943246698541425, 0.03943246698541425, 0.4209475587121087, 0.21047377935605435, 0.21047377935605435, 0.28762703189775235, 0.21995008321592827, 0.3130058876534364, 0.08459618585228011, 0.09305580443750812, 0.4078783789777125, 0.24472702738662752, 0.1468362164319765, 0.1142059461137595, 0.08157567579554251, 0.20161626015942488, 0.4398900221660179, 0.1832875092358408, 0.0916437546179204, 0.0916437546179204, 0.18229164425064537, 0.36458328850129074, 0.18229164425064537, 0.18229164425064537, 0.7187046714924031, 0.35935233574620157, 0.488165600583474, 0.488165600583474, 0.26965674981625615, 0.3595423330883415, 0.2022425623621921, 0.06741418745406404, 0.10112128118109605, 0.6099202687754974, 0.12677215825437324, 0.6338607912718662, 0.12677215825437324, 0.06338607912718662, 0.06338607912718662, 0.41412751070655085, 0.41412751070655085, 0.41412751070655085, 0.5705487150625695, 0.20957501336794845, 0.6287250401038453, 0.20957501336794845, 0.31059282929470045, 0.2773150261559825, 0.19966681883230744, 0.14420381360111093, 0.06655560627743581, 0.11011422910189833, 0.66068537461139, 0.11011422910189833, 0.055057114550949166, 0.055057114550949166, 0.5300772735441962, 0.2891310702460508, 0.15568596090171966, 0.3780944764756049, 0.08896340622955409, 0.11120425778694261, 0.24519251667022524, 0.5721158722305255, 0.08173083889007507, 0.08173083889007507, 0.08173083889007507, 0.09591557909508579, 0.09591557909508579, 0.47957789547542895, 0.19183115819017157, 0.09591557909508579, 0.5371079997956447, 0.17903599993188157, 0.17903599993188157, 0.08951799996594079, 0.08951799996594079, 0.11774615890233757, 0.44154809588376587, 0.29436539725584393, 0.08830961917675317, 0.029436539725584392, 0.47312708815573795, 0.15770902938524597, 0.2628483823087433, 0.052569676461748656, 0.052569676461748656, 0.6770726353621992, 0.5269661196900755, 0.38013431084904475, 0.17739601172955421, 0.3041074486792358, 0.03801343108490447, 0.10136914955974526, 0.5281652302792187, 0.26408261513960934, 0.32840743906152486, 0.16420371953076243, 0.16420371953076243, 0.16420371953076243, 0.32840743906152486, 0.24983912830232985, 0.39557861981202225, 0.17696938254748365, 0.09368967311337369, 0.08327970943410995, 0.2169011733436712, 0.4338023466873424, 0.15016235077638776, 0.1084505866718356, 0.08342352820910431, 0.30292035931203337, 0.13463127080534815, 0.38706490356537593, 0.06731563540267407, 0.0841445442533426, 0.12869707214003778, 0.6434853607001888, 0.12869707214003778, 0.12869707214003778, 0.07274593320135002, 0.6547133988121502, 0.14549186640270004, 0.03637296660067501, 0.07274593320135002, 0.35717558902565993, 0.3466704246425523, 0.16808263012972233, 0.05252582191553823, 0.06303098629864587, 0.29357158367559666, 0.36402876375773985, 0.19962867689940572, 0.05871431673511933, 0.09394290677619094, 0.13703603650004076, 0.548144146000163, 0.2283933941667346, 0.04567867883334692, 0.09135735766669384, 0.44706285569765364, 0.11176571392441341, 0.22353142784882682, 0.055882856962206705, 0.1676485708866201, 0.18367747371085258, 0.18367747371085258, 0.5510324211325577, 0.18367747371085258, 0.33389297403462875, 0.14309698887198377, 0.4054414684706207, 0.04769899629066125, 0.07154849443599189, 0.5285277869478382], "Term": ["access", "access", "access", "access", "access", "action", "action", "action", "action", "action", "activistas", "addition", "addition", "addition", "addition", "addition", "administraci\u00f3n", "administraci\u00f3n", "administraci\u00f3n", "administraci\u00f3n", "administraci\u00f3n", "administrator", "administrator", "ads", "agree", "agree", "agree", "air", "air", "air", "air", "air", "al", "al", "al", "al", "al", "aligns", "altos", "altos", "america", "america", "america", "america", "america", "angie", "angie", "angie", "arctic", "arctic", "arctic", "arctic", "arctic", "arizona", "arizona", "arizona", "arizona", "arizona", "arkansas", "arkansas", "arkansas", "arkansas", "artificially", "assassination", "assassination", "assassination", "associations", "bailout", "bernhardt", "bernhardt", "bernhardt", "bernhardt", "bernhardt", "beyer", "blanca", "blanca", "border", "border", "border", "border", "border", "bosques", "bosques", "canyons", "canyons", "canyons", "canyons", "capacity", "capacity", "capacity", "capacity", "capacity", "captive", "captive", "captive", "casa", "casa", "chickasaw", "chickasaw", "chickasaw", "chickasaw", "city", "city", "city", "city", "city", "civiles", "clean", "clean", "clean", "clean", "clean", "climate", "climate", "climate", "climate", "climate", "club", "club", "club", "club", "club", "coal", "coal", "coal", "coal", "coal", "colleague", "colleague", "commission", "commission", "commission", "commission", "commission", "communities", "communities", "communities", "communities", "communities", "community", "community", "community", "community", "community", "como", "como", "como", "como", "como", "comunidades", "comunidades", "comunidades", "comunidades", "comunidades", "con", "con", "con", "con", "con", "consumer", "contact", "contact", "contact", "contact", "contact", "continued", "continued", "continued", "continued", "continued", "corte", "corte", "corte", "corte", "court", "court", "court", "court", "court", "craig", "craig", "craig", "customers", "customers", "customers", "customers", "customers", "cuts", "da\u00f1inas", "da\u00f1inas", "dci", "dci", "de", "de", "de", "de", "de", "defender", "defender", "del", "del", "del", "del", "del", "demand", "demand", "demand", "demand", "demand", "denton", "denton", "denton", "denton", "deq", "deq", "deq", "deq", "deq", "different", "different", "different", "directions", "directions", "education", "education", "education", "education", "education", "efficiency", "efficiency", "efficiency", "efficiency", "efficiency", "ejecutivos", "el", "el", "el", "el", "el", "electric", "electric", "electric", "electric", "electric", "emp", "en", "en", "en", "en", "en", "energy", "energy", "energy", "energy", "energy", "energ\u00eda", "energ\u00eda", "energ\u00eda", "english", "english", "english", "english", "english", "environmental", "environmental", "environmental", "environmental", "environmental", "epa", "epa", "epa", "epa", "epa", "es", "es", "es", "es", "es", "estados", "estados", "estados", "estados", "estados", "este", "este", "este", "este", "este", "est\u00e1", "est\u00e1", "est\u00e1", "est\u00e1", "est\u00e1", "evergy", "evergy", "evergy", "evergy", "evergy", "every", "every", "every", "every", "every", "expandir", "expandir", "experiencia", "financiera", "financiera", "fomb", "fomb", "fondos", "fondos", "fossil", "fossil", "fossil", "fossil", "fossil", "frontera", "frontera", "fuel", "fuel", "fuel", "fuel", "fuel", "garett", "garland", "garland", "garland", "gas", "gas", "gas", "gas", "gas", "get", "get", "get", "get", "get", "gibbons", "gibbons", "gibbons", "girls", "girls", "girls", "girls", "girls", "govern", "govern", "grande", "grande", "grande", "grande", "grande", "grassroots", "grassroots", "grassroots", "grassroots", "grassroots", "gray", "gray", "gray", "gray", "grid", "grid", "grid", "grid", "grid", "ha", "ha", "ha", "ha", "ha", "health", "health", "health", "health", "health", "heat", "heat", "heat", "heat", "heat", "hunters", "hunters", "hunters", "identifying", "impossible", "incendios", "incendios", "incendios", "industria", "industria", "industria", "influential", "influential", "influential", "influential", "influential", "information", "information", "information", "information", "information", "infraestructura", "infraestructura", "infraestructura", "infraestructura", "jealous", "jersey", "jersey", "jersey", "junta", "junta", "junta", "justicia", "justicia", "justin", "justin", "kansas", "kansas", "kansas", "kansas", "kansas", "king", "king", "king", "king", "king", "la", "la", "la", "la", "la", "lantry", "lantry", "largest", "largest", "largest", "largest", "largest", "las", "las", "las", "las", "las", "latino", "latino", "latino", "latino", "lauren", "lauren", "lauren", "legal", "legal", "legal", "legal", "legal", "llc", "llc", "llc", "llc", "llc", "lng", "lng", "lng", "lng", "lng", "lobbying", "lobbying", "lobbying", "lobbying", "lobbying", "logging", "logging", "logging", "los", "los", "los", "los", "los", "lost", "mandates", "market", "market", "market", "market", "market", "markets", "markets", "markets", "markets", "markets", "mast", "medio", "medio", "medio", "medio", "members", "members", "members", "members", "members", "memphis", "memphis", "memphis", "memphis", "metano", "metano", "million", "million", "million", "million", "million", "missoula", "missoula", "missoula", "missoula", "monopoly", "monopoly", "monopoly", "monopoly", "mopr", "mopr", "mopr", "mountains", "mountains", "muro", "muro", "muro", "muro", "muro", "murphy", "m\u00e1s", "m\u00e1s", "m\u00e1s", "m\u00e1s", "m\u00e1s", "nafta", "nafta", "national", "national", "national", "national", "national", "new", "new", "new", "new", "new", "nj", "njbpu", "nomination", "nomination", "nomination", "northern", "northern", "northern", "northern", "northern", "obama", "obama", "offset", "offshore", "offshore", "offshore", "offshore", "offshore", "opting", "organization", "organization", "organization", "organization", "organization", "owner", "owner", "owner", "owner", "owner", "para", "para", "para", "para", "para", "parajes", "parajes", "parajes", "parajes", "pa\u00eds", "pa\u00eds", "pa\u00eds", "pa\u00eds", "pa\u00eds", "people", "people", "people", "people", "people", "permit", "permit", "permit", "permit", "permit", "peterson", "peterson", "peterson", "petr\u00f3leo", "petr\u00f3leo", "petr\u00f3leo", "petr\u00f3leo", "pipeline", "pipeline", "pipeline", "pipeline", "pipeline", "pjm", "pjm", "pjm", "pjm", "places", "places", "places", "places", "places", "plan", "plan", "plan", "plan", "plan", "plants", "plants", "plants", "plants", "plants", "poder", "poder", "poder", "poder", "poder", "pollution", "pollution", "pollution", "pollution", "pollution", "por", "por", "por", "por", "por", "power", "power", "power", "power", "power", "press", "press", "press", "press", "press", "prices", "prices", "prices", "prices", "protect", "protect", "protect", "protect", "protect", "proteger", "proteger", "proteger", "proteger", "proteger", "public", "public", "public", "public", "public", "puerto", "puerto", "puerto", "puerto", "puerto", "p\u00fablica", "p\u00fablica", "p\u00fablica", "p\u00fablica", "p\u00fablica", "que", "que", "que", "que", "que", "radium", "radium", "radium", "radium", "radium", "reducci\u00f3n", "refuge", "refuge", "refuge", "refuge", "refuge", "regressive", "regulaciones", "related", "related", "related", "related", "related", "released", "released", "released", "released", "released", "remaining", "remaining", "remaining", "remaining", "remaining", "renewable", "renewable", "renewable", "renewable", "renewable", "report", "report", "report", "report", "report", "reppenhagen", "reputaci\u00f3n", "reputaci\u00f3n", "reputations", "reputations", "resources", "resources", "resources", "resources", "resources", "response", "response", "response", "response", "response", "rico", "rico", "rico", "rico", "rico", "rio", "rio", "rio", "rio", "rio", "roadless", "roadless", "roadless", "roadless", "roadless", "rockies", "rockies", "rockies", "rockies", "rockies", "rocky", "rocky", "rocky", "said", "said", "said", "said", "said", "salmon", "salmon", "salud", "salud", "salud", "salud", "salud", "scheme", "se", "se", "se", "se", "se", "senate", "senate", "senate", "senate", "senate", "service", "service", "service", "service", "service", "sierra", "sierra", "sierra", "sierra", "sierra", "sobre", "sobre", "sobre", "sobre", "sobre", "solar", "solar", "solar", "solar", "solar", "species", "species", "species", "species", "species", "srp", "srp", "srp", "state", "state", "state", "state", "state", "statement", "statement", "statement", "statement", "statement", "states", "states", "states", "states", "states", "strategic", "strategic", "strategic", "strategic", "summit", "summit", "supervisi\u00f3n", "supervisi\u00f3n", "supporters", "supporters", "supporters", "supporters", "supporters", "suprema", "tax", "tax", "tax", "tax", "tax", "terrible", "terrible", "terrible", "tilt", "timber", "timber", "timber", "today", "today", "today", "today", "today", "tongass", "tongass", "tongass", "tongass", "tongass", "transformative", "transition", "transition", "transition", "transition", "transition", "trees", "trees", "trees", "trees", "trees", "un", "un", "un", "un", "un", "usps", "usps", "usps", "usps", "usps", "utah", "utah", "utah", "utah", "utah", "vehicles", "vehicles", "vehicles", "vehicles", "vehicles", "vet", "veteran", "water", "water", "water", "water", "water", "weatherization", "weatherization", "wholesale", "wholesale", "wholesale", "wholesale", "wholesale", "wild", "wild", "wild", "wild", "wild", "wildlife", "wildlife", "wildlife", "wildlife", "wildlife", "wind", "wind", "wind", "wind", "wind", "wolf", "wolf", "wolf", "wolf", "wolves", "wolves", "wolves", "wolves", "wolves", "works", "works", "works", "works", "works", "would", "would", "would", "would", "would", "wyoming", "wyoming", "wyoming", "wyoming", "wyoming", "xcel", "xcel", "xcel", "xcel", "xcel", "ya", "ya", "ya", "ya", "york", "york", "york", "york", "york", "zeldin"]}, "R": 30, "lambda.step": 0.01, "plot.opts": {"xlab": "PC1", "ylab": "PC2"}, "topic.order": [4, 5, 3, 1, 2]};
+
+function LDAvis_load_lib(url, callback){
+  var s = document.createElement('script');
+  s.src = url;
+  s.async = true;
+  s.onreadystatechange = s.onload = callback;
+  s.onerror = function(){console.warn("failed to load library " + url);};
+  document.getElementsByTagName("head")[0].appendChild(s);
+}
+
+if(typeof(LDAvis) !== "undefined"){
+   // already loaded: just create the visualization
+   !function(LDAvis){
+       new LDAvis("#" + "ldavis_el8144763022158881119366775", ldavis_el8144763022158881119366775_data);
+   }(LDAvis);
+}else if(typeof define === "function" && define.amd){
+   // require.js is available: use it to load d3/LDAvis
+   require.config({paths: {d3: "https://d3js.org/d3.v5"}});
+   require(["d3"], function(d3){
+      window.d3 = d3;
+      LDAvis_load_lib("https://cdn.jsdelivr.net/gh/bmabey/pyLDAvis@3.4.0/pyLDAvis/js/ldavis.v3.0.0.js", function(){
+        new LDAvis("#" + "ldavis_el8144763022158881119366775", ldavis_el8144763022158881119366775_data);
+      });
+    });
+}else{
+    // require.js not available: dynamically load d3 & LDAvis
+    LDAvis_load_lib("https://d3js.org/d3.v5.js", function(){
+         LDAvis_load_lib("https://cdn.jsdelivr.net/gh/bmabey/pyLDAvis@3.4.0/pyLDAvis/js/ldavis.v3.0.0.js", function(){
+                 new LDAvis("#" + "ldavis_el8144763022158881119366775", ldavis_el8144763022158881119366775_data);
+            })
+         });
+}
+</script></div></div>
+</div>
+</section>
+<section id="word-co-occurrence-analysis">
+<h2>3. Word Co-occurrence Analysis<a class="headerlink" href="#word-co-occurrence-analysis" title="Link to this heading">#</a></h2>
+<p>Let’s analyze word co-occurrence patterns in the press releases to understand which environmental concepts are frequently mentioned together.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_top_n_bigram</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">vec</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+    <span class="n">bag_of_words</span> <span class="o">=</span> <span class="n">vec</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+    <span class="n">sum_words</span> <span class="o">=</span> <span class="n">bag_of_words</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">words_freq</span> <span class="o">=</span> <span class="p">[(</span><span class="n">word</span><span class="p">,</span> <span class="n">sum_words</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">])</span> <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">vec</span><span class="o">.</span><span class="n">vocabulary_</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+    <span class="n">words_freq</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">words_freq</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">words_freq</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
+
+
+<span class="n">top_bigrams</span> <span class="o">=</span> <span class="n">get_top_n_bigram</span><span class="p">(</span><span class="n">merged_df</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">],</span> <span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># Visualize top bigrams</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">top_bigrams</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Bigram&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Top 20 Bigrams in Sierra Club Press Releases&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../_images/eddf0f3ee8b640858f243d0eb1d32ea46410ac3f181df56ef002cad9202a7635.png"><img alt="../_images/eddf0f3ee8b640858f243d0eb1d32ea46410ac3f181df56ef002cad9202a7635.png" src="../_images/eddf0f3ee8b640858f243d0eb1d32ea46410ac3f181df56ef002cad9202a7635.png" style="width: 1190px; height: 789px;" /></a>
+</div>
+</div>
+</section>
+<section id="sentiment-analysis-comparison">
+<h2>4. Sentiment Analysis Comparison<a class="headerlink" href="#sentiment-analysis-comparison" title="Link to this heading">#</a></h2>
+<p>Compare the sentiment analysis results from the LLM-based few-shot learning approach with a traditional lexicon-based method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">textblob</span> <span class="kn">import</span> <span class="n">TextBlob</span>
+
+
+<span class="k">def</span> <span class="nf">get_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">TextBlob</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">sentiment</span><span class="o">.</span><span class="n">polarity</span>
+
+
+<span class="n">merged_df</span><span class="p">[</span><span class="s2">&quot;textblob_sentiment&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged_df</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">get_sentiment</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">categorize_sentiment</span><span class="p">(</span><span class="n">score</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Positive&quot;</span>
+    <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Negative&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Neutral&quot;</span>
+
+
+<span class="n">merged_df</span><span class="p">[</span><span class="s2">&quot;textblob_sentiment_category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged_df</span><span class="p">[</span><span class="s2">&quot;textblob_sentiment&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="n">categorize_sentiment</span>
+<span class="p">)</span>
+
+<span class="c1"># Compare the results</span>
+<span class="n">comparison</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span>
+    <span class="n">merged_df</span><span class="p">[</span><span class="s2">&quot;few_shot_sentiment&quot;</span><span class="p">],</span> <span class="n">merged_df</span><span class="p">[</span><span class="s2">&quot;textblob_sentiment_category&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sentiment Analysis Comparison:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">comparison</span><span class="p">)</span>
+
+<span class="c1"># Visualize the comparison</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">comparison</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Comparison of LLM-based and TextBlob Sentiment Analysis&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;LLM-based Sentiment&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;TextBlob Sentiment&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sentiment Analysis Comparison:
+textblob_sentiment_category  Neutral  Positive
+few_shot_sentiment                            
+Negative                           7        52
+Neutral                            0        11
+Positive                           1        29
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 1000x600 with 0 Axes&gt;
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/c82a2adab0244035e3e565c590d500a55c2ff11caf5e01783fbea7a47db40e93.png"><img alt="../_images/c82a2adab0244035e3e565c590d500a55c2ff11caf5e01783fbea7a47db40e93.png" src="../_images/c82a2adab0244035e3e565c590d500a55c2ff11caf5e01783fbea7a47db40e93.png" style="width: 630px; height: 468px;" /></a>
+</div>
+</div>
+</section>
+<section id="key-issue-extraction-evaluation">
+<h2>5. Key Issue Extraction Evaluation<a class="headerlink" href="#key-issue-extraction-evaluation" title="Link to this heading">#</a></h2>
+<p>Evaluate the performance of the LLM-based key issue extraction by comparing it with a traditional keyword extraction method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+
+<span class="k">def</span> <span class="nf">extract_keywords</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">tfidf</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">max_features</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="n">text</span><span class="p">])</span>
+    <span class="n">feature_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tfidf</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+    <span class="n">tfidf_sorting</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span><span class="o">.</span><span class="n">flatten</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s2">&quot;; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">feature_array</span><span class="p">[</span><span class="n">tfidf_sorting</span><span class="p">][:</span><span class="n">n</span><span class="p">])</span>
+
+
+<span class="n">merged_df</span><span class="p">[</span><span class="s2">&quot;tfidf_keywords&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged_df</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">extract_keywords</span><span class="p">)</span>
+
+<span class="c1"># Compare a sample of results</span>
+<span class="n">sample_comparison</span> <span class="o">=</span> <span class="n">merged_df</span><span class="p">[[</span><span class="s2">&quot;key_issues&quot;</span><span class="p">,</span> <span class="s2">&quot;tfidf_keywords&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Comparison of LLM-based and TF-IDF Keyword Extraction:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sample_comparison</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Comparison of LLM-based and TF-IDF Keyword Extraction:
+                                          key_issues    tfidf_keywords
+0  energy efficiency; electricity usage reduction...  the; energy; and
+1         water quality; contamination; strip mining       the; of; to
+2  habitat destruction; environmental damage; flo...      and; the; of
+3  Energy burdens; Historic discrimination; Disin...      the; of; and
+4  oil and gas drilling in the Arctic; thermal co...      the; and; to
+5  clear cutting land; destruction of Garcia Past...     the; and; rio
+6      methane pollution; public lands; polluted air      the; and; to
+7  fracked gas pipelines; tolling orders; eminent...      the; to; and
+8  fossil fuel electricity generation; clean ener...  the; energy; and
+9  air quality; noise pollution; environmental ju...      the; and; of
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analysis-and-interpretation">
+<h2>6. Analysis and Interpretation<a class="headerlink" href="#analysis-and-interpretation" title="Link to this heading">#</a></h2>
+<p>Based on the results of these traditional NLP techniques, analyze and interpret the findings:</p>
+<ol class="arabic simple">
+<li><p>How do the traditional classification methods compare to the LLM-based zero-shot classification? Discuss the strengths and weaknesses of each approach.</p></li>
+<li><p>What insights do the LDA topics provide about the main themes in Sierra Club press releases? How do these compare with the zero-shot classification results?</p></li>
+<li><p>What patterns do you observe in the word co-occurrence analysis? How might these inform our understanding of environmental communication strategies?</p></li>
+<li><p>Compare the sentiment analysis results from the LLM-based and lexicon-based methods. What are the implications of any differences for social science research on environmental advocacy?</p></li>
+<li><p>Evaluate the effectiveness of the LLM-based key issue extraction compared to the TF-IDF method. What are the pros and cons of each approach for analyzing environmental communication?</p></li>
+</ol>
+</section>
+<section id="exercise">
+<h2>7. Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h2>
+<p>For your exercise, please complete the following tasks:</p>
+<ol class="arabic simple">
+<li><p>Implement a traditional NLP approach (e.g., rule-based or machine learning) to extract quotes from the press releases. Compare its performance with the LLM-based quote extraction you implemented in Lab 2.</p></li>
+<li><p>Use a traditional NLP technique (e.g., pattern matching, named entity recognition) to identify organizations mentioned in the press releases. Compare these results with the key issues extracted by the LLM.</p></li>
+<li><p>Apply a lexical diversity measure (e.g., type-token ratio or MTLD) to analyze the complexity of language used in the press releases. Investigate if there’s any correlation between language complexity and the topics or sentiments of the releases.</p></li>
+<li><p>Create a visualization that combines insights from both traditional NLP techniques and LLM-based analyses. For example, you could create a scatter plot of lexical diversity vs. sentiment, with points colored by the zero-shot classification topic.</p></li>
+<li><p>Write a brief (300-350 words) comparative analysis of traditional NLP techniques and LLM-based approaches for analyzing environmental communication. Discuss the strengths, weaknesses, and potential complementarities of these methods in the context of social science research.</p></li>
+</ol>
+<p>Submit your code, visualizations, and written analysis.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "entelecheia/nlp4ss",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./labs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+    <div class="giscus"></div>
+<script src="https://giscus.app/client.js"        data-repo="entelecheia/nlp4ss"        data-repo-id="R_kgDOMTcakg"        data-category="Q&A"        data-category-id="DIC_kwDOMTcaks4Cgwzd"        data-mapping="pathname"        data-strict="1"        data-reactions-enabled="1"        data-emit-metadata="1"        data-input-position="bottom"        data-theme="noborder_light"        data-lang="en"        data-loading="lazy"        crossorigin="anonymous"        async></script>
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="nlp4ss-lab-2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lab Session 2: LLMs for Data Annotation and Classification</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../syllabus/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Course Syllabus</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-data-loading">Setup and Data Loading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-classification-comparing-traditional-methods">1. Text Classification: Comparing Traditional Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topic-modeling-with-lda">2. Topic Modeling with LDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#word-co-occurrence-analysis">3. Word Co-occurrence Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentiment-analysis-comparison">4. Sentiment Analysis Comparison</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-issue-extraction-evaluation">5. Key Issue Extraction Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-and-interpretation">6. Analysis and Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">7. Exercise</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Young Joon Lee
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
