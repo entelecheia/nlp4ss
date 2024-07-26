@@ -1,4 +1,4 @@
-# Session 2 Extra Notes
+# Extra 2: Text Representation and NLP Pipeline
 
 ## 1. The Importance of Text Representation in NLP
 
