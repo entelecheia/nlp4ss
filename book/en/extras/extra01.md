@@ -1,4 +1,4 @@
-# Session 1 Extra Notes
+# Extra 1: The Evolution and Impact of LLMs in Social Science Research
 
 ## 1. The Paradigm Shift in NLP
 

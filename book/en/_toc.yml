@@ -11,19 +11,16 @@ parts:
           - file: session01/lecture1
           - file: session01/lecture2
           - file: session01/lecture3
-          - file: session01/extra01
       - file: session02/index
         sections:
           - file: session02/lecture1
           - file: session02/lecture2
           - file: session02/lecture3
-          - file: session02/extra02
       - file: session03/index
         sections:
           - file: session03/lecture1
           - file: session03/lecture2
           - file: session03/lecture3
-          - file: session03/extra03
       - file: session04/index
         sections:
           - file: session04/lecture1
@@ -34,6 +31,11 @@ parts:
           - file: session05/lecture1
           - file: session05/lecture2
           - file: session05/lecture3
+  - caption: Extras
+    chapters:
+      - file: extras/extra01
+      - file: extras/extra02
+      - file: extras/extra03
   - caption: Labs
     chapters:
       - file: labs/nlp4ss-lab-1
