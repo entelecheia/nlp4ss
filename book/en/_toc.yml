@@ -11,16 +11,19 @@ parts:
           - file: session01/lecture1
           - file: session01/lecture2
           - file: session01/lecture3
+          - file: session01/extra01
       - file: session02/index
         sections:
           - file: session02/lecture1
           - file: session02/lecture2
           - file: session02/lecture3
+          - file: session02/extra02
       - file: session03/index
         sections:
           - file: session03/lecture1
           - file: session03/lecture2
           - file: session03/lecture3
+          - file: session03/extra03
       - file: session04/index
         sections:
           - file: session04/lecture1
