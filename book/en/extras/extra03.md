@@ -1,4 +1,4 @@
-# Session 3 Extra Notes
+# Extra 3: Practical Considerations for Using LLMs in Social Science Research
 
 ## 1. Cost Management
 
