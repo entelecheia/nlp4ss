@@ -36,6 +36,7 @@ parts:
       - file: extras/extra01
       - file: extras/extra02
       - file: extras/extra03
+      - file: extras/extra04
   - caption: Labs
     chapters:
       - file: labs/nlp4ss-lab-1
