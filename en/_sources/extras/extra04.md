@@ -122,4 +122,4 @@ def generate_text(prompt, max_length=100, temperature=0.7, top_k=50, top_p=0.95)
 
 By understanding and appropriately using these advanced concepts and parameters, social science researchers can more effectively leverage LLMs in their work, producing more accurate, balanced, and tailored results for their specific research questions.
 
-<iframe width="100%" height="1024" title="llm-sampler" src="https://entelecheia.github.io/llm-sampling/" allow="clipboard-write" style="border-radius:10px;background:linear-gradient(to left, #141e30, #243b55)" frameborder="0"></iframe>
+<iframe width="100%" height="2000" title="llm-sampler" src="https://entelecheia.github.io/llm-sampling/" allow="clipboard-write" style="border-radius:10px;background:linear-gradient(to left, #141e30, #243b55)" frameborder="0"></iframe>
