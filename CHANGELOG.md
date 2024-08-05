@@ -1,5 +1,18 @@
 <!--next-version-placeholder-->
 
+## v0.7.0 (2024-08-05)
+
+### Feature
+
+* **toc:** Add projects section with nlp4ss-project-1 ([`aaf07e0`](https://github.com/entelecheia/nlp4ss/commit/aaf07e01ad93f733eb0b77c1c11ae3c1bbe09d4a))
+* **dependencies:** Add wordcloud 1.9.3 ([`f26108b`](https://github.com/entelecheia/nlp4ss/commit/f26108b0d0cfcd0c13566344159b4b3de9ef3126))
+* **docs:** Add LLM sampler iframe to extra04.md ([`5aff335`](https://github.com/entelecheia/nlp4ss/commit/5aff33548f2e0e8be666fd403759e3b0a048756f))
+* **docs:** Add extra section on advanced considerations for LLMs in social science research ([`3010d9e`](https://github.com/entelecheia/nlp4ss/commit/3010d9ee332fe9d9b20fbf3c405d8ab22321f431))
+* **toc:** Add extra content sections to session01, session02, and03 ([`888b7a5`](https://github.com/entelecheia/nlp4ss/commit/888b7a5acdb0d69d499eec3e03b26294dc1071b1))
+* **docs:** Add Session 3 extra notes on LLM cost and technical setup ([`9cf980a`](https://github.com/entelecheia/nlp4ss/commit/9cf980ada9c28b11b71d5902f69fbbf4c2b67036))
+* **docs:** Add extra notes on text representation in for session 2 ([`de6a2f6`](https://github.com/entelecheia/nlp4ss/commit/de6a2f622d6531946d934e59ca0c3ddece61c8d3))
+* **docs:** Add session 1 extra notes on NLP paradigm shift and LLMs ([`ba996d6`](https://github.com/entelecheia/nlp4ss/commit/ba996d6af412785059791040dc4f8b8c91208f5b))
+
 ## v0.6.0 (2024-07-25)
 
 ### Feature
