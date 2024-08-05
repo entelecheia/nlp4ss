@@ -31,11 +31,20 @@ parts:
           - file: session05/lecture1
           - file: session05/lecture2
           - file: session05/lecture3
+  - caption: Extras
+    chapters:
+      - file: extras/extra01
+      - file: extras/extra02
+      - file: extras/extra03
+      - file: extras/extra04
   - caption: Labs
     chapters:
       - file: labs/nlp4ss-lab-1
       - file: labs/nlp4ss-lab-2
       - file: labs/nlp4ss-lab-3
+  - caption: Projects
+    chapters:
+      - file: labs/nlp4ss-project-1
   - caption: About
     chapters:
       - file: syllabus/index
