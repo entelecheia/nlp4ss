@@ -25,6 +25,7 @@ openai = "^1.35.14"
 seaborn = "^0.13.2"
 gensim = "^4.3.3"
 pyldavis = "^3.4.1"
+wordcloud = "^1.9.3"
 
 [tool.poetry.group.dev]
 optional = true
