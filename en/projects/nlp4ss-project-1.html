@@ -1,0 +1,1068 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>NLP Analysis of Sierra Club Press Releases &#8212; NLP for Social Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css?v=e236af4b" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/language_selector.css?v=6a8ebae4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/tabs.js?v=3ee01567"></script>
+    <script src="../_static/js/hoverxref.js"></script>
+    <script src="../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../_static/js/micromodal.min.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-BQJE5V9RK2"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-BQJE5V9RK2');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-BQJE5V9RK2');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'projects/nlp4ss-project-1';</script>
+    <script src="../_static/language_switcher.js?v=ff97be19"></script>
+    <script src="../_static/chat.js?v=f0de43d7"></script>
+    <link rel="icon" href="https://assets.entelecheia.ai/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <script src="/_static/language_switcher.js"></script>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-lang-select">  <nav class="menu">    <ul class="clearfix">      <li class="current-item">        <a href="#" class="clicker">          English <span class="arrow">&#9660;</span>        </a>        <ul class="sub-menu">                    <li><a href="#" onclick="switchLanguage('en'); return false;">English</a></li>        </ul>      </li>    </ul>  </nav></div>
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">NLP for Social Science</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Home
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture Notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session01/index.html">Session 1 - Introduction to NLP for Social Science</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../session01/lecture1.html">1.1 Fundamentals of NLP and its Evolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session01/lecture2.html">1.2 Overview of Generative LLMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session01/lecture3.html">1.3 Ethical Considerations and Challenges in Using LLMs for Research</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session02/index.html">Session 2: Traditional NLP Techniques and Text Preprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../session02/lecture1.html">2.1 Text Cleaning, Normalization, and Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session02/lecture2.html">2.2 Basic NLP Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session02/lecture3.html">2.3 Topic Modeling and Latent Dirichlet Allocation (LDA)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session03/index.html">Session 3: LLMs for Data Annotation and Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../session03/lecture1.html">3.1 Zero-shot Learning with LLMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session03/lecture2.html">3.2 Few-shot Learning and Prompt Engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session03/lecture3.html">3.3 Comparing LLM Performance with Traditional Supervised Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session04/index.html">Session 4: Generative Explanations and Summaries in Social Science</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../session04/lecture1.html">4.1 Using LLMs for High-Quality Text Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session04/lecture2.html">4.2 Social Bias Inference and Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session04/lecture3.html">4.3 Figurative Language Explanation and Cultural Context</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../session05/index.html">Session 5: Advanced Applications of LLMs in Social Science Research</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../session05/lecture1.html">5.1 Analyzing Large-Scale Textual Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session05/lecture2.html">5.2 Misinformation and Fake News Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session05/lecture3.html">5.3 Future Directions and Emerging Trends</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extras</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../extras/extra01.html">Extra 1: The Evolution and Impact of LLMs in Social Science Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extras/extra02.html">Extra 2: Text Representation and NLP Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extras/extra03.html">Extra 3: Practical Considerations for Using LLMs in Social Science Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extras/extra04.html">Extra 4: Advanced Considerations for LLMs in Social Science Research</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Labs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../labs/nlp4ss-lab-1.html">Lab Session 1: Introduction to NLP for Social Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/nlp4ss-lab-2.html">Lab Session 2: LLMs for Data Annotation and Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/nlp4ss-lab-3.html">Lab Session 3: Applying Traditional NLP Techniques</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/index.html">Course Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">Who made this book?</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/entelecheia/nlp4ss/blob/main/book/en/projects/nlp4ss-project-1.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/entelecheia/nlp4ss" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/entelecheia/nlp4ss/edit/main/book/en/projects/nlp4ss-project-1.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/entelecheia/nlp4ss/issues/new?title=Issue%20on%20page%20%2Fprojects/nlp4ss-project-1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/projects/nlp4ss-project-1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>NLP Analysis of Sierra Club Press Releases</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-data-loading">Setup and Data Loading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-preprocessing">Text Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#word-frequency-analysis">Word Frequency Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#named-entity-recognition">Named Entity Recognition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentiment-analysis">Sentiment Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-analysis">TF-IDF Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topic-modeling">Topic Modeling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topic-sentiment-analysis">Topic-Sentiment Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#word-clouds">Word Clouds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-results">Saving Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="nlp-analysis-of-sierra-club-press-releases">
+<h1>NLP Analysis of Sierra Club Press Releases<a class="headerlink" href="#nlp-analysis-of-sierra-club-press-releases" title="Link to this heading">#</a></h1>
+<p>This notebook demonstrates an advanced Natural Language Processing (NLP) analysis of Sierra Club press releases. We’ll cover various techniques including text preprocessing, word frequency analysis, named entity recognition, sentiment analysis, topic modeling, and more.</p>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>Before we begin, let’s install the necessary packages for this lab. Run the following cell to install the required libraries:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> install nlp4ss
+<span class="o">!</span>python<span class="w"> </span>-m<span class="w"> </span>spacy<span class="w"> </span>download<span class="w"> </span>en_core_web_sm
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="setup-and-data-loading">
+<h2>Setup and Data Loading<a class="headerlink" href="#setup-and-data-loading" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hyfi</span> <span class="kn">import</span> <span class="n">HyFI</span>
+
+<span class="k">if</span> <span class="n">HyFI</span><span class="o">.</span><span class="n">is_colab</span><span class="p">():</span>
+    <span class="n">HyFI</span><span class="o">.</span><span class="n">mount_google_drive</span><span class="p">()</span>
+    <span class="n">project_root</span> <span class="o">=</span> <span class="s2">&quot;/content/drive/MyDrive/courses/nlp4ss&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">project_root</span> <span class="o">=</span> <span class="s2">&quot;$HOME/workspace/courses/nlp4ss&quot;</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">HyFI</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
+    <span class="n">project_name</span><span class="o">=</span><span class="s2">&quot;nlp4ss&quot;</span><span class="p">,</span>
+    <span class="n">project_root</span><span class="o">=</span><span class="n">project_root</span><span class="p">,</span>
+    <span class="n">logging_level</span><span class="o">=</span><span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;project_dir:&quot;</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">root_dir</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;project_workspace_dir:&quot;</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">workspace_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing necessary libraries</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pyLDAvis.gensim_models</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">from</span> <span class="nn">gensim</span> <span class="kn">import</span> <span class="n">corpora</span>
+<span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">CoherenceModel</span><span class="p">,</span> <span class="n">LdaModel</span>
+<span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">pos_tag</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">WordNetLemmatizer</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">textblob</span> <span class="kn">import</span> <span class="n">TextBlob</span>
+<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="n">WordCloud</span>
+
+<span class="c1"># Download necessary NLTK data</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;punkt&quot;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;averaged_perceptron_tagger&quot;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;wordnet&quot;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;stopwords&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load spaCy model</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load the data</span>
+<span class="n">raw_data_file</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">workspace_dir</span> <span class="o">/</span> <span class="s2">&quot;data/raw/articles.jsonl&quot;</span>
+<span class="n">rdata</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">,</span> <span class="n">data_files</span><span class="o">=</span><span class="n">raw_data_file</span><span class="o">.</span><span class="n">as_posix</span><span class="p">())</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">rdata</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data loaded. Shape:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sample of the data:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="text-preprocessing">
+<h2>Text Preprocessing<a class="headerlink" href="#text-preprocessing" title="Link to this heading">#</a></h2>
+<p>We’ll now preprocess the text data. This includes lowercasing, removing special characters, tokenization, removing stopwords, and lemmatization. We’ll also filter for only nouns and adjectives, which are typically the most informative for topic modeling.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Custom stopwords list</span>
+<span class="n">custom_stopwords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">))</span>
+<span class="n">custom_stopwords</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;sierra&quot;</span><span class="p">,</span> <span class="s2">&quot;club&quot;</span><span class="p">,</span> <span class="s2">&quot;press&quot;</span><span class="p">,</span> <span class="s2">&quot;release&quot;</span><span class="p">]</span>
+<span class="p">)</span>  <span class="c1"># Add domain-specific stopwords</span>
+
+
+<span class="k">def</span> <span class="nf">preprocess_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1"># Lowercase and remove special characters</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[^a-zA-Z\s]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+    <span class="c1"># Tokenize</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="c1"># Remove stopwords and keep only nouns and adjectives</span>
+    <span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">lemmatizer</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">token</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">pos_tag</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pos</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;NN&quot;</span><span class="p">)</span>
+        <span class="ow">or</span> <span class="n">pos</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;JJ&quot;</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="n">token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">custom_stopwords</span>
+    <span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">tokens</span>
+
+
+<span class="c1"># Apply preprocessing to all documents</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;processed_text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">preprocess_text</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;processed_string&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;processed_text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Preprocessing completed.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sample of processed text:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;processed_text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="word-frequency-analysis">
+<h2>Word Frequency Analysis<a class="headerlink" href="#word-frequency-analysis" title="Link to this heading">#</a></h2>
+<p>Let’s analyze the most frequent words in our corpus. This can give us a quick overview of the main themes in the press releases.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_word_frequency</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">word_freq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()[:</span><span class="n">n</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">word_freq</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Words&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="n">plot_word_frequency</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;processed_string&quot;</span><span class="p">],</span> <span class="s2">&quot;Top 20 Most Frequent Words in Sierra Club Press Releases&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="named-entity-recognition">
+<h2>Named Entity Recognition<a class="headerlink" href="#named-entity-recognition" title="Link to this heading">#</a></h2>
+<p>Named Entity Recognition (NER) can help us identify key entities (like people, organizations, or locations) mentioned in the press releases.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">extract_entities</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">ent</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">)</span> <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">]</span>
+
+
+<span class="c1"># Extract entities from a sample of articles</span>
+<span class="n">sample_size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+<span class="n">sample_entities</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">extract_entities</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">entity_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">entity</span> <span class="k">for</span> <span class="n">entities</span> <span class="ow">in</span> <span class="n">sample_entities</span> <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entities</span><span class="p">],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Entity&quot;</span><span class="p">,</span> <span class="s2">&quot;Label&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top 10 most common named entities:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">entity_df</span><span class="p">[</span><span class="s2">&quot;Entity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="sentiment-analysis">
+<h2>Sentiment Analysis<a class="headerlink" href="#sentiment-analysis" title="Link to this heading">#</a></h2>
+<p>Sentiment analysis can help us understand the overall tone of the press releases.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">TextBlob</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">sentiment</span><span class="o">.</span><span class="n">polarity</span>
+
+
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;sentiment&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">get_sentiment</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;sentiment&quot;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sentiment Distribution of Sierra Club Press Releases&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Sentiment Score&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average sentiment: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="tf-idf-analysis">
+<h2>TF-IDF Analysis<a class="headerlink" href="#tf-idf-analysis" title="Link to this heading">#</a></h2>
+<p>TF-IDF (Term Frequency-Inverse Document Frequency) can help us identify important terms in each document.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">max_features</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">tfidf_matrix</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;processed_string&quot;</span><span class="p">])</span>
+
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+<span class="n">first_doc_vector</span> <span class="o">=</span> <span class="n">tfidf_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">top_terms</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+    <span class="nb">zip</span><span class="p">(</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">first_doc_vector</span><span class="o">.</span><span class="n">toarray</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top 10 terms in the first document (TF-IDF):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">term</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">top_terms</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">term</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="topic-modeling">
+<h2>Topic Modeling<a class="headerlink" href="#topic-modeling" title="Link to this heading">#</a></h2>
+<p>We’ll use Latent Dirichlet Allocation (LDA) for topic modeling. First, we’ll determine the optimal number of topics.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">id2word</span> <span class="o">=</span> <span class="n">corpora</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;processed_text&quot;</span><span class="p">])</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">id2word</span><span class="o">.</span><span class="n">doc2bow</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;processed_text&quot;</span><span class="p">]]</span>
+
+
+<span class="k">def</span> <span class="nf">compute_coherence_values</span><span class="p">(</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">texts</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+    <span class="n">coherence_values</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">model_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">num_topics</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">LdaModel</span><span class="p">(</span>
+            <span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span>
+            <span class="n">id2word</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span>
+            <span class="n">num_topics</span><span class="o">=</span><span class="n">num_topics</span><span class="p">,</span>
+            <span class="n">random_state</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+            <span class="n">update_every</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">chunksize</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+            <span class="n">passes</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+            <span class="n">per_word_topics</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">model_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+        <span class="n">coherencemodel</span> <span class="o">=</span> <span class="n">CoherenceModel</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">texts</span><span class="o">=</span><span class="n">texts</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">coherence</span><span class="o">=</span><span class="s2">&quot;c_v&quot;</span>
+        <span class="p">)</span>
+        <span class="n">coherence_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coherencemodel</span><span class="o">.</span><span class="n">get_coherence</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">model_list</span><span class="p">,</span> <span class="n">coherence_values</span>
+
+
+<span class="n">model_list</span><span class="p">,</span> <span class="n">coherence_values</span> <span class="o">=</span> <span class="n">compute_coherence_values</span><span class="p">(</span>
+    <span class="n">dictionary</span><span class="o">=</span><span class="n">id2word</span><span class="p">,</span>
+    <span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span>
+    <span class="n">texts</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;processed_text&quot;</span><span class="p">],</span>
+    <span class="n">start</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+    <span class="n">step</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Plot coherence scores</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">coherence_values</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Topics&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Coherence Score&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Topic Coherence Scores&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Find the optimal number of topics</span>
+<span class="n">optimal_num_topics</span> <span class="o">=</span> <span class="n">coherence_values</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">coherence_values</span><span class="p">))</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimal number of topics: </span><span class="si">{</span><span class="n">optimal_num_topics</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have the optimal number of topics, let’s train our LDA model and examine the results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train LDA model with optimal number of topics</span>
+<span class="n">lda_model</span> <span class="o">=</span> <span class="n">LdaModel</span><span class="p">(</span>
+    <span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span>
+    <span class="n">id2word</span><span class="o">=</span><span class="n">id2word</span><span class="p">,</span>
+    <span class="n">num_topics</span><span class="o">=</span><span class="n">optimal_num_topics</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">update_every</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">chunksize</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">passes</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+    <span class="n">per_word_topics</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Print topics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top words for each topic:&quot;</span><span class="p">)</span>
+<span class="n">topics</span> <span class="o">=</span> <span class="n">lda_model</span><span class="o">.</span><span class="n">print_topics</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">topics</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Topic </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">topic</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Visualize topics</span>
+<span class="n">vis</span> <span class="o">=</span> <span class="n">pyLDAvis</span><span class="o">.</span><span class="n">gensim_models</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">lda_model</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">id2word</span><span class="p">)</span>
+<span class="n">pyLDAvis</span><span class="o">.</span><span class="n">save_html</span><span class="p">(</span><span class="n">vis</span><span class="p">,</span> <span class="s2">&quot;lda_visualization.html&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">LDA visualization saved as &#39;lda_visualization.html&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="topic-sentiment-analysis">
+<h2>Topic-Sentiment Analysis<a class="headerlink" href="#topic-sentiment-analysis" title="Link to this heading">#</a></h2>
+<p>Let’s analyze the sentiment associated with each topic.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_dominant_topic</span><span class="p">(</span><span class="n">ldamodel</span><span class="p">,</span> <span class="n">corpus</span><span class="p">):</span>
+    <span class="n">dominant_topics</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">bow</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
+        <span class="n">topic_probs</span> <span class="o">=</span> <span class="n">ldamodel</span><span class="o">.</span><span class="n">get_document_topics</span><span class="p">(</span><span class="n">bow</span><span class="p">,</span> <span class="n">minimum_probability</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">dominant_topic</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">topic_probs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">dominant_topics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dominant_topic</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dominant_topics</span>
+
+
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;dominant_topic&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_dominant_topic</span><span class="p">(</span><span class="n">lda_model</span><span class="p">,</span> <span class="n">corpus</span><span class="p">)</span>
+
+<span class="n">topic_sentiments</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;dominant_topic&quot;</span><span class="p">)[</span><span class="s2">&quot;sentiment&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">topic_sentiments</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Average Sentiment by Topic&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Topic&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Average Sentiment Score&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="word-clouds">
+<h2>Word Clouds<a class="headerlink" href="#word-clouds" title="Link to this heading">#</a></h2>
+<p>Let’s create word clouds for each topic to visually represent the most significant words.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_wordcloud</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="n">wordcloud</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">background_color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+        <span class="n">text</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wordcloud</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="k">for</span> <span class="n">topic_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">optimal_num_topics</span><span class="p">):</span>
+    <span class="n">topic_words</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">lda_model</span><span class="o">.</span><span class="n">show_topic</span><span class="p">(</span><span class="n">topic_id</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">30</span><span class="p">))</span>
+    <span class="n">generate_wordcloud</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">topic_words</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="sa">f</span><span class="s2">&quot;Word Cloud for Topic </span><span class="si">{</span><span class="n">topic_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="saving-results">
+<h2>Saving Results<a class="headerlink" href="#saving-results" title="Link to this heading">#</a></h2>
+<p>Let’s save our analysis results for future reference or further analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output_file</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">workspace_dir</span> <span class="o">/</span> <span class="s2">&quot;data/processed/sierra_club_analysis.csv&quot;</span>
+<span class="n">df</span><span class="p">[[</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;processed_string&quot;</span><span class="p">,</span> <span class="s2">&quot;sentiment&quot;</span><span class="p">,</span> <span class="s2">&quot;dominant_topic&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">output_file</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Analysis results saved to </span><span class="si">{</span><span class="n">output_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>In this notebook, we’ve conducted a comprehensive NLP analysis of Sierra Club press releases. Here’s a summary of what we’ve accomplished:</p>
+<ol class="arabic simple">
+<li><p><strong>Text Preprocessing</strong>: We cleaned and normalized the text data, focusing on nouns and adjectives which are most informative for our analysis.</p></li>
+<li><p><strong>Word Frequency Analysis</strong>: We identified the most common words in the press releases, giving us an initial insight into the main themes.</p></li>
+<li><p><strong>Named Entity Recognition</strong>: We extracted key entities mentioned in the press releases, which can be useful for understanding who and what the Sierra Club frequently discusses.</p></li>
+<li><p><strong>Sentiment Analysis</strong>: We analyzed the overall sentiment of the press releases, which can indicate the general tone of Sierra Club’s communications.</p></li>
+<li><p><strong>TF-IDF Analysis</strong>: We identified important terms in individual documents, which can highlight specific focus areas in different press releases.</p></li>
+<li><p><strong>Topic Modeling</strong>: Using LDA, we discovered the main topics discussed in the press releases. We also determined the optimal number of topics for our dataset.</p></li>
+<li><p><strong>Topic-Sentiment Analysis</strong>: We examined the average sentiment associated with each topic, which can reveal how different subjects are framed.</p></li>
+<li><p><strong>Word Clouds</strong>: We created visual representations of the most significant words in each topic.</p></li>
+</ol>
+<p>This analysis provides valuable insights into the content and framing of Sierra Club’s press releases. It can be used to understand their communication strategies, main areas of focus, and how they discuss different environmental issues.</p>
+<p>For further analysis, you might consider:</p>
+<ul class="simple">
+<li><p>Examining how topics and sentiment change over time</p></li>
+<li><p>Comparing these results with press releases from other environmental organizations</p></li>
+<li><p>Diving deeper into specific topics or entities of interest</p></li>
+</ul>
+<p>Remember that while these computational methods provide powerful insights, they should be combined with close reading and domain expertise for the most comprehensive understanding of the text data.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "entelecheia/nlp4ss",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./projects"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+    <div class="giscus"></div>
+<script src="https://giscus.app/client.js"        data-repo="entelecheia/nlp4ss"        data-repo-id="R_kgDOMTcakg"        data-category="Q&A"        data-category-id="DIC_kwDOMTcaks4Cgwzd"        data-mapping="pathname"        data-strict="1"        data-reactions-enabled="1"        data-emit-metadata="1"        data-input-position="bottom"        data-theme="noborder_light"        data-lang="en"        data-loading="lazy"        crossorigin="anonymous"        async></script>
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-data-loading">Setup and Data Loading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-preprocessing">Text Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#word-frequency-analysis">Word Frequency Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#named-entity-recognition">Named Entity Recognition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentiment-analysis">Sentiment Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-analysis">TF-IDF Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topic-modeling">Topic Modeling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topic-sentiment-analysis">Topic-Sentiment Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#word-clouds">Word Clouds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-results">Saving Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Young Joon Lee
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
