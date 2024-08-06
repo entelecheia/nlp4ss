@@ -44,7 +44,7 @@ parts:
       - file: labs/nlp4ss-lab-3
   - caption: Projects
     chapters:
-      - file: labs/nlp4ss-project-1
+      - file: projects/nlp4ss-project-1
   - caption: About
     chapters:
       - file: syllabus/index
