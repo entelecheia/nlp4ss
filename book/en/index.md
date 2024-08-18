@@ -21,7 +21,7 @@
 [jupyter-book-image]: https://jupyterbook.org/en/stable/_images/badge.svg
 [repo-url]: https://github.com/entelecheia/nlp4ss
 [pypi-url]: https://pypi.org/project/nlp4ss
-[docs-url]: https://nlp4ss.entelecheia.ai
+[docs-url]: https://nlp4ss.jeju.ai
 [changelog]: https://github.com/entelecheia/nlp4ss/blob/main/CHANGELOG.md
 [contributing guidelines]: https://github.com/entelecheia/nlp4ss/blob/main/CONTRIBUTING.md
 

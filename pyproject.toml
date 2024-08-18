@@ -4,7 +4,7 @@ version = "0.7.0"
 description = "A course on applying natural language processing (NLP) techniques for social science research."
 authors = ["Young Joon Lee <entelecheia@hotmail.com>"]
 license = "CC-BY-4.0"
-homepage = "https://nlp4ss.entelecheia.ai"
+homepage = "https://nlp4ss.jeju.ai"
 repository = "https://github.com/entelecheia/nlp4ss"
 readme = "README.md"
 packages = [{ include = "nlp4ss", from = "src" }]
