@@ -20,14 +20,14 @@
 
 [repo-url]: https://github.com/entelecheia/nlp4ss
 [pypi-url]: https://pypi.org/project/nlp4ss
-[docs-url]: https://nlp4ss.entelecheia.ai
+[docs-url]: https://nlp4ss.jeju.ai
 [changelog]: https://github.com/entelecheia/nlp4ss/blob/main/CHANGELOG.md
 [contributing guidelines]: https://github.com/entelecheia/nlp4ss/blob/main/CONTRIBUTING.md
 <!-- Links: -->
 
 A course on applying natural language processing (NLP) techniques for social science research.
 
-- Documentation: [https://nlp4ss.entelecheia.ai][docs-url]
+- Documentation: [https://nlp4ss.jeju.ai][docs-url]
 - GitHub: [https://github.com/entelecheia/nlp4ss][repo-url]
 - PyPI: [https://pypi.org/project/nlp4ss][pypi-url]
 
