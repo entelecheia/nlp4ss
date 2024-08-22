@@ -26,6 +26,7 @@ seaborn = "^0.13.2"
 gensim = "^4.3.3"
 pyldavis = "^3.4.1"
 wordcloud = "^1.9.3"
+scipy = ">=1.7.0,<1.14.0"
 
 [tool.poetry.group.dev]
 optional = true
@@ -62,16 +63,43 @@ extend-exclude = '''
 
 [tool.isort]
 profile = "black"
-skip = ['_version.py', 'node_modules', '_build', 'docs', 'tests', 'venv', '.copier-template', '.refs']
+skip = [
+  '_version.py',
+  'node_modules',
+  '_build',
+  'docs',
+  'tests',
+  'venv',
+  '.copier-template',
+  '.refs',
+]
 
 [tool.flake8]
 ignore = ['F401', 'E501', 'W503']
-exclude = ["node_modules", "_build", "docs", "tests", "venv", ".copier-template", ".refs"]
+exclude = [
+  "node_modules",
+  "_build",
+  "docs",
+  "tests",
+  "venv",
+  ".copier-template",
+  ".refs",
+]
 per-file-ignores = ['__init__.py:F401', '_version.py:W292']
 
 [tool.mypy]
 namespace_packages = true
-exclude = ["node_modules", "build", "_build", "dist", "docs", "tests", "venv", ".copier-template", ".refs"]
+exclude = [
+  "node_modules",
+  "build",
+  "_build",
+  "dist",
+  "docs",
+  "tests",
+  "venv",
+  ".copier-template",
+  ".refs",
+]
 # 3rd party import
 ignore_missing_imports = true
 # dynamic typing
@@ -113,7 +141,7 @@ version_toml = "pyproject.toml:tool.poetry.version"
 version_pattern = '.docker/docker.version:IMAGE_VERSION="{version}"'
 version_variable = "src/nlp4ss/_version.py:__version__"
 version_source = "tag"
-commit_version_number = true # required for version_source = "tag"
+commit_version_number = true                                         # required for version_source = "tag"
 commit_subject = "chore(release): :rocket: {version} [skip ci]"
 prerelease_tag = "rc"
 major_on_zero = true
@@ -121,10 +149,9 @@ tag_commit = true
 changelog_file = "CHANGELOG.md"
 upload_to_repository = true
 upload_to_release = true
-hvcs = "github" # hosting version control system, gitlab is also supported
+hvcs = "github"                                                      # hosting version control system, gitlab is also supported
 build_command = "poetry build --no-cache"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-
