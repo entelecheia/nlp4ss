@@ -1,5 +1,12 @@
 <!--next-version-placeholder-->
 
+## v0.9.0 (2024-08-23)
+
+### Feature
+
+* Add project 2-2 using sentence-transformers ([`9537586`](https://github.com/entelecheia/nlp4ss/commit/953758602868ea266216e89515d2839c8c278595))
+* Update pyproject.toml with sentence-transformers and tqdm dependencies ([`197695e`](https://github.com/entelecheia/nlp4ss/commit/197695e61a4c3860d2899584f3294ad20f4d2a24))
+
 ## v0.8.0 (2024-08-23)
 
 ### Feature
