@@ -29,6 +29,8 @@ wordcloud = "^1.9.3"
 scipy = ">=1.7.0,<1.14.0"
 transformers = "4.42.4"
 torch = "2.3.1"
+sentence-transformers = "^3.0.1"
+tqdm = "^4.66.5"
 
 [tool.poetry.group.dev]
 optional = true
