@@ -45,6 +45,7 @@ parts:
   - caption: Projects
     chapters:
       - file: projects/nlp4ss-project-1
+      - file: projects/nlp4ss-project-2
   - caption: About
     chapters:
       - file: syllabus/index
