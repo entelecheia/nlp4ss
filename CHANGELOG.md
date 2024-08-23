@@ -1,5 +1,17 @@
 <!--next-version-placeholder-->
 
+## v0.8.0 (2024-08-23)
+
+### Feature
+
+* Add results of the project 2 ([`3760673`](https://github.com/entelecheia/nlp4ss/commit/37606730225d6fb9e15392fe5e6de91004c94590))
+* Update pyproject.toml with transformers and torch dependencies ([`53e57e9`](https://github.com/entelecheia/nlp4ss/commit/53e57e97d94a70923618e140bcce663b7bfa8375))
+* Add scipy dependency to >=1.7.0,<1.14.0 ([`8db9504`](https://github.com/entelecheia/nlp4ss/commit/8db9504efb4d962f9faebefbfc4c905250d991d5))
+
+### Fix
+
+* **toc:** Correct file path for project chapter ([`8760421`](https://github.com/entelecheia/nlp4ss/commit/87604212e6af68bb1c445c1a7e6f4d61e38eb34c))
+
 ## v0.7.0 (2024-08-05)
 
 ### Feature
