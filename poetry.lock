@@ -4088,26 +4088,29 @@ files = [
 
 [[package]]
 name = "sentence-transformers"
-version = "3.1.1"
+version = "3.2.0"
 description = "State-of-the-Art Text Embeddings"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "sentence_transformers-3.1.1-py3-none-any.whl", hash = "sha256:c73bf6f17e3676bb9372a6133a254ebfb5907586b470f2bac5a840c64c3cf97e"},
-    {file = "sentence_transformers-3.1.1.tar.gz", hash = "sha256:8f00020ef4ad6b918475c38af545c22f61403b67eb22d994860bab06902db160"},
+    {file = "sentence_transformers-3.2.0-py3-none-any.whl", hash = "sha256:02dbe96d669d30084ea11af94e7c17895c31748e86f20af4dbcc4ea6522b3506"},
+    {file = "sentence_transformers-3.2.0.tar.gz", hash = "sha256:4da78ba340fffc48d60a25415145cbe665216d374c948ec54c3163bd352bcc27"},
 ]
 
 [package.dependencies]
-huggingface-hub = ">=0.19.3"
+huggingface-hub = ">=0.20.0"
 Pillow = "*"
 scikit-learn = "*"
 scipy = "*"
 torch = ">=1.11.0"
 tqdm = "*"
-transformers = ">=4.38.0,<5.0.0"
+transformers = ">=4.41.0,<5.0.0"
 
 [package.extras]
 dev = ["accelerate (>=0.20.3)", "datasets", "pre-commit", "pytest", "pytest-cov"]
+onnx = ["optimum[onnxruntime] (>=1.23.0)"]
+onnx-gpu = ["optimum[onnxruntime-gpu] (>=1.23.0)"]
+openvino = ["optimum-intel[openvino] (>=1.20.0)"]
 train = ["accelerate (>=0.20.3)", "datasets"]
 
 [[package]]
