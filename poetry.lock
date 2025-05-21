@@ -2986,14 +2986,14 @@ PyYAML = ">=5.1.0"
 
 [[package]]
 name = "openai"
-version = "1.78.0"
+version = "1.80.0"
 description = "The official Python library for the openai API"
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "openai-1.78.0-py3-none-any.whl", hash = "sha256:1ade6a48cd323ad8a7715e7e1669bb97a17e1a5b8a916644261aaef4bf284778"},
-    {file = "openai-1.78.0.tar.gz", hash = "sha256:254aef4980688468e96cbddb1f348ed01d274d02c64c6c69b0334bf001fb62b3"},
+    {file = "openai-1.80.0-py3-none-any.whl", hash = "sha256:c436bf636327245ebae3246a78c7adc5adf81c04ae8699fec580c7fd21b08cdf"},
+    {file = "openai-1.80.0.tar.gz", hash = "sha256:65b9b0442e8d3bee49857e92ee7b873dfcebbac52b9451fe80d451adfac98b90"},
 ]
 
 [package.dependencies]
