@@ -26,10 +26,6 @@ build: ## Build sdist and wheel into dist/
 book: ## Build the en and ko books (book/_scripts/build.sh)
 	@uv run --with-requirements book/requirements.txt bash book/_scripts/build.sh
 
-.PHONY: toc
-toc: ## Regenerate the book table of contents
-	@uv run python .github/scripts/autotoc.py
-
 symlink-global-docker-env: ## symlink global docker env file for local development
 	@DOCKERFILES_SHARE_DIR="$HOME/.local/share/dockerfiles" \
 	DOCKER_GLOBAL_ENV_FILENAME=".env.docker" \
