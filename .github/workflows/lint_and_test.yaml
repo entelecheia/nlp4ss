@@ -43,8 +43,11 @@ jobs:
           run_full=true
           reason="this event requires full validation"
           if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
-            files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER/files" --jq '.[].filename')
-            if [ -n "$files" ] && ! printf '%s\n' "$files" | grep -Evq "$DOCS_ONLY_RE"; then
+            # Both sides of a rename count: moving code into docs/ still validates.
+            files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER/files" \
+              --jq '.[] | .filename, (.previous_filename // empty)')
+            other=$(printf '%s\n' "$files" | grep -Ev "$DOCS_ONLY_RE" || true)
+            if [ -n "$files" ] && [ -z "$other" ]; then
               run_full=false
               reason="docs-only change"
             fi
