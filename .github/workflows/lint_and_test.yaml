@@ -69,10 +69,3 @@ jobs:
           cat tests/pytest-coverage.txt >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo '\n\n\n'
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }} # required
-          fail_ci_if_error: false # optional (default = false)
-          verbose: true # optional (default = false)
