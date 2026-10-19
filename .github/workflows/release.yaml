@@ -3,6 +3,11 @@ name: semantic-release
 
 on:
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "Republish an existing tag (e.g. v1.2.3) after a failed upload; empty runs a normal release"
+        required: false
+        default: ""
   push:
     branches: [release]
     paths: ["src/**", "pyproject.toml"]
@@ -15,6 +20,7 @@ jobs:
   # Reuse CI instead of rebuilding: a successful `lint & test` run for this exact
   # commit (fast-forward `release` to a verified main commit) skips validation.
   verified:
+    if: inputs.tag == ''
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -41,7 +47,7 @@ jobs:
 
   release:
     needs: [verified, validate]
-    if: always() && (needs.verified.outputs.found == 'true' || needs.validate.result == 'success')
+    if: always() && (inputs.tag != '' || needs.verified.outputs.found == 'true' || needs.validate.result == 'success')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -51,13 +57,15 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-          ref: ${{ github.sha }}
+          ref: ${{ inputs.tag || github.sha }}
       - name: Pin the release branch to the workflow sha
+        if: inputs.tag == ''
         env:
           RELEASE_BRANCH: ${{ github.ref_name }}
           RELEASE_SHA: ${{ github.sha }}
         run: git checkout -B "$RELEASE_BRANCH" "$RELEASE_SHA"
       - name: Semantic version release
+        if: inputs.tag == ''
         id: release
         uses: python-semantic-release/python-semantic-release@b700dbeb1f431a0fcc30a79f3f0869407fe07278 # v10.7.0
         with:
@@ -65,12 +73,21 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           git_committer_name: "github-actions"
           git_committer_email: "actions@users.noreply.github.com"
+      - name: Build the tag being republished
+        if: inputs.tag != ''
+        uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          version: "0.13.1"
+      - if: inputs.tag != ''
+        run: uv build
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
-        if: steps.release.outputs.released == 'true'
+        if: steps.release.outputs.released == 'true' || inputs.tag != ''
+        with:
+          skip-existing: true # a retry may find some files already uploaded
       - name: Upload GitHub release assets
         uses: python-semantic-release/publish-action@99d4062dd393b5a7a62c5fe9ed78fb364b5674f2 # v10.7.0
-        if: steps.release.outputs.released == 'true'
+        if: steps.release.outputs.released == 'true' || inputs.tag != ''
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.release.outputs.tag }}
+          tag: ${{ inputs.tag || steps.release.outputs.tag }}

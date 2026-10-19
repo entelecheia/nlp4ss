@@ -5,7 +5,6 @@ on:
   workflow_call:
   workflow_dispatch:
   pull_request:
-    paths-ignore: ["*.md", "book/**", ".github/workflows/deploy-docs.yaml"]
   push:
     branches: [main]
     paths-ignore: ["*.md", "book/**", ".github/workflows/deploy-docs.yaml"]
@@ -36,11 +35,20 @@ jobs:
       - id: dedupe
         env:
           GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          # PRs touching only these paths skip validation but still report ci-ok.
+          DOCS_ONLY_RE: '^([^/]*\.md|book/.*|\.github/workflows/deploy\-docs\.yaml)$'
         run: |
           set -uo pipefail
           run_full=true
           reason="this event requires full validation"
-          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER/files" --jq '.[].filename')
+            if [ -n "$files" ] && ! printf '%s\n' "$files" | grep -Evq "$DOCS_ONLY_RE"; then
+              run_full=false
+              reason="docs-only change"
+            fi
+          elif [ "$GITHUB_EVENT_NAME" = "push" ]; then
             reason="no successful pull request run for the same tree"
             pr=$(gh api "repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA/pulls" \
               --jq "[.[] | select(.merge_commit_sha == \"$GITHUB_SHA\")] | last | .head.sha // empty" 2>/dev/null)
