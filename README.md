@@ -4,12 +4,9 @@
 [![version-image]][release-url]
 [![release-date-image]][release-url]
 [![license-image]][license-url]
-[![codecov][codecov-image]][codecov-url]
 [![jupyter-book-image]][docs-url]
 
 <!-- Links: -->
-[codecov-image]: https://codecov.io/gh/entelecheia/nlp4ss/branch/main/graph/badge.svg?token=FZ6rvEttdM
-[codecov-url]: https://codecov.io/gh/entelecheia/nlp4ss
 [pypi-image]: https://img.shields.io/pypi/v/nlp4ss
 [license-image]: https://img.shields.io/github/license/entelecheia/nlp4ss
 [license-url]: https://github.com/entelecheia/nlp4ss/blob/main/LICENSE
