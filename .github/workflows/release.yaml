@@ -38,8 +38,11 @@ jobs:
 
   validate:
     needs: verified
-    if: needs.verified.outputs.found != 'true'
+    # A tag republish skips `verified` and always validates the tag itself.
+    if: always() && needs.verified.outputs.found != 'true'
     uses: ./.github/workflows/lint_and_test.yaml
+    with:
+      ref: ${{ inputs.tag && format('refs/tags/{0}', inputs.tag) || '' }}
     permissions:
       contents: read
       actions: read
@@ -47,7 +50,7 @@ jobs:
 
   release:
     needs: [verified, validate]
-    if: always() && (inputs.tag != '' || needs.verified.outputs.found == 'true' || needs.validate.result == 'success')
+    if: always() && (needs.verified.outputs.found == 'true' || needs.validate.result == 'success')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -57,7 +60,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-          ref: ${{ inputs.tag || github.sha }}
+          ref: ${{ inputs.tag && format('refs/tags/{0}', inputs.tag) || github.sha }}
       - name: Pin the release branch to the workflow sha
         if: inputs.tag == ''
         env:
