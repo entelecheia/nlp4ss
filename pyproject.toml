@@ -46,6 +46,9 @@ dev = [{ include-group = "test" }, { include-group = "lint" }]
 
 [tool.uv]
 default-groups = ["dev"]
+# Lock-only floor: preferring smart-open 8 (via gensim) otherwise backtracks weasel to 0.1 and
+# typer to 0.7, which breaks the spaCy CLI on click 8.2+.
+constraint-dependencies = ["typer>=0.12"]
 
 [build-system]
 requires = ["hatchling"]

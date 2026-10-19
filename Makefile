@@ -23,8 +23,8 @@ build: ## Build sdist and wheel into dist/
 	@uv build
 
 .PHONY: book
-book: ## Build the Jupyter Book into book/_build/html
-	@uv run --with-requirements book/requirements.txt jupyter-book build book
+book: ## Build the en and ko books (book/_scripts/build.sh)
+	@uv run --with-requirements book/requirements.txt bash book/_scripts/build.sh
 
 .PHONY: toc
 toc: ## Regenerate the book table of contents

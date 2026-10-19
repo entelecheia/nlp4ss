@@ -27,7 +27,7 @@ jobs:
 
       # Build the book with the package and the book requirements
       - name: Build the book
-        run: uv run --with-requirements book/requirements.txt jupyter-book build book
+        run: uv run --with-requirements book/requirements.txt bash book/_scripts/build.sh --all
 
       # Deploy the book's HTML to gh-pages branch
       - name: GitHub Pages action
