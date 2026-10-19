@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Republish an existing tag (e.g. v1.2.3) after a failed upload; empty runs a normal release"
+        description: "Republish a tag this workflow created (e.g. v1.2.3) after a failed upload; older tags fail validation and are not published. Empty runs a normal release"
         required: false
         default: ""
   push:
