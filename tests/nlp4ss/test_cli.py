@@ -1,22 +1,14 @@
 """
 test cli module
 """
+
 import subprocess
-from typing import List, Tuple
+
+from nlp4ss._version import __version__
 
 
-def capture(command: List[str]) -> Tuple[bytes, bytes, int]:
-    proc = subprocess.Popen(
-        command,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
-    out, err = proc.communicate()
-    return out, err, proc.returncode
-
-
-def test_cli() -> None:
-    """Test cli module"""
-    command = ["nlp4ss"]
-    out, err, exitcode = capture(command)
-    assert exitcode == 0
+def test_cli_version() -> None:
+    """The installed entry point reports the package version."""
+    proc = subprocess.run(["nlp4ss", "--version"], capture_output=True, text=True, check=False)
+    assert proc.returncode == 0
+    assert __version__ in proc.stdout

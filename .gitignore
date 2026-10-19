@@ -38,3 +38,7 @@ coverage.xml
 *.cover
 htmlcov/
 pytest-coverage.*
+
+# uv
+.venv/
+.ruff_cache/

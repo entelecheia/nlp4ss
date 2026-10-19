@@ -20,19 +20,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
         with:
-          python-version: 3.9
+          version: "0.13.1" # pin the uv CLI; bump with uv.lock-affecting changes
+          python-version: "3.12"
 
-      # install the source code
-      - name: Install the source code
-        run: pip install .
-
-      # Build the book
+      # Build the book with the package and the book requirements
       - name: Build the book
-        run: |
-          pip install -r book/requirements.txt
-          bash book/_scripts/build.sh --all
+        run: uv run --with-requirements book/requirements.txt jupyter-book build book
 
       # Deploy the book's HTML to gh-pages branch
       - name: GitHub Pages action

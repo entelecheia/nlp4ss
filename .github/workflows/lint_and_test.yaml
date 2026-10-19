@@ -4,68 +4,119 @@ name: lint & test
 on:
   workflow_call:
   workflow_dispatch:
+  pull_request:
+    paths-ignore: ["*.md", "book/**", ".github/workflows/deploy-docs.yaml"]
   push:
-    branches:
-      - "main"
-    paths:
-      - "src/**"
-      - "tests/**"
+    branches: [main]
+    paths-ignore: ["*.md", "book/**", ".github/workflows/deploy-docs.yaml"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lint-and-test-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  UV_LOCKED: "1"
 
 jobs:
-  build:
-    # Name the Job
-    name: test-code-base
-    # Set the agent to run on
+  # One build per commit: a main push whose tree equals a PR head that already
+  # passed this workflow skips the matrix (workspace CI standard, maru `decision`).
+  decision:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+      pull-requests: read
+    outputs:
+      run_full: ${{ steps.dedupe.outputs.run_full }}
+    steps:
+      - id: dedupe
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -uo pipefail
+          run_full=true
+          reason="this event requires full validation"
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
+            reason="no successful pull request run for the same tree"
+            pr=$(gh api "repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA/pulls" \
+              --jq "[.[] | select(.merge_commit_sha == \"$GITHUB_SHA\")] | last | .head.sha // empty" 2>/dev/null)
+            if [ -n "$pr" ]; then
+              push_tree=$(gh api "repos/$GITHUB_REPOSITORY/git/commits/$GITHUB_SHA" --jq .tree.sha)
+              head_tree=$(gh api "repos/$GITHUB_REPOSITORY/git/commits/$pr" --jq .tree.sha)
+              conclusion=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/lint_and_test.yaml/runs?event=pull_request&head_sha=$pr&status=completed" \
+                --jq '[.workflow_runs[]] | sort_by(.run_started_at) | last | .conclusion // ""')
+              if [ "$push_tree" = "$head_tree" ] && [ "$conclusion" = "success" ]; then
+                run_full=false
+                reason="PR head $pr passed on the identical tree $push_tree"
+              fi
+            fi
+          fi
+          echo "run_full=$run_full" >> "$GITHUB_OUTPUT"
+          echo "decision: $reason" | tee -a "$GITHUB_STEP_SUMMARY"
+
+  quality:
+    needs: decision
+    if: needs.decision.outputs.run_full == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          version: "0.13.1" # pin the uv CLI; bump with uv.lock-affecting changes
+          python-version: "3.12"
+          enable-cache: true
+          cache-python: true
+      - run: make lint
+
+  test:
+    needs: decision
+    if: needs.decision.outputs.run_full == 'true'
+    name: Python ${{ matrix.python-version }} / ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        python-version: [3.9]
-
+        python-version: ["3.11", "3.12"]
+        include:
+          # macOS covers path handling and native wheels at the support edges only.
+          - { os: macos-latest, python-version: "3.11" }
+          - { os: macos-latest, python-version: "3.12" }
     steps:
-      # Checkout the code base #
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
         with:
-          fetch-depth: 0
-
-      # install poetry
-      - name: Install poetry
-        run: pipx install poetry>=1.3.2
-
-      # set up python
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
+          version: "0.13.1" # pin the uv CLI; bump with uv.lock-affecting changes
           python-version: ${{ matrix.python-version }}
-          cache: "poetry"
-
-      # initialize
-      - name: Initialize
-        run: make initialize
-
-      # install dependencies
-      - name: Install dependencies for linters
-        run: poe install-dev
-
-      # run linters
-      - name: Run linters
+          enable-cache: true
+          cache-python: true
+      - run: uv sync --no-default-groups --group test
+      - run: uv run --no-sync pytest --cov --cov-report=term-missing
+      - name: CLI entry point
+        run: uv run --no-sync nlp4ss --version
+      - name: Installed wheel works outside the checkout
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
         run: |
-          set -o pipefail
-          poe lint
+          uv build
+          wheel="$(ls "$PWD"/dist/*.whl)"
+          cd "$RUNNER_TEMP"
+          uvx --python 3.12 --from "$wheel" nlp4ss --version
 
-      # run unit tests
-      - name: Run unit-tests
+  # Single required check that is green whether the matrix ran or was deduplicated.
+  ci-ok:
+    if: always()
+    needs: [decision, quality, test]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - env:
+          RESULTS: ${{ toJSON(needs.*.result) }}
         run: |
-          set -o pipefail
-          poe tests-cov-fail
-
-      # add content to GitHub summary
-      - name: Pytest coverage GitHub summary
-        run: |
-          set -o pipefail
-          echo '# Coverage report' >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          cat tests/pytest-coverage.txt >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          echo '\n\n\n'
+          echo "$RESULTS"
+          echo "$RESULTS" | grep -Eq '"(failure|cancelled)"' && exit 1 || exit 0

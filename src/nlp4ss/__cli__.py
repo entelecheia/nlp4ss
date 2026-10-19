@@ -23,8 +23,8 @@ def load_about() -> dict:
     if not os.path.isfile(about_path):
         click.echo(f"The `{about_path}` was not found.")
         raise click.Abort()
-    with open(about_path, "r", encoding="utf-8") as f:
-        return yaml.load(f, Loader=yaml.Loader)
+    with open(about_path, encoding="utf-8") as f:
+        return yaml.safe_load(f)
 
 
 __about__ = load_about()
@@ -61,7 +61,7 @@ def build_book() -> None:
     if not os.path.isdir(book_path):
         click.echo("The book directory was not found.")
         return
-    subprocess.run(["jupyter-book", "build", book_path], check=True)
+    subprocess.run(["jupyter-book", "build", book_path], check=True)  # noqa: S603, S607  (fixed argv)
 
 
 # main function for the main module
