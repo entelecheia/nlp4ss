@@ -50,8 +50,9 @@ jobs:
           reason="this event requires full validation"
           if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
             # Both sides of a rename count: moving code into docs/ still validates.
+            # Any API failure (even after some pages) means a full run.
             files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER/files" \
-              --jq '.[] | .filename, (.previous_filename // empty)')
+              --jq '.[] | .filename, (.previous_filename // empty)') || files=""
             other=$(printf '%s\n' "$files" | grep -Ev "$DOCS_ONLY_RE" || true)
             # The files API stops at 3000 entries; a PR that large always validates.
             changed=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" --jq .changed_files || echo 3000)
