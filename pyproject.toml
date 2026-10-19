@@ -42,7 +42,9 @@ nlp4ss = "nlp4ss.__cli__:main"
 [dependency-groups]
 test = ["pytest>=8", "pytest-cov>=5"]
 lint = ["ruff>=0.15"]
-dev = [{ include-group = "test" }, { include-group = "lint" }]
+# pip: the notebooks run `%pip install` and `python -m spacy download`, which need it in the kernel env.
+notebook = ["pip"]
+dev = [{ include-group = "test" }, { include-group = "lint" }, { include-group = "notebook" }]
 
 [tool.uv]
 default-groups = ["dev"]
