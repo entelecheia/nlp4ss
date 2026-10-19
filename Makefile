@@ -8,8 +8,8 @@ install: ## Create the virtual environment with all dependency groups
 .PHONY: lint
 lint: ## Lock consistency and ruff
 	@uv lock --locked
-	@uv run ruff check .
-	@uv run ruff format --check .
+	@uv run --only-group lint ruff check .
+	@uv run --only-group lint ruff format --check .
 
 .PHONY: test
 test: ## Tests with coverage
