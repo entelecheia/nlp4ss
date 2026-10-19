@@ -53,7 +53,9 @@ jobs:
             files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER/files" \
               --jq '.[] | .filename, (.previous_filename // empty)')
             other=$(printf '%s\n' "$files" | grep -Ev "$DOCS_ONLY_RE" || true)
-            if [ -n "$files" ] && [ -z "$other" ]; then
+            # The files API stops at 3000 entries; a PR that large always validates.
+            changed=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" --jq .changed_files || echo 3000)
+            if [ -n "$files" ] && [ -z "$other" ] && [ "${changed:-3000}" -lt 3000 ]; then
               run_full=false
               reason="docs-only change"
             fi
