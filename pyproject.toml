@@ -1,6 +1,6 @@
 [project]
 name = "nlp4ss"
-version = "0.9.0"
+version = "1.0.0"
 description = "A course on applying natural language processing (NLP) techniques for social science research."
 authors = [{ name = "Young Joon Lee", email = "entelecheia@hotmail.com" }]
 license = "CC-BY-4.0"
