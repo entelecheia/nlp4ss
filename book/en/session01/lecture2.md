@@ -324,7 +324,8 @@ Pre-trained models can be further trained on domain-specific data to adapt to pa
 Example of fine-tuning a pre-trained BERT model for sentiment analysis:
 
 ```python
-from transformers import BertForSequenceClassification, BertTokenizer, AdamW
+from transformers import BertForSequenceClassification, BertTokenizer
+from torch.optim import AdamW
 from torch.utils.data import DataLoader, TensorDataset
 import torch
 

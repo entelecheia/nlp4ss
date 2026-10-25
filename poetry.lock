@@ -1,0 +1,9 @@
+# Placeholder, not used: the project is managed with uv (see uv.lock).
+# GitHub's dependency graph kept the deleted Poetry lockfile as a stale manifest and
+# kept raising alerts on it; an empty lockfile clears it. Do not delete this file.
+package = []
+
+[metadata]
+lock-version = "2.1"
+python-versions = ">=3.11,<3.13"
+content-hash = "0000000000000000000000000000000000000000000000000000000000000000"

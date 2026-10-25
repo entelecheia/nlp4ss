@@ -5,7 +5,7 @@ description = "A course on applying natural language processing (NLP) techniques
 authors = [{ name = "Young Joon Lee", email = "entelecheia@hotmail.com" }]
 license = "CC-BY-4.0"
 readme = "README.md"
-# The upper bound follows the pinned course stack (scipy<1.14, gensim, torch<=2.7).
+# The upper bound follows the pinned course stack (scipy<1.14, gensim).
 requires-python = ">=3.11,<3.13"
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -15,7 +15,7 @@ classifiers = [
 dependencies = [
     "click>=8.1.3,<9",
     "pyyaml>=6.0.1,<7",
-    "nltk<=3.9.1",
+    "nltk>=3.10.4,<4",
     "scikit-learn>=1.5.1,<2",
     "spacy>=3.7.5,<=3.8.5",
     "textblob>=0.18,<0.20",
@@ -25,9 +25,9 @@ dependencies = [
     "pyldavis>=3.4.1,<4",
     "wordcloud>=1.9.3,<2",
     "scipy>=1.7.0,<1.14.0",
-    "transformers==4.50.2",
-    "torch>=2.3.1,<=2.7.0",
-    "sentence-transformers>=3.0.1,<5.0.0",
+    "transformers>=5.10.0,<6",
+    "torch>=2.13.0,<3",
+    "sentence-transformers>=5.6.0,<6",
     "tqdm>=4.66.5,<5",
 ]
 
